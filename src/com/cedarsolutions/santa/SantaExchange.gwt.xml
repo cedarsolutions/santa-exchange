@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="santaexchange">
+
+    <!-- Core GWT functionality and configuration. -->
+    <inherits name="com.google.gwt.user.User"/>
+    <inherits name="com.google.gwt.i18n.I18N"/>
+    <inherits name="com.google.gwt.uibinder.UiBinder" />
+    <set-configuration-property name="UiBinder.useSafeHtmlTemplates" value="true" />
+
+    <!-- Set the GWT theme. -->
+    <inherits name="com.google.gwt.user.theme.standard.Standard"/>
+
+    <!-- Inherit other modules. -->
+    <inherits name="com.mvp4g.Mvp4gModule"/>
+    <inherits name="com.cedarsolutions.CedarCommon"/>
+
+    <!-- Specify the application entry point class. -->
+    <entry-point class="com.cedarsolutions.santa.client.SantaExchange"/>
+
+    <!-- Specify the paths for translatable code. -->
+    <source path="client"/>
+    <source path="shared"/>
+
+</module>

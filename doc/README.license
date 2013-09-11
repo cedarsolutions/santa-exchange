@@ -1,0 +1,23 @@
+CHOICE OF LICENSE
+
+Because so much open source Java code is licensed under the Apache License
+v2.0, I have decided to release my code under that license as well.  This
+really simplifies the process of determining whether there are any license
+compatibility issues.
+
+In a few cases, there are dependencies which fall under a different license
+(for instance, JUnit which uses the CDL and Javassist which uses the MPL).  It
+appears to be safe to rely on these dependencies even though they are not
+Apache-licensed.
+
+However, I have decided not to rely directly on any GPL or LGPL software in
+this project.  The Free Software Foundation and the Apache Foundation appear to
+be in agreement that these licenses are either incompatible (i.e. GPL v2.1 and
+Apache v2.0) or are only compatible in one direction (i.e. GPL v3 code can use
+Apache v2.0 code, but not the other way around).
+
+For an interesting discussion of these issues, see the following documents
+maintained by the Apache Software Foundation:
+
+    http://www.apache.org/legal/resolved.html
+    http://www.apache.org/licenses/GPL-compatibility.html

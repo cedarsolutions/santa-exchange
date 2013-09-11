@@ -1,0 +1,19 @@
+<html>
+<body>
+
+<p>
+A new user was registered on the Santa Exchange web site:
+</p>
+
+<ul>
+    <li><b>User id:</b> $!registeredUser.userId</li>
+    <li><b>User name:</b> $!registeredUser.userName</li>
+    <li><b>Registration date:</b> $!registeredUser.registrationDate</li>
+    <li><b>Authentication domain</b> $!registeredUser.authenticationDomain</li>
+    <li><b>OpenId provider:</b> $!registeredUser.openIdProvider</li>
+    <li><b>Email address:</b> $!registeredUser.emailAddress</li>
+    <li><b>Administrator:</b> $!registeredUser.admin</li>
+</ul>
+
+</body>
+</html>

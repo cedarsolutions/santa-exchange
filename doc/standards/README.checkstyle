@@ -1,0 +1,24 @@
+Checkstyle is a tool that helps enforce a defined Java coding standard.  When
+coupled with the Eclipse Checkstyle plugin, coding standard errors show up as
+warnings in the Problems tab, just like any other compiler warnings.
+
+The main Checkstyle project can be found here:
+
+   http://checkstyle.sourceforge.net/
+
+The Checkstyle Eclipse plugin can be found here:
+
+   http://eclipse-cs.sourceforge.net/
+
+The Checkstyle rules we use (defined in doc/standards/CheckstyleRules.xml) are
+for Checkstyle 5.  These rules are not backwards-compatible with Checkstyle 4.
+So, you must get a version 5.x Checkstyle plugin for Eclipse.
+
+If you want, you can suppress warnings.  Suppressions should be used in special
+cases where code has been reviewed, but for some reason can't easily meet the
+standard.  Suppressions are placed in the doc/standards/CheckstyleSupressions.xml file.
+A good example is a very long line that would be less legible if split onto
+multiple lines.
+
+Note: When possible, edit CheckstyleRules.xml file by hand.  Formatting and
+comments are not preserved when using the Checkstyle dialog in preferences.

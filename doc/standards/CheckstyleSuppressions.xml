@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions 1.0//EN" "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+
+    <!-- We don't follow the normal conventions for GWT constants. -->
+    <suppress checks="MethodName" files="SantaExchangeConfig.java"/>
+    <suppress checks="MethodName" files="SantaExchangeConstants.java"/>
+    <suppress checks="MethodName" files="SantaExchangeMessages.java"/>
+    <suppress checks="MethodName" files="SantaExchangeMessageConstants.java"/>
+    <suppress checks="MethodName" files="AdminConstants.java"/>
+    <suppress checks="MethodName" files="AdminMessages.java"/>
+    <suppress checks="MethodName" files="AdminMessageConstants.java"/>
+    <suppress checks="MethodName" files="ExternalConstants.java"/>
+    <suppress checks="MethodName" files="ExternalMessages.java"/>
+    <suppress checks="MethodName" files="ExternalMessageConstants.java"/>
+    <suppress checks="MethodName" files="InternalConstants.java"/>
+    <suppress checks="MethodName" files="InternalMessages.java"/>
+    <suppress checks="MethodName" files="InternalMessageConstants.java"/>
+    <suppress checks="MethodName" files="WidgetConstants.java"/>
+    <suppress checks="MethodName" files="WidgetMessages.java"/>
+    <suppress checks="MethodName" files="WidgetMessageConstants.java"/>
+
+    <!-- Other checks. -->
+    <suppress checks="LineLength" files="IAdminRpc.java"/>
+    <suppress checks="LineLength" files="AdminRpc.java"/>
+    <suppress checks="LineLength" files="RegisteredUserDaoTest.java"/>
+    <suppress checks="LineLength" files="RegisteredUserDaoTest.java"/>
+    <suppress checks="LineLength" files="ClientTestCase.java"/>
+
+</suppressions>

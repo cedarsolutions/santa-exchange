@@ -1,0 +1,90 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:custom="urn:import:com.cedarsolutions.client.gwt.widget"
+             xmlns:widget="urn:import:com.cedarsolutions.santa.client.common.widget">
+
+    <ui:style>
+    .panel {
+        padding-top: 10px;
+        border: 2px solid;
+        background: #ffffff;
+        font-family: sans-serif;
+        margin: 3px;
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-bottom: 1em;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-bottom: 1em;
+        margin-right: 1em;
+        width: 300px;
+    }
+
+    .labels {
+        font-weight: bold;
+    }
+    </ui:style>
+
+    <g:ScrollPanel>
+        <g:VerticalPanel width="650px">
+            <g:HTMLPanel>
+                <widget:ValidationErrorWidget ui:field="validationErrorWidget" />
+            </g:HTMLPanel>
+            <g:HorizontalPanel>
+                <g:VerticalPanel>
+                    <g:HTMLPanel>
+                        <p><g:Button ui:field="saveButton" /> <g:Button ui:field="cancelButton" /></p>
+                    </g:HTMLPanel>
+                    <g:HTMLPanel styleName="{style.panel}">
+                        <g:Grid>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="nameLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="nameInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="nicknameLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="nicknameInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="emailLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="emailInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                        </g:Grid>
+                        <g:DisclosurePanel stylePrimaryName="ss-DisclosurePanel" ui:field="giftGiverDisclosure">
+                            <g:header />
+                            <g:HTMLPanel>
+                                <g:Grid>
+                                    <g:row>
+                                        <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="giftGiverLabel"/></g:HTMLPanel></g:customCell>
+                                        <g:customCell><g:HTMLPanel><g:Label ui:field="giftGiverDisplayLabel" /></g:HTMLPanel></g:customCell>
+                                    </g:row>
+                                </g:Grid>
+                            </g:HTMLPanel>
+                        </g:DisclosurePanel>
+                        <g:DisclosurePanel stylePrimaryName="ss-DisclosurePanel" ui:field="giftReceiverDisclosure">
+                            <g:header />
+                            <g:HTMLPanel>
+                                <g:Grid>
+                                    <g:row>
+                                        <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="giftReceiverLabel"/></g:HTMLPanel></g:customCell>
+                                        <g:customCell><g:HTMLPanel><g:Label ui:field="giftReceiverDisplayLabel" /></g:HTMLPanel></g:customCell>
+                                    </g:row>
+                                </g:Grid>
+                            </g:HTMLPanel>
+                        </g:DisclosurePanel>
+                    </g:HTMLPanel>
+                </g:VerticalPanel>
+                <g:VerticalPanel>
+                    <g:HTMLPanel>
+                        <p><g:Button ui:field="addConflictButton" /><g:Button ui:field="deleteConflictButton" /></p>
+                        <p><g:Label ui:field="conflictLabel" /><widget:ParticipantList ui:field="conflictInput" /> </p>
+                        <custom:DataTable ui:field="table" />
+                        <custom:DataTablePager ui:field="pager" />
+                    </g:HTMLPanel>
+                </g:VerticalPanel>
+            </g:HorizontalPanel>
+        </g:VerticalPanel>
+    </g:ScrollPanel>
+
+</ui:UiBinder>

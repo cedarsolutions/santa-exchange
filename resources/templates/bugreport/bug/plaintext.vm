@@ -1,0 +1,17 @@
+A bug report was submitted on the SantaExchange web site:
+
+Report date.........: $!dateTool.format("yyyy-MM-dd HH:mm", $!bugReport.reportDate)
+Application version.: $!bugReport.applicationVersion
+#if($!bugReport.submittingUser)
+Submitting user id..: $bugReport.submittingUser.userId
+Submitting user name: $bugReport.submittingUser.userName
+#else
+Submitting user id..: 
+Submitting user name: 
+#end
+Email address.......: $!bugReport.emailAddress
+Problem summary.....: $!bugReport.problemSummary
+
+Detailed description: 
+
+$!bugReport.detailedDescription

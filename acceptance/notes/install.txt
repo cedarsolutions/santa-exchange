@@ -1,0 +1,63 @@
+The acceptance tests are written in Ruby using Cucumber
+and Capybara:
+
+    Cucumber: http://cukes.info/
+    Capybara: http://jnicklas.github.com/capybara/
+
+Here are my notes on how to install the tooling:
+
+    1. Install Ruby 1.9.3
+       Go to: http://rubyinstaller.org/downloads/
+       Download rubyinstaller-1.9.3-p125.exe
+       Run the installer, and install to c:\Ruby193
+
+    2. Install the Ruby development kit
+       Go to: http://rubyinstaller.org/downloads/
+       Download DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe
+       Run the installer, and extract to c:\Ruby193\DevKit
+       > cd c:\Ruby193\DevKit
+       > ruby dk.rb init
+       > ruby dk.rb review
+       > ruby dk.rb install
+
+    3. Install cucumber and capybara
+       > gem install --http-proxy http://user:password@mspproxy:80 cucumber
+       > gem install --http-proxy http://user:password@mspproxy:80 capybara
+       > gem install --http-proxy http://user:password@mspproxy:80 rspec
+
+Make sure that you set the proper paths in local.properties, so
+that the Ant script can find Ruby.
+
+You may also want to install the Ruby toolkit for Eclipse.  Under
+Help > Install New Software, choose the Helios source (or whatever
+version is appropriate for your Eclipse) and find:
+
+    Programming Languages
+        Dynamic Languages Toolkit - Ruby Development Toolkit
+
+This gives you syntax highlighting for the Ruby source files (but
+not Cucumber).
+
+It seems like there is an update for Selenium each time a new version
+of Firefox is released:
+
+    http://stackoverflow.com/questions/7263564/unable-to-obtain-stable-firefox-connection-in-60-seconds-127-0-0-17055
+
+If the tests don't work, you probably need to update it:
+
+    C:\Users\pronovic\Desktop>gem update selenium-webdriver
+    Updating installed gems
+    Updating selenium-webdriver
+    Fetching: addressable-2.3.2.gem (100%)
+    Fetching: libwebsocket-0.1.5.gem (100%)
+    Fetching: selenium-webdriver-2.25.0.gem (100%)
+    Successfully installed addressable-2.3.2
+    Successfully installed libwebsocket-0.1.5
+    Successfully installed selenium-webdriver-2.25.0
+    Gems updated: addressable, libwebsocket, selenium-webdriver
+    Installing ri documentation for addressable-2.3.2...
+    Installing ri documentation for libwebsocket-0.1.5...
+    Installing ri documentation for selenium-webdriver-2.25.0...
+    Installing RDoc documentation for addressable-2.3.2...
+    Installing RDoc documentation for libwebsocket-0.1.5...
+    Installing RDoc documentation for selenium-webdriver-2.25.0...

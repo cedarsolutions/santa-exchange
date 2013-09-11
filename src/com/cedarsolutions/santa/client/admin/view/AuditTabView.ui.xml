@@ -1,0 +1,65 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:d="urn:import:com.cedarsolutions.client.gwt.custom.datepicker"
+             xmlns:custom="urn:import:com.cedarsolutions.client.gwt.widget"
+             xmlns:widget="urn:import:com.cedarsolutions.santa.client.common.widget">
+
+    <ui:style>
+    .panel {
+        padding-top: 10px;
+        width: 40em;
+        border: 2px solid;
+        background: #e5e5e5;
+        font-family: sans-serif;
+        padding-left: 1em;
+        padding-bottom: 1em;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-bottom: 1em;
+    }
+
+    .buttons {
+        text-align: left;
+    }
+
+    .labels {
+        font-weight: bold;
+    }
+    </ui:style>
+
+    <g:ScrollPanel>
+        <g:HTMLPanel>
+            <g:DisclosurePanel stylePrimaryName="ss-DisclosurePanel" ui:field="filterDisclosure">
+                <g:header />
+                <g:HTMLPanel> <!-- no idea why, but style.panel won't take effect here -->
+                    <g:HTMLPanel styleName="{style.panel}">
+                        <widget:ValidationErrorWidget ui:field="validationErrorWidget" />
+                        <g:Grid>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="eventTypeLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><widget:AuditEventTypeList ui:field="eventTypeInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="userIdLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="userIdInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="eventDateLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><d:DateBox ui:field="startDateInput" /></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="toLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><d:DateBox ui:field="endDateInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel><g:Button ui:field="refreshButton" /> <g:Button ui:field="clearButton" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                        </g:Grid>
+                    </g:HTMLPanel>
+                </g:HTMLPanel>
+            </g:DisclosurePanel>
+            <custom:DataTablePager ui:field="pager" />
+            <custom:DataTable ui:field="table" />
+        </g:HTMLPanel>
+    </g:ScrollPanel>
+
+</ui:UiBinder>

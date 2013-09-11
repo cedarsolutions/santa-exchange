@@ -1,0 +1,98 @@
+Steps for copying SantaExchange to a New Project
+================================================
+
+Take the following steps before opening Eclipse:
+
+- Determine the name of your new project (i.e. BonsaiTreeWiki)
+- Determine the base package (i.e. com.cedarsolutions.bonsai)
+- Create the project repository on Google Code (or wherever), including for Javadoc
+- Clone the project into a local folder on your machine (same name as your new project)
+- Copy the contents of SantaExchange (excluding the .hg directory) to the cloned folder
+- Delete the following directories:
+   - .hgtags
+   - www-test
+   - test-bin
+   - suites-bin
+   - war/santaexchange
+   - war/com.cedarsolutions.santa.SantaExchange.JUnit
+   - war/WEB-INF/appengine-generated
+   - war/WEB-INF/classes
+   - war/WEB-INF/deploy
+- Run change-string to change the copyright header, something like:
+   cygwin
+   cd /cygdrive/c/ken/workspaces/BonsaiTreeWiki/BonsaiTreeWiki
+   change-string "Project  : Secret Santa Exchange" "Project  : BonsaiTree Wiki" $(find . -type f)
+   change-string "Project  : BonsaiTree Wiki" "Project  : Bonsai Tree Wiki" $(find . -type f)
+   change-string "Copyright \(c\) 2011-2012 Kenneth J. Pronovici." "Copyright (c) 2012 Kenneth J. Pronovici." $(find . -type f)
+- Edit .project to reference new project name and packages (case-insensitive search for "santa")
+   com.cedarsolutions.santa.SantaExchange.JUnit -> com.cedarsolutions.bonsai.BonsaiTreeWiki.JUnit
+   santaexchange -> bonsaitreewiki
+- Edit .factorypath and change SantaExchange to your new project name
+- Edit .hgignore to reference paths in your new project (case-insensitive search for "santa")
+
+At this point, you can open the project in Eclipse.
+
+- Rename war/SantaExchange.html to BonsaiTreeWiki.html
+- Rename war/SantaExchange.css to BonsaiTreeWiki.css
+- Rename resources/santa-exchange.properties to bonsaitreewiki.properties
+- Rename various top-level files to suit the new project:
+   - SantaExchange.gwt.xml -> BonsaiTreeWiki.gwt.xml
+   - SantaExchange.java -> BonsaiTreeWiki.java
+   - SantaExchangeConfig.java -> BonsaiTreeWikiConfig.java
+   - SantaExchangeConstants.java -> BonsaiTreeWikiConstants.java
+   - SantaExchangeCustomLogger.java -> BonsaiTreeWikiCustomLogger.java
+   - SantaExchangeEventTypes.java -> BonsaiTreeWikiEventTypes.java
+   - SantaExchangeGinModule.java -> BonsaiTreeWikiGinModule.java
+   - SantaExchangeMessages.java -> BonsaiTreeWikiMessages.java
+- Edit war/WEB-INF/web.xml to change name of starting HTML file
+- Edit war/WEB-INF/appengine-web.xml to change the name of the application
+- Edit war/WEB-INF/rpc-servlet.xml
+   - change RPC paths
+   - reference bonsaitreewiki rather than santaexchange
+   - reference bonsaitreewiki.properties rather than santa-exchange.properties
+   - reference com.cedarsolutions.bonsai rather than com.cedarsolutions.santa
+- Edit README and update to match new project
+- Edit build.properties
+- Edit build.xml and change the project name
+- Edit Changelog and trim it down to a single unreleased version
+- Edit LICENSE and change the copyright date
+- Edit doc/README.license and change the references to SantaExchange
+- Edit doc/standards/CheckstyleSuppressions.txt
+- Edit acceptance/README.txt and remove the part about what is covered
+- Edit acceptance/cucumber.properties and change SantaExchange references
+- Edit BonsaiTreeWiki.gwt.xml and change the entry point class and the module rename option
+- Edit ClientTestCase to change the entry point class in getModule()
+- Edit the templates in resources/templates/bugreport
+- Edit the templates in resources/templates/notification
+- Edit resources/bonsai.properties
+- Edit resources/managed-entities.txt
+- Using Eclipse, rename the com.cedarsolutions.santa package to com.cedarsolutions.bonsai (src and test)
+- Run organize imports in the test folder, to eliminate extra imports caused by the refactor
+- Search for "com.cedarsolutions.santa" in the remaining codebase and fix it (mostly *.ui.xml)
+- Edit BonsaiTreeWikiConfig and change configuration to suit the new application
+- Edit BonsaiTreeWikiConstants and change the constants to suit the new application
+- Edit all of the acceptance test files to make them work for the new application.
+  Since the SantaExchange tests are already pretty limited, and focus on the common
+  functionality that will be shared, this is straightforward:
+   - Change "Santa Exchange" to "Bonsai Tree"
+   - Change Google Code URL
+   - Change App Engine admin console URL
+- Search for "santa" (case-insensitive) and see what else uses it
+- Run the unit tests and see if anything fails
+- Assuming that works, run the application as a web app
+
+At this point, you have the starting point for an application.  Commit to
+source control and use this as a starting point to begin ripping out and
+modifying stuff that is specific to Santa Exchange.
+
+- Create new favicon.ico and banners, logos, etc.
+- Update the external landing page and About dialog to reflect the new application
+- Start removing all code tied to exchanges (just search for "exchange" and go on from there)
+- Assuming the app seems stable, run the acceptance tests
+
+Create a copy of the Javadoc project following similar steps.  Copy everything except
+the .hg directory and look through the few files to make the required changes (not that
+much has to change).
+
+Finally, release the code to Google Code and App Engine for the
+first time, following the standard release procedure.

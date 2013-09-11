@@ -1,0 +1,42 @@
+IMAGES
+
+Images in this project have been taken from several royalty-free sources.  In some
+cases, the images have been modifed for use here.
+
+Below, an image has several attributes:
+
+- License is the license the image was released under
+- Upstream source is the source of the image (usually a web site)
+- Original file is the name of the original file from the upstream source
+
+Upstream source is usually the name of the image that was downloaded, unless
+the image that was dynamically generated.
+
+
+LICENSES
+
+    License                     License Text
+    =============================================================================
+    CPG License                 licenses/cgp_license.txt
+    No Restrictions             <No usage restrictions were indicated>
+
+
+UPSTREAM SOURCE
+
+    Project                     License                     Project URL
+    ===================================================================================================================
+    Christmas Graphics Plus     CGP License                 http://www.christmas-graphics-plus.com/
+    AjaxLoad                    No Restrictions             http://ajaxload.info/
+
+
+IMAGE
+
+    Image                       Upstream Source             Original Image
+    ===================================================================================================================
+    favicon.ico                 Christmas Graphics Plus     stocking08.gif
+    gift-75x75.png              Christmas Graphics Plus     gift03.gif
+    stocking.png                Christmas Graphics Plus     stocking08.gif
+    stocking-16x16.png          Christmas Graphics Plus     stocking08.gif
+    stocking-32x32.png          Christmas Graphics Plus     stocking08.gif
+    stocking-64x64.png          Christmas Graphics Plus     stocking08.gif
+    ajax-loader.gif             AjaxLoad                    <file was dynamically generated>

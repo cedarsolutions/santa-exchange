@@ -1,0 +1,17 @@
+DEPENDENCIES
+
+This project relies on functionality taken from a variety of open source
+software packages.
+
+In a few cases, external functionality has been pulled into this project
+either by directly copying external source code, or by deriving new code
+from external source code.  This copied and derived source code is
+documented in README.credits.
+
+Most external functionality has been pulled into the project in compiled
+form, as part of a jar file.  Most jars are sourced from Maven, as documented
+in build.gradle.  In a few cases, jar files that were not available in Maven
+were uploaded to the cedar-common Maven group.  For information about those
+dependencies, see the Dependencies project.
+
+See README.license for a discussion of license compatibility.

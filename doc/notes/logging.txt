@@ -1,0 +1,4 @@
+Notes on logging with GAE and GWT:
+
+http://fredsa.allen-sauer.com/2009/04/getting-gwt-log-to-just-work-on-google.html
+http://blog.xam.de/2010/03/logging-in-google-appengine-for-java.html

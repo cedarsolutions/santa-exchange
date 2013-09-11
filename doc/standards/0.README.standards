@@ -1,0 +1,102 @@
+SUMMARY
+
+Below, you can find a discussion of the coding standard that has been put in
+place for this project.
+
+The formatting conventions are defined using the Eclipse formatting tool.
+There are project-specific settings for formatting, so you should not have to do
+anything special in order to use this configuration.  It should be enabled by
+default.
+
+Coding standards are enforced by Checkstyle.  If you install the Checkstyle
+Eclipse plugin, the coding standards will be applied to the code, and
+violations will show up in the Problems view.  See README.checkstyle for
+information about how to install the plugin.
+
+Checkstyle rules only apply to source code in the com.cedarsolutions package.
+That way, we don't bother to apply coding standards to external code that
+someone else wrote.
+
+
+FORMATTING CONVENTIONS
+
+Here are few highlights of the formatting standard:
+
+1. Code should use 4-space indent with no tab characters
+2. Always put braces on the same line as if statements and catch statements, etc.
+3. Always tuck else onto the same line as the preceeding brace
+4. Never align variable declarations or assignments using whitespace
+5. Always use braces in conditionals
+
+Checkstyle does enforce most of these formatting conventions.  It also enforces
+the following length-related conventions:
+
+1. The line length limit is 150 characters
+2. The method length limit is 500 lines
+
+Checkstyle also enforces other rules.  See the configuration file for details.
+
+
+NAMING CONVENTIONS
+
+Naming conventions generally follow Sun's conventions.  Here is a summary of
+the conventions enforced by Checkstyle:
+
+1. Constants are always named using alphanumeric UPPER_CASE
+2. Static variables are always named using alphanumeric UPPER_CASE
+3. Local variables are always named using alphanumeric lowerCamelCase
+4. Method parameters are always named using alphanumeric lowerCamelCase
+5. Methods are always named using alphanumeric lowerCamelCase
+6. Types are always named using alphanumeric UpperCamelCase
+7. Package names must start with "com.cedarsolutions"
+8. Packages are always named using alphanumeric characters
+
+Besides the conventions enforced by Checkstyle, there are a few
+other less-formal conventions.
+
+1. Avoid single-character variable names for instance variables
+2. Avoid abbreviations in variable names, i.e. use "Employee" not "Emp"
+3. Avoid sequenences of upper case letters, i.e. use "Id" not "ID"
+4. Hungarian notation and other type-based conventions should not be used
+5. Use a simple "Exception e" in catch blocks, not "Exception eSomething"
+
+Also, remember to always declare instance variables as private rather than
+letting the compiler assign the default scope.  Checkstyle enforces this.
+
+
+COMMENT AND JAVADOC CONVENTIONS
+
+Here is a summary of the conventions.  Some are discussed further below:
+
+1. Each class has a copyright statement at the top
+2. Empty or meaningless Javadoc comments are not allowed
+3. All classes must have a meaningful Javadoc comment
+4. All methods other than getters and setters should have Javadoc comments
+5. Javadoc comments use the modern style, with no extra *** at top or bottom
+
+All classes should have a Javadoc comment describing their purpose, and
+Checkstyle enforces this convention.  This is an example of an acceptable class
+comment:
+
+   /**
+    * Class to do something.
+    * @author Kenneth J. Pronovici <pronovic@ieee.org>
+    */
+
+Ideally, all methods -- other than getters and setters -- should have a Javadoc
+comment describing their purpose and documenting their usage.  This is an example
+of an acceptable method comment:
+
+   /**
+    * This is a method comment.
+    * @param param1  First parameter
+    * @param param2  Second parameter
+    * @return An integer value from 1-10
+    * @throws NumberFormatException If the first parameter is invalid.
+    */
+
+The convention regarding empty Javadoc comments is important.  Either fill in
+something useful, or leave Javadoc off completely.  This allows automated tools
+to notice that a class, method, etc. does not have a Javadoc comment asociated
+with it.
+

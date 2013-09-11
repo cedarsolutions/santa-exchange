@@ -1,0 +1,19 @@
+CREDITS
+
+This project relies on functionality taken from a variety of open source
+software packages.
+
+Most external functionality has been pulled into the project in compiled form,
+as part of a jar file.  These jar files are referred to as dependencies.
+Dependencies are documented in README.dependencies.
+
+In a few cases, external functionality has been pulled into this project either
+by directly copying external source code, or by deriving new code from an
+external source. If the external source is a relatively small posting from a
+newsgroup or forum, the code is usually placed in the src folder and is marked
+appropriately with @see and @author.  Code that is larger, or is taken from a
+released product, is formally managed as external code in the CedarCommon
+project.  See README.credits in that project for further information.
+
+Images in this project have been taken from several royalty-free sources, and
+have been modified for use here.  See README.images for credits.

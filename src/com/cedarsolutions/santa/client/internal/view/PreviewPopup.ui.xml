@@ -1,0 +1,16 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:c="urn:import:com.cedarsolutions.client.gwt.custom.tab"
+             xmlns:widget="urn:import:com.cedarsolutions.client.gwt.widget">
+
+    <ui:style>
+    </ui:style>
+
+    <g:HTMLPanel width="600px" height="500px" ui:field="htmlPanel">
+        <g:VerticalPanel>
+            <c:TabLayoutPanel stylePrimaryName="ss-TabLayoutPanel" ui:field="tabPanel" barUnit="PX" barHeight="45" width="575px" height="450px" />
+            <g:HTMLPanel><p><g:Button ui:field="closeButton" /></p></g:HTMLPanel>
+        </g:VerticalPanel>
+    </g:HTMLPanel>
+
+</ui:UiBinder>

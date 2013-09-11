@@ -1,0 +1,180 @@
+Version 0.9.28   10 Sep 2013
+
+    * Switched build system to Gradle using Maven for dependencies.
+    * No functional changes, but this is a major structural change for developers.
+
+Version 0.9.27   19 Aug 2013
+
+    * Upgrade to App Engine 1.8.3.
+    * Convert to new abstracted transaction mechanism for DAOs.
+    * Add transactional version for most DAO methods.
+
+Version 0.9.26   19 May 2013
+
+    * Add a continue button on the bottom of the Account Locked page.
+
+Version 0.9.25   08 May 2013
+
+    * Add email address to admin-related audit events as well as the create user event.
+    * Upgrade acceptance tests to use Capybara 2.x, which required only minor changes.
+    * Completely revamp the RPC invocation mechanism using a new "Caller" pattern.
+    * Handle double-call of retrieve method when a data table is first loaded.
+    * Change the standard internal timestamp format to ISO 8601 (with literal "T")
+    * Add timestamp to front of standard Mvp4g logger output.
+
+Version 0.9.24   17 Apr 2013
+
+    * Upgrade to Spring 3.2.2 and Spring Security 2.0.8.
+    * Configure @Secured annotations so that all listed roles are required to get authorization.
+    * Add new role ROLE_ENABLED based on ClientSession.isLocked(), wired into Spring security.
+    * Explictly disallow locked-out users from invoking RPCs, even if they authenticate.
+
+Version 0.9.23   10 Apr 2013
+
+    * Bump the RPC timeout to 30 seconds (required when a new AppEngine instance boots).
+
+Version 0.9.22   10 Apr 2013
+
+    * Upgrade to App Engine 1.7.7 and GWT 2.5.1.
+    * Change GIN injection to annotate setters rather than instance variables.
+    * Apply a system-wide RPC timeout policy (and a separate policy for the XSRF RPC)
+    * Provide special error reporting for RPC timeout and incompatible back-end errors.
+
+Version 0.9.21   03 Jan 2013
+
+    * Upgrade to App Engine 1.7.4 and GWT 2.5.0 (final).
+    * Fix generation of hash codes: use toHashCode() rather than hashCode().
+    * Rework ExchangeService.generateAssignments() so conflicts are in terms of participant id.
+    * Change disclosure panel when editing participant, so giver/receiver are revealed separately.
+    * Add support for conflicts in the user interface (already supported in back-end).
+
+Version 0.9.20   07 Oct 2012
+
+    * Upgrade to App Engine 1.7.2.1 and GWT 2.5.0-rc2.
+    * Change Google OpenId provider to "www.google.com" instead of "google.com".
+
+Version 0.9.19   29 Jun 2012
+
+    * Fix odd problem with provided=true DisclosurePanels not showing header text (since GWT upgrade).
+
+Version 0.9.18   29 Jun 2012
+
+    * Upgrade to App Engine 1.7.0 and GWT 2.5.0-rc1.
+
+Version 0.9.17   08 May 2012
+
+    * Add Cucumber acceptance tests for invalid bookmark scenarios.
+    * Upgrade to Mvp4g 1.5.0 (SNAPSHOT), to properly handle invalid bookmarks within modules.
+    * Minor refactoring to reduce McCabe cyclomatic complexity (pointed out by Metrics plugin).
+
+Version 0.9.16   04 May 2012
+
+    * Refactor out common event handler functionality.
+    * Review code and be more careful with potential XSS vulnerabilities.
+    * Trigger most pop-ups via the event bus rather than WidgetUtils.
+    * Other minor cleanup to comments and documentation.
+    * Upgrade to App Engine 1.6.5 and latest version of Google Plugin for Eclipse.
+
+Version 0.9.15   30 Apr 2012
+
+    * Refactor to use my own XsrfTokenRpc rather than Google's standard XsrfTokenServiceServlet.
+
+Version 0.9.14   29 Apr 2012
+
+    * Re-implement CSRF/XSRF protection using a custom generator rather than hand-written proxies.
+
+Version 0.9.13   28 Apr 2012
+
+    * Implement protection against CSRF/XSRF attacks (cross-site request forgery).
+
+Version 0.9.12   23 Apr 2012
+
+    * Create per-module GIN modules and move ExchangeEditManager to module level.
+    * Finish the last of the improvements to code coverage, primarily RPC and DAO tests.
+    * Fix the internal landing page bookmark, which got broken back in 0.9.4.
+    * Finish up all of the Cucumber acceptance tests that I am going to write (for now).
+
+Version 0.9.11   05 Apr 2012
+
+    * Convert to App Engine's HR datastore.
+        * Change application id to "santa-exchange-hrd"
+        * Change version string to include "using HRD" for clarity
+        * Point the dashboard at the new application
+
+Version 0.9.10   05 Apr 2012
+
+    * Conduct another review of the code and improve comments and documentation.
+    * Upgrade to App Engine 1.6.4 and latest version of Google Plugin for Eclipse.
+    * Add legible HTML ids for most widgets, based on ArcBee's work for GWTP.
+    * Rework test suites and support Emma coverage for client-side tests.
+    * Improve code coverage across-the-board using new Emma code coverage stats.
+    * Start implementing behavior-driven acceptance tests using Cucumber.
+    * Lots of non-functional changes, such as enhancements to the build scripts.
+
+Version 0.9.9    23 Feb 2012
+
+    * Fix logger used by some of the RPCs.
+    * Upgrade to Mvp4g v1.4.0 (minor tweaks) and latest GPE (no changes).
+
+Version 0.9.8    15 Jan 2012
+
+    * Upgrade to App Engine 1.6.1 and new version of Google Plugin for Eclipse.
+    * Convert application to use a cross-module singleton for client session.
+
+Version 0.9.7    09 Dec 2011
+
+    * Made updates to lots of comments after a personal code review.
+    * Changed AsyncRpcCallback, which should refer to "rpc" not "service".
+    * Pulled error popup dimensions out of WidgetConstants and into showError().
+    * Refactored common code out into WidgetUtils.closeOnEnterOrEscape().
+    * Tweaked constants in SantaExchangeMessages so Eclipe won't complain.
+    * Refactored PreviewPopup slightly, to make it easier to unit test.
+    * Added unit tests for PreviewPopup, focused around the HTML generation.
+
+Version 0.9.6    06 Dec 2011
+
+    * Minor changes from a personal code review.
+
+Version 0.9.5    28 Nov 2011
+
+    * Wrap long extra info lines in the text version of emails, so the result is legible.
+
+Version 0.9.4    06 Nov 2011
+
+    * Refactor exchange editing to base edit and undo states on ExchangeEditManager singleton
+    * Rework history so it's less easy to lose changes when moving between exchange and participant
+    * Get rid of session cache capability on ClientSession, because I don't think it will be needed
+
+Version 0.9.3    04 Nov 2011
+
+    * Refactor and clean up some tab-related functionality for internal landing page
+    * Change audit tab so that clicking on user id takes you to the user tab for that user
+    * Make browser history work for important pages, both internal and admin
+    * Handle RpcSecurityException for back-end just like an HTTP Forbidden error
+    * Edit exchange page does a better job handling an exchange that's not found
+    * Pull out a common NativeEventType enumeration instead of magic "click" constant everywhere
+    * Pull out SantaExchangeStyles for standard constants used system-wide
+    * Add a new audit event RESEND_EMAILS to track resend of invitations to participants
+    * Audit tab now shows a tooltip over the event type, providing a description of what it means
+    * Generate assignments now takes a 2-pass approach, with auto-conflict=true and then false
+    * Add instructions and a few confirmation popups on the edit screen to make flow of control clearer
+    * Clicking cancel when editing a new participant now discards that participant out of the list
+    * Added disclosure panel on edit participant to view assignments (if any)
+    * Added session cache capability to ClientSession, to support future functionality
+    * Added Exchange.refresh() method, to support updating an exchange in-place
+
+Version 0.9.2    31 Oct 2011
+
+    * Bug report should not exit when ENTER is pressed (prevents submission)
+    * Create/delete exchange should show yellow "Please wait" indicator
+    * Filter criteria box in Audit Tab wasn't quite wide enough to hold everything
+    * Add hint about which fields are optional when editing an exchange.
+
+Version 0.9.1    31 Oct 2011
+
+    * Minor tweaks to code based on personal code review
+
+Version 0.9.0    30 Oct 2011
+
+    * Initial public release on Google Code
+

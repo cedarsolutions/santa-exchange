@@ -1,0 +1,9 @@
+A new user was registered on the Santa Exchange web site:
+
+User id..........: userId
+User name........: userName
+Registration date: Tue Jun 14 00:00:00 CDT 2011
+Auth domain......: authenticationDomain
+OpenId provider..: GOOGLE
+Email address....: emailAddress
+Administrator....: true

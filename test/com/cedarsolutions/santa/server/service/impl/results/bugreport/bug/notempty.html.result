@@ -1,0 +1,19 @@
+<html>
+<body>
+
+<p>
+A bug report was submitted on the SantaExchange web site:
+</p>
+
+<ul>
+    <li><b>Report date: </b> 2011-11-12 14:36</li>
+    <li><b>Application version: </b> version</li>
+    <li><b>Submitting user id:</b> id</li>
+    <li><b>Submitting user name:</b> name</li>
+    <li><b>Email address: </b> email</li>
+    <li><b>Problem summary: </b> summary</li>
+    <li><b>Detailed description: </b><br/><p>detailed description of the problem</p></li>
+</ul>
+
+</body>
+</html>

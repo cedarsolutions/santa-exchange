@@ -1,0 +1,19 @@
+<html>
+<body>
+
+<p>
+A new user was registered on the Santa Exchange web site:
+</p>
+
+<ul>
+    <li><b>User id:</b> </li>
+    <li><b>User name:</b> </li>
+    <li><b>Registration date:</b> </li>
+    <li><b>Authentication domain</b> </li>
+    <li><b>OpenId provider:</b> </li>
+    <li><b>Email address:</b> </li>
+    <li><b>Administrator:</b> false</li>
+</ul>
+
+</body>
+</html>

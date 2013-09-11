@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                                 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.6.xsd">
+
+    <!--
+     ****************************
+      GAE security configuration
+     ****************************
+    -->
+
+    <!-- Note: most other Spring configuration goes in rpc-servlet.xml.  -->
+
+    <http auto-config="false" entry-point-ref="gaeEntryPoint" session-fixation-protection="newSession" />
+
+    <authentication-manager alias="gaeAuthenticationManager" />
+
+    <beans:bean id="gaeEntryPoint" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationEntryPoint" />
+
+    <beans:bean id="gaeAuthenticationProvider" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationProvider">
+        <custom-authentication-provider />
+    </beans:bean>
+
+    <beans:bean id="userService" class="com.google.appengine.api.users.UserServiceFactory" factory-method="getUserService"/>
+
+    <beans:bean id="gaeAuthenticationFilter" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationFilter">
+        <custom-filter position="PRE_AUTH_FILTER" />
+        <beans:property name="userService" ref="userService" />
+        <beans:property name="authenticationManager" ref="gaeAuthenticationManager" />
+    </beans:bean>
+
+</beans:beans>

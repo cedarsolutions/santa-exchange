@@ -1,0 +1,30 @@
+These are some of the major things I was trying to accomplish:
+
+- Use Spring 2.5 wherever possible for back-end code
+- Use of .ui.xml files rather than dynamically building HTML in Java
+- All user-facing text should be pulled out into resource bundles
+- Ability to share GWT client code in common project or jar
+- Ability to dispatch a URL to more than one place based on login state (role)
+- Protect access to certain pages by role
+   - Including clear and easy error handling behavior
+- Allow for deep links into the web site (i.e. history and bookmarks)
+   - This should include automatic redirection after login
+- Protect access to RPC calls by role
+   - Including clear and easy error handling behavior
+- Well-organized plan for external resources (i.e. for localization)
+- Way to nest views so that I don't have to duplicate functionality
+- Templates for pages including common UI elements
+   - For instance, header, sitebar, footer, login/logout links, etc.
+- Unit tests should be easy to implement
+   - Full (or nearly-full) unit test coverage for back-end code
+   - Solid unit test coverage for front-end code (as much as possible)
+   - Including tests for callbacks, which are shown as inline in most examples
+- Ability to style the site with CSS and easily change the theme
+- Good way to get configuration into presenters and widgets
+- DAOs to deal with the App Engine back-end data store
+- Good examples for validation without a lot of duplicated code
+- Make email work from GAE
+- Get some templating engine (Velocity) configured under GAE
+- OpenId login working
+- Incremental development process
+

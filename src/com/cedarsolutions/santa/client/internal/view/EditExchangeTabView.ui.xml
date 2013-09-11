@@ -1,0 +1,105 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:custom="urn:import:com.cedarsolutions.client.gwt.widget"
+             xmlns:widget="urn:import:com.cedarsolutions.santa.client.common.widget">
+
+    <ui:style>
+    .panel {
+        padding-top: 10px;
+        border: 2px solid;
+        background: #ffffff;
+        font-family: sans-serif;
+        margin: 3px;
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-bottom: 1em;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-bottom: 1em;
+        margin-right: 1em;
+        width: 350px;
+    }
+
+    .instructions {
+        /* make the instructions slightly smaller than the cell table */
+        text-align: justify;
+        margin-left: 25px;
+        margin-right: 25px;
+        width: 500px;
+    }
+
+    .labels {
+        font-weight: bold;
+    }
+    </ui:style>
+
+    <g:ScrollPanel>
+        <g:VerticalPanel>
+            <g:HTMLPanel>
+                <widget:ValidationErrorWidget ui:field="validationErrorWidget" />
+            </g:HTMLPanel>
+            <g:HorizontalPanel>
+                <g:VerticalPanel>
+                    <g:HTMLPanel>
+                        <p><g:Button ui:field="returnToListButton" /> <g:Button ui:field="saveButton" /> <g:Button ui:field="resetButton" /></p>
+                    </g:HTMLPanel>
+                    <g:HTMLPanel styleName="{style.panel}">
+                        <g:Grid>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="stateTitleLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:Label ui:field="stateDisplayLabel" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="exchangeNameLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="exchangeNameInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="dateTimeLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="dateTimeInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="themeLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="themeInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="costLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="costInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="organizerNameLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="organizerNameInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="organizerEmailLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="organizerEmailInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="organizerPhoneLabel"/></g:HTMLPanel></g:customCell>
+                                <g:customCell><g:HTMLPanel><g:TextBox ui:field="organizerPhoneInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                        </g:Grid>
+                        <g:Grid>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="extraInfoLabel"/></g:HTMLPanel></g:customCell>
+                            </g:row>
+                            <g:row>
+                                <g:customCell><g:HTMLPanel><g:TextArea visibleLines="3" width="25em" ui:field="extraInfoInput" /></g:HTMLPanel></g:customCell>
+                            </g:row>
+                        </g:Grid>
+                        <p><g:Label ui:field="optionalLabel"/></p>
+                    </g:HTMLPanel>
+                </g:VerticalPanel>
+                <g:VerticalPanel>
+                    <g:HTMLPanel>
+                        <p><g:Button ui:field="addParticipantButton" /> <g:Button ui:field="deleteParticipantButton" /> <g:Button ui:field="previewButton" /> <g:Button ui:field="sendAllNotificationsButton" /> <g:Button ui:field="resendNotificationButton" /> </p>
+                        <p><g:Label styleName="{style.instructions}" ui:field="instructionsLabel"></g:Label></p>
+                        <custom:DataTable ui:field="table" />
+                        <custom:DataTablePager ui:field="pager" />
+                    </g:HTMLPanel>
+                </g:VerticalPanel>
+            </g:HorizontalPanel>
+        </g:VerticalPanel>
+    </g:ScrollPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,11 @@
+A new user was registered on the Santa Exchange web site:
+
+User id..........: $!registeredUser.userId
+User name........: $!registeredUser.userName
+Registration date: $!registeredUser.registrationDate
+Auth domain......: $!registeredUser.authenticationDomain
+OpenId provider..: $!registeredUser.openIdProvider
+Email address....: $!registeredUser.emailAddress
+Administrator....: $!registeredUser.admin
+
+

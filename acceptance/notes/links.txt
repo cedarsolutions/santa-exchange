@@ -1,0 +1,28 @@
+XPath Debugging
+http://stackoverflow.com/questions/103325/what-is-the-correct-xpath-for-choosing-attributes-that-contain-foo
+http://www.xmlme.com/XpathTool.aspx
+
+General notes on Cucumber
+http://coryschires.com/ten-tips-for-writing-better-cucumber-steps/
+https://github.com/cucumber/cucumber/wiki/Hooks
+http://net.tutsplus.com/tutorials/ruby/ruby-for-newbies-testing-web-apps-with-capybara-and-cucumber/
+http://codebetter.com/kylebaley/2011/02/10/running-cucumber-tests-against-gwtappengine-in-teamcity-or-how-to-ci-with-ui/
+
+Cucumber
+http://cukes.info/
+https://github.com/cucumber/cucumber/wiki/Gherkin
+
+Capybara
+http://rubydoc.info/github/jnicklas/capybara/file/README.md#Using_Capybara_with_Cucumber
+http://rubydoc.info/github/jnicklas/capybara/master/Capybara/Session#current_path-instance_method
+http://rubydoc.info/github/jnicklas/capybara/Capybara/Node/Matchers#has_no_text%3F-instance_method
+http://rubydoc.info/github/jnicklas/capybara/Capybara/Node/Finders#all-instance_method
+http://rubydoc.info/github/jnicklas/capybara/Capybara/RSpecMatchers
+
+Cucumber Reuse
+http://blog.mattwynne.net/2008/11/14/dry-up-your-cucumber-steps/
+http://stackoverflow.com/questions/918066/reuse-cucumber-steps
+https://github.com/cucumber/cucumber/wiki/A-Whole-New-World
+
+Testing Strategies
+Hidden fields: https://makandracards.com/makandra/1049-capybara-check-that-a-page-element-is-not-visible

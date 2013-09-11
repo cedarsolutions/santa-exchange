@@ -1,0 +1,101 @@
+<!--
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*
+*              C E D A R
+*          S O L U T I O N S       "Software done right."
+*           S O F T W A R E
+*
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*
+* Copyright (c) 2012-2013 Kenneth J. Pronovici.
+* All rights reserved.
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the Apache License, Version 2.0.
+* See LICENSE for more information about the licensing terms.
+ *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*
+* Author   : Kenneth J. Pronovici <pronovic@ieee.org>
+* Language : Apache Ant (>= 1.8.3)
+* Project  : Secret Santa Exchange
+*
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+-->
+<project name="SantaExchange" basedir="." default="help">
+
+    <!-- The goal of this build script is to make common Gradle tasks accessible from Eclipse. -->
+
+    <property environment="env" />
+    <property file="local.properties" />  <!-- use this to override config for your local environment -->
+    <property file="app.properties" />
+
+    <!-- This assumes Gradle is properly set up on your system path. -->
+    <condition property="gradle" value="gradle.bat"><os family="windows" /></condition>
+    <property name="gradle" value="gradle" />
+
+    <macrodef name="gradle">
+        <attribute name="target"/>
+        <sequential>
+            <exec executable="${gradle}" dir="${basedir}">
+                <arg line="@{target}" />
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <target name="help">
+        <echo message="This project is managed with Gradle." />
+        <echo message="To generate Eclipse project files, execute 'gradle eclipse' or 'ant eclipse'." />
+        <echo message="Once the project has been bootstrapped, you can import it into Eclipse as usual." />
+    </target>
+
+    <target name="eclipse" description="Rebuild the Eclipse project files">
+        <gradle target="eclipse" />
+        <echo message="Remember to close and open your Eclipse project if you ran this from Eclipse." />
+    </target>
+
+    <target name="label.current.release" description="Label the current release in all configured Mercurial projects.">
+        <gradle target="labelCurrentRelease" />
+    </target>
+
+    <target name="update.copyright.statements" description="Update copyright statements based on Mercurial" >
+        <gradle target="updateCopyrightStatements" />
+    </target>
+
+    <target name="start.devmode" description="Boot the GWT development mode server.">
+        <gradle target="startDevMode" />
+    </target>
+
+    <target name="stop.devmode" description="Stop the GWT development mode server.">
+        <gradle target="stopDevMode" />
+    </target>
+
+    <target name="build.application" description="Rebuild the application.">
+        <gradle target="buildApplication" />
+    </target>
+
+    <target name="cleanup.eclipse.test.dirs" description="Cleanup the Eclipse GWT cache and test database directories">
+        <gradle target="cleanupEclipseTestDirs" />
+    </target>
+
+    <target name="run.all.tests" description="Run all tests for this project">
+        <gradle target="unittest clienttest acceptancetest" />
+    </target>
+
+    <target name="run.unit.tests" description="Run all unit-type tests for this project.">
+        <gradle target="unittest clienttest" />
+    </target>
+
+    <target name="run.acceptance.tests" description="Run all acceptance tests for this project.">
+        <gradle target="acceptancetest" />
+    </target>
+
+    <target name="run.cucumber" description="Run the Cucumber acceptance tests.">
+        <gradle target="runCucumber" />
+    </target>
+
+    <target name="run.cucumber.reboot" description="Run the acceptance tests, including a reboot of the server.">
+        <gradle target="runCucumberWithReboot" />
+    </target>
+
+</project>

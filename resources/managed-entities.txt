@@ -1,0 +1,7 @@
+# This file lists the entity classes that are managed by the
+# DAO infrastructure and can be written to the GAE datastore.
+# It is parsed by DaoObjectifyService.
+
+com.cedarsolutions.santa.shared.domain.audit.AuditEvent
+com.cedarsolutions.santa.server.dao.impl.ExchangeContainer
+com.cedarsolutions.santa.shared.domain.user.RegisteredUser

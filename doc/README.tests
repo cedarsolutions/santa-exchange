@@ -1,0 +1,97 @@
+TYPES OF TESTS
+
+This project has three kinds of tests: unit tests, client-side tests, and
+acceptance tests.
+
+Acceptance tests, found in the acceptance folder, are implemented in Ruby using
+the Cucumber and Capybara frameworks.  See README.txt in the acceptance folder
+for more information.
+
+Unit tests and client-side tests, found in the test folder, are implemented
+using JUnit.  The same class might have both unit tests and client-side tests.
+You can tell apart client-side tests by their "ClientTest" suffix.
+
+Unit tests in this context are "true" unit tests: that is, they are simple
+JUnit 4 tests that do not have any outside dependencies.  To run tests for an
+individual class, right-click on the class and choose Run As > JUnit Test.
+
+Client-side unit tests all inherit from ClientTestCase (which itself inherits
+from Google's GWTTestCase).  When invoked, client-side tests use a customized
+test runner provided by Google.  The test runner starts up a servlet container
+and invokes the client side code in that container with a stubbed browser.
+
+To run client-side tests for an individual class, right-click on the class and
+choose Run As > GWT JUnit Test.  Sometimes, Eclipse gets confused and doesn't
+offer the Run As > GWT JUnit Test option.  To work around this, open the class
+in the Java editor and and right click on the class name instead.
+
+
+TEST SUITES
+
+In a normal (non-GWT) project, I would normally forego suite definitions and
+just use Run As > JUnit Test at the package or source folder level.  For GWT
+projects, it seems to work better to have explicit suite definitions.
+
+There are two suites: UnitTestSuite runs the unit tests.  ClientTestSuite runs
+the GWT client-side tests.
+
+To run UnitTestSuite, right-click on it and choose Run As > JUnit Test.  To run
+ClientTestSuite, right-click on it and choose Run As > GWT JUnit Test.
+Sometimes, Eclipse gets confused and doesn't offer the Run As > GWT JUnit Test
+option.  To work around this, open the class in the Java editor and and right
+click on the class name instead.
+
+
+CODE COVERAGE
+
+I aim for as close to 100% unit test coverage as possible.  I use the EclEmma
+Eclipse plugin to measure code coverage:
+
+   http://www.eclemma.org/
+
+Any version of EclEmma will work for the unit tests.  However, you'll need a
+specially patched version of the plugin to get coverage for GWT client-side
+tests.  You can download a patched version of EclEmma here:
+
+   http://code.google.com/p/santa-exchange/downloads/detail?name=eclemma-1.3.2-gwt.zip&can=2&q=
+
+To get coverage for the unit tests, right-click on UnitTestSuite and choose
+Coverage As > JUnit Test.  Let the test suite run.  It will probably
+double-count tests, but you can ignore that for the time being.
+
+Once the suite has finished running, right-click on UnitTestSuite again and
+choose Coverage Configurations.  In the Coverage tab, uncheck all folders
+except src and resources.
+
+Now that things are configured properly, click Apply, then click Coverage.
+This time, when the suite runs, you should get the correct number of tests and
+the coverage analyis should show only the source tree.
+
+To get coverage for the GWT client-side test cases, right-click on
+ClientTestSuite and choose Coverage As > JUnit Test.  The first time the suite
+runs, all of the tests will fail.  This is expected.
+
+Once the suite has finished running, right-click on ClientTestSuite again and
+choose Coverage Configurations.  In the Arguments tab, place the following in
+the VM Arguments box:
+
+    -Dgwt.args="-out www-test"
+
+This option tells GWT to generate a www-test folder for the compiled code,
+rather than trying to re-use the existing war directory.  The standard Google
+test runner does this automatically, but we have to be explicit about it here.
+If you forget this, the Spring context will be loaded, and the unit tests won't
+work properly.
+
+Next, in the Coverage tab, uncheck all folders except src and resources.  Then,
+in the Classpath tab, click on User Entries, then click Advanced.  Select the
+Add Folders radio button and click OK.  Then, add the src and test folders to
+the classpath.
+
+Now that things are configured properly, click Apply, then click Coverage.
+This time, when the suite runs, all of the tests should pass.
+
+At this point, you'll have two separate coverage reports shown in the Coverage
+view, one for each suite.  Click the Merge Sessions icon in the Coverage View,
+and EclEmma will merge the two coverage reports into a single report.  This
+will tell you about the overall coverage for both kinds of tests.

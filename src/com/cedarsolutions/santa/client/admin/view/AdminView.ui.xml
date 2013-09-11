@@ -1,0 +1,48 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:widget="urn:import:com.cedarsolutions.santa.client.common.widget">
+
+    <!--
+    Every view in the module is rendered by this template.  The body placeholder
+    below is replaced via the replaceModuleBody event.
+    -->
+
+    <ui:style>
+    .content {
+        width: 100%;
+        margin: 0px auto;
+        text-align: left;
+    }
+
+    .body {
+    }
+    </ui:style>
+
+    <g:ScrollPanel>
+        <g:FlowPanel styleName="{style.content}">
+            <g:HTMLPanel styleName="ss-MainMenuRegion">
+                <g:HTMLPanel styleName="left">
+                    <h1><g:Label ui:field="title" /></h1>
+                </g:HTMLPanel>
+                <g:HTMLPanel styleName="right">
+                    <g:MenuBar stylePrimaryName="ss-MainMenuBar" ui:field="menuBar" animationEnabled="false" autoOpen="true">
+                        <g:MenuItem ui:field="mainMenu">
+                            <g:MenuBar stylePrimaryName="ss-MainVerticalMenu" vertical="true">
+                                <g:MenuItem ui:field="internalLandingPageItem" />
+                                <g:MenuItem ui:field="dashboardItem" />
+                                <g:MenuItem ui:field="aboutItem" />
+                                <g:MenuItem ui:field="bugReportItem" />
+                                <g:MenuItem ui:field="sourceCodeItem" />
+                                <g:MenuItem ui:field="logoutItem" />
+                            </g:MenuBar>
+                        </g:MenuItem>
+                    </g:MenuBar>
+                </g:HTMLPanel>
+            </g:HTMLPanel>
+            <g:SimplePanel styleName="{style.body}" ui:field="moduleBody" />
+            <widget:PageFooter />
+        </g:FlowPanel>
+    </g:ScrollPanel>
+
+</ui:UiBinder>

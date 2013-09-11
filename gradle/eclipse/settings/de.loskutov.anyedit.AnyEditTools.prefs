@@ -1,0 +1,16 @@
+#Fri Oct 14 20:36:23 CDT 2011
+activeContentFilterList=MANIFEST.MF,*.result,*.vm,*.properties
+addNewLine=true
+convertActionOnSaave=AnyEdit.CnvrtTabToSpaces
+eclipse.preferences.version=1
+inActiveContentFilterList=
+javaTabWidthForJava=true
+org.eclipse.jdt.ui.editor.tab.width=4
+projectPropsEnabled=true
+removeTrailingSpaces=true
+replaceAllSpaces=true
+replaceAllTabs=true
+saveAndAddLine=true
+saveAndConvert=true
+saveAndTrim=true
+useModulo4Tabs=false

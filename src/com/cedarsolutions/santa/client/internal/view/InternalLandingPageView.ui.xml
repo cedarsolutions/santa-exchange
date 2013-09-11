@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:c="urn:import:com.cedarsolutions.client.gwt.custom.tab"
+             xmlns:admin="urn:import:com.cedarsolutions.santa.client.admin.view">
+
+    <g:HTMLPanel>
+        <c:TabLayoutPanel stylePrimaryName="ss-TabLayoutPanel" ui:field="tabPanel" barUnit="PX" barHeight="45" />
+    </g:HTMLPanel>
+
+</ui:UiBinder>

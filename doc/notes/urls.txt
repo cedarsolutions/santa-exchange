@@ -1,0 +1,54 @@
+=====================
+High-level Projects
+=====================
+
+Mvp4g
+    http://code.google.com/p/mvp4g/
+    http://groups.google.com/group/mvp4g
+
+GWT-SL (spring back-end with GWT):
+    http://code.google.com/p/gwt-sl
+
+Mockito
+    http://mockito.org/
+
+
+=====================
+Notes
+=====================
+
+GWT/GAE and Spring
+    http://code.google.com/p/gwt-sl/wiki/Documentation
+    http://sikeh.javaeye.com/blog/364043
+
+GWT Authentication
+    http://code.google.com/appengine/docs/java/config/webxml.html#Security_and_Authentication
+    http://code.google.com/appengine/docs/java/users/overview.html
+
+Spring security with GWT:
+    http://www.insideit.fr/post/2009/02/19/How-to-:-Spring-Security-ex-Acegi-and-GWT
+    http://code.google.com/p/gwt-incubator-lib/wiki/GwtIncubatorSecurity'
+    http://blog.springsource.com/2010/08/02/spring-security-in-google-app-engine/
+
+Discussion about MVP: http://blog.codiform.com/2011/03/view-presenter-interaction-patterns-in.html
+
+List of GWT widgets: http://code.google.com/webtoolkit/doc/latest/RefWidgetGallery.html
+Info on building user interfaces: http://code.google.com/webtoolkit/doc/latest/DevGuideUi.html
+Javadoc for UI widgets: http://google-web-toolkit.googlecode.com/svn/javadoc/1.6/com/google/gwt/user/client/ui/package-summary.html
+
+
+Mockito and organize imports: http://codecampfire.blogspot.com/2010/03/eclipse-and-mockito.html
+    Note that you still don't automatically *get* imports, but at least Eclipse doesn't remove them
+
+GWT anti-patterns:
+http://www.zackgrossbart.com/hackito/antiptrn-gwt/
+http://www.zackgrossbart.com/hackito/antiptrn-gwt2/
+
+
+Cell Table:
+http://code.google.com/webtoolkit/doc/latest/DevGuideUiCellTable.html
+http://gwt.google.com/samples/Showcase/Showcase.html#!CwCellTable
+
+Problems running out of memory (permgen) in GWT dev mode:
+http://code.google.com/p/google-web-toolkit/issues/detail?id=4923
+http://stackoverflow.com/questions/5796088/gwt-dev-mode-performance-problems

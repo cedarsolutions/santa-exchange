@@ -1,0 +1,312 @@
+/*************************************/
+/* Overrides of standard GWT styles. */
+/*************************************/
+
+.gwt-Anchor {
+    cursor: pointer;
+    cursor: hand;
+}
+
+
+/******************/
+/* General styles */
+/******************/
+
+.ss-ErrorField {
+    border: 2px solid #d40000;
+}
+
+.ss-TextAsLink {
+    color: #0000AA;
+    text-decoration: underline;
+}
+
+
+/**********************/
+/* Styles for DialogBox */
+/************************/
+
+.ss-DialogBox .Caption {
+    padding: 4px 4px 4px 8px;
+    cursor: default;
+    font-weight: bold;
+    background: #bfd9cc;
+    border: 3px solid;
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+}
+
+.ss-DialogBox .dialogContent {
+    padding: 5px 10px 5px 10px;
+}
+
+.ss-DialogBox .dialogMiddleCenter {
+    padding: 3px;
+    background: white;
+    border: 3px solid;
+    border-top: none;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.ss-DialogBox .dialogBottomCenter {
+}
+
+.ss-DialogBox .dialogMiddleLeft {
+}
+
+.ss-DialogBox .dialogMiddleRight {
+}
+
+.ss-DialogBox .dialogTopLeftInner {
+    width: 5px;
+    zoom: 1;
+}
+
+.ss-DialogBox .dialogTopRightInner {
+    width: 8px;
+    zoom: 1;
+}
+
+.ss-DialogBox .dialogBottomLeftInner {
+    width: 5px;
+    height: 8px;
+    zoom: 1;
+}
+
+.ss-DialogBox .dialogBottomRightInner {
+    width: 5px;
+    height: 8px;
+    zoom: 1;
+}
+
+.ss-DialogBox .dialogTopLeft {
+}
+
+.ss-DialogBox .dialogTopRight {
+}
+
+.ss-DialogBox .dialogBottomLeft {
+}
+
+.ss-DialogBox .dialogBottomRight {
+}
+
+* html .ss-DialogBox .dialogTopLeftInner {
+    width: 5px;
+    overflow: hidden;
+}
+
+* html .ss-DialogBox .dialogTopRightInner {
+    width: 8px;
+    overflow: hidden;
+}
+
+* html .ss-DialogBox .dialogBottomLeftInner {
+    width: 5px;
+    height: 8px;
+    overflow: hidden;
+}
+
+* html .ss-DialogBox .dialogBottomRightInner {
+    width: 8px;
+    height: 8px;
+    overflow: hidden;
+}
+
+
+/*******************************/
+/* Styles for DisclosurePanel. */
+/*******************************/
+/** See also: http://www.mail-archive.com/google-web-toolkit@googlegroups.com/msg07251.html */
+/** See also: http://stackoverflow.com/questions/5034312/how-to-remove-the-focus-on-disclosure-panels-header */
+/** See also: http://www.colorhunter.com/ (I like #623641) */
+
+.ss-DisclosurePanel {
+}
+
+.ss-DisclosurePanel-open {
+    width: 100%;
+    height: 100%;
+}
+
+.ss-DisclosurePanel-closed {
+}
+
+.ss-DisclosurePanel .header,
+.ss-DisclosurePanel .header a,
+.ss-DisclosurePanel .header td {
+    outline: 0;
+    text-decoration: none;
+    color: #626360;
+    font-weight: bold;
+    cursor: pointer;
+    cursor: hand;
+    padding-top: 2px;
+}
+
+.ss-DisclosurePanel .content {
+    width: 90%;
+    text-align: justify;
+    height: 80%;
+    padding-left: 10px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+
+/********************************************************/
+/* Main menu bar across the top of the internal screens */
+/********************************************************/
+
+.ss-MainMenuRegion {
+    padding-top: 1px;
+    height: 30px;
+    background: #e5e5e5;
+}
+
+.ss-MainMenuRegion h1 {
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.ss-MainMenuRegion .left {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    background: #e5e5e5;
+    border-bottom: 1px solid #000000;
+}
+
+.ss-MainMenuRegion .right {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    background: #e5e5e5;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 1px;  /* for some reason, this doesn't line up with the other side...? */
+}
+
+.ss-MainMenuBar {
+    background: #e5e5e5;
+    float: right;
+    width: 275px;
+}
+
+.ss-MainMenuBar .gwt-MenuItem {
+    padding: 5px 10px 5px 20px;
+    background: #e5e5e5;
+    background-image: url(images/menu-20x20.png);
+    background-repeat: no-repeat;
+}
+
+.ss-MainMenuBar .gwt-MenuItem-selected {
+    padding: 5px 10px 5px 20px;
+    background: #e5e5e5;
+    background-image: url(images/menu-selected-20x20.png);
+    background-repeat: no-repeat;
+}
+
+.ss-MainMenuBarPopup {
+    background: #e5e5e5;
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+.ss-MainMenuBarPopup .menuPopupTop .menuPopupTopCenter {
+    background: #e5e5e5;
+}
+
+.ss-MainMenuBarPopup .menuPopupTop .menuPopupTopLeft {
+    background: #e5e5e5;
+}
+
+.ss-MainMenuBarPopup .menuPopupTop .menuPopupTopRight {
+    background: #e5e5e5;
+}
+
+.ss-MainMenuBarPopup .menuPopupBottom .menuPopupBottomCenter {
+    background: #e5e5e5;
+}
+
+.ss-MainMenuBarPopup .menuPopupBottom .menuPopupBottomLeft {
+    background: #e5e5e5;
+}
+
+.ss-MainMenuBarPopup .menuPopupBottom .menuPopupBottomRight {
+    background: #e5e5e5;
+}
+
+.ss-MainMenuBarPopup .menuPopupMiddle .menuPopupMiddleLeft {
+    background: #e5e5e5;
+}
+
+.ss-MainMenuBarPopup .menuPopupMiddle .menuPopupMiddleRight {
+    background: #e5e5e5;
+}
+
+.ss-MainVerticalMenu .gwt-MenuItem {
+    background: #e5e5e5;
+}
+
+.ss-MainVerticalMenu .gwt-MenuItem-selected {
+    background: #bfbfbf;
+}
+
+
+/*******************************************/
+/* This is a full-screen tab layout panel. */
+/*******************************************/
+
+/* Note: the space above the tab panel is controlled by barHeight="XX" on the panel itself. */
+
+/* This the the entire panel. */
+.ss-TabLayoutPanel {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* This is the container that the tabs live in */
+.ss-TabLayoutPanel .gwt-TabLayoutPanelTabs {
+}
+
+/** This is the container below the tabs. */
+.ss-TabLayoutPanel .gwt-TabLayoutPanelContentContainer {
+    border-style: none;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #d40000;
+    border-top-width: 5px;
+}
+
+/* This is the container for the content. */
+.ss-TabLayoutPanel .gwt-TabLayoutPanelContent {
+    padding: 8px;
+}
+
+/* This is the style for the non-selected tabs. */
+.ss-TabLayoutPanel .gwt-TabLayoutPanelTab {
+    background: #d09898;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    cursor: hand;
+    margin-right: 2px;
+    padding: 5px 6px 3px 6px;
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+}
+
+/** This is the style for the selected tabs. */
+.ss-TabLayoutPanel .gwt-TabLayoutPanelTab-selected {
+    color: #ffffff;
+    background: #d40000;
+}

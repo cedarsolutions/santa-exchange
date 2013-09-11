@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="SantaExchange.css">
+
+        <!-- Any title is fine  -->
+        <title>Santa Exchange</title>
+
+        <!-- Load the compiled module. -->
+        <script type="text/javascript" src="santaexchange/santaexchange.nocache.js"></script>
+
+        <style type="text/css">
+.gwt-history {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0;
+}
+
+.severe-error {
+    width: 22em;
+    position: absolute;
+    left: 50%;
+    margin-left: -11em;
+    color: red;
+    background-color: white;
+    border: 1px solid red;
+    padding: 4px;
+    font-family: sans-serif
+}
+
+.ajax-progress-indicator {
+    background: #fff1a8;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    font-weight: bold;
+    top: 0;
+    left: 0;
+    width: auto;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    z-index: 100;
+}
+
+.ajax-progress-image {
+    vertical-align: middle;
+    padding-right: 5px;
+    margin-bottom: 5px;
+    z-index: 100;
+}
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Include history support -->
+        <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' class="gwt-history"></iframe>
+
+        <!-- Blow up if Javascript is not available. -->
+        <noscript>
+            <div class="severe-error">
+                Your web browser must have Javascript enabled in order for this
+                application to display correctly.  If you are using Internet
+                Explorer, you may need to enable "active" controls under some
+                circumstances.
+            </div>
+        </noscript>
+
+        <!-- Progress indicator for slow AJAX actions. -->
+        <div class="ajax-progress-indicator" id="ajaxProgressIndicator">
+            <img class="ajax-progress-image" src="images/ajax-loader.gif" alt="" />
+            <span id="ajaxProgressIndicatorText">Please wait...</span>
+        </div>
+
+    </body>
+
+</html>
