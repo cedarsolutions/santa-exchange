@@ -277,7 +277,7 @@ def cleanupCacheDirs() {
 // *************
 
 // Unit tests are defined by the UnitTestSuite
-task unittest(type: Test) {
+task unittest(type: Test) << {
    scanForTestClasses = false
    enableAssertions = false
    outputs.upToDateWhen { false }
@@ -285,7 +285,7 @@ task unittest(type: Test) {
 }
 
 // Client tests are defined by the ClientTestSuite
-task clienttest(type: Test) {
+task clienttest(type: Test) << {
    scanForTestClasses = false
    enableAssertions = false
    outputs.upToDateWhen { false }
@@ -429,7 +429,7 @@ task updateCopyrightStatements(dependsOn: gaeExplodeWar) << {
 tasks.eclipse.dependsOn(cleanEclipse)
 
 // Clean up extended settings
-task cleanEclipseExtendedSettings(type: Delete) {
+task cleanEclipseExtendedSettings(type: Delete) << {
 
    // Delete the settings we copied in
    file(".settings/de.loskutov.anyedit.AnyEditTools.prefs").delete()
