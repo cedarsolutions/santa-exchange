@@ -97,5 +97,9 @@
     <target name="run.cucumber.reboot" description="Run the acceptance tests, including a reboot of the server.">
         <gradle target="runCucumberWithReboot" />
     </target>
+    
+    <target name="clean" description="Clean up everything except Eclipse configuration and .gradle">
+        <gradle target="clean" />
+    </target>
 
 </project>
