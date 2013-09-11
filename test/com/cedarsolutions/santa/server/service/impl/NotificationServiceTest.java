@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -120,28 +121,36 @@ public class NotificationServiceTest {
 
     /** Test notifyRegisteredUser(), confirming that the Velocity template renders (non-empty object). */
     @Test public void testNotifyRegisteredUserTemplateNotEmpty() throws Exception {
-        RegisteredUser registeredUser = new RegisteredUser();
-        registeredUser.setUserId("userId");
-        registeredUser.setUserName("userName");
-        registeredUser.setRegistrationDate(DateUtils.createDate("2011-06-14"));
-        registeredUser.setAuthenticationDomain("authenticationDomain");
-        registeredUser.setOpenIdProvider(OpenIdProvider.GOOGLE);
-        registeredUser.setFederatedIdentity("federatedIdentity");
-        registeredUser.setEmailAddress("emailAddress");
-        registeredUser.setAdmin(true);
+        TimeZone originalZone = TimeZone.getDefault();
+        try {
+            // This matters because the output has a date in it, formatted in local time
+            TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
-        NotificationService service = createService();
+            RegisteredUser registeredUser = new RegisteredUser();
+            registeredUser.setUserId("userId");
+            registeredUser.setUserName("userName");
+            registeredUser.setRegistrationDate(DateUtils.createDate("2011-06-14T00:00:00,000-0000"));
+            registeredUser.setAuthenticationDomain("authenticationDomain");
+            registeredUser.setOpenIdProvider(OpenIdProvider.GOOGLE);
+            registeredUser.setFederatedIdentity("federatedIdentity");
+            registeredUser.setEmailAddress("emailAddress");
+            registeredUser.setAdmin(true);
 
-        ArgumentCaptor<EmailTemplate> template = ArgumentCaptor.forClass(EmailTemplate.class);
-        ArgumentCaptor<EmailMessage> message = ArgumentCaptor.forClass(EmailMessage.class);
+            NotificationService service = createService();
 
-        service.notifyRegisteredUser(registeredUser);
-        verify(service.getEmailService()).sendEmail(template.capture());
-        verify(service.getEmailService()).sendEmail(message.capture());
+            ArgumentCaptor<EmailTemplate> template = ArgumentCaptor.forClass(EmailTemplate.class);
+            ArgumentCaptor<EmailMessage> message = ArgumentCaptor.forClass(EmailMessage.class);
 
-        assertSame(registeredUser, template.getValue().getTemplateContext().get("registeredUser"));
-        validateTemplateContents(template.getValue(), REGISTER, service);
-        validateMessageContents(message.getValue(), REGISTER, "notempty");
+            service.notifyRegisteredUser(registeredUser);
+            verify(service.getEmailService()).sendEmail(template.capture());
+            verify(service.getEmailService()).sendEmail(message.capture());
+
+            assertSame(registeredUser, template.getValue().getTemplateContext().get("registeredUser"));
+            validateTemplateContents(template.getValue(), REGISTER, service);
+            validateMessageContents(message.getValue(), REGISTER, "notempty");
+        } finally {
+            TimeZone.setDefault(originalZone);
+        }
     }
 
     /**

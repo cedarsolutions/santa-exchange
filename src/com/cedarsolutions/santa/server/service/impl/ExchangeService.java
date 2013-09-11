@@ -207,7 +207,12 @@ public class ExchangeService extends AbstractService implements IExchangeService
         TemplateConfig templateConfig = this.deriveTemplateConfig(exchange, assignment);
 
         exchange = new Exchange(exchange);  // operate on a copy, so we don't modify the caller's object
-        exchange.setExtraInfo(StringUtils.wrapLine(exchange.getExtraInfo(), 75));
+
+        // Wrap the input data, but use Windows newline because that's what the
+        // templates use.  There should be a smarter way to do this (i.e. load
+        // the templates and convert the line endings), but I haven't gotten
+        // that working yet.
+        exchange.setExtraInfo(StringUtils.wrapLine(exchange.getExtraInfo(), 75, "\r\n"));
 
         Map<String, Object> context = new HashMap<String, Object>();
         context.put("exchange", exchange);

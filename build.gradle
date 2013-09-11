@@ -1,4 +1,4 @@
-// vim: set ft=groovy:
+// vim: set ft=groovy ts=3:
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 // *
 // *              C E D A R
@@ -289,7 +289,10 @@ task clienttest(type: Test) {
    scanForTestClasses = false
    enableAssertions = false
    outputs.upToDateWhen { false }
+
    systemProperty "gwt.args", "-out build/www-test -logLevel ERROR"
+   systemProperty "java.awt.headless", "true"   // required on Linux to avoid deferred binding errors
+
    include "**/ClientTestSuite.class"
 
    beforeSuite { descriptor ->
@@ -621,29 +624,33 @@ def ignoreResourcesFromDirectories(provider, directories) {
 // This makes the output legible in Eclipse; normally, the output isn't printed because Eclipse as a dumb terminal
 // See: http://forums.gradle.org/gradle/topics/how_to_print_a_maven_like_test_summary_on_the_console
 class TestSummary implements org.gradle.api.tasks.testing.TestListener {
-    long passed;
-    long failed;
-    long skipped;
+   long passed;
+   long failed;
+   long skipped;
 
-    public void beforeSuite(org.gradle.api.tasks.testing.TestDescriptor suite) {
-        passed = 0;
-        failed = 0;
-        skipped = 0;
-    }
+   public void beforeSuite(org.gradle.api.tasks.testing.TestDescriptor suite) {
+      passed = 0;
+      failed = 0;
+      skipped = 0;
+   }
 
-    public void afterSuite(org.gradle.api.tasks.testing.TestDescriptor suite, org.gradle.api.tasks.testing.TestResult result) {
-        System.out.printf("*** Test results: passed=%d, failed=%d, skipped=%d\n", passed, failed, skipped);
-    }
+   public void afterSuite(org.gradle.api.tasks.testing.TestDescriptor suite, org.gradle.api.tasks.testing.TestResult result) {
+      // On Windows, we get one result called "Test Run".  On Linux, there are several results, and "Test Run" is one of them.
+      if (suite.getName() == "Test Run") {
+         System.out.printf("*** Test results: passed=%d, failed=%d, skipped=%d\n", passed, failed, skipped);
+      }
+   }
 
-    public void beforeTest(org.gradle.api.tasks.testing.TestDescriptor test) {
-    }
+   public void beforeTest(org.gradle.api.tasks.testing.TestDescriptor test) {
+   }
 
-    public void afterTest(org.gradle.api.tasks.testing.TestDescriptor test, org.gradle.api.tasks.testing.TestResult result) {
-        passed += result.getSuccessfulTestCount();
-        failed += result.getFailedTestCount();
-        skipped += result.getSkippedTestCount();
-    }
+   public void afterTest(org.gradle.api.tasks.testing.TestDescriptor test, org.gradle.api.tasks.testing.TestResult result) {
+      passed += result.getSuccessfulTestCount();
+      failed += result.getFailedTestCount();
+      skipped += result.getSkippedTestCount();
+   }
 }
 
 // Add a test sumamry listener to print test output
 gradle.addListener(new TestSummary())
+

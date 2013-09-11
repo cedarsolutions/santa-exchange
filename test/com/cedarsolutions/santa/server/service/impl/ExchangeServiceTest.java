@@ -61,7 +61,6 @@ import com.cedarsolutions.shared.domain.email.EmailAddress;
 import com.cedarsolutions.shared.domain.email.EmailFormat;
 import com.cedarsolutions.shared.domain.email.EmailMessage;
 import com.cedarsolutions.shared.domain.email.EmailTemplate;
-import com.cedarsolutions.util.StringUtils;
 
 /**
  * Unit tests for ExchangeService.
@@ -328,8 +327,8 @@ public class ExchangeServiceTest {
         exchange.setExtraInfo("This is example extra info that is really really long and is indeed longer than 75 characters and will be wrapped.");
 
         Exchange expected = new Exchange(exchange);
-        expected.setExtraInfo("This is example extra info that is really really long and is indeed longer" +
-                              StringUtils.LINE_ENDING + "than 75 characters and will be wrapped.");
+        expected.setExtraInfo("This is example extra info that is really really long and is indeed longer\r\n" +
+                              "than 75 characters and will be wrapped.");
 
         ArgumentCaptor<EmailTemplate> template = ArgumentCaptor.forClass(EmailTemplate.class);
         ArgumentCaptor<EmailMessage> message = ArgumentCaptor.forClass(EmailMessage.class);

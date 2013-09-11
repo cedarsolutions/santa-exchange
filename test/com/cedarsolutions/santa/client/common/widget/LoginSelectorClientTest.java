@@ -83,7 +83,7 @@ public class LoginSelectorClientTest extends ClientTestCase {
         StubbedViewEventHandler eventHandler = new StubbedViewEventHandler();
         selector.setContinueEventHandler(eventHandler);
         assertSame(eventHandler, selector.getContinueEventHandler());
-        selector.continueButton.click();
+        clickButton(selector.continueButton);
         assertTrue(eventHandler.handledEvent());
     }
 
@@ -95,7 +95,7 @@ public class LoginSelectorClientTest extends ClientTestCase {
         StubbedViewEventHandler eventHandler = new StubbedViewEventHandler();
         selector.setLoginSelectorEventHandler(eventHandler);
         assertSame(eventHandler, selector.getLoginSelectorEventHandler());
-        selector.openIdButton.click();
+        clickButton(selector.openIdButton);
         assertTrue(eventHandler.handledEvent());
     }
 
