@@ -117,16 +117,16 @@ dependencies {
 
    compile "com.google.gwt:gwt-servlet:${config_gwtVersion}"
    compile fileTree(dir: getAppEngineSdkDir(), includes: [ "lib/user/**/*.jar", ])
-   compile "com.googlecode.cedar-common:cedar-common-util:2.1.+"
-   compile "com.googlecode.cedar-common:cedar-common-gae:2.1.+"
-   compile("com.googlecode.cedar-common:cedar-common-gwt:2.1.+") {
+   compile "com.googlecode.cedar-common:cedar-common-util:${config_cedarCommonVersion}"
+   compile "com.googlecode.cedar-common:cedar-common-gae:${config_cedarCommonVersion}"
+   compile("com.googlecode.cedar-common:cedar-common-gwt:${config_cedarCommonVersion}") {
       exclude module: "com.google.gwt" // proper version is provided runtime, below
    }
 
    testCompile "com.googlecode.cedar-common:cpsuite:1.2.6" 
-   testCompile "com.googlecode.cedar-common:cedar-common-testutil:2.1.+"
-   testCompile "com.googlecode.cedar-common:cedar-common-gwttestutil:2.1.+"
-   testCompile "com.googlecode.cedar-common:cedar-common-gaetestutil:2.1.+"
+   testCompile "com.googlecode.cedar-common:cedar-common-testutil:${config_cedarCommonVersion}"
+   testCompile "com.googlecode.cedar-common:cedar-common-gwttestutil:${config_cedarCommonVersion}"
+   testCompile "com.googlecode.cedar-common:cedar-common-gaetestutil:${config_cedarCommonVersion}"
 
    runtime("org.apache.xalan:com.springsource.org.apache.xalan:2.7.1") { transitive = false }
    runtime("org.apache.xerces:com.springsource.org.apache.xerces:2.9.1") { transitive = false }
@@ -135,7 +135,7 @@ dependencies {
    providedRuntime "com.google.gwt:gwt-dev:${config_gwtVersion}"
    providedRuntime "com.google.gwt:gwt-user:${config_gwtVersion}"
 
-   toolsRuntime "com.googlecode.cedar-common:cedar-common-tools:2.1.+"
+   toolsRuntime "com.googlecode.cedar-common:cedar-common-tools:${config_cedarCommonVersion}"
 
    devmodeRuntime fileTree(dir: getAppEngineSdkDir(), includes: [ "lib/appengine-tools-api.jar", ])
 }
