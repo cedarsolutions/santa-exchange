@@ -519,7 +519,8 @@ eclipse {
 
 // Hide the various derived directories from Eclipse
 project.eclipse.project.file.withXml { provider ->
-   ignoreResourcesFromDirectories(provider, [ "build", 
+   ignoreResourcesFromDirectories(provider, [ ".gradle",
+                                              "build", 
                                               "gwt-unitCache", 
                                               "www-test", 
                                               "war/com.cedarsolutions.santa.SantaExchange.JUnit", 
