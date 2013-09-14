@@ -2,4 +2,5 @@ Things to do:
 
 - Incrementally implement Cucumber acceptance tests for most of the site
 - Pull up cucumber, GWT, and app engine stuff into a Gradle plugin
-- Come up with a better way to label code that doesn't require building the entire application
+- Come up with a better Gradle way to label code that doesn't require building the entire application
+  - This is probably a Groovy method that regex-parses a GWT constants file for String and Integer
