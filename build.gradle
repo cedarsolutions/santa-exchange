@@ -36,7 +36,7 @@ buildscript {
    }
 
    dependencies {
-      classpath "com.googlecode.cedar-common:cedar-build:0.8.3"
+      classpath "com.googlecode.cedar-common:cedar-build:0.8.4"
       classpath "org.gradle.api.plugins:gradle-gae-plugin:0.9"
    }
 } 
@@ -53,6 +53,10 @@ apply plugin: "cedarJavadoc"
 // Load properties from standard configuration files (build.properties and local.properties)
 cedarProperties.loadStandardProperties()
 
+// Load properties from the GWT application configuration file
+def gwtConfig = file(projectDir.canonicalPath + "/src/com/cedarsolutions/santa/client/SantaExchangeConfig.java").canonicalPath
+cedarProperties.loadGwtProperties(gwtConfig, [ "system_applicationName", "system_versionNumber", "system_releaseDate", ])
+
 
 // ************************
 // * Project configuration
@@ -66,8 +70,8 @@ targetCompatibility = JavaVersion.VERSION_1_6
 tasks.compileJava.dependsOn(gaeDownloadSdk)  // We need to download the SDK before the classpath can be generated properly.
 
 cedarLabel {
-   projectName = "SantaExchange"
-   projectVersion = config_releaseVersion   // TODO: change this to something dynamic, and also change Javadoc task
+   projectName = system_applicationName
+   projectVersion = "${system_versionNumber} (${system_releaseDate})"
    repositories = [ projectDir, ]
    mercurialPath = config_mercurialPath
 }
@@ -129,9 +133,6 @@ sourceSets {
       runtimeClasspath += files(sourceSets.test.java.srcDirs)
    }
 
-   tools {
-   }
-
    devmode {
    }
 }
@@ -158,8 +159,6 @@ dependencies {
 
    providedRuntime "com.google.gwt:gwt-dev:${config_gwtVersion}"
    providedRuntime "com.google.gwt:gwt-user:${config_gwtVersion}"
-
-   toolsRuntime "com.googlecode.cedar-common:cedar-common-tools:${config_cedarCommonVersion}"
 
    devmodeRuntime fileTree(dir: getAppEngineSdkDir(), includes: [ "lib/appengine-tools-api.jar", ])
 }
@@ -194,21 +193,7 @@ configurations {
 
 // Generate Javadoc for into the Mercurial repository.
 task generateJavadoc(dependsOn: jdoc) << {
-   if (config_mercurialJavadocProject != null && config_mercurialJavadocProject != "unset") {
-      if (file(config_mercurialJavadocProject).isDirectory()) {
-         def baseDir = file(config_mercurialJavadocProject)
-         def sourceDir = file(project.docsDir.canonicalPath + "/javadoc")
-         def index = file(sourceDir.canonicalPath + "/index.html")
-         def targetDir = file(baseDir.canonicalPath + "/SantaExchange")
-         if (index.isFile()) {
-            targetDir.deleteDir()
-            targetDir.mkdirs()
-            ant.copy(todir: targetDir) {
-               fileset(dir: sourceDir, includes: "**/*")
-            }
-         }
-      }
-   }
+   copyJavadocToMercurial(config_mercurialJavadocProject, project, { name -> name })
 }
 
 
