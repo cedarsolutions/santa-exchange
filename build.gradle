@@ -49,6 +49,7 @@ apply plugin: "gae"  // I'm using this in only a limited way (for builds)
 apply plugin: "cedarBuild"
 apply plugin: "cedarCopyright"
 apply plugin: "cedarJavadoc"
+apply plugin: "cedarTestSuite"
 
 // Load properties from standard configuration files (build.properties and local.properties)
 cedarProperties.loadStandardProperties()
@@ -308,44 +309,6 @@ def cleanupCacheDirs() {
 // *************
 // * Test tasks
 // *************
-
-// Unit tests are defined by the UnitTestSuite
-task unittest(type: Test) {
-   scanForTestClasses = false
-   enableAssertions = false
-   outputs.upToDateWhen { false }
-   include "**/UnitTestSuite.class"
-}
-
-// Client tests are defined by the ClientTestSuite
-task clienttest(type: Test) {
-   scanForTestClasses = false
-   enableAssertions = false
-   outputs.upToDateWhen { false }
-
-   systemProperty "gwt.args", "-out build/www-test -logLevel ERROR"
-   systemProperty "java.awt.headless", "true"   // required on Linux to avoid deferred binding errors
-
-   include "**/ClientTestSuite.class"
-
-   beforeSuite { descriptor ->
-      file("build/www-test").deleteDir()
-      file("build/gwt-unitCache").deleteDir()
-   }
-
-   afterSuite { descriptor ->
-      file("build/www-test").deleteDir()
-      file("build/gwt-unitCache").deleteDir()
-   }
-}
-
-// Effectively disable the standard test runner
-test {
-   include "**/bogus.class"  // so nothing gets run
-}
-
-// Redefine the test runner in terms of the unit and client test suites
-tasks.test.dependsOn(clienttest, unittest) 
 
 // Run the Cucumber tests, assuming the devmode server is already up
 // Note that you have to manually build the application and boot devmode for this to work
