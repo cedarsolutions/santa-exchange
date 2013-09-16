@@ -55,11 +55,11 @@
     </target>
 
     <target name="label.current.release" description="Label the current release in all configured Mercurial projects.">
-        <gradle target="labelCurrentRelease" />
+        <gradle target="label" />
     </target>
 
     <target name="update.copyright.statements" description="Update copyright statements based on Mercurial" >
-        <gradle target="updateCopyrightStatements" />
+        <gradle target="copyright" />
     </target>
 
     <target name="start.devmode" description="Boot the GWT development mode server.">
