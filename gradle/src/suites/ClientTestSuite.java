@@ -17,7 +17,6 @@
  *
  * Author   : Kenneth J. Pronovici <pronovic@ieee.org>
  * Language : Java 6
- * Project  : Common Java Functionality
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package suites;
