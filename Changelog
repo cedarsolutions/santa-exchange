@@ -1,6 +1,7 @@
 Version 0.9.29   unreleased
 
-    * Update dependencies to App Engine 1.8.4
+    * Update dependencies to App Engine 1.8.4.
+    * Updates to the Gradle build process.
 
 Version 0.9.28   10 Sep 2013
 

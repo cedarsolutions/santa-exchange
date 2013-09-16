@@ -36,7 +36,7 @@ buildscript {
    }
 
    dependencies {
-      classpath "com.googlecode.cedar-common:cedar-build:0.8.4"
+      classpath "com.googlecode.cedar-common:cedar-build:0.8.5"
       classpath "org.gradle.api.plugins:gradle-gae-plugin:0.9"
    }
 } 
@@ -71,6 +71,7 @@ targetCompatibility = JavaVersion.VERSION_1_6
 tasks.compileJava.dependsOn(gaeDownloadSdk)  // We need to download the SDK before the classpath can be generated properly.
 
 cedarLabel {
+   enabled = config_mercurialLabelEnabled
    projectName = system_applicationName
    projectVersion = "${system_versionNumber} (${system_releaseDate})"
    repositories = [ projectDir, ]
