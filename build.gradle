@@ -385,6 +385,13 @@ task cleanEclipseExtendedSettings(type: Delete) << {
 
 }
 
+// Cleanup the runtime libraries
+task cleanupRuntimeLibraries() << {
+   ant.delete(includeemptydirs: "true", quiet: "true") {
+      fileset(dir: "war/WEB-INF/lib", includes: "**/*")
+   }
+}
+
 // Copy the runtime libraries to war/WEB-INF/lib to make the Eclipse web application launcher happy
 task copyRuntimeLibraries << {
     copy {
@@ -392,6 +399,9 @@ task copyRuntimeLibraries << {
         from configurations.runtime.files
     }
 }
+
+// Clean up runtime libraries whenever the rest of Eclipse gets cleaned up
+tasks.cleanEclipse.dependsOn(cleanupRuntimeLibraries)
 
 // Clean up custom settings whenever the rest of Eclipse gets cleaned up
 tasks.cleanEclipseJdt.dependsOn(cleanEclipseExtendedSettings)
@@ -483,14 +493,14 @@ eclipse.classpath.file {
          entry.output = "test-bin"
       }
 
-      // Replace the "gradle/src/suites source" folder with just "suites", and sent classes to test-bin
+      // Replace the "gradle/src/suites source" folder with just "suites", and send classes to test-bin
       classpath.entries.findAll { entry -> entry.kind == "src" && entry.path == "gradle/src/suites" }.each { entry ->
          entry.path = "suites"
          entry.output = "test-bin"
       }
 
       // Add the devmode runtime dependencies to the Eclipse classpath
-      // Note: the ".nondependnecy" attributes means that this shouldn't go into the war
+      // Note: the ".nondependency" attributes means that this shouldn't go into the war
       withXml { xml ->
          def node = xml.asNode()
          configurations.devmodeRuntime.each { devmode ->
@@ -500,7 +510,7 @@ eclipse.classpath.file {
       }
 
       // Exclude the provided dependencies (like GWT) from the war file so Eclipse is consistent with gradle build
-      // Note: the ".nondependnecy" attributes means that this shouldn't go into the war
+      // Note: the ".nondependency" attributes means that this shouldn't go into the war
       withXml { xml ->
          def node = xml.asNode()
          configurations.providedRuntime.each { provided ->
