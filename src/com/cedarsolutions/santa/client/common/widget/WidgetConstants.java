@@ -68,9 +68,9 @@ public interface WidgetConstants extends Constants {
     String progressIndicator_pleaseWait();
 
 
-    /* **********************************
-     *  Constants for the YesNoQueryList
-     * **********************************/
+    /* *****************************
+     *  Constants for the YesNoList
+     * *****************************/
 
     @DefaultStringValue("Yes")
     String yesNoList_yes();
