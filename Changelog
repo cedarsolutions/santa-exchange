@@ -1,3 +1,8 @@
+Version 0.9.30   unreleased
+
+    * Move up to CedarCommon v2.1.8
+    * Use IGaeUserService.addClientRoles() rather than interaction with session directly.
+
 Version 0.9.29   16 Sep 2013
 
     * Update dependencies to App Engine 1.8.4.

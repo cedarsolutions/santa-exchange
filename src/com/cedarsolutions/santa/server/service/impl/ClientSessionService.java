@@ -22,8 +22,6 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.server.service.impl;
 
-import static com.cedarsolutions.wiring.gae.security.GaeAuthenticationFilter.CLIENT_ROLES_ATTRIBUTE;
-
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
@@ -174,8 +172,7 @@ public class ClientSessionService extends AbstractService implements IClientSess
     /** Set client roles based on the session. */
     private void setClientRoles(ClientSession session) {
         if (session.isLoggedIn() && !session.isLocked()) {
-            String[] clientRoles = new String[] { ROLE_ENABLED, };
-            this.springContextService.setSessionAttribute(CLIENT_ROLES_ATTRIBUTE, clientRoles);
+            this.gaeUserService.addClientRoles(ROLE_ENABLED);
             LOGGER.debug("Working with session id: " + this.springContextService.getCurrentSessionId());
         }
     }

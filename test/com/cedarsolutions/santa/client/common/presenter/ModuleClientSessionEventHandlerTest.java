@@ -93,6 +93,19 @@ public class ModuleClientSessionEventHandlerTest extends StubbedClientTestCase {
         assertSame(handler.getModule(), module.getValue());
     }
 
+    /** Test onClearSession(). */
+    @SuppressWarnings("unchecked")
+    @Test public void testOnClearSessionAndRedirect() {
+        ArgumentCaptor<Module> module = ArgumentCaptor.forClass(Module.class);
+
+        ConcreteModuleClientSessionEventHandler handler = createEventHandler();
+        handler.onClearSession();
+
+        verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
+        verify(handler.getClientSessionRpc()).invalidateClientSession(module.capture(), any(RpcCallback.class));
+        assertSame(handler.getModule(), module.getValue());
+    }
+
     /** Test EstablishClientSessionCaller's basic functionality. */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test public void testEstablishClientSessionCallerBasic() {

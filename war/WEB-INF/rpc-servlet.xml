@@ -151,6 +151,7 @@
 
     <bean id="gaeUserService" class="com.cedarsolutions.server.service.impl.GaeUserService">
         <property name="userService" ref="userService" />
+        <property name="springContextService" ref="springContextService" />
     </bean>
 
     <bean id="notificationService" class="com.cedarsolutions.santa.server.service.impl.NotificationService">
