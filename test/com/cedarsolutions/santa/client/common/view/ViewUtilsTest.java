@@ -85,4 +85,11 @@ public class ViewUtilsTest extends StubbedClientTestCase {
         verify(ValidationUtils.getInstance()).showValidationError(view, error, SantaExchangeStyles.VALIDATION_ERROR_STYLE);
     }
 
+    /** Test clearValidationErrors(). */
+    @Test public void testClearValidationErrors() {
+        IViewWithValidation view = mock(IViewWithValidation.class);
+        new ViewUtils().clearValidationErrors(view);
+        verify(ValidationUtils.getInstance()).clearValidationErrors(view, SantaExchangeStyles.VALIDATION_ERROR_STYLE);
+    }
+
 }
