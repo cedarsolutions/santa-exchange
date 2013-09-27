@@ -27,6 +27,7 @@ import java.util.List;
 
 import com.cedarsolutions.client.gwt.rpc.util.AbstractRpcCaller;
 import com.cedarsolutions.exception.RpcSecurityException;
+import com.cedarsolutions.santa.client.SantaExchangeConfig;
 import com.cedarsolutions.santa.client.SantaExchangeMessages;
 import com.cedarsolutions.santa.client.common.widget.WidgetUtils;
 import com.cedarsolutions.shared.domain.ErrorDescription;
@@ -63,6 +64,9 @@ import com.google.gwt.user.client.rpc.RpcTokenException;
  */
 public abstract class StandardRpcCaller<A, T> extends AbstractRpcCaller<A, T> {
 
+    /** Configuration. */
+    private SantaExchangeConfig config;
+
     /** Localized messages. */
     private SantaExchangeMessages messages;
 
@@ -74,6 +78,7 @@ public abstract class StandardRpcCaller<A, T> extends AbstractRpcCaller<A, T> {
      */
     protected StandardRpcCaller(A async, String rpc, String method) {
         super(async, rpc, method);
+        this.config = GWT.create(SantaExchangeConfig.class);
         this.messages = GWT.create(SantaExchangeMessages.class);
         this.markNotRetryable();
     }
@@ -91,6 +96,12 @@ public abstract class StandardRpcCaller<A, T> extends AbstractRpcCaller<A, T> {
     /** Mark that the RPC is not retryable. */
     public void markNotRetryable() {
         this.setMaxAttempts(1);
+    }
+
+    /** Sets the global timeout to be used by the XSRF RPC proxy. */
+    @Override
+    public int getXsrfRpcProxyTimeoutMs() {
+        return config.system_xsrfRpcTimeoutMs();
     }
 
     /** Apply policies to the RPC. */

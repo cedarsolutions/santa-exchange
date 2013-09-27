@@ -1,7 +1,8 @@
 Version 0.9.30   unreleased
 
-    * Move up to CedarCommon v2.1.8
+    * Move up to CedarCommon v2.2.0.
     * Use IGaeUserService.addClientRoles() rather than interaction with session directly.
+    * Fix problems with initial RPC call timing out, using the new XSRF RPC timeout config hook. 
 
 Version 0.9.29   16 Sep 2013
 

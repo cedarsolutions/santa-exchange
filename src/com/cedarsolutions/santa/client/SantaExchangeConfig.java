@@ -63,10 +63,15 @@ public interface SantaExchangeConfig extends ConstantsWithLookup {
     String system_dashboardUrl();
 
     /** System-wide RPC timeout, in milliseconds. */
-    // Note that the XSRF RPC has its own timeout that is independent of this
-    // one.  The XSRF timeout is currently set (hardcoded) to 30000ms.
     @DefaultIntValue(30000)
     int system_defaultRpcTimeoutMs();
+
+    /** Timeout for the XSRF RPC call, in milliseconds. */
+    // This is so high because GAE is sometimes very slow when booting.
+    // The XSRF RPC call is the first one that happens after boot, and
+    // it sometimes times out when the limit is set to 30 seconds.
+    @DefaultIntValue(45000)
+    int system_xsrfRpcTimeoutMs();
 
     /** Whether ErrorPopup should display exception stack traces. */
     @DefaultBooleanValue(true)
