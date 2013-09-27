@@ -400,6 +400,10 @@ task copyRuntimeLibraries << {
     }
 }
 
+// Just an alias for copyRuntimeLibaries
+task refreshLibraries(dependsOn: copyRuntimeLibraries) << {
+}
+
 // Clean up runtime libraries whenever the rest of Eclipse gets cleaned up
 tasks.cleanEclipse.dependsOn(cleanupRuntimeLibraries)
 

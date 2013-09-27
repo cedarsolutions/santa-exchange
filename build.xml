@@ -49,9 +49,14 @@
         <echo message="Once the project has been bootstrapped, you can import it into Eclipse as usual." />
     </target>
 
-    <target name="eclipse" description="Rebuild the Eclipse project files">
-        <gradle target="eclipse  --refresh-dependencies" />
-        <echo message="Remember to close and open your Eclipse project if you ran this from Eclipse." />
+    <target name="generate.eclipse" description="Regenerate the Eclipse project files">
+        <gradle target="eclipse" />
+        <echo message="Done. Remember to close and open your Eclipse project to pick up changes." />
+    </target>
+
+    <target name="refresh.libraries" description="Refresh the libraries in war/WEB-INF/lib">
+        <gradle target="refreshLibraries" />
+        <echo message="Done.  You also need to refresh your Eclipse project to pick up the new libraries." />
     </target>
 
     <target name="label.current.release" description="Label the current release in all configured Mercurial projects.">
@@ -97,7 +102,7 @@
     <target name="run.cucumber.reboot" description="Run the acceptance tests, including a reboot of the server.">
         <gradle target="runCucumberWithReboot" />
     </target>
-    
+
     <target name="clean" description="Clean up everything except Eclipse configuration and .gradle">
         <gradle target="clean" />
     </target>
