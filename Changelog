@@ -1,4 +1,4 @@
-Version 0.9.30   unreleased
+Version 0.9.30   27 Sep 2013
 
     * Move up to CedarCommon v2.2.0.
     * Use IGaeUserService.addClientRoles() rather than interaction with session directly.
