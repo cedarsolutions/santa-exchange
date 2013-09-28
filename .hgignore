@@ -30,3 +30,4 @@ build/*
 resources-bin/*
 _.swo
 war/WEB-INF/lib/*
+.settings/com.google.appengine.eclipse.core.prefs
