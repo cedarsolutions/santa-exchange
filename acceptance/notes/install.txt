@@ -21,9 +21,9 @@ Here are my notes on how to install the tooling:
        > ruby dk.rb install
 
     3. Install cucumber and capybara
-       > gem install --http-proxy http://user:password@mspproxy:80 cucumber
-       > gem install --http-proxy http://user:password@mspproxy:80 capybara
-       > gem install --http-proxy http://user:password@mspproxy:80 rspec
+       > gem install --http-proxy http://user:password@proxy:80 cucumber
+       > gem install --http-proxy http://user:password@proxy:80 capybara
+       > gem install --http-proxy http://user:password@proxy:80 rspec
 
 Make sure that you set the proper paths in local.properties, so
 that the Ant script can find Ruby.

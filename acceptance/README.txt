@@ -11,15 +11,15 @@ tools, as well as a Ruby interpreter.  To develop tests, it's also useful to
 install the Ruby language plugin for Eclipse.  See install.txt in the notes
 folder for information about how to install these tools.
 
-All of the acceptance tests are invoked via the standard build.xml Ant script.
+All of the acceptance tests are invoked via the standard build script.
 This script does a fresh build of the entire source tree (separate from the
 directories that are used by Eclipse), then boots the App Engine development
 mode server and executes the Cucumber tests.
 
 If you are developing tests, you don't always need to go through the complete
 build/start/execute/stop process.  You can also run the steps by hand: build
-the code with build.application, start the server with boot.devmode, and then
-use run.cucumber to execute the tests.
+the code, start the server, and then use execute the tests.  The simplest way
+to do this is probably using the build.xml Ant script.   
 
 
 WHAT IS COVERED, AND OTHER NOTES
