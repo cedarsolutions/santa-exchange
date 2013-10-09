@@ -29,8 +29,6 @@ import static com.cedarsolutions.santa.shared.domain.MessageKeys.REQUIRED;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.velocity.tools.generic.DateTool;
-
 import com.cedarsolutions.exception.InvalidDataException;
 import com.cedarsolutions.exception.NotConfiguredException;
 import com.cedarsolutions.santa.server.config.BugReportServiceConfig;
@@ -76,7 +74,6 @@ public class BugReportService extends AbstractService implements IBugReportServi
     public void submitBugReport(BugReport bugReport) throws InvalidDataException {
         validateBugReport(bugReport);
         Map<String, Object> context = new HashMap<String, Object>();
-        context.put("dateTool", new DateTool());
         context.put("bugReport", bugReport);
         this.generateAndSendEmail(context);
     }

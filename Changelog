@@ -1,6 +1,8 @@
 Version 0.9.31   unreleased
 
+	* Move up to CedarCommon v2.2.1.
     * Fix the CSS style for "text as link" to use the correct cursor.
+    * Remove explicit use of Velocity classes in application code.
 
 Version 0.9.30   27 Sep 2013
 
