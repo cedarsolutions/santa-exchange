@@ -19,6 +19,8 @@
 .ss-TextAsLink {
     color: #0000AA;
     text-decoration: underline;
+    cursor: pointer;
+    cursor: hand;
 }
 
 

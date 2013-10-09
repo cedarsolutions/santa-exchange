@@ -1,8 +1,12 @@
+Version 0.9.31   unreleased
+
+    * Fix the CSS style for "text as link" to use the correct cursor.
+
 Version 0.9.30   27 Sep 2013
 
     * Move up to CedarCommon v2.2.0.
     * Use IGaeUserService.addClientRoles() rather than interaction with session directly.
-    * Fix problems with initial RPC call timing out, using the new XSRF RPC timeout config hook. 
+    * Fix problems with initial RPC call timing out, using the new XSRF RPC timeout config hook.
 
 Version 0.9.29   16 Sep 2013
 
