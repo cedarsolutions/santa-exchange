@@ -26,9 +26,13 @@ import com.cedarsolutions.santa.client.SantaExchangeConfig;
 import com.cedarsolutions.shared.domain.ErrorDescription;
 import com.cedarsolutions.web.metadata.NativeEventType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -176,6 +180,57 @@ public class WidgetUtils {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Globally handle the enter key, using it to click the indicated button.
+     * @param button  Button to click when the enter key is pressed
+     */
+    public void clickOnEnter(Button button) {
+        Event.addNativePreviewHandler(new ClickOnEnterHandler(button));
+    }
+
+    /** Handler that clicks a button when enter is pressed. */
+    protected static class ClickOnEnterHandler implements Event.NativePreviewHandler {
+        private Button button;
+
+        public ClickOnEnterHandler(Button button) {
+            this.button = button;
+        }
+
+        @Override
+        public void onPreviewNativeEvent(NativePreviewEvent event) {
+            switch (event.getTypeInt()) {
+            case Event.ONKEYDOWN:
+                int keyCode = event.getNativeEvent().getKeyCode();
+                if (keyCode == KeyCodes.KEY_ENTER) {
+                    this.button.click();
+                }
+            }
+        }
+    }
+
+    /**
+     * Set focus on a widget after the display has been rendered, especially useful for pop-ups.
+     * @param widget  Widget to set focus on
+     * @see <a href="http://stackoverflow.com/questions/5944612/not-able-to-set-focus-on-textbox-in-a-gwt-app">StackOverflow</a>
+     */
+    public void setFocusAfterDisplay(final FocusWidget widget) {
+        Scheduler.get().scheduleDeferred(new FocusScheduledCommand(widget));
+    }
+
+    /** Scheduled command that sets focus on a widget. */
+    protected static class FocusScheduledCommand implements Scheduler.ScheduledCommand {
+        private FocusWidget widget;
+
+        public FocusScheduledCommand(FocusWidget widget) {
+            this.widget = widget;
+        }
+
+        @Override
+        public void execute() {
+            this.widget.setFocus(true);
         }
     }
 }
