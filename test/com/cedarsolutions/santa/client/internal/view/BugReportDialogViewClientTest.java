@@ -90,6 +90,7 @@ public class BugReportDialogViewClientTest extends ClientTestCase {
 
         view.showDialog(bugReport);
         assertTrue(view.isShowing());
+        // Unfortunately, there's no reliable way to confirm that emailAddress has focus
 
         assertEquals(bugReport.getReportDate(), view.reportDate);
         assertEquals(bugReport.getApplicationVersion(), view.applicationVersion);

@@ -2,6 +2,7 @@ Version 0.9.32   unreleased
 
     * Move up to CedarCommon v2.3.1.
     * Add WidgetUtils.clickOnEnter() and WidgetUtils.setFocusAfterDisplay().
+    * Fix BugReportDialogView so the first text field has focus when it's opened.
 
 Version 0.9.31   09 Oct 2013
 

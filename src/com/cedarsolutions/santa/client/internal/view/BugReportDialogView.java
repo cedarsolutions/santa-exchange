@@ -34,6 +34,7 @@ import com.cedarsolutions.exception.InvalidDataException;
 import com.cedarsolutions.santa.client.common.view.ViewUtils;
 import com.cedarsolutions.santa.client.common.widget.StandardDialog;
 import com.cedarsolutions.santa.client.common.widget.ValidationErrorWidget;
+import com.cedarsolutions.santa.client.common.widget.WidgetUtils;
 import com.cedarsolutions.santa.shared.domain.BugReport;
 import com.cedarsolutions.shared.domain.FederatedUser;
 import com.cedarsolutions.shared.domain.LocalizableMessage;
@@ -155,6 +156,7 @@ public class BugReportDialogView extends StandardDialog implements IBugReportDia
         this.problemSummary.setText(bugReport.getProblemSummary());
         this.detailedDescription.setText(bugReport.getDetailedDescription());
 
+        WidgetUtils.getInstance().setFocusAfterDisplay(this.emailAddress);
         this.show();
     }
 
