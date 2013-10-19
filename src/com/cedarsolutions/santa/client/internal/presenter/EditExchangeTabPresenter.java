@@ -36,7 +36,6 @@ import com.cedarsolutions.santa.client.internal.view.EditExchangeTabView;
 import com.cedarsolutions.santa.client.internal.view.IEditExchangeTabView;
 import com.cedarsolutions.santa.client.internal.view.InternalConstants;
 import com.cedarsolutions.santa.client.rpc.IExchangeRpcAsync;
-import com.cedarsolutions.santa.client.rpc.util.RpcUtils;
 import com.cedarsolutions.santa.client.rpc.util.StandardRpcCaller;
 import com.cedarsolutions.santa.shared.domain.exchange.Exchange;
 import com.cedarsolutions.santa.shared.domain.exchange.Participant;
@@ -116,7 +115,6 @@ public class EditExchangeTabPresenter extends ModulePagePresenter<IEditExchangeT
     @Inject
     public void setExchangeRpc(IExchangeRpcAsync exchangeRpc) {
         this.exchangeRpc = exchangeRpc;
-        RpcUtils.getInstance().applySystemWidePolicies(this.exchangeRpc);
     }
 
     /** Save handler. */
