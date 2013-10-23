@@ -9,6 +9,7 @@ Version 0.9.32   unreleased
     * Convert unit tests for StandardRpcCaller to use StubbedClientTestCase.
     * Add Cucumber tests: lock/unlock users and RPC security (including new view and RPC)
     * Reorganize Spring context, pulling most definitions up to applicationContext.xml.
+    * Change the initial "please wait" message to indicate that the application is starting.
 
 Version 0.9.31   09 Oct 2013
 
