@@ -98,6 +98,10 @@ Then /^the user should be taken to the external application dashboard page$/ do
     current_url_equals("https://accounts.google.com/ServiceLogin?service=ah&passive=true&continue=https%3A%2F%2Fappengine.google.com%2F_ah%2Fconflogin%3Fcontinue%3Dhttps%3A%2F%2Fappengine.google.com%2Fdashboard%253F%2526app_id%253Dsanta-exchange-hrd&ltmpl=ae")
 end
 
+Then(/^the user should be taken to the account locked page$/) do
+    current_url_matches(test_config.base_url + "#accountLocked")
+end
+
 Then(/^the user should be taken to the RPC test page$/) do
     current_url_matches(test_config.base_url + "#rpcTest")
 end

@@ -7,7 +7,7 @@ Version 0.9.32   unreleased
     * Fix BugReportDialogView so the first text field has focus when it's opened.
     * Change the name of static constants in StubbedClientTestCase to make them more legible.
     * Convert unit tests for StandardRpcCaller to use StubbedClientTestCase.
-    * Add Cucumber tests for RPC security via a new test RPC and related view.
+    * Add Cucumber tests: lock/unlock users and RPC security (including new view and RPC)
 
 Version 0.9.31   09 Oct 2013
 

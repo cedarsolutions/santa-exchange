@@ -28,6 +28,12 @@ When /^the user logs in with admin credentials$/ do
     click_button("Log In")
 end
 
+When /^the user logs in with locked credentials$/ do
+    click_button("LoginSelector_openIdButton")
+    fill_in("email", {:with => test_config.locked_user})
+    click_button("Log In")
+end
+
 Then /^the user should be taken to the "([^"]*)" admin tab$/ do |tab|
     if tab == "Admin Home"
         current_url_matches(test_config.base_url + "#(admin\/adminLandingPage|admin\/adminHome)")
@@ -102,5 +108,130 @@ When /^the user views (a|an) "([^"]*)" admin tab bookmark$/ do |adjective, bookm
         visit test_config.base_url + "#admin/adminUser"
     else
         raise "Test definition problem: unknown tab bookmark \"" + bookmark + "\""
+    end
+end
+
+When /^the user clicks on the "([^"]*)" admin tab$/ do |tab|
+    if tab == "Admin Home"
+        click_tab("AdminLandingPageView_tabPanel_homeTab");
+    elsif tab == "Auditing"
+        click_tab("AdminLandingPageView_tabPanel_auditTab");
+    elsif tab == "User Maintenance"
+        click_tab("AdminLandingPageView_tabPanel_userTab");
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+When /^the "(.*?)" table should exist on the "(.*?)" admin tab$/ do |table, tab|
+    if tab == "Auditing"
+        if table == "Audit Events"
+            check_table_exists("AuditTabView_table");
+        else
+            raise "Test definition problem: unknown table \"" + table + "\" on tab \"" + tab + "\""
+        end
+    elsif tab == "User Maintenance"
+        if table == "Users"
+            check_table_exists("UserTabView_table");
+        else
+            raise "Test definition problem: unknown table \"" + table + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+When /^the "(.*?)" button should exist on the "(.*?)" admin tab$/ do |button, tab|
+    if tab == "User Maintenance"
+        if button == "Delete"
+            check_button_exists("UserTabView_deleteButton");
+        elsif button == "Lock"
+            check_button_exists("UserTabView_lockButton");
+        elsif button == "Unlock"
+            check_button_exists("UserTabView_unlockButton");
+        else
+            raise "Test definition problem: unknown button \"" + button + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+When(/^the user clicks the "(.*?)" button on the "(.*?)" admin tab$/) do |button, tab|
+    if tab == "User Maintenance"
+        if button == "Delete"
+            click_button("UserTabView_deleteButton");
+        elsif button == "Lock"
+            click_button("UserTabView_lockButton");
+        elsif button == "Unlock"
+            click_button("UserTabView_unlockButton");
+        else
+            raise "Test definition problem: unknown button \"" + button + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+Then(/^the "(.*?)" table on the "(.*?)" admin tab should have a row for user "(.*?)" that is (checked|unchecked)$/) do |table, tab, user, state|
+    checked = state == "checked"
+    if tab == "User Maintenance"
+        if table == "Users"
+            check_table_row_checked("UserTabView_table", checked, { "2" => user })
+        else
+            raise "Test definition problem: unknown table \"" + table + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+Then(/^the "(.*?)" table on the "(.*?)" admin tab should not have a row for user "(.*?)"$/) do |table, tab, user|
+    if tab == "User Maintenance"
+        if table == "Users"
+            check_table_row_does_not_exist("UserTabView_table", { "2" => user })
+        else
+            raise "Test definition problem: unknown table \"" + table + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+Then(/^the "(.*?)" table on the "(.*?)" admin tab should show the "(.*?)" user as (locked|not locked)$/) do |table, tab, user, state|
+    locked = state == "locked" ? "Yes" : "No"
+    if tab == "User Maintenance"
+        if table == "Users"
+            check_table_row_exists("UserTabView_table", { "2" => user, "9" => locked })
+        else
+            raise "Test definition problem: unknown table \"" + table + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+Then(/^the "(.*?)" table on the "(.*?)" admin tab should show the "(.*?)" user as (admin|not admin)$/) do |table, tab, user, state|
+    admin = state == "admin" ? "Yes" : "No"
+    if tab == "User Maintenance"
+        if table == "Users"
+            check_table_row_exists("UserTabView_table", { "2" => user, "8" => admin })
+        else
+            raise "Test definition problem: unknown table \"" + table + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
+    end
+end
+
+When(/^the user clicks the checkbox for the "(.*?)" user on the "(.*?)" table on the "(.*?)" admin tab$/) do |user, table, tab|
+    if tab == "User Maintenance"
+        if table == "Users"
+            click_table_row_checkbox("UserTabView_table", { "2" => user })
+        else
+            raise "Test definition problem: unknown table \"" + table + "\" on tab \"" + tab + "\""
+        end
+    else
+        raise "Test definition problem: unknown tab \"" + tab + "\""
     end
 end
