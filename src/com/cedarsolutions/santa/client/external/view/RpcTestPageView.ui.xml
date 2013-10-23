@@ -1,0 +1,72 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:widget="urn:import:com.cedarsolutions.santa.client.common.widget">
+
+    <ui:style>
+    .panel {
+        padding-top: 10px;
+        border: 2px solid;
+        background: #ffffff;
+        font-family: sans-serif;
+        margin: 3px;
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-bottom: 1em;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-bottom: 1em;
+        margin-right: 1em;
+        width: 550px;
+    }
+
+    .labels {
+        font-weight: bold;
+    }
+
+    .result {
+        font-weight: bold;
+        color: green;
+    }
+    </ui:style>
+
+    <g:ScrollPanel>
+        <g:VerticalPanel>
+            <g:HTMLPanel styleName="{style.panel}">
+                <g:Grid>
+                    <g:row>
+                        <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="unprotectedRpcLabel"/></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Button ui:field="unprotectedRpcButton" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Label ui:field="unprotectedRpcExpectedResult" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel styleName="{style.result}"><g:Label ui:field="unprotectedRpcActualResult" /></g:HTMLPanel></g:customCell>
+                    </g:row>
+                    <g:row>
+                        <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="userRpcLabel"/></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Button ui:field="userRpcButton" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Label ui:field="userRpcExpectedResult" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel styleName="{style.result}"><g:Label ui:field="userRpcActualResult" /></g:HTMLPanel></g:customCell>
+                    </g:row>
+                    <g:row>
+                        <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="adminRpcLabel"/></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Button ui:field="adminRpcButton" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Label ui:field="adminRpcExpectedResult" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel styleName="{style.result}"><g:Label ui:field="adminRpcActualResult" /></g:HTMLPanel></g:customCell>
+                    </g:row>
+                    <g:row>
+                        <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="enabledUserRpcLabel"/></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Button ui:field="enabledUserRpcButton" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Label ui:field="enabledUserRpcExpectedResult" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel styleName="{style.result}"><g:Label ui:field="enabledUserRpcActualResult" /></g:HTMLPanel></g:customCell>
+                    </g:row>
+                    <g:row>
+                        <g:customCell><g:HTMLPanel styleName="{style.labels}"><g:Label ui:field="enabledAdminRpcLabel"/></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Button ui:field="enabledAdminRpcButton" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel><g:Label ui:field="enabledAdminRpcExpectedResult" /></g:HTMLPanel></g:customCell>
+                        <g:customCell><g:HTMLPanel styleName="{style.result}"><g:Label ui:field="enabledAdminRpcActualResult" /></g:HTMLPanel></g:customCell>
+                    </g:row>
+                </g:Grid>
+            </g:HTMLPanel>
+        </g:VerticalPanel>
+    </g:ScrollPanel>
+
+</ui:UiBinder>

@@ -180,4 +180,11 @@ public interface RootEventBus extends SessionAwareEventBus {
     /** Show the bug report dialog. */
     @Event(forwardToModules = InternalModule.class)
     void showBugReportDialog();
+
+    /** Show the RPC test page. */
+    @Event(forwardToModules = ExternalModule.class,
+           historyConverter = RootHistoryConverter.class,
+           name = SantaExchangeEventTypes.RPC_TEST_PAGE)
+    String showRpcTestPage();
+
 }

@@ -63,6 +63,10 @@ When /^the user views an invalid ([^"]*) bookmark$/ do |bookmark|
     end
 end
 
+When(/^the user views the RPC test page$/) do
+    visit test_config.base_url + "#rpcTest"
+end
+
 Then /^the user should be taken to the external landing page$/ do
     current_url_matches(test_config.base_url + "#external\/externalLandingPage")
 end
@@ -92,4 +96,8 @@ Then /^the user should be taken to the external application dashboard page$/ do
     # Technically, we go to "https://appengine.google.com/dashboard?&app_id=santa-exchange-hrd"
     # However, Google will make us authenticate, so the URL below is the actual place we end up
     current_url_equals("https://accounts.google.com/ServiceLogin?service=ah&passive=true&continue=https%3A%2F%2Fappengine.google.com%2F_ah%2Fconflogin%3Fcontinue%3Dhttps%3A%2F%2Fappengine.google.com%2Fdashboard%253F%2526app_id%253Dsanta-exchange-hrd&ltmpl=ae")
+end
+
+Then(/^the user should be taken to the RPC test page$/) do
+    current_url_matches(test_config.base_url + "#rpcTest")
 end

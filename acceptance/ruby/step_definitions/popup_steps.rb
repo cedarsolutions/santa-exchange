@@ -110,3 +110,11 @@ When /^the user fills in valid bug report data in the "([^"]*)" pop\-up$/ do |po
         raise "Test definition problem: unknown pop-up \"" + popup + "\""
     end
 end
+
+Then(/^the "(.*?)" pop\-up should contain "(.*?)"$/) do |popup, string|
+    if popup == "Error Occurred"
+        check_popup_content("ErrorPopup", string)
+    else
+        raise "Test definition problem: unknown pop-up \"" + popup + "\""
+    end
+end

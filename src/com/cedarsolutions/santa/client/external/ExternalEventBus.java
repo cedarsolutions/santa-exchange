@@ -31,6 +31,7 @@ import com.cedarsolutions.santa.client.external.presenter.ExternalClientSessionE
 import com.cedarsolutions.santa.client.external.presenter.ExternalLandingPagePresenter;
 import com.cedarsolutions.santa.client.external.presenter.ExternalPresenter;
 import com.cedarsolutions.santa.client.external.presenter.LoginRequiredPagePresenter;
+import com.cedarsolutions.santa.client.external.presenter.RpcTestPagePresenter;
 import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.mvp4g.client.annotation.Debug;
@@ -120,5 +121,9 @@ public interface ExternalEventBus extends ModuleEventBus {
     /** Log out the current user. */
     @Event(forwardToParent = true)
     void logout();
+
+    /** Show the RPC test page. */
+    @Event(handlers = RpcTestPagePresenter.class)
+    void showRpcTestPage();
 
 }

@@ -52,5 +52,6 @@ public class SantaExchangeEventTypes {
     public static final String ADMIN_AUDIT_TAB = "adminAudit";
 
     public static final String ACCOUNT_LOCKED_PAGE = "accountLocked";
+    public static final String RPC_TEST_PAGE = "rpcTest";
 
 }

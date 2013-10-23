@@ -44,6 +44,7 @@
                 <entry key="/santaexchange/rpc/clientSessionRpc.rpc" value-ref="clientSessionRpc" />
                 <entry key="/santaexchange/rpc/exchangeRpc.rpc" value-ref="exchangeRpc" />
                 <entry key="/santaexchange/rpc/gaeUserRpc.rpc" value-ref="gaeUserRpc" />
+                <entry key="/santaexchange/rpc/testRpc.rpc" value-ref="testRpc" />
                 <entry key="/santaexchange/rpc/xsrfTokenRpc.rpc" value-ref="xsrfTokenRpc" />
             </map>
         </property>
@@ -107,6 +108,8 @@
     <bean id="gaeUserRpc" class="com.cedarsolutions.server.rpc.impl.GaeUserRpc">
         <property name="gaeUserService" ref="gaeUserService" />
     </bean>
+
+    <bean id="testRpc" class="com.cedarsolutions.santa.server.rpc.impl.TestRpc" />
 
     <bean id="xsrfTokenRpc" class="com.cedarsolutions.server.rpc.impl.XsrfTokenRpc">
         <property name="xsrfTokenService" ref="xsrfTokenService" />

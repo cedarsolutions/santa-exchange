@@ -94,4 +94,48 @@ public interface ExternalConstants extends Constants {
                         "at <a href=\"%s\">Google Code</a>.")
     String landingPage_paragraph4TextFormat();
 
+
+    /* ********************
+     *  RPC test constants
+     * ********************/
+
+    @DefaultStringValue("Invoke RPC")
+    String rpcTest_invokeRpcButton();
+
+    @DefaultStringValue("Unprotected RPC")
+    String rpcTest_unprotectedRpcLabel();
+
+    @DefaultStringValue("Invoke an RPC that is unprotected, i.e. with no @Secured annotation.")
+    String rpcTest_unprotectedRpcTooltip();
+
+    @DefaultStringValue("User RPC")
+    String rpcTest_userRpcLabel();
+
+    @DefaultStringValue("Invoke an RPC that is marked as @Secured(\"ROLE_USER\")")
+    String rpcTest_userRpcTooltip();
+
+    @DefaultStringValue("Admin RPC")
+    String rpcTest_adminRpcLabel();
+
+    @DefaultStringValue("Invoke an RPC that is marked as @Secured(\"ROLE_ADMIN\")")
+    String rpcTest_adminRpcTooltip();
+
+    @DefaultStringValue("Enabled User RPC")
+    String rpcTest_enabledUserRpcLabel();
+
+    @DefaultStringValue("Invoke an RPC that is marked as @Secured({ \"ROLE_USER\", \"ROLE_ENABLED\" })")
+    String rpcTest_enabledUserRpcTooltip();
+
+    @DefaultStringValue("Enabled Admin RPC")
+    String rpcTest_enabledAdminRpcLabel();
+
+    @DefaultStringValue("Invoke an RPC that is marked as @Secured({ \"ROLE_ADMIN\", \"ROLE_ENABLED\" })")
+    String rpcTest_enabledAdminRpcTooltip();
+
+    @DefaultStringValue("Allowed")
+    String rpcTest_allowed();
+
+    @DefaultStringValue("Not Allowed")
+    String rpcTest_notAllowed();
+
 }
