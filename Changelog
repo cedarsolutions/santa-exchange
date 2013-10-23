@@ -8,6 +8,7 @@ Version 0.9.32   unreleased
     * Change the name of static constants in StubbedClientTestCase to make them more legible.
     * Convert unit tests for StandardRpcCaller to use StubbedClientTestCase.
     * Add Cucumber tests: lock/unlock users and RPC security (including new view and RPC)
+    * Reorganize Spring context, pulling most definitions up to applicationContext.xml.
 
 Version 0.9.31   09 Oct 2013
 

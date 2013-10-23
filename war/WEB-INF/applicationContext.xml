@@ -1,35 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
+             xmlns:security="http://www.springframework.org/schema/security"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:util="http://www.springframework.org/schema/util"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                                 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
                                  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.6.xsd">
 
+    <!-- Note: other Spring configuration is also found in rpc-servlet.xml.  -->
+
     <!--
-     ****************************
-      GAE security configuration
-     ****************************
+     *******************************
+      Spring Security Configuration
+     *******************************
     -->
 
-    <!-- Note: most other Spring configuration goes in rpc-servlet.xml.  -->
+    <security:http auto-config="false" entry-point-ref="gaeEntryPoint" session-fixation-protection="newSession" />
 
-    <http auto-config="false" entry-point-ref="gaeEntryPoint" session-fixation-protection="newSession" />
+    <security:authentication-manager alias="gaeAuthenticationManager" />
 
-    <authentication-manager alias="gaeAuthenticationManager" />
+    <bean id="gaeEntryPoint" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationEntryPoint" />
 
-    <beans:bean id="gaeEntryPoint" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationEntryPoint" />
+    <bean id="gaeAuthenticationProvider" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationProvider">
+        <security:custom-authentication-provider />
+    </bean>
 
-    <beans:bean id="gaeAuthenticationProvider" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationProvider">
-        <custom-authentication-provider />
-    </beans:bean>
+    <bean id="userService" class="com.google.appengine.api.users.UserServiceFactory" factory-method="getUserService"/>
 
-    <beans:bean id="userService" class="com.google.appengine.api.users.UserServiceFactory" factory-method="getUserService"/>
+    <bean id="gaeAuthenticationFilter" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationFilter">
+        <security:custom-filter position="PRE_AUTH_FILTER" />
+        <property name="userService" ref="userService" />
+        <property name="authenticationManager" ref="gaeAuthenticationManager" />
+    </bean>
 
-    <beans:bean id="gaeAuthenticationFilter" class="com.cedarsolutions.wiring.gae.security.GaeAuthenticationFilter">
-        <custom-filter position="PRE_AUTH_FILTER" />
-        <beans:property name="userService" ref="userService" />
-        <beans:property name="authenticationManager" ref="gaeAuthenticationManager" />
-    </beans:bean>
+    <!-- This makes the @Secured annotations use "and" logic rather than "or" logic. -->
+    <!-- See: http://rockycode.com/blog/and-spring-secured-roles/ -->
+    <bean id="roleVoter" class="org.springframework.security.vote.RoleVoter" />
+    <bean id="unanimousDecisionManager" class="org.springframework.security.vote.UnanimousBased">
+        <property name="decisionVoters">
+            <list><ref bean="roleVoter" /></list>
+        </property>
+        <property name="allowIfAllAbstainDecisions" value="false" />
+    </bean>
 
-</beans:beans>
+
+    <!--
+     ******************************
+      Configuration and singletons
+     ******************************
+    -->
+
+    <util:properties id="properties" location="classpath:santa-exchange.properties" />
+
+    <bean id="notificationServiceConfig" class="com.cedarsolutions.santa.server.config.NotificationServiceConfig">
+        <property name="properties" ref="properties" />
+    </bean>
+
+    <bean id="bugReportServiceConfig" class="com.cedarsolutions.santa.server.config.BugReportServiceConfig">
+        <property name="properties" ref="properties" />
+    </bean>
+
+    <bean id="exchangeServiceConfig" class="com.cedarsolutions.santa.server.config.ExchangeServiceConfig">
+        <property name="properties" ref="properties" />
+    </bean>
+
+    <bean id="gaeVelocityUtils" class="com.cedarsolutions.util.gae.GaeVelocityUtils" factory-method="getInstance" scope="singleton" />
+
+    <bean id="gaeEmailUtils" class="com.cedarsolutions.util.gae.GaeEmailUtils" scope="singleton" />
+
+    <bean id="objectifyServiceProxy" class="com.cedarsolutions.dao.gae.impl.ObjectifyServiceProxy" factory-method="getInstance" scope="singleton" />
+
+
+    <!--
+     **********************
+      Server-side services
+     **********************
+    -->
+
+    <bean id="springContextService" class="com.cedarsolutions.server.service.impl.SpringContextService" />
+
+    <bean id="auditEventService" class="com.cedarsolutions.santa.server.service.impl.AuditEventService">
+        <property name="auditEventDao" ref="auditEventDao" />
+        <property name="clientSessionService" ref="clientSessionService" />
+    </bean>
+
+    <bean id="bugReportService" class="com.cedarsolutions.santa.server.service.impl.BugReportService">
+        <property name="config" ref="bugReportServiceConfig" />
+        <property name="emailService" ref="emailService" />
+    </bean>
+
+    <bean id="clientSessionService" class="com.cedarsolutions.santa.server.service.impl.ClientSessionService">
+        <property name="gaeUserService" ref="gaeUserService" />
+        <property name="springContextService" ref="springContextService" />
+        <property name="notificationService" ref="notificationService" />
+        <property name="auditEventDao" ref="auditEventDao" />
+        <property name="registeredUserDao" ref="registeredUserDao" />
+    </bean>
+
+    <bean id="emailService" class="com.cedarsolutions.server.service.impl.GaeEmailService">
+        <property name="gaeEmailUtils" ref="gaeEmailUtils" />
+        <property name="templateService" ref="templateService" />
+    </bean>
+
+    <bean id="exchangeService" class="com.cedarsolutions.santa.server.service.impl.ExchangeService">
+        <property name="config" ref="exchangeServiceConfig" />
+        <property name="emailService" ref="emailService" />
+    </bean>
+
+    <bean id="gaeUserService" class="com.cedarsolutions.server.service.impl.GaeUserService">
+        <property name="userService" ref="userService" />
+        <property name="springContextService" ref="springContextService" />
+    </bean>
+
+    <bean id="notificationService" class="com.cedarsolutions.santa.server.service.impl.NotificationService">
+        <property name="config" ref="notificationServiceConfig" />
+        <property name="emailService" ref="emailService" />
+    </bean>
+
+    <bean id="templateService" class="com.cedarsolutions.server.service.impl.GaeVelocityTemplateService">
+        <property name="gaeVelocityUtils" ref="gaeVelocityUtils" />
+        <property name="templateDirResource" value="classpath:templates" />
+    </bean>
+
+    <bean id="xsrfTokenService" class="com.cedarsolutions.server.service.impl.GwtCookieXsrfTokenService">
+        <property name="sessionCookieName" value="JSESSIONID" />
+        <property name="springContextService" ref="springContextService" />
+    </bean>
+
+
+    <!--
+     ****************************************
+      Server-side data access objects (DAOs)
+     ****************************************
+    -->
+
+    <bean id="daoObjectifyService" class="com.cedarsolutions.dao.gae.impl.DaoObjectifyService">
+        <property name="objectifyServiceProxy" ref="objectifyServiceProxy" />
+        <property name="entities" value="classpath:managed-entities.txt" />
+    </bean>
+
+    <bean id="auditEventDao" class="com.cedarsolutions.santa.server.dao.impl.AuditEventDao">
+        <property name="daoObjectifyService" ref="daoObjectifyService" />
+    </bean>
+
+    <bean id="exchangeDao" class="com.cedarsolutions.santa.server.dao.impl.ExchangeDao">
+        <property name="daoObjectifyService" ref="daoObjectifyService" />
+    </bean>
+
+    <bean id="registeredUserDao" class="com.cedarsolutions.santa.server.dao.impl.RegisteredUserDao">
+        <property name="daoObjectifyService" ref="daoObjectifyService" />
+    </bean>
+
+</beans>
