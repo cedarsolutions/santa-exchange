@@ -27,6 +27,7 @@ class WorldExtensions
 
     # Configuration accessible to all tests
     attr_accessor :test_config
+
     # Default constructor
     def initialize()
         @test_config = TestConfig.new
@@ -52,6 +53,171 @@ class WorldExtensions
         if element.text != value
             raise "Label \"" + id + "\" does not have expected content"
         end
+    end
+
+    # Check that a table exists with a specific id.
+    # @param id      HTML id of the table
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception if the table is not found
+    def check_table_exists(id, timeout=nil)
+        find_by_id_and_tag(id, "table", timeout)
+    end
+
+    # Check that a table row exists and that its checkbox is checked as expected.
+    # The checkbox is assumed to be in the first column.
+    # The row is identified by looking for values in specific columns.
+    # @param id      HTML id of the table
+    # @param checked Whether the row should be checked
+    # @param columns Hash from one-based column index to expected column value
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception if the expected row is not found
+    def check_table_row_checked(id, checked, columns, timeout=nil)
+        page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
+            found = { }
+            columns.keys.sort.each do |index|
+                found[index] = false
+                row.all(:xpath, "./td[" + index + "]/div[text()='" + columns[index] + "']").each do |column|
+                    found[index] = true
+                    break
+                end
+            end
+
+            missingAny = false
+            found.keys.each do |index|
+                if not found[index]
+                    missingAny = true
+                    break
+                end
+            end
+
+            if not missingAny
+                row.all(:xpath, "./td[1]/div/input[@type='checkbox']").each do |checkbox|
+                    if (checked and checkbox.checked?()) or ((not checked) and (not checkbox.checked?()))
+                        return
+                    end
+                end
+            end
+        end
+
+        raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+    end
+
+    # Check that a table row exists.
+    # The row is identified by looking for values in specific columns.
+    # @param id      HTML id of the table
+    # @param columns Hash from one-based column index to expected column value
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception if the expected row is not found
+    def check_table_row_exists(id, columns, timeout=nil)
+        page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
+            found = { }
+            columns.keys.sort.each do |index|
+                found[index] = false
+                row.all(:xpath, "./td[" + index + "]/div[text()='" + columns[index] + "']").each do |column|
+                    found[index] = true
+                    break
+                end
+            end
+
+            missingAny = false
+            found.keys.each do |index|
+                if not found[index]
+                    missingAny = true
+                    break
+                end
+            end
+
+            if not missingAny
+                return
+            end
+        end
+
+        raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+    end
+
+    # Check that a table row does not exist.
+    # The row is identified by looking for values in specific columns.
+    # @param id      HTML id of the table
+    # @param columns Hash from one-based column index to expected column value
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception if the expected row is found
+    def check_table_row_does_not_exist(id, columns, timeout=nil)
+        page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
+            found = { }
+            columns.keys.sort.each do |index|
+                found[index] = false
+                row.all(:xpath, "./td[" + index + "]/div[text()='" + columns[index] + "']").each do |column|
+                    found[index] = true
+                    break
+                end
+            end
+
+            missingAny = false
+            found.keys.each do |index|
+                if not found[index]
+                    missingAny = true
+                    break
+                end
+            end
+
+            if not missingAny
+                raise "Found row in table \"" + id + "\" that is not supposed to exist: " + columns.inspect
+            end
+        end
+    end
+
+    # Click the checkbox on a table row.
+    # The checkbox is assumed to be in the first column.
+    # The row is identified by looking for values in specific columns.
+    # @param id      HTML id of the table
+    # @param columns Hash fro one-based column index to expected column value
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception if the expected row is not found
+    def click_table_row_checkbox(id, columns, timeout=nil)
+        page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
+            found = { }
+            columns.keys.sort.each do |index|
+                found[index] = false
+                row.all(:xpath, "./td[" + index + "]/div[text()='" + columns[index] + "']").each do |column|
+                    found[index] = true
+                    break
+                end
+            end
+
+            missingAny = false
+            found.keys.each do |index|
+                if not found[index]
+                    missingAny = true
+                    break
+                end
+            end
+
+            if not missingAny
+                row.all(:xpath, "./td[1]/div/input[@type='checkbox']").each do |checkbox|
+                    checkbox.set(true)
+                    return
+                end
+            end
+        end
+
+        raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+    end
+
+    # Check that a button exists with a specific id.
+    # @param id      HTML id of the button
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception if the button is not found with the correct name
+    def check_button_exists(id, timeout=nil)
+        find_by_id_and_class(id, "gwt-Button", timeout)
+    end
+
+    # Click a button with a particular id.
+    # @param id      HTML id of the button
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception if the button is not found with the correct name
+    def click_button_by_id(id, timeout=nil)
+        button = find_by_id_and_class(id, "gwt-Button", timeout)
+        button.click
     end
 
     # Check that a top-level menu exists with a specific title.
@@ -89,12 +255,13 @@ class WorldExtensions
     # @param bar    HTML id of the menu bar
     # @param menu   HTML id of the top-level menu
     # @param item   HTML id of the menu item
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
     # @raise Exception if the menu item is not found in the hierarchy
-    def click_menu_item(bar, menu, item)
-        barElement = find_by_id_and_class(bar, "ss-MainMenuBar")
-        menuElement = source_find_by_id_and_class(barElement, menu, "gwt-MenuItem")
+    def click_menu_item(bar, menu, item, timeout=nil)
+        barElement = find_by_id_and_class(bar, "ss-MainMenuBar", timeout)
+        menuElement = source_find_by_id_and_class(barElement, menu, "gwt-MenuItem", timeout)
         menuElement.click
-        itemElement = find_by_id_and_class(item, "gwt-MenuItem")
+        itemElement = find_by_id_and_class(item, "gwt-MenuItem", timeout)
         itemElement.click
     end
 
@@ -142,6 +309,15 @@ class WorldExtensions
         end
     end
 
+    # Check the state of a tab identified by HTML id.
+    # @param id        HTML id of the tab
+    # @param timeout   Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception If the tab is not found, or is not in the right state
+    def click_tab(id, timeout=nil)
+        tab = find_by_id_and_class(id, "gwt-TabLayoutPanelTab")
+        tab.click
+    end
+
     # Check the state of a pop-up identified by HTML id.
     # @param id        HTML id of the pop-up
     # @param visible   True if the pop-up is expected to be visible, false otherwise
@@ -152,6 +328,31 @@ class WorldExtensions
             find_by_id_and_class(id, "ss-DialogBox", timeout);
         else
             find_by_id_and_class_fail(id, "ss-DialogBox", timeout);
+        end
+    end
+
+    # Check content of a pop-up identified by HTML id.
+    # @param id        HTML id of the pop-up
+    # @param string    Expected string
+    # @param timeout   Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception If the pop-up is not in the right state
+    def check_popup_content(id,  string, timeout=nil)
+        popup = find_by_id_and_class(id, "ss-DialogBox", timeout);
+        popup.should have_content(string)
+    end
+
+    # Check text of a label identified by HTML id.
+    # @param id        HTML id of the label
+    # @param text      Expected text
+    # @param timeout   Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @raise Exception If the label does not have the right text
+    def check_label_content(id,  text, timeout=nil)
+        if (text == "")
+            # Apparently, if a label is empty, GWT just doesn't render it
+            find_by_id_and_class_fail(id, "gwt-Label", timeout)
+        else
+            label = find_by_id_and_class(id, "gwt-Label", timeout);
+            label.should have_content(text)
         end
     end
 
@@ -200,6 +401,41 @@ class WorldExtensions
         for i in 1..timeout
             begin
                 return source.find_by_id(id)
+            rescue
+            end
+
+            sleep(1)
+        end
+
+        raise "Did not find element \"" + id + "\""
+    end
+
+    # Find an element by HTML id, with a specific tag type.
+    # @param id      HTML id of the element to find
+    # @param tag     The HTML tag that is expected, like "table"
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @return Element with the id.
+    # @raise Exception if the element is not found or does not have the right type
+    def find_by_id_and_tag(id, tag, timeout=nil)
+        return source_find_by_id_and_tag(page, id, tag, timeout)
+    end
+
+    # Find an element by HTML id, with a specific tag type.
+    # @param source  Source to check in, like page or element
+    # @param id      HTML id of the element to find
+    # @param tag     The HTML tag that is expected, like "table"
+    # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @return Element with the id and CSS class
+    # @raise Exception if the element is not found or does not have the right type
+    def source_find_by_id_and_tag(source, id, tag, timeout=nil)
+        timeout = normalize_timeout(timeout)
+
+        for i in 1..timeout
+            begin
+                element = source.find_by_id(id)
+                if element.tag_name() == tag
+                    return
+                end
             rescue
             end
 
@@ -309,6 +545,14 @@ class WorldExtensions
         keypress_on(element, key)
     end
 
+    # Press a key with focus on a named element.
+    # @param id  HTML id of the element
+    # @param key Key to press, like :enter
+    def press_element_key(id, key)
+        element = find_by_id(id);
+        keypress_on(element, key)
+    end
+
     # Send a keypress to a specific element.
     # @param element  Element to interact with
     # @param key      Key to press, like :return or :escape
@@ -386,8 +630,11 @@ end
 # See: http://snippets.dzone.com/posts/show/1311 for the original properties parser.
 class TestConfig
 
-    # Name of the properties file on disk
-    PROPERTIES = "cucumber.properties";
+    # Name of the project-wide build properties file on disk, relative to the acceptance directory
+    BUILD_PROPERTIES = "../build.properties";
+
+    # Name of the test properties file on disk, relative to the acceptance directory
+    TEST_PROPERTIES = "cucumber.properties";
 
     # Host that we're testing against, like "http://127.0.0.1:8888"
     attr_accessor :app_host
@@ -404,17 +651,23 @@ class TestConfig
     # Username that should be used for logging in normal users
     attr_accessor :normal_user
 
+    # Username that is locked
+    attr_accessor :locked_user
+
     # Browser to use for tests
     attr_accessor :browser
+
     # Default constructor, which loads properties from disk.
     def initialize()
-        properties = parse(PROPERTIES);
-        @app_host = properties["application.host"]
-        @module_html = properties["application.moduleHtml"]
+        buildProperties = parse(BUILD_PROPERTIES);
+        testProperties = parse(TEST_PROPERTIES);
+        @app_host = testProperties["config_appHost"]
+        @module_html = buildProperties["config_appStartupUrl"]
         @base_url = self.app_host + "/" + self.module_html
-        @admin_user = properties["credentials.admin"]
-        @normal_user = properties["credentials.user"]
-        @browser = properties["capybara.selenium.browser"]
+        @admin_user = testProperties["config_credentialsAdmin"]
+        @normal_user = testProperties["config_credentialsUser"]
+        @locked_user = testProperties["config_credentialsLocked"]
+        @browser = testProperties["config_capybaraSeleniumBrowser"]
     end
 
     # Parse a properties file from disk
