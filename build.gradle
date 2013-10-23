@@ -314,25 +314,41 @@ def cleanupCacheDirs() {
 // Run the Cucumber tests, assuming the devmode server is already up
 // Note that you have to manually build the application and boot devmode for this to work
 task runCucumber() << {
-   execCucumber().assertNormalExitValue()
+   execCucumber(null, null).assertNormalExitValue()
+}
+
+// Run the Cucumber tests, restricting by name containing a substring, assuming the devmode server is already up
+// Note that you have to manually build the application and boot devmode for this to work
+task runCucumberByName() << {
+   def name = null
+   getInput("Configure Cucumber", "Test Name", false, { input -> name = input})
+   execCucumber(name, null).assertNormalExitValue()
+}
+
+// Run the Cucumber tests for a specific feature file, assuming the devmode server is already up
+// Note that you have to manually build the application and boot devmode for this to work
+task runCucumberByFeature() << {
+   def feature = null
+   getInput("Configure Cucumber", "Feature Path", false, { input -> feature = input})
+   execCucumber(null, feature).assertNormalExitValue()
 }
 
 // Run the Cucumber tests, including a reboot of the server
 // Note that you have to manually build the application for this to work
 task runCucumberWithReboot() << {
-   killDevmode()   
+   killDevmode()
    bootDevmode()
    waitForDevmode()
-   execCucumber().assertNormalExitValue()
+   execCucumber(null, null).assertNormalExitValue()
 }
 
 // Run the acceptance tests, including a build of the application
 task acceptancetest(dependsOn: buildApplication) << {
-   killDevmode()   
+   killDevmode()
    bootDevmode()
    waitForDevmode()
-   def result = execCucumber()
-   killDevmode()   
+   def result = execCucumber(null, null)
+   killDevmode()
    result.assertNormalExitValue()
 }
 
@@ -349,13 +365,32 @@ def waitForDevmode() {
    sleep Integer.parseInt(config_serverWait) * 1000;  // wait for dev mode to finish booting
 }
 
-// Exec the cucumber tests, returning an ExecResult so caller can handle failures
-def execCucumber() {
+// Execute the cucumber tests, returning an ExecResult so caller can handle failures.
+// If you want the database to start over fresh, you need to reboot dev mode.
+// You can optionally provide either name or feature, but not both.
+// @param name     Specific name of a test, or a substring, as for the Cucumber --name option
+// @param feature  Path to a specific feature to execute, relative to the acceptance/cucumber directory
+// See: http://jeannotsweblog.blogspot.com/2013/02/cucumber-10-command-line.html
+def execCucumber(String name, String feature) {
+   def rubyPath = file("${config_rubyBinDir}/${config_rubyInterpreter}").canonicalPath
+   def cucumberPath =  file("${config_rubyBinDir}/${config_rubyCucumberProgram}").canonicalPath
+
+   def command = [ cucumberPath, "--require", "ruby", ]
+   if (name != null) {
+       command += "--name"
+       command += name.replaceAll('"', "")  // quotes cause problems, so just remove them and the test won't be found
+       command += "cucumber"
+   } else if (feature != null) {
+       command += "cucumber/" + feature
+   } else {
+       command += "cucumber"
+   }
+
    return project.exec {
       workingDir = "acceptance"
       ignoreExitValue = true
-      executable = file("${config_rubyBinDir}/${config_rubyInterpreter}").canonicalPath
-      args = [ file("${config_rubyBinDir}/${config_rubyCucumberProgram}").canonicalPath, ]
+      executable = rubyPath
+      args = command
    }
 }
 

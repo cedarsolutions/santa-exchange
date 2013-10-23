@@ -95,8 +95,16 @@
         <gradle target="acceptancetest" />
     </target>
 
-    <target name="run.cucumber" description="Run the Cucumber acceptance tests.">
+    <target name="run.cucumber" description="Run the Cucumber acceptance tests, assuming the server is already up.">
         <gradle target="runCucumber" />
+    </target>
+
+    <target name="run.cucumber.by.name" description="Run the Cucumber acceptance tests, restricting by name containing a substring.">
+        <gradle target="runCucumberByName" />
+    </target>
+
+    <target name="run.cucumber.by.feature" description="Run the Cucumber acceptance tests, restricting by feature within acceptance/cucumber">
+        <gradle target="runCucumberByFeature" />
     </target>
 
     <target name="run.cucumber.reboot" description="Run the acceptance tests, including a reboot of the server.">
