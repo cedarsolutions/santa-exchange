@@ -64,7 +64,6 @@ import com.cedarsolutions.santa.client.internal.view.IEditExchangeTabView;
 import com.cedarsolutions.santa.client.internal.view.InternalConstants;
 import com.cedarsolutions.santa.client.junit.StubbedClientTestCase;
 import com.cedarsolutions.santa.client.rpc.IExchangeRpcAsync;
-import com.cedarsolutions.santa.client.rpc.util.RpcUtils;
 import com.cedarsolutions.santa.shared.domain.exchange.Exchange;
 import com.cedarsolutions.santa.shared.domain.exchange.Participant;
 import com.cedarsolutions.santa.shared.domain.exchange.ParticipantSet;
@@ -694,7 +693,6 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
 
         presenter.setExchangeRpc(exchangeRpc);
         assertSame(exchangeRpc, presenter.getExchangeRpc());
-        verify(RpcUtils.getInstance()).applySystemWidePolicies(exchangeRpc);
 
         presenter.setManager(manager);
         assertSame(manager, presenter.getManager());

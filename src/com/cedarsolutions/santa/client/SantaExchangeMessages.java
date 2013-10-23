@@ -58,6 +58,9 @@ public interface SantaExchangeMessages extends Messages {
     @DefaultMessage("There was an error invoking a remote service: your request timed out.")
     String abstractRpcCallback_requestTimedOut();
 
+    @DefaultMessage("There was an error invoking a remote service: no response was received from the server.")
+    String abstractRpcCallback_noResponse();
+
     @DefaultMessage("There was an error invoking a remote service: the backend has been upgraded.")
     String abstractRpcCallback_backendUpgraded();
 
@@ -67,14 +70,18 @@ public interface SantaExchangeMessages extends Messages {
     @DefaultMessage("The HTTP/1.1 status code was: {1} ({0})")
     String abstractRpcCallback_httpStatusCode(HttpStatusCode name, int value);
 
+    @DefaultMessage("The configured timeout was: {0} ms")
+    String abstractRpcCallback_timeoutMs(int timeoutMs);
+
     @DefaultMessage("There was a security exception that prevented your request from being processed.")
     String abstractRpcCallback_securityException();
 
-    @DefaultMessage("A timeout can have several causes. For instance, there may have been a " +
-                    "problem with your internet connection, or the back-end might be so busy that " +
-                    "it did not respond in time.  Some of these problems are intermittent and " +
-                    "your action might work if you try it again.  If the problem continues, " +
-                    "it is probably best to close your browser and try again later.")
+    @DefaultMessage("A timeout or lack of response can have several causes. For instance, there may " +
+                    "have been a problem with your network connection, the back-end might be so " +
+                    "busy that it did not respond in time, or the back-end might be completely down. " +
+                    "Some of these problems are intermittent and your action might work if you try " +
+                    "it again.  If the problem continues, it is probably best to close your browser " +
+                    "and try again later.")
     String abstractRpcCallback_timeoutExplanation();
 
     @DefaultMessage("The backend has been upgraded and is incompatable with the version of " +

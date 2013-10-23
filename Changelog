@@ -1,8 +1,12 @@
 Version 0.9.32   unreleased
 
-    * Move up to CedarCommon v2.3.1.
-    * Add WidgetUtils.clickOnEnter() and WidgetUtils.setFocusAfterDisplay().
+    * Move up to CedarCommon v2.4.1.
+    * Remove NativeUtils, which now exists up in CedarCommon.
+    * Refactor to use the new AbstractWidgetUtils and AbstractStandardDialog classes.
+    * Add new required method StandardRpcCaller.generateNoResponseReceivedError().
     * Fix BugReportDialogView so the first text field has focus when it's opened.
+    * Change the name of static constants in StubbedClientTestCase to make them more legible.
+    * Convert unit tests for StandardRpcCaller to use StubbedClientTestCase.
 
 Version 0.9.31   09 Oct 2013
 
@@ -13,7 +17,7 @@ Version 0.9.31   09 Oct 2013
 Version 0.9.30   27 Sep 2013
 
     * Move up to CedarCommon v2.2.0.
-    * Use IGaeUserService.addClientRoles() rather than interaction with session directly.
+    * Use IGaeUserService.addClientRoles() rather than interacting with session directly.
     * Fix problems with initial RPC call timing out, using the new XSRF RPC timeout config hook.
 
 Version 0.9.29   16 Sep 2013

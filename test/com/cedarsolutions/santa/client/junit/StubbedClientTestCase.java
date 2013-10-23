@@ -69,9 +69,9 @@ import com.google.gwt.core.client.GWT;
 @RunWith(GwtStubbedTestRunner.class)
 public abstract class StubbedClientTestCase {
 
-    protected static SantaExchangeMessages SANTA_EXCHANGE_MESSAGES;
-    protected static SantaExchangeConfig SANTA_EXCHANGE_CONFIG;
-    protected static SantaExchangeConstants SANTA_EXCHANGE_CONSTANTS;
+    protected static SantaExchangeMessages MESSAGES;
+    protected static SantaExchangeConfig CONFIG;
+    protected static SantaExchangeConstants CONSTANTS;
 
     /** Set up logging for GAE, so log messages go to Log4J. */
     @BeforeClass
@@ -83,9 +83,9 @@ public abstract class StubbedClientTestCase {
     /** Apply stubbed resources to this test. */
     @BeforeClass
     public static void applyStubbedResources() {
-        SANTA_EXCHANGE_MESSAGES = GWT.create(SantaExchangeMessages.class);
-        SANTA_EXCHANGE_CONFIG = GWT.create(SantaExchangeConfig.class);
-        SANTA_EXCHANGE_CONSTANTS = GWT.create(SantaExchangeConstants.class);
+        MESSAGES = GWT.create(SantaExchangeMessages.class);
+        CONFIG = GWT.create(SantaExchangeConfig.class);
+        CONSTANTS = GWT.create(SantaExchangeConstants.class);
     }
 
     /** Reset any known singleton mocks before each test case runs. */

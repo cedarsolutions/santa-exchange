@@ -197,9 +197,24 @@ public abstract class StandardRpcCaller<A, T> extends AbstractRpcCaller<A, T> {
         List<String> supporting = new ArrayList<String>();
         supporting.add(this.messages.abstractRpcCallback_rpcName(rpcMethod));
         supporting.add(this.messages.abstractRpcCallback_message(exception.getMessage()));
+        supporting.add(this.messages.abstractRpcCallback_timeoutMs(exception.getTimeoutMillis()));
         supporting.add(this.messages.abstractRpcCallback_timeoutExplanation());
 
         // Note: for a timeout, there's no reason to show a stack trace
+        return new ErrorDescription(message, supporting);
+    }
+
+    /** Generate an error due to no response received. */
+    @Override
+    public ErrorDescription generateNoResponseReceivedError(Throwable exception) {
+        String rpcMethod = this.getRpcMethod();
+        String message = this.messages.abstractRpcCallback_noResponse();
+
+        List<String> supporting = new ArrayList<String>();
+        supporting.add(this.messages.abstractRpcCallback_rpcName(rpcMethod));
+        supporting.add(this.messages.abstractRpcCallback_timeoutExplanation());
+
+        // Note: for this situation, there's no reason to show a stack trace
         return new ErrorDescription(message, supporting);
     }
 

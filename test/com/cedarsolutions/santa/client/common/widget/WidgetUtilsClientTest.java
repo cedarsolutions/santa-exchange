@@ -50,31 +50,11 @@ public class WidgetUtilsClientTest extends ClientTestCase {
         assertEquals(expected, WidgetUtils.getInstance().getApplicationVersion());
     }
 
-    /** Test getWndLocationHref(). */
-    public void testGetWndLocationHref() {
-        // Just make sure it doesn't blow up and we get something back
-        assertNotNull(WidgetUtils.getInstance().getWndLocationHref());
-    }
-
-    // This test seems to cause strange problems with other tests; not sure exactly why
-//    /** Test redirect(). */
-//    public void testRedirect() {
-//        // Redirect back to the current page, just to make sure the method doesn't blow up
-//        WidgetUtils.getInstance().redirect(WidgetUtils.getInstance().getWndLocationHref());
-//    }
-
     /** Test showErrorPopupSpecial(). */
     public void testShowErrorPopupSpecial() {
         // We can't really verify much; just make sure that the method call doesn't blow up
         ErrorDescription error = new ErrorDescription("Hello, world");
         WidgetUtils.getInstance().showErrorPopup(error);
-    }
-
-    /** Test getDestinationUrl(). */
-    public void testGetDestinationUrl() {
-        // Just make sure it looks semi-sensible
-        String result = WidgetUtils.getInstance().getDestinationUrl("token");
-        assertTrue(result.endsWith("#token"));
     }
 
 }

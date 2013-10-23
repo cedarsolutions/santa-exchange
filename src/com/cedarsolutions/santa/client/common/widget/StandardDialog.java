@@ -22,47 +22,17 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.client.common.widget;
 
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.DialogBox;
-
+import com.cedarsolutions.client.gwt.widget.AbstractStandardDialog;
 
 /**
  * Dialog box that behaves in a standard way.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
-public abstract class StandardDialog extends DialogBox {
+public abstract class StandardDialog extends AbstractStandardDialog {
 
     /** Shared constructor. */
     protected StandardDialog() {
-        setAnimationEnabled(false);
-        setGlassEnabled(true);
-        setStylePrimaryName(SantaExchangeStyles.STANDARD_DIALOG_STYLE);
-    }
-
-    /** Standardize the way the dialog is shown. */
-    @Override
-    public void show() {
-        super.show();
-        positionDialog();
-    }
-
-    /** Standardize the way the dialog is hidden. */
-    @Override
-    public void hide() {
-        super.hide();
-    }
-
-    /** Position the dialog in a sensible place. */
-    private void positionDialog() {
-        // This follows the strategy in PopupPanel.center()
-
-        double width = (double) (Window.getClientWidth() - getOffsetWidth());
-        double height = (double) (Window.getClientHeight() - getOffsetHeight());
-
-        int left = (int) (width * 0.5);
-        int top = (int) (height * 0.1);
-
-        setPopupPosition(Math.max(Window.getScrollLeft() + left, 0), Math.max(Window.getScrollTop() + top, 0));
+        super(SantaExchangeStyles.STANDARD_DIALOG_STYLE);
     }
 
 }

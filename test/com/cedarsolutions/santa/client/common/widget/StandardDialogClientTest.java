@@ -33,17 +33,7 @@ public class StandardDialogClientTest extends ClientTestCase {
     /** Test constructor. */
     public void testConstructor() {
         ConcreteDialog dialog = new ConcreteDialog();
-        assertFalse(dialog.isAnimationEnabled());
-        assertTrue(dialog.isGlassEnabled());
         assertEquals(SantaExchangeStyles.STANDARD_DIALOG_STYLE, dialog.getStylePrimaryName());
-    }
-
-    /** Test show(). */
-    public void testShow() {
-        ConcreteDialog dialog = new ConcreteDialog();
-        dialog.show();  // make sure it doesn't blow up, and look for moderately sensible results
-        assertTrue(dialog.getPopupLeft() >= 0);
-        assertTrue(dialog.getPopupTop() >= 0);
     }
 
     /** Concrete dialog to test with. */

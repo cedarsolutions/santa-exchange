@@ -117,8 +117,8 @@ public class AdminEventFilterTest extends StubbedClientTestCase {
         inOrder.verify(eventBus).showLandingPage();
         inOrder.verify(eventBus).showErrorPopup(error.capture());
         inOrder.verify(eventBus).setFilteringEnabled(true);
-        assertEquals(SANTA_EXCHANGE_MESSAGES.filter_adminAccessRequired(), error.getValue().getMessage());
-        assertEquals(SANTA_EXCHANGE_MESSAGES.filter_youWillBeRedirected(), error.getValue().getSupportingTextItems().get(0));
+        assertEquals(MESSAGES.filter_adminAccessRequired(), error.getValue().getMessage());
+        assertEquals(MESSAGES.filter_youWillBeRedirected(), error.getValue().getSupportingTextItems().get(0));
     }
 
     /** Test filterEventOnceInitialized() when there is no logged in user. */
@@ -146,11 +146,11 @@ public class AdminEventFilterTest extends StubbedClientTestCase {
 
         AdminEventFilter filter = new AdminEventFilter();
         filter.setSystemStateInjector(systemStateInjector);
-        filter.setMessages(SANTA_EXCHANGE_MESSAGES);
+        filter.setMessages(MESSAGES);
 
         assertSame(systemStateInjector, filter.getSystemStateInjector());
         assertSame(session, filter.getSession());
-        assertSame(SANTA_EXCHANGE_MESSAGES, filter.getMessages());
+        assertSame(MESSAGES, filter.getMessages());
 
         return filter;
     }
