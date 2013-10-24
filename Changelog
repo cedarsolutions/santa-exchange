@@ -1,6 +1,7 @@
 Version 0.9.33   unreleased
 
     * Fall back the "please wait" change, which didn't make enough difference to worth it.
+    * Refactor a lot of code in build.gradle out into a project-level Gradle plugin, for clarity.
 
 Version 0.9.32   23 Oct 2013
 
