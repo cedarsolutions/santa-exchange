@@ -32,17 +32,14 @@ buildscript {
 
     dependencies {
         classpath "com.googlecode.cedar-common:cedar-build:0.8.5"
-        classpath "org.gradle.api.plugins:gradle-gae-plugin:0.9"
     }
 } 
 
-apply plugin: "base"
-apply plugin: "gae"  // I'm using this in only a limited way (for builds)
+apply plugin: "projectGwt"
+apply plugin: "projectEclipse"
 apply plugin: "cedarBuild"
 apply plugin: "cedarCopyright"
 apply plugin: "cedarJavadoc"
-apply plugin: "projectGwt"
-apply plugin: "projectEclipse"
 
 cedarProperties.loadStandardProperties()
 
@@ -52,31 +49,6 @@ cedarProperties.loadGwtProperties(gwtConfig, [ "system_applicationName", "system
 compileJava.options.fork(memoryMaximumSize: config_javaCompilerMemory)
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
-
-projectGwt {
-    appModuleName = config_appModuleName
-    appEntryPoint = config_appEntryPoint
-    appStartupUrl = config_appStartupUrl
-
-    gwtCompilerMemory = config_gwtCompilerMemory
-
-    devmodeServerMemory = config_devmodeServerMemory
-    devmodeCodeserverPort = config_devmodeCodeserverPort
-    devmodeServerPort = config_devmodeServerPort
-
-    rubyPath = file("${config_rubyBinDir}/${config_rubyInterpreter}").canonicalPath
-    cucumberPath = file("${config_rubyBinDir}/${config_rubyCucumberProgram}").canonicalPath
-    serverWait = config_serverWait
-
-    appEngineVersion = config_appEngineVersion
-}
-
-projectEclipse {
-    sourceFolders = [ "resources", "src", "test", "suites", ]  // in desired order
-    suitesSourceDir = "gradle/src/suites"
-    settingsSourceDir = "gradle/eclipse/settings"
-    externalToolBuildersSourceDir = "gradle/eclipse/externalToolBuilders"    
-}
 
 cedarLabel {
     enabled = config_mercurialLabelEnabled
@@ -101,9 +73,29 @@ cedarJavadoc {
     subpackages = [ "com", ]
 }
 
-gae {
-    downloadSdk = true
-    webAppDirName = "war"
+projectEclipse {
+    sourceFolders = [ "resources", "src", "test", "suites", ]  // in desired order
+    suitesSourceDir = "gradle/src/suites"
+    settingsSourceDir = "gradle/eclipse/settings"
+    externalToolBuildersSourceDir = "gradle/eclipse/externalToolBuilders"    
+}
+
+projectGwt {
+    appModuleName = config_appModuleName
+    appEntryPoint = config_appEntryPoint
+    appStartupUrl = config_appStartupUrl
+
+    gwtCompilerMemory = config_gwtCompilerMemory
+
+    devmodeServerMemory = config_devmodeServerMemory
+    devmodeCodeserverPort = config_devmodeCodeserverPort
+    devmodeServerPort = config_devmodeServerPort
+
+    rubyPath = file("${config_rubyBinDir}/${config_rubyInterpreter}").canonicalPath
+    cucumberPath = file("${config_rubyBinDir}/${config_rubyCucumberProgram}").canonicalPath
+    serverWait = config_serverWait
+
+    appEngineVersion = config_appEngineVersion
 }
 
 repositories {
