@@ -1,4 +1,4 @@
-Version 0.9.32   unreleased
+Version 0.9.32   23 Oct 2013
 
     * Move up to CedarCommon v2.4.1.
     * Remove NativeUtils, which now exists up in CedarCommon.
