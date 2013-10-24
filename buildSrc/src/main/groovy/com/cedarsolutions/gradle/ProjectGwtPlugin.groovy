@@ -31,7 +31,7 @@ import org.gradle.api.plugins.gae.GaePlugin
 
 /**
  * The projectGwt plugin.
- * @author Kenneth J. Pronovici, Cedar Solutions Inc.
+ * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
 class ProjectGwtPlugin implements Plugin<Project> {
 
