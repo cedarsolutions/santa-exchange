@@ -26,9 +26,6 @@ package com.cedarsolutions.gradle
 import org.gradle.api.Project
 import org.gradle.api.Plugin
 
-import org.gradle.api.plugins.JavaPlugin
-import org.gradle.api.plugins.gae.GaePlugin
-
 /**
  * The projectCucumber plugin.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
@@ -44,6 +41,21 @@ class ProjectCucumberPlugin implements Plugin<Project> {
 
     /** Apply projectCucumber. */
     void applyProjectCucumber(Project project) {
+
+        // Install all of the Cucumber-related tooling
+        project.task("installCucumber") << {
+            project.convention.plugins.projectCucumber.installCucumber()
+        }
+
+        // Uninstall all of the Cucumber-related tooling
+        project.task("uninstallCucumber") << {
+            project.convention.plugins.projectCucumber.uninstallCucumber()
+        }
+
+        // Verify the configured cucumber install is ok.
+        project.task("verifyCucumber") << {
+            project.convention.plugins.projectCucumber.verifyCucumberInstall()
+        }
 
         // Run the Cucumber tests, assuming the devmode server is already up
         // Note that you have to manually build the application and boot devmode for this to work

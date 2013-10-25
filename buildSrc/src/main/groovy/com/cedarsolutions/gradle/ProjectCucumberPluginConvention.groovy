@@ -25,6 +25,7 @@ package com.cedarsolutions.gradle
 
 import org.gradle.api.Project
 import org.gradle.api.InvalidUserDataException
+import org.apache.tools.ant.taskdefs.condition.Os
 
 /**
  * Plugin convention for projectCucumber.
@@ -73,11 +74,67 @@ class ProjectCucumberPluginConvention {
 
     /** Verify that all of the required components have been installed in order to run Cucumber. */
     def verifyCucumberInstall() {
+        project.logger.lifecycle("Using Cucumber from: " + project.projectCucumber.getRubyInstallDir())
         verifyRuby()
         verifyGem()
         verifyCucumber()
         verifyGemVersions()
         project.logger.lifecycle("Cucumber install is ok.")
+    }
+
+    /** Install Cucumber, including Ruby and all of the other required dependencies.  */
+    def installCucumber() {
+        if (!isWindows()) {
+            project.logger.error("The installCucumber task is only supported on the Windows platform, sorry.");
+        } else {
+            if (project.file("tools/cucumber").exists()) {
+                project.logger.lifecycle("Cucumber already exists in tools/cucumber; to reinstall, remove first with 'gradle uninstallCucumber'.")
+            } else {
+                installRubyInterpreter()
+                installRubyDevkit()
+                installSeleniumGem()
+                installRspecGem()
+                installCapybaraGem()
+                installCucumberGem()
+                if (project.projectCucumber.getRubyInstallDir() == "tools/cucumber") {
+                    verifyCucumberInstall()
+                    project.logger.lifecycle("All Cucumber tooling has been installed.")
+                } else {
+                    project.logger.lifecycle("All Cucumber tooling has been installed.")
+                    project.logger.lifecycle("However, your project is not configured to point to the new Cucumber.");
+                    project.logger.lifecycle("Change your local.properties and run 'gradle verifyCucumber'.")
+                }
+            }
+        }
+    }
+
+    /** Uninstall Cucumber, removing the install directory. */
+    def uninstallCucumber() {
+        if (project.file("tools").exists()) {
+            if (!project.file("tools/cucumber").exists()) {
+                project.logger.lifecycle("Cucumber tooling is apparently not installed.")
+            } else {
+                if (project.file("tools/cucumber/unins000.exe").exists()) {
+                    try {
+                        def devnull = new ByteArrayOutputStream()
+                        project.exec {
+                            standardOutput = devnull
+                            executable = "tools/cucumber/unins000.exe" 
+                            args = [ "/silent", ]
+                        }
+                    } catch (Exception e) { 
+                        throw new InvalidUserDataException("Error uninstalling Ruby: " + e.getMessage(), e);
+                    }
+                }
+
+                project.file("tools/cucumber").deleteDir()
+                project.logger.lifecycle("All Cucumber tooling has been uninstalled.")
+            }
+
+            project.ant.delete(includeemptydirs : "true", quiet : "true") {
+                fileset(dir: "tools", excludes : "**/*")  // remove tools only if empty
+            }
+        }
     }
 
     /** Verify that the Ruby interpreter is available. */
@@ -192,6 +249,147 @@ class ProjectCucumberPluginConvention {
         } catch (Exception e) {
             return false
         }
+    }
+
+    /** Install the Ruby interpreter. */
+    private void installRubyInterpreter() {
+        try {
+            project.logger.lifecycle("Installing Ruby...")
+
+            project.file("build/tmp/installCucumber").deleteDir()
+            project.file("build/tmp/installCucumber").mkdir()
+
+            def devnull = new ByteArrayOutputStream()
+
+            def rubyUrl = "http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p448.exe?direct"
+            def rubyTarget = "build/tmp/installCucumber/ruby.exe"
+            project.ant.get(src: rubyUrl, dest: rubyTarget)
+
+            project.exec {
+                standardOutput = devnull
+                executable = "build/tmp/installCucumber/ruby.exe"
+                args = [ "/silent", "/dir=tools/cucumber", ]
+            }
+        } catch (Exception e) { 
+            throw new InvalidUserDataException("Error installing Ruby: " + e.getMessage(), e);
+        } finally {
+            project.file("build/tmp/installCucumber").deleteDir()
+        }
+    }
+
+    /** Install the Ruby DevKit. */
+    private void installRubyDevkit() {
+        try {
+            project.logger.lifecycle("Installing Ruby DevKit...")
+
+            project.file("build/tmp/installCucumber").deleteDir()
+            project.file("build/tmp/installCucumber").mkdir()
+
+            def devnull = new ByteArrayOutputStream()
+
+            def devkitUrl = "http://cloud.github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe"
+            def devkitTarget = "build/tmp/installCucumber/devkit.exe"
+            project.ant.get(src: devkitUrl, dest: devkitTarget)
+
+            project.exec {
+                standardOutput = devnull
+                executable = "build/tmp/installCucumber/devkit.exe"
+                args = [ "-y", "-ai", "-gm2", "-otools\\cucumber\\DevKit", ]
+            }
+
+            project.exec {
+                standardOutput = devnull
+                workingDir = "tools/cucumber/DevKit"
+                executable = "tools/cucumber/bin/ruby.exe"
+                args = [ "dk.rb", "init", ]
+            }
+
+            project.exec {
+                standardOutput = devnull
+                workingDir = "tools/cucumber/DevKit"
+                executable = "tools/cucumber/bin/ruby.exe"
+                args = [ "dk.rb", "review", ]
+            }
+
+            project.exec {
+                standardOutput = devnull
+                workingDir = "tools/cucumber/DevKit"
+                executable = "tools/cucumber/bin/ruby.exe"
+                args = [ "dk.rb", "install", ]
+            }
+        } catch (Exception e) { 
+            throw new InvalidUserDataException("Error installing Ruby DevKit: " + e.getMessage(), e);
+        } finally {
+            project.file("build/tmp/installCucumber").deleteDir()
+        }
+    }
+
+    /** Install the Selenium Ruby Gem. */
+    private void installSeleniumGem() {
+        try {
+            project.logger.lifecycle("Installing Selenium gem...")
+            def devnull = new ByteArrayOutputStream()
+            project.exec {
+                standardOutput = devnull
+                errorOutput = devnull
+                executable = "tools/cucumber/bin/gem.bat"
+                args = [ "install", "selenium-webdriver", ]
+            }
+        } catch (Exception e) { 
+            throw new InvalidUserDataException("Error installing Selenium gem: " + e.getMessage(), e);
+        }
+    }
+
+    /** Install the Rspec Ruby Gem. */
+    private void installRspecGem() {
+        try {
+            project.logger.lifecycle("Installing Rspec gem...")
+            def devnull = new ByteArrayOutputStream()
+            project.exec {
+                standardOutput = devnull
+                errorOutput = devnull
+                executable = "tools/cucumber/bin/gem.bat"
+                args = [ "install", "rspec", "-v", "2.14.1", ]
+            }
+        } catch (Exception e) { 
+            throw new InvalidUserDataException("Error installing Rspec gem: " + e.getMessage(), e);
+        }
+    }
+
+    /** Install the Capybara Ruby Gem. */
+    private void installCapybaraGem() {
+        try {
+            project.logger.lifecycle("Installing Capybara gem...")
+            def devnull = new ByteArrayOutputStream()
+            project.exec {
+                standardOutput = devnull
+                errorOutput = devnull
+                executable = "tools/cucumber/bin/gem.bat"
+                args = [ "install", "capybara", "-v", "2.1.0", ]
+            }
+        } catch (Exception e) { 
+            throw new InvalidUserDataException("Error installing Capybara gem: " + e.getMessage(), e);
+        }
+    }
+
+    /** Install the Cucumber Ruby Gem. */
+    private void installCucumberGem() {
+        try {
+            project.logger.lifecycle("Installing Cucumber gem...")
+            def devnull = new ByteArrayOutputStream()
+            project.exec {
+                standardOutput = devnull
+                errorOutput = devnull
+                executable = "tools/cucumber/bin/gem.bat"
+                args = [ "install", "cucumber", "-v", "1.3.8", ]
+            }
+        } catch (Exception e) { 
+            throw new InvalidUserDataException("Error installing Cucumber gem: " + e.getMessage(), e);
+        }
+    }
+
+    private boolean isWindows() {
+        return Os.isFamily(Os.FAMILY_WINDOWS);
     }
 
 }

@@ -85,6 +85,7 @@ class ProjectEclipsePlugin implements Plugin<Project> {
             project.convention.plugins.cedarBuild.ignoreResourcesFromDirectories(provider, 
                 [ ".gradle",
                   "build",
+                  "tools",
                   "buildSrc/build",
                   "gwt-unitCache",
                   "www-test",

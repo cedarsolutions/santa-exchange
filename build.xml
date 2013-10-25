@@ -84,7 +84,7 @@
     </target>
 
     <target name="run.all.tests" description="Run all tests for this project">
-        <gradle target="unittest clienttest acceptancetest" />
+        <gradle target="test" />
     </target>
 
     <target name="run.unit.tests" description="Run all unit-type tests for this project.">
