@@ -165,52 +165,22 @@ class ProjectGwtPlugin implements Plugin<Project> {
             }
         }
 
+        // Run the acceptance tests, including a build of the application
+        project.task("acceptancetest", dependsOn: project.tasks.buildApplication) << {
+            project.convention.plugins.projectGwt.killDevmode()
+            project.convention.plugins.projectGwt.bootDevmode()
+            project.convention.plugins.projectGwt.waitForDevmode()
+            def result = project.convention.plugins.projectCucumber.execCucumber(null, null)
+            project.convention.plugins.projectGwt.killDevmode()
+            result.assertNormalExitValue()
+        }
+
         // Effectively disable the standard test runner by making it look for a bogus class.
         project.tasks.test.include("**/bogus.class")
 
         // Redefine the test runner in terms of the unit and client test suites.
         project.tasks.test.dependsOn(project.tasks.clienttest, project.tasks.unittest)
         project.tasks.clienttest.mustRunAfter project.tasks.unittest
-
-        // Run the Cucumber tests, assuming the devmode server is already up
-        // Note that you have to manually build the application and boot devmode for this to work
-        project.task("runCucumber") << {
-            project.convention.plugins.projectGwt.execCucumber(null, null).assertNormalExitValue()
-        }
-
-        // Run the Cucumber tests, restricting by name containing a substring, assuming the devmode server is already up
-        // Note that you have to manually build the application and boot devmode for this to work
-        project.task("runCucumberByName") << {
-            def name = null
-            project.convention.plugins.cedarBuild.getInput("Configure Cucumber", "Test Name", false, { input -> name = input})
-            project.convention.plugins.projectGwt.execCucumber(name, null).assertNormalExitValue()
-        }
-
-        // Run the Cucumber tests for a specific feature file, assuming the devmode server is already up
-        // Note that you have to manually build the application and boot devmode for this to work
-        project.task("runCucumberByFeature") << {
-            def feature = null
-            project.convention.plugins.cedarBuild.getInput("Configure Cucumber", "Feature Path", false, { input -> feature = input})
-            project.convention.plugins.projectGwt.execCucumber(null, feature).assertNormalExitValue()
-        }
-
-        // Run the Cucumber tests, including a reboot of the server
-        // Note that you have to manually build the application for this to work
-        project.task("runCucumberWithReboot") << {
-            project.convention.plugins.projectGwt.rebootDevmode()
-            project.convention.plugins.projectGwt.waitForDevmode()
-            project.convention.plugins.projectGwt.execCucumber(null, null).assertNormalExitValue()
-        }
-
-        // Run the acceptance tests, including a build of the application
-        project.task("acceptancetest", dependsOn: project.tasks.buildApplication) << {
-            project.convention.plugins.projectGwt.killDevmode()
-            project.convention.plugins.projectGwt.bootDevmode()
-            project.convention.plugins.projectGwt.waitForDevmode()
-            def result = project.convention.plugins.projectGwt.execCucumber(null, null)
-            project.convention.plugins.projectGwt.killDevmode()
-            result.assertNormalExitValue()
-        }
 
         // Define the order of tests if there are multiple called at the same time
         project.tasks.clienttest.mustRunAfter project.tasks.unittest

@@ -35,6 +35,7 @@ buildscript {
     }
 } 
 
+apply plugin: "projectCucumber"
 apply plugin: "projectGwt"
 apply plugin: "projectEclipse"
 apply plugin: "cedarBuild"
@@ -92,9 +93,14 @@ projectGwt {
     devmodeServerPort = config_devmodeServerPort
     serverWait = config_serverWait
 
-    rubyInstallDir = config_rubyInstallDir
-
     appEngineVersion = config_appEngineVersion
+}
+
+projectCucumber {
+    rubyInstallDir = config_rubyInstallDir
+    cucumberDir = "acceptance"
+    featuresSubdir = "cucumber"
+    rubySubdir = "ruby"
 }
 
 repositories {

@@ -64,9 +64,6 @@ class ProjectGwtPluginExtension {
     /** Amount of memory to give the devmode server, like "512M". */
     def devmodeServerMemory
 
-    /** Path to the Ruby install directory. */
-    def rubyInstallDir
-
     /** Expected boot time for the server, in seconds. */
     def serverWait
    
@@ -106,28 +103,6 @@ class ProjectGwtPluginExtension {
     /** Get devmodeServerMemory, accounting for closures. */
     String getDevmodeServerMemory() {
         return devmodeServerMemory != null && devmodeServerMemory instanceof Callable ? devmodeServerMemory.call() : devmodeServerMemory
-    }
-
-    /** Get rubyInstallDir, accounting for closures. */
-    String getRubyInstallDir() {
-        return rubyInstallDir != null && rubyInstallDir instanceof Callable ? rubyInstallDir.call() : rubyInstallDir
-    }
-
-    /** Get the path to the ruby executable. */
-    String getRubyPath() {
-        def path = project.file(getRubyInstallDir() + "/bin/ruby").canonicalPath
-        return isWindows() ? path + ".exe" : path
-    }
-
-    /** Get the path to the Ruby gem executable. */
-    String getGemPath() {
-        def path = project.file(getRubyInstallDir() + "/bin/gem").canonicalPath
-        return isWindows() ? path + ".bat" : path
-    }
-
-    /** Get the path to the Ruby cucumber executable. */
-    String getCucumberPath() {
-        return project.file(getRubyInstallDir() + "/bin/cucumber").canonicalPath
     }
 
     /** Get serverWait, accounting for closures. */
@@ -174,10 +149,6 @@ class ProjectGwtPluginExtension {
         if (getDevmodeServerMemory() == null || getDevmodeServerMemory() == "unset") {
             throw new InvalidUserDataException("GWT error: devmodeServerMemory is unset")
         }
-    }
-
-    private boolean isWindows() {
-        return Os.isFamily(Os.FAMILY_WINDOWS);
     }
 
 }
