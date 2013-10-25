@@ -179,13 +179,11 @@ class ProjectGwtPlugin implements Plugin<Project> {
         project.tasks.test.include("**/bogus.class")
 
         // Redefine the test runner in terms of the unit and client test suites.
-        project.tasks.test.dependsOn(project.tasks.clienttest, project.tasks.unittest)
-        project.tasks.clienttest.mustRunAfter project.tasks.unittest
+        project.tasks.test.dependsOn(project.tasks.clienttest, project.tasks.unittest, project.tasks.acceptancetest)
 
         // Define the order of tests if there are multiple called at the same time
         project.tasks.clienttest.mustRunAfter project.tasks.unittest
         project.tasks.acceptancetest.mustRunAfter project.tasks.clienttest
-
     }
 
 }
