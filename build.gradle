@@ -90,10 +90,9 @@ projectGwt {
     devmodeServerMemory = config_devmodeServerMemory
     devmodeCodeserverPort = config_devmodeCodeserverPort
     devmodeServerPort = config_devmodeServerPort
-
-    rubyPath = file("${config_rubyBinDir}/${config_rubyInterpreter}").canonicalPath
-    cucumberPath = file("${config_rubyBinDir}/${config_rubyCucumberProgram}").canonicalPath
     serverWait = config_serverWait
+
+    rubyInstallDir = config_rubyInstallDir
 
     appEngineVersion = config_appEngineVersion
 }

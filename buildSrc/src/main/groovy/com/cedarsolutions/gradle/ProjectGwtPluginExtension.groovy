@@ -27,6 +27,7 @@ import org.gradle.api.Project
 import org.gradle.api.InvalidUserDataException
 import java.io.File
 import java.util.concurrent.Callable
+import org.apache.tools.ant.taskdefs.condition.Os
 
 /**
  * Plugin extension for projectGwt.
@@ -63,11 +64,8 @@ class ProjectGwtPluginExtension {
     /** Amount of memory to give the devmode server, like "512M". */
     def devmodeServerMemory
 
-    /** Full path to the ruby interepreter. */
-    def rubyPath
-
-    /** Path to the Cucumber program. */
-    def cucumberPath
+    /** Path to the Ruby install directory. */
+    def rubyInstallDir
 
     /** Expected boot time for the server, in seconds. */
     def serverWait
@@ -110,14 +108,26 @@ class ProjectGwtPluginExtension {
         return devmodeServerMemory != null && devmodeServerMemory instanceof Callable ? devmodeServerMemory.call() : devmodeServerMemory
     }
 
-    /** Get rubyPath, accounting for closures. */
-    String getRubyPath() {
-        return rubyPath != null && rubyPath instanceof Callable ? rubyPath.call() : rubyPath
+    /** Get rubyInstallDir, accounting for closures. */
+    String getRubyInstallDir() {
+        return rubyInstallDir != null && rubyInstallDir instanceof Callable ? rubyInstallDir.call() : rubyInstallDir
     }
 
-    /** Get cucumberPath, accounting for closures. */
+    /** Get the path to the ruby executable. */
+    String getRubyPath() {
+        def path = project.file(getRubyInstallDir() + "/bin/ruby").canonicalPath
+        return isWindows() ? path + ".exe" : path
+    }
+
+    /** Get the path to the Ruby gem executable. */
+    String getGemPath() {
+        def path = project.file(getRubyInstallDir() + "/bin/gem").canonicalPath
+        return isWindows() ? path + ".bat" : path
+    }
+
+    /** Get the path to the Ruby cucumber executable. */
     String getCucumberPath() {
-        return cucumberPath != null && cucumberPath instanceof Callable ? cucumberPath.call() : cucumberPath
+        return project.file(getRubyInstallDir() + "/bin/cucumber").canonicalPath
     }
 
     /** Get serverWait, accounting for closures. */
@@ -164,14 +174,10 @@ class ProjectGwtPluginExtension {
         if (getDevmodeServerMemory() == null || getDevmodeServerMemory() == "unset") {
             throw new InvalidUserDataException("GWT error: devmodeServerMemory is unset")
         }
+    }
 
-        if (getRubyPath() == null || getRubyPath() == "unset") {
-            throw new InvalidUserDataException("GWT error: rubyPath is unset")
-        }
-
-        if (getCucumberPath() == null || getCucumberPath() == "unset") {
-            throw new InvalidUserDataException("GWT error: cucumberPath is unset")
-        }
+    private boolean isWindows() {
+        return Os.isFamily(Os.FAMILY_WINDOWS);
     }
 
 }
