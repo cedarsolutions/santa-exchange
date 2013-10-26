@@ -51,7 +51,7 @@ class ProjectGwtPlugin implements Plugin<Project> {
     void applyProjectGwt(Project project) {
 
         // We need to download the SDK before the classpath can be generated properly.
-        project.tasks.compileJava.dependsOn(project.tasks.gaeDownloadSdk) 
+        project.tasks.compileJava.dependsOn(project.tasks.gaeDownloadSdk)
 
         // Tell the GAE plugin to download the SDK
         project.convention.plugins.gae.downloadSdk = true
@@ -98,7 +98,7 @@ class ProjectGwtPlugin implements Plugin<Project> {
                     }
                 }
             }
-        } 
+        }
 
         // Start the development mode server
         project.task("startDevmode") << {
@@ -179,7 +179,7 @@ class ProjectGwtPlugin implements Plugin<Project> {
         project.tasks.test.include("**/bogus.class")
 
         // Redefine the test runner in terms of the unit and client test suites.
-        project.tasks.test.dependsOn(project.tasks.clienttest, project.tasks.unittest, project.tasks.acceptancetest)
+        project.tasks.test.dependsOn(project.tasks.clienttest, project.tasks.unittest)
 
         // Define the order of tests if there are multiple called at the same time
         project.tasks.clienttest.mustRunAfter project.tasks.unittest
