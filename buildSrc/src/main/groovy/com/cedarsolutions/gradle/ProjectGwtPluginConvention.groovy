@@ -25,6 +25,7 @@ package com.cedarsolutions.gradle
 
 import org.gradle.api.Project
 import org.gradle.api.InvalidUserDataException
+import org.apache.tools.ant.taskdefs.condition.Os
 
 /**
  * Plugin convention for projectGwt.
@@ -99,10 +100,38 @@ class ProjectGwtPluginConvention {
 
     /** Kill the development mode server. */
     public void killDevmode() {
-        // Unfortunately, this only works on Windows for now
-        project.ant.exec(executable: "taskkill") {
-            arg(value: "/fi")
-            arg(value: '"Windowtitle eq GWT Development Mode"')
+        if (isWindows()) {
+            // AFAIK, there's no better way to do this than to kill the window with the known title
+            project.ant.exec(executable: "taskkill") {
+                arg(value: "/fi")
+                arg(value: '"Windowtitle eq GWT Development Mode"')
+            }
+        } else {
+            // This is the equivalent of: kill $(ps -fww -C java | grep '-javaagent:.*appengine-agent\.jar' | awk '{print $2}')
+
+            def stdout = new ByteArrayOutputStream()
+            def stderr = new ByteArrayOutputStream()
+
+            def result = project.exec {
+                standardOutput = stdout
+                errorOutput = stderr
+                executable = "ps"
+                args = [ "-fww", "-C", "java", ]
+            }
+
+            def contents = stdout.toString()
+            for (String line : contents.split("\n")) {
+                def regex = ~/(^.*)(-javaagent:.*appengine-agent\.jar)(.*$)/
+                def matcher = regex.matcher(line)
+                if (matcher.matches()) {
+                    project.exec {
+                        standardOutput = stdout
+                        errorOutput = stderr
+                        executable = "kill"
+                        args = [ line.split(/\s+/)[1], ]
+                    }
+                } 
+            }
         }
     }
 
@@ -116,5 +145,9 @@ class ProjectGwtPluginConvention {
     def waitForDevmode() {
         sleep project.projectGwt.getServerWait() * 1000;  // wait for dev mode to finish booting
     }
+
+    private boolean isWindows() {
+        return Os.isFamily(Os.FAMILY_WINDOWS);
+    } 
 
 }
