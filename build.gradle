@@ -31,16 +31,15 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.googlecode.cedar-common:cedar-build:0.8.5"
+        classpath "com.googlecode.cedar-common:cedar-build:0.8.6"
     }
 } 
 
-apply plugin: "projectCucumber"
-apply plugin: "projectGwt"
-apply plugin: "projectEclipse"
+apply plugin: "cedarGwtOnGae"
 apply plugin: "cedarBuild"
 apply plugin: "cedarCopyright"
 apply plugin: "cedarJavadoc"
+apply plugin: "projectEclipse"
 
 cedarProperties.loadStandardProperties()
 
@@ -81,7 +80,7 @@ projectEclipse {
     externalToolBuildersSourceDir = "gradle/eclipse/externalToolBuilders"    
 }
 
-projectGwt {
+cedarGwtOnGae {
     appModuleName = config_appModuleName
     appEntryPoint = config_appEntryPoint
     appStartupUrl = config_appStartupUrl
@@ -96,7 +95,7 @@ projectGwt {
     appEngineVersion = config_appEngineVersion
 }
 
-projectCucumber {
+cedarCucumber {
     rubyInstallDir = config_rubyInstallDir
     cucumberDir = "acceptance"
     featuresSubdir = "cucumber"
@@ -133,7 +132,7 @@ dependencies {
     gaeSdk "com.google.appengine:appengine-java-sdk:${config_appEngineVersion}"
 
     compile "com.google.gwt:gwt-servlet:${config_gwtVersion}"
-    compile fileTree(dir: project.convention.plugins.projectGwt.getAppEngineSdkDir(), includes: [ "lib/user/**/*.jar", ])
+    compile fileTree(dir: project.convention.plugins.cedarGwtOnGae.getAppEngineSdkDir(), includes: [ "lib/user/**/*.jar", ])
     compile "com.googlecode.cedar-common:cedar-common-util:${config_cedarCommonVersion}"
     compile "com.googlecode.cedar-common:cedar-common-gae:${config_cedarCommonVersion}"
     compile("com.googlecode.cedar-common:cedar-common-gwt:${config_cedarCommonVersion}") {
@@ -152,7 +151,7 @@ dependencies {
     providedRuntime "com.google.gwt:gwt-dev:${config_gwtVersion}"
     providedRuntime "com.google.gwt:gwt-user:${config_gwtVersion}"
 
-    devmodeRuntime fileTree(dir: project.convention.plugins.projectGwt.getAppEngineSdkDir(), includes: [ "lib/appengine-tools-api.jar", ])
+    devmodeRuntime fileTree(dir: project.convention.plugins.cedarGwtOnGae.getAppEngineSdkDir(), includes: [ "lib/appengine-tools-api.jar", ])
 }
 
 configurations {
@@ -176,6 +175,10 @@ configurations {
     all*.exclude group: "org.sonatype.sisu.inject", module: "cglib"
     all*.exclude group: "org.springframework", module: "spring-support"
     all*.exclude group: "sslext", module: "sslext"
+}
+
+project.tasks.javadoc.doFirst {
+    throw new Exception("Do not use javadoc task, use generateJavadoc instead.")
 }
 
 task generateJavadoc(dependsOn: jdoc) << {
