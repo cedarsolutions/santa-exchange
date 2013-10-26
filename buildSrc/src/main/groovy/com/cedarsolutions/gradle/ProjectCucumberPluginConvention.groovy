@@ -207,7 +207,7 @@ class ProjectCucumberPluginConvention {
             }
 
             def contents = stdout.toString()
-            def regex = ~/(?s)(^${gem} [(])([.0-9]*)([)].*$)/       // for a string like "selenium-webdriver (2.37.0)"
+            def regex = ~/(?s)(^${gem} [(])([.0-9]*)([,)].*$)/       // for a string like "selenium-webdriver (2.37.0)"
             def matcher = regex.matcher(contents)
             if (matcher.matches()) {
                 return matcher.group(2)
