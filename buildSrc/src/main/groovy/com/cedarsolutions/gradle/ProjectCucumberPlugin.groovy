@@ -52,6 +52,13 @@ class ProjectCucumberPlugin implements Plugin<Project> {
             project.convention.plugins.projectCucumber.uninstallCucumber()
         }
 
+        // Reinstall all of the Cucumber-related tooling
+        project.task("reinstallCucumber", dependsOn: [project.tasks.uninstallCucumber, project.tasks.installCucumber]) << {
+        }
+    
+        // If they invoke both, uninstall and then reinstall
+        project.tasks.installCucumber.mustRunAfter project.tasks.uninstallCucumber
+
         // Verify the configured cucumber install is ok.
         project.task("verifyCucumber") << {
             project.convention.plugins.projectCucumber.verifyCucumberInstall()

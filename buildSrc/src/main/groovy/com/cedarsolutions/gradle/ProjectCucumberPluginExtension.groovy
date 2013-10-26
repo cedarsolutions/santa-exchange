@@ -55,6 +55,21 @@ class ProjectCucumberPluginExtension {
     /** Subdirectory (within cucumberDir) where Ruby code lives. */
     def rubySubdir
 
+    /** URL for JRuby. */
+    def jrubyDownloadUrl = "http://jruby.org.s3.amazonaws.com/downloads/1.7.6/jruby-bin-1.7.6.tar.gz"
+
+    /** Required version of Selenium, possibly null. */
+    def seleniumVersion = null
+
+    /** Required version of Rspec gem, possibly null. */
+    def rspecVersion = "2.14.1"
+
+    /** Required version of Capybara gem, possibly null. */
+    def capybaraVersion = "2.1.0"
+
+    /** Required version of Cucumber gem, possibly null. */
+    def cucumberVersion = "1.3.8"
+
     /** Get rubyInstallDir, accounting for closures. */
     String getRubyInstallDir() {
         return rubyInstallDir != null && rubyInstallDir instanceof Callable ? rubyInstallDir.call() : rubyInstallDir
@@ -75,16 +90,55 @@ class ProjectCucumberPluginExtension {
         return rubySubdir != null && rubySubdir instanceof Callable ? rubySubdir.call() : rubySubdir
     }
 
+    /** Get jrubyDownloadUrl, accounting for closures. */
+    String getJRubyDownloadUrl() {
+        return jrubyDownloadUrl != null && jrubyDownloadUrl instanceof Callable ? jrubyDownloadUrl.call() : jrubyDownloadUrl
+    }
+
+    /** Get seleniumVersion, accounting for closures. */
+    String getSeleniumVersion() {
+        return seleniumVersion != null && seleniumVersion instanceof Callable ? seleniumVersion.call() : seleniumVersion
+    }
+
+    /** Get rspecVersion, accounting for closures. */
+    String getRspecVersion() {
+        return rspecVersion != null && rspecVersion instanceof Callable ? rspecVersion.call() : rspecVersion
+    }
+
+    /** Get capybaraVersion, accounting for closures. */
+    String getCapybaraVersion() {
+        return capybaraVersion != null && capybaraVersion instanceof Callable ? capybaraVersion.call() : capybaraVersion
+    }
+
+    /** Get cucumberVersion, accounting for closures. */
+    String getCucumberVersion() {
+        return cucumberVersion != null && cucumberVersion instanceof Callable ? cucumberVersion.call() : cucumberVersion
+    }
+
     /** Get the path to the ruby executable. */
     String getRubyPath() {
-        def path = project.file(getRubyInstallDir() + "/bin/ruby").canonicalPath
-        return isWindows() ? path + ".exe" : path
+        if (isWindows()) {
+            if (project.file(getRubyInstallDir() + "/bin/jruby.exe").exists()) {
+                return project.file(getRubyInstallDir() + "/bin/jruby.exe").canonicalPath
+            } else {
+                return project.file(getRubyInstallDir() + "/bin/ruby.exe").canonicalPath
+            }
+        } else {
+            if (project.file(getRubyInstallDir() + "/bin/jruby").exists()) {
+                return project.file(getRubyInstallDir() + "/bin/jruby").canonicalPath
+            } else {
+                return project.file(getRubyInstallDir() + "/bin/ruby").canonicalPath
+            }
+        }
     }
 
     /** Get the path to the Ruby gem executable. */
     String getGemPath() {
-        def path = project.file(getRubyInstallDir() + "/bin/gem").canonicalPath
-        return isWindows() ? path + ".bat" : path
+        if (project.file(getRubyInstallDir() + "/bin/jgem").exists()) {
+            return project.file(getRubyInstallDir() + "/bin/jgem").canonicalPath
+        } else {
+            return project.file(getRubyInstallDir() + "/bin/gem").canonicalPath
+        }
     }
 
     /** Get the path to the Ruby cucumber executable. */

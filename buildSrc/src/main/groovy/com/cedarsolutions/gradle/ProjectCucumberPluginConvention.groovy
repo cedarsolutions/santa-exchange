@@ -84,26 +84,20 @@ class ProjectCucumberPluginConvention {
 
     /** Install Cucumber, including Ruby and all of the other required dependencies.  */
     def installCucumber() {
-        if (!isWindows()) {
-            project.logger.error("The installCucumber task is only supported on the Windows platform, sorry.");
+        if (project.projectCucumber.getRubyInstallDir() != "tools/cucumber") {
+            project.logger.error("Project is configured to use Ruby from: " + project.projectCucumber.getRubyInstallDir())
+            throw new InvalidUserDataException("Before running installing Cucumber, re-configure project to use tools/cucumber")
         } else {
-            if (project.file("tools/cucumber").exists()) {
-                project.logger.lifecycle("Cucumber already exists in tools/cucumber; to reinstall, remove first with 'gradle uninstallCucumber'.")
+            if (project.file(project.projectCucumber.getRubyInstallDir()).exists()) {
+                throw new InvalidUserDataException("Cucumber is already installed.  To reinstall, use 'gradle reinstallCucumber'.")
             } else {
-                installRubyInterpreter()
-                installRubyDevkit()
-                installSeleniumGem()
-                installRspecGem()
-                installCapybaraGem()
-                installCucumberGem()
-                if (project.projectCucumber.getRubyInstallDir() == "tools/cucumber") {
-                    verifyCucumberInstall()
-                    project.logger.lifecycle("All Cucumber tooling has been installed.")
-                } else {
-                    project.logger.lifecycle("All Cucumber tooling has been installed.")
-                    project.logger.lifecycle("However, your project is not configured to point to the new Cucumber.");
-                    project.logger.lifecycle("Change your local.properties and run 'gradle verifyCucumber'.")
-                }
+                installJRuby(project.projectCucumber.getJRubyDownloadUrl())
+                installGem("selenium-webdriver", project.projectCucumber.getSeleniumVersion())
+                installGem("rspec", project.projectCucumber.getRspecVersion())
+                installGem("capybara", project.projectCucumber.getCapybaraVersion())
+                installGem("cucumber", project.projectCucumber.getCucumberVersion())
+                verifyCucumberInstall()
+                project.logger.lifecycle("All Cucumber tooling has been installed.")
             }
         }
     }
@@ -111,22 +105,7 @@ class ProjectCucumberPluginConvention {
     /** Uninstall Cucumber, removing the install directory. */
     def uninstallCucumber() {
         if (project.file("tools").exists()) {
-            if (!project.file("tools/cucumber").exists()) {
-                project.logger.lifecycle("Cucumber tooling is apparently not installed.")
-            } else {
-                if (project.file("tools/cucumber/unins000.exe").exists()) {
-                    try {
-                        def devnull = new ByteArrayOutputStream()
-                        project.exec {
-                            standardOutput = devnull
-                            executable = "tools/cucumber/unins000.exe" 
-                            args = [ "/silent", ]
-                        }
-                    } catch (Exception e) { 
-                        throw new InvalidUserDataException("Error uninstalling Ruby: " + e.getMessage(), e);
-                    }
-                }
-
+            if (project.file("tools/cucumber").exists()) {
                 project.file("tools/cucumber").deleteDir()
                 project.logger.lifecycle("All Cucumber tooling has been uninstalled.")
             }
@@ -166,24 +145,36 @@ class ProjectCucumberPluginConvention {
 
     /** Verify the versions of some specific gems. */
     private void verifyGemVersions() {
-        def seleniumVersion = getGemVersion("selenium-webdriver")
-        if (!seleniumVersion.startsWith("2.")) {
-            project.logger.warn("Cucumber tests might not work due to version mismatch; expected Selenium 2.x, but got: " + seleniumVersion)
+        if (project.projectCucumber.getSeleniumVersion() != null) {
+            def seleniumVersion = getGemVersion("selenium-webdriver")
+            if (!seleniumVersion != project.projectCucumber.getSeleniumVersion()) {
+                def version = project.projectCucumber.getSeleniumVersion()
+                project.logger.warn("Cucumber tests might not work due to version mismatch; expected Selenium ${version}, but got: " + seleniumVersion)
+            }
         }
 
-        def rspecVersion = getGemVersion("rspec")
-        if (rspecVersion != "2.14.1") {
-            project.logger.warn("Cucumber tests might not work due to version mismatch; expected Rspec 2.14.1, but got: " + rspecVersion)
+        if (project.projectCucumber.getRspecVersion() != null) {
+            def rspecVersion = getGemVersion("rspec")
+            if (rspecVersion != project.projectCucumber.getRspecVersion()) {
+                def version = project.projectCucumber.getRspecVersion()
+                project.logger.warn("Cucumber tests might not work due to version mismatch; expected Rspec ${version}, but got: " + rspecVersion)
+            }
         }
 
-        def capybaraVersion = getGemVersion("capybara")
-        if (capybaraVersion != "2.1.0") {
-            project.logger.warn("Cucumber tests might not work due to version mismatch; expected Capybara 2.1.0, but got: " + capybaraVersion)
+        if (project.projectCucumber.getCapybaraVersion() != null) {
+            def capybaraVersion = getGemVersion("capybara")
+            if (capybaraVersion != project.projectCucumber.getCapybaraVersion()) {
+                def version = project.projectCucumber.getCapybaraVersion()
+                project.logger.warn("Cucumber tests might not work due to version mismatch; expected Capybara ${version}, but got: " + capybaraVersion)
+            }
         }
 
-        def cucumberVersion = getGemVersion("cucumber")
-        if (cucumberVersion != "1.3.8") {
-            project.logger.warn("Cucumber tests might not work due to version mismatch; expected Cucumber 1.3.8, but got: " + cucumberVersion)
+        if (project.projectCucumber.getCucumberVersion() != null) {
+            def cucumberVersion = getGemVersion("cucumber")
+            if (cucumberVersion != project.projectCucumber.getCucumberVersion()) {
+                def version = project.projectCucumber.getCucumberVersion()
+                project.logger.warn("Cucumber tests might not work due to version mismatch; expected Cucumber ${version}, but got: " + cucumberVersion)
+            } 
         }
     }
 
@@ -194,7 +185,7 @@ class ProjectCucumberPluginConvention {
 
     /** Check whether the Ruby 'gem' tool is available. */
     private boolean isGemAvailable() {
-        return isCommandAvailable(project.projectCucumber.getGemPath(), [ "--version", ])
+        return isCommandAvailable(project.projectCucumber.getRubyPath(), [ project.projectCucumber.getGemPath(), "--version", ])
     }
 
     /** Check whether the Cucumber tool is available. */
@@ -211,8 +202,8 @@ class ProjectCucumberPluginConvention {
             def result = project.exec {
                 standardOutput = stdout
                 errorOutput = stderr
-                executable = project.projectCucumber.getGemPath()
-                args = [ "list", gem, ]
+                executable = project.projectCucumber.getRubyPath()
+                args = [ project.projectCucumber.getGemPath(), "list", gem, ]
             }
 
             def contents = stdout.toString()
@@ -251,140 +242,68 @@ class ProjectCucumberPluginConvention {
         }
     }
 
-    /** Install the Ruby interpreter. */
-    private void installRubyInterpreter() {
+    /** Install JRuby from a particular URL, expected to be a .tar.gz file. */
+    private void installJRuby(url) {
         try {
-            project.logger.lifecycle("Installing Ruby...")
+            project.logger.lifecycle("Installing JRuby...")
 
-            project.file("build/tmp/installCucumber").deleteDir()
-            project.file("build/tmp/installCucumber").mkdir()
+            project.file("build/tmp/jruby").deleteDir()
+            project.file("build/tmp/jruby").mkdir()
+            project.ant.get(src: url, dest: "build/tmp/jruby/jruby.tar.gz")
+            if (!project.file("build/tmp/jruby/jruby.tar.gz").exists()) {
+                throw new InvalidUserDataException("Error downloading JRuby, file not retrieved.")
+            }
 
-            def devnull = new ByteArrayOutputStream()
+            if (isWindows()) {
+                project.ant.untar(src: "build/tmp/jruby/jruby.tar.gz", dest: "build/tmp/jruby", compression: "gzip")
+            } else {
+                // The Ant task doesn't preserve permissions, so use tar on other platforms
+                def stdout = new ByteArrayOutputStream()
+                def stderr = new ByteArrayOutputStream()
+                def result = project.exec {
+                    ignoreExitValue = true
+                    workingDir = "build/tmp/jruby"
+                    standardOutput = stdout
+                    errorOutput = stderr
+                    executable = "tar"
+                    args = [ "zxvf", "jruby.tar.gz", ]
+                }
+            }
 
-            def rubyUrl = "http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p448.exe?direct"
-            def rubyTarget = "build/tmp/installCucumber/ruby.exe"
-            project.ant.get(src: rubyUrl, dest: rubyTarget)
-
-            project.exec {
-                standardOutput = devnull
-                executable = "build/tmp/installCucumber/ruby.exe"
-                args = [ "/silent", "/dir=tools/cucumber", ]
+            project.file("tools").mkdir()
+            project.file("build/tmp/jruby").eachDir() { dir ->
+                dir.renameTo("tools/cucumber") // there should be only one directory, like jruby-1.7.6
             }
         } catch (Exception e) { 
-            throw new InvalidUserDataException("Error installing Ruby: " + e.getMessage(), e);
+            throw new InvalidUserDataException("Error installing JRuby: " + e.getMessage(), e);
         } finally {
-            project.file("build/tmp/installCucumber").deleteDir()
+            project.file("build/tmp/jruby").deleteDir()
         }
     }
 
-    /** Install the Ruby DevKit. */
-    private void installRubyDevkit() {
+    /** Install a named gem, optionally specifying a version. */
+    private void installGem(gem, version) {
         try {
-            project.logger.lifecycle("Installing Ruby DevKit...")
-
-            project.file("build/tmp/installCucumber").deleteDir()
-            project.file("build/tmp/installCucumber").mkdir()
-
-            def devnull = new ByteArrayOutputStream()
-
-            def devkitUrl = "http://cloud.github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe"
-            def devkitTarget = "build/tmp/installCucumber/devkit.exe"
-            project.ant.get(src: devkitUrl, dest: devkitTarget)
-
-            project.exec {
-                standardOutput = devnull
-                executable = "build/tmp/installCucumber/devkit.exe"
-                args = [ "-y", "-ai", "-gm2", "-otools\\cucumber\\DevKit", ]
+            def arguments = [ project.projectCucumber.getGemPath(), "install", gem, ]
+            if (version != null) {
+                arguments += [ "-v", version ]
             }
 
-            project.exec {
-                standardOutput = devnull
-                workingDir = "tools/cucumber/DevKit"
-                executable = "tools/cucumber/bin/ruby.exe"
-                args = [ "dk.rb", "init", ]
+            if (version != null) {
+                project.logger.lifecycle("Installing gem: " + gem + ", version " + version)
+            } else {
+                project.logger.lifecycle("Installing gem: " + gem + ", latest version")
             }
-
-            project.exec {
-                standardOutput = devnull
-                workingDir = "tools/cucumber/DevKit"
-                executable = "tools/cucumber/bin/ruby.exe"
-                args = [ "dk.rb", "review", ]
-            }
-
-            project.exec {
-                standardOutput = devnull
-                workingDir = "tools/cucumber/DevKit"
-                executable = "tools/cucumber/bin/ruby.exe"
-                args = [ "dk.rb", "install", ]
-            }
-        } catch (Exception e) { 
-            throw new InvalidUserDataException("Error installing Ruby DevKit: " + e.getMessage(), e);
-        } finally {
-            project.file("build/tmp/installCucumber").deleteDir()
-        }
-    }
-
-    /** Install the Selenium Ruby Gem. */
-    private void installSeleniumGem() {
-        try {
-            project.logger.lifecycle("Installing Selenium gem...")
+            
             def devnull = new ByteArrayOutputStream()
             project.exec {
                 standardOutput = devnull
                 errorOutput = devnull
-                executable = "tools/cucumber/bin/gem.bat"
-                args = [ "install", "selenium-webdriver", ]
+                executable = project.projectCucumber.getRubyPath()
+                args = arguments
             }
         } catch (Exception e) { 
-            throw new InvalidUserDataException("Error installing Selenium gem: " + e.getMessage(), e);
-        }
-    }
-
-    /** Install the Rspec Ruby Gem. */
-    private void installRspecGem() {
-        try {
-            project.logger.lifecycle("Installing Rspec gem...")
-            def devnull = new ByteArrayOutputStream()
-            project.exec {
-                standardOutput = devnull
-                errorOutput = devnull
-                executable = "tools/cucumber/bin/gem.bat"
-                args = [ "install", "rspec", "-v", "2.14.1", ]
-            }
-        } catch (Exception e) { 
-            throw new InvalidUserDataException("Error installing Rspec gem: " + e.getMessage(), e);
-        }
-    }
-
-    /** Install the Capybara Ruby Gem. */
-    private void installCapybaraGem() {
-        try {
-            project.logger.lifecycle("Installing Capybara gem...")
-            def devnull = new ByteArrayOutputStream()
-            project.exec {
-                standardOutput = devnull
-                errorOutput = devnull
-                executable = "tools/cucumber/bin/gem.bat"
-                args = [ "install", "capybara", "-v", "2.1.0", ]
-            }
-        } catch (Exception e) { 
-            throw new InvalidUserDataException("Error installing Capybara gem: " + e.getMessage(), e);
-        }
-    }
-
-    /** Install the Cucumber Ruby Gem. */
-    private void installCucumberGem() {
-        try {
-            project.logger.lifecycle("Installing Cucumber gem...")
-            def devnull = new ByteArrayOutputStream()
-            project.exec {
-                standardOutput = devnull
-                errorOutput = devnull
-                executable = "tools/cucumber/bin/gem.bat"
-                args = [ "install", "cucumber", "-v", "1.3.8", ]
-            }
-        } catch (Exception e) { 
-            throw new InvalidUserDataException("Error installing Cucumber gem: " + e.getMessage(), e);
+            throw new InvalidUserDataException("Error installing gem: " + e.getMessage(), e);
         }
     }
 
