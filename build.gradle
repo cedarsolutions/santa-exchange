@@ -31,7 +31,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.googlecode.cedar-common:cedar-build:0.8.6"
+        classpath "com.googlecode.cedar-common:cedar-build:0.8.7"
     }
 } 
 
