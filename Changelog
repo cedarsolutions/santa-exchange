@@ -1,6 +1,7 @@
 Version 0.9.33   unreleased
 
-    * Refactor a lot of code in build.gradle out into CedarBuild and bump up to 0.8.7.
+    * Bump up to latest-and-greatest CedarCommon v2.4.2.
+    * Refactor a lot of code in build.gradle out into CedarBuild and bump up to v0.8.7.
     * Fall back the "please wait" change, which didn't make enough difference to worth it.
     * Minor tweaks to make the build process work the same on Linux as Windows.
 
