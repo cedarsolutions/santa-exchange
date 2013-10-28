@@ -44,7 +44,6 @@ public class AdminLandingPagePresenter extends ModulePagePresenter<IAdminLanding
     /** Show the admin landing page. */
     public void onShowAdminLandingPage() {
         this.getEventBus().selectHomeTab();
-        this.showWelcomePopup();
     }
 
     /** Select the home tab. */
@@ -63,18 +62,6 @@ public class AdminLandingPagePresenter extends ModulePagePresenter<IAdminLanding
     public void onSelectUserTab() {
         this.getView().selectUserTab();
         this.replaceModuleBody();
-    }
-
-    /** Show the welcome popup, if necessary. */
-    private void showWelcomePopup() {
-        if (this.getSession().getCurrentUser() != null) {
-            if (this.getSession().getCurrentUser().isFirstLogin()) {
-                this.getSession().getCurrentUser().setFirstLogin(false);
-                if (this.getSession().getCurrentUser().isAdmin()) {
-                    this.getEventBus().showWelcomePopup();
-                }
-            }
-        }
     }
 
     /** Get the session from the injector. */

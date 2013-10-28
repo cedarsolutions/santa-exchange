@@ -46,14 +46,13 @@ import com.google.gwt.user.client.ui.IsWidget;
  */
 public class InternalLandingPagePresenterTest extends StubbedClientTestCase {
 
-    /** Test onShowInternalLandingPage(), no welcome message. */
+    /** Test onShowInternalLandingPage(). */
     @Test public void testOnShowInternalLandingPage1() {
         IsWidget viewWidget = mock(IsWidget.class);
 
         InternalLandingPagePresenter presenter = createPresenter();
         when(presenter.getView().getViewWidget()).thenReturn(viewWidget);
 
-        // If it's not the first login, no welcome message is displayed
         when(presenter.getSession().getCurrentUser().isFirstLogin()).thenReturn(false);
         when(presenter.getSession().getCurrentUser().isAdmin()).thenReturn(false);
 
@@ -61,28 +60,9 @@ public class InternalLandingPagePresenterTest extends StubbedClientTestCase {
         InOrder order = Mockito.inOrder(presenter.getEventBus(), WidgetUtils.getInstance(), presenter.getSession().getCurrentUser());
         order.verify(presenter.getEventBus()).showExchangeListPage();
         order.verify(presenter.getSession().getCurrentUser(), never()).setFirstLogin(false);
-        order.verify(presenter.getEventBus(), never()).showWelcomePopup();
     }
 
-    /** Test onShowInternalLandingPage(), with welcome message. */
-    @Test public void testOnShowInternalLandingPage2() {
-        IsWidget viewWidget = mock(IsWidget.class);
-
-        InternalLandingPagePresenter presenter = createPresenter();
-        when(presenter.getView().getViewWidget()).thenReturn(viewWidget);
-
-        // If it's their first login and they're an admin user, we'll show the welcome pop-up
-        when(presenter.getSession().getCurrentUser().isFirstLogin()).thenReturn(true);
-        when(presenter.getSession().getCurrentUser().isAdmin()).thenReturn(false);
-
-        presenter.onShowInternalLandingPage();
-        InOrder order = Mockito.inOrder(presenter.getEventBus(), WidgetUtils.getInstance(), presenter.getSession().getCurrentUser());
-        order.verify(presenter.getEventBus()).showExchangeListPage();
-        order.verify(presenter.getSession().getCurrentUser()).setFirstLogin(false);
-        order.verify(presenter.getEventBus()).showWelcomePopup();
-    }
-
-    /** Test onShowInternalLandingPage(), no welcome message (admin). */
+    /** Test onShowInternalLandingPage(), admin. */
     @Test public void testOnShowInternalLandingPage3() {
         IsWidget viewWidget = mock(IsWidget.class);
 
@@ -96,8 +76,6 @@ public class InternalLandingPagePresenterTest extends StubbedClientTestCase {
         presenter.onShowInternalLandingPage();
         InOrder order = Mockito.inOrder(presenter.getEventBus(), WidgetUtils.getInstance(), presenter.getSession().getCurrentUser());
         order.verify(presenter.getEventBus()).showExchangeListPage();
-        order.verify(presenter.getEventBus(), never()).showWelcomePopup();
-        order.verify(presenter.getSession().getCurrentUser()).setFirstLogin(false);
     }
 
     /** Test onSelectExchangeListTab(). */

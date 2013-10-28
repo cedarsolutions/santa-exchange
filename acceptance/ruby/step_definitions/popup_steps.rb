@@ -22,9 +22,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 Then /^the "([^"]*)" pop\-up should be visible$/ do |popup|
-    if popup == "Welcome"
-        check_popup_state("WelcomePopup", true)
-    elsif popup == "Error Occurred"
+    if popup == "Error Occurred"
         check_popup_state("ErrorPopup", true)
     elsif popup == "About Santa Exchange"
         check_popup_state("AboutPopup", true)
@@ -36,9 +34,7 @@ Then /^the "([^"]*)" pop\-up should be visible$/ do |popup|
 end
 
 Then /^the "([^"]*)" pop\-up should be hidden$/ do |popup|
-    if popup == "Welcome"
-        check_popup_state("WelcomePopup", false)
-    elsif popup == "Error Occurred"
+    if popup == "Error Occurred"
         check_popup_state("ErrorPopup", false)
     elsif popup == "About Santa Exchange"
         check_popup_state("AboutPopup", false)
@@ -50,9 +46,7 @@ Then /^the "([^"]*)" pop\-up should be hidden$/ do |popup|
 end
 
 When /^the user clicks the "([^"]*)" pop\-up "([^"]*)" button$/ do |popup, button|
-    if popup == "Welcome"
-        click_popup_button("WelcomePopup", button)
-    elsif popup == "Error Occurred"
+    if popup == "Error Occurred"
         click_popup_button("ErrorPopup", button)
     elsif popup == "About Santa Exchange"
         click_popup_button("AboutPopup", button)
@@ -65,9 +59,7 @@ When /^the user clicks the "([^"]*)" pop\-up "([^"]*)" button$/ do |popup, butto
 end
 
 When /^the user presses the Enter key on the "([^"]*)" pop\-up$/ do |popup|
-    if popup == "Welcome"
-        press_popup_key("WelcomePopup", :return)
-    elsif popup == "Error Occurred"
+    if popup == "Error Occurred"
         press_popup_key("ErrorPopup", :return)
     elsif popup == "About Santa Exchange"
         press_popup_key("AboutPopup", :return)
@@ -79,9 +71,7 @@ When /^the user presses the Enter key on the "([^"]*)" pop\-up$/ do |popup|
 end
 
 When /^the user presses the Escape key on the "([^"]*)" pop\-up$/ do |popup|
-    if popup == "Welcome"
-        press_popup_key("WelcomePopup", :escape)
-    elsif popup == "Error Occurred"
+    if popup == "Error Occurred"
         press_popup_key("ErrorPopup", :escape)
     elsif popup == "About Santa Exchange"
         press_popup_key("AboutPopup", :escape)

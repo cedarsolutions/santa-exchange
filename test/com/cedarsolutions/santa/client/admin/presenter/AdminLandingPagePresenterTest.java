@@ -47,42 +47,23 @@ import com.google.gwt.user.client.ui.IsWidget;
  */
 public class AdminLandingPagePresenterTest extends StubbedClientTestCase {
 
-    /** Test onShowAdminLandingPage(), no welcome message. */
+    /** Test onShowAdminLandingPage(). */
     @Test public void testOnShowAdminLandingPage1() {
         IsWidget viewWidget = mock(IsWidget.class);
 
         AdminLandingPagePresenter presenter = createPresenter();
         when(presenter.getView().getViewWidget()).thenReturn(viewWidget);
 
-        // If it's not the first login, no welcome message is displayed
         when(presenter.getSession().getCurrentUser().isFirstLogin()).thenReturn(false);
         when(presenter.getSession().getCurrentUser().isAdmin()).thenReturn(false);
         presenter.onShowAdminLandingPage();
         InOrder order = Mockito.inOrder(presenter.getEventBus(), WidgetUtils.getInstance());
         order.verify(presenter.getEventBus()).selectHomeTab();
-        order.verify(presenter.getEventBus(), never()).showWelcomePopup();
         verify(presenter.getSession().getCurrentUser(), never()).setFirstLogin(false);
     }
 
-    /** Test onShowAdminLandingPage(), with welcome message. */
+    /** Test onShowAdminLandingPage(), non-admin. */
     @Test public void testOnShowAdminLandingPage2() {
-        IsWidget viewWidget = mock(IsWidget.class);
-
-        AdminLandingPagePresenter presenter = createPresenter();
-        when(presenter.getView().getViewWidget()).thenReturn(viewWidget);
-
-        // If it's their first login and they're an admin user, we'll show the welcome pop-up
-        when(presenter.getSession().getCurrentUser().isFirstLogin()).thenReturn(true);
-        when(presenter.getSession().getCurrentUser().isAdmin()).thenReturn(true);
-        presenter.onShowAdminLandingPage();
-        InOrder order = Mockito.inOrder(presenter.getEventBus(), WidgetUtils.getInstance());
-        order.verify(presenter.getEventBus()).selectHomeTab();
-        order.verify(presenter.getEventBus()).showWelcomePopup();
-        verify(presenter.getSession().getCurrentUser()).setFirstLogin(false);
-    }
-
-    /** Test onShowAdminLandingPage(), no welcome message (non-admin). */
-    @Test public void testOnShowAdminLandingPage3() {
         IsWidget viewWidget = mock(IsWidget.class);
 
         AdminLandingPagePresenter presenter = createPresenter();
@@ -94,8 +75,6 @@ public class AdminLandingPagePresenterTest extends StubbedClientTestCase {
         presenter.onShowAdminLandingPage();
         InOrder order = Mockito.inOrder(presenter.getEventBus(), WidgetUtils.getInstance());
         order.verify(presenter.getEventBus()).selectHomeTab();
-        order.verify(presenter.getEventBus(), never()).showWelcomePopup();
-        verify(presenter.getSession().getCurrentUser()).setFirstLogin(false);
     }
 
     /** Test selectHomeTab(). */

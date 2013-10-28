@@ -165,10 +165,6 @@ public interface RootEventBus extends SessionAwareEventBus {
     @Event(handlers = RootPresenter.class)
     void showAboutPopup();
 
-    /** Show the welcome pop-up. */
-    @Event(handlers = RootPresenter.class)
-    void showWelcomePopup();
-
     /** Show an error via the error pop-up. */
     @Event(handlers = RootPresenter.class)
     void showErrorPopup(ErrorDescription error);
