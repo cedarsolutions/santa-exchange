@@ -44,7 +44,6 @@ public class InternalLandingPagePresenter extends ModulePagePresenter<IInternalL
     /** Show the internal landing page. */
     public void onShowInternalLandingPage() {
         this.eventBus.showExchangeListPage();
-        this.showWelcomePopup();
     }
 
     /** Select the exchange list tab. */
@@ -63,18 +62,6 @@ public class InternalLandingPagePresenter extends ModulePagePresenter<IInternalL
     public void onSelectEditParticipantTab() {
         this.view.selectEditParticipantTab();
         this.replaceModuleBody();
-    }
-
-    /** Show the welcome popup, if necessary. */
-    private void showWelcomePopup() {
-        if (this.getSession().getCurrentUser() != null) {
-            if (this.getSession().getCurrentUser().isFirstLogin()) {
-                this.getSession().getCurrentUser().setFirstLogin(false);
-                if (!this.getSession().getCurrentUser().isAdmin()) {
-                    this.getEventBus().showWelcomePopup();
-                }
-            }
-        }
     }
 
     /** Get the session from the injector. */

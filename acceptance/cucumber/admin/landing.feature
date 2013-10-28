@@ -6,9 +6,6 @@ Scenario: Log in for the first time
     Then the user should be taken to the "Admin Home" admin tab
      And the admin title bar should say "Santa Exchange Administrator Interface"
      And the admin menu should display the admin email address
-     And the "Welcome" pop-up should be visible
-    When the user clicks the "Welcome" pop-up "Close" button
-    Then the "Welcome" pop-up should be hidden
      And the "Internal Landing Page" admin menu option should be visible
      And the "Application Dashboard" admin menu option should be visible
      And the "About Santa Exchange" admin menu option should be visible
@@ -22,7 +19,6 @@ Scenario: Log in subsequent times
     When the user views the canonical site url
      And the user logs in with admin credentials
     Then the user should be taken to the "Admin Home" admin tab
-     And the "Welcome" pop-up should be hidden
     When the user chooses the "Sign Out" admin menu option
     Then the user should be taken to the external landing page
 

@@ -24,7 +24,6 @@ package com.cedarsolutions.santa.client.root.presenter;
 
 import com.cedarsolutions.santa.client.SantaExchangeMessages;
 import com.cedarsolutions.santa.client.common.widget.AboutPopup;
-import com.cedarsolutions.santa.client.common.widget.WelcomePopup;
 import com.cedarsolutions.santa.client.common.widget.WidgetUtils;
 import com.cedarsolutions.santa.client.root.RootEventBus;
 import com.cedarsolutions.santa.client.root.view.IRootView;
@@ -67,11 +66,6 @@ public class RootPresenter extends BasePresenter<IRootView, RootEventBus> {
     /** Handle show the about pop-up. */
     public void onShowAboutPopup() {
         new AboutPopup().showPopup();
-    }
-
-    /** Show the welcome pop-up. */
-    public void onShowWelcomePopup() {
-        new WelcomePopup().showPopup();
     }
 
     /** Show an error via the error pop-up. */

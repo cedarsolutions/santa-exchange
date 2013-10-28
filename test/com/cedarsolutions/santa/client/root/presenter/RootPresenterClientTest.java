@@ -45,13 +45,6 @@ public class RootPresenterClientTest extends ClientTestCase {
         // just make sure it doesn't blow up
     }
 
-    /** Test onShowWelcomePopup(). */
-    public void testShowWelcomePopup() {
-        RootPresenter presenter = new RootPresenter();
-        presenter.onShowWelcomePopup();
-        // just make sure it doesn't blow up
-    }
-
     /** Test onShowErrorPopup(). */
     public void testOnShowErrorPopup() {
         // We can't really verify much; just make sure that the method call doesn't blow up

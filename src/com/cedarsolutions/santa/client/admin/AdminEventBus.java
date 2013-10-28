@@ -133,10 +133,6 @@ public interface AdminEventBus extends ModuleEventBus {
     @Event(forwardToParent = true)
     void showAboutPopup();
 
-    /** Show the welcome pop-up. */
-    @Event(forwardToParent = true)
-    void showWelcomePopup();
-
     /** Show an error via the error pop-up. */
     @Event(forwardToParent = true)
     void showErrorPopup(ErrorDescription error);

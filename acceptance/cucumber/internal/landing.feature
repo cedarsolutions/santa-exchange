@@ -6,9 +6,6 @@ Scenario: Log in for the first time
     Then the user should be taken to the internal landing page
      And the internal title bar should say "Santa Exchange"
      And the internal menu should display the normal user email address
-     And the "Welcome" pop-up should be visible
-    When the user clicks the "Welcome" pop-up "Close" button
-    Then the "Welcome" pop-up should be hidden
      And the "About Santa Exchange" internal menu option should be visible
      And the "Report a Problem" internal menu option should be visible
      And the "Source Code" internal menu option should be visible
@@ -20,7 +17,6 @@ Scenario: Log in subsequent times
     When the user views the canonical site url
      And the user logs in with normal user credentials
     Then the user should be taken to the internal landing page
-     And the "Welcome" pop-up should be hidden
     When the user chooses the "Sign Out" internal menu option
     Then the user should be taken to the external landing page
 

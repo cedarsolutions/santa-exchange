@@ -4,9 +4,6 @@ Scenario: Confirm that lock and unlock behavior works as expected
     When the user views the canonical site url
      And the user logs in with locked credentials
      Then the user should be taken to the internal landing page
-     And the "Welcome" pop-up should be visible
-    When the user clicks the "Welcome" pop-up "Close" button
-    Then the "Welcome" pop-up should be hidden
     When the user chooses the "Sign Out" internal menu option
     Then the user should be taken to the external landing page
     When the user logs in with admin credentials

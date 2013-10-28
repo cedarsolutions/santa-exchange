@@ -1,3 +1,7 @@
+Version 0.9.34   unreleased
+
+    * Remove the stupid welcome pop-up, which I'm tired of because it complicates tests.
+
 Version 0.9.33   27 Oct 2013
 
     * Bump up to latest-and-greatest CedarCommon v2.4.2.

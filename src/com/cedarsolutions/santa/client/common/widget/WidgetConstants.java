@@ -177,26 +177,6 @@ public interface WidgetConstants extends Constants {
     String about_paragraph5TextFormat();
 
 
-    /* ***************************************
-     *  Constants for the WelcomePopup widget
-     * ***************************************/
-
-    @DefaultStringValue("Welcome!")
-    String welcome_title();
-
-    @DefaultStringValue("Close")
-    String welcome_close();
-
-    @DefaultStringValue("Welcome to SantaExchange!")
-    String welcome_paragraph1();
-
-    @DefaultStringValue("Thanks for visiting.  We're glad to have you here.")
-    String welcome_paragraph2();
-
-    @DefaultStringValue("If you notice any problems, please use the Report a Problem menu option to tell us.")
-    String welcome_paragraph3();
-
-
     /* *******************************
      *  Confirmation pop-up constants
      * *******************************/
