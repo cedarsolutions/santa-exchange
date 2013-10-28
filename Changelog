@@ -1,4 +1,4 @@
-Version 0.9.34   unreleased
+Version 0.9.34   28 Oct 2013
 
     * Fix build.xml's run.all.tests tasks to actually run all tests, not just unit tests.
     * Remove the stupid welcome pop-up, which I'm tired of because it complicates tests.
