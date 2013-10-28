@@ -3,7 +3,8 @@ Version 0.9.34   unreleased
     * Fix build.xml's run.all.tests tasks to actually run all tests, not just unit tests.
     * Remove the stupid welcome pop-up, which I'm tired of because it complicates tests.
     * Enhance extensions.rb to allow local.properties to override build.properties and cuucmber.properties.
-    * Rework Capybara configuration to allow configuring the AJAX wait timeout in properties. 
+    * Rework Capybara configuration to allow configuring the AJAX wait timeout in properties.
+    * Bump up to CedarBuild v0.8.8 to fix problems with JRuby and JVM 1.6.
 
 Version 0.9.33   27 Oct 2013
 
