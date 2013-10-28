@@ -81,8 +81,9 @@ class WorldExtensions
     # @param checked Whether the row should be checked
     # @param columns Hash from one-based column index to expected column value
     # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @param recurse Whether to recurse and check a second time if a failure occurs
     # @raise Exception if the expected row is not found
-    def check_table_row_checked(id, checked, columns, timeout=nil)
+    def check_table_row_checked(id, checked, columns, timeout=nil, recurse=true)
         page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
             found = { }
             columns.keys.sort.each do |index|
@@ -110,7 +111,14 @@ class WorldExtensions
             end
         end
 
-        raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+        # I only want to sleep if the initial check doesn't work, because it slows down the tests
+        if (recurse)
+            timeout = normalize_timeout(timeout)
+            sleep(timeout)
+            check_table_row_checked(id, checked, columns, timeout, false)
+        else
+            raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+        end
     end
 
     # Check that a table row exists.
@@ -118,8 +126,9 @@ class WorldExtensions
     # @param id      HTML id of the table
     # @param columns Hash from one-based column index to expected column value
     # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @param recurse Whether to recurse and check a second time if a failure occurs
     # @raise Exception if the expected row is not found
-    def check_table_row_exists(id, columns, timeout=nil)
+    def check_table_row_exists(id, columns, timeout=nil, recurse=true)
         page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
             found = { }
             columns.keys.sort.each do |index|
@@ -143,7 +152,14 @@ class WorldExtensions
             end
         end
 
-        raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+        # I only want to sleep if the initial check doesn't work, because it slows down the tests
+        if (recurse)
+            timeout = normalize_timeout(timeout)
+            sleep(timeout)
+            check_table_row_exists(id, columns, timeout, false)
+        else
+            raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+        end
     end
 
     # Check that a table row does not exist.
@@ -151,8 +167,9 @@ class WorldExtensions
     # @param id      HTML id of the table
     # @param columns Hash from one-based column index to expected column value
     # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @param recurse Whether to recurse and check a second time if a failure occurs
     # @raise Exception if the expected row is found
-    def check_table_row_does_not_exist(id, columns, timeout=nil)
+    def check_table_row_does_not_exist(id, columns, timeout=nil, recurse=true)
         page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
             found = { }
             columns.keys.sort.each do |index|
@@ -172,7 +189,14 @@ class WorldExtensions
             end
 
             if not missingAny
-                raise "Found row in table \"" + id + "\" that is not supposed to exist: " + columns.inspect
+                # I only want to sleep if the initial check doesn't work, because it slows down the tests
+                if (recurse)
+                    timeout = normalize_timeout(timeout)
+                    sleep(timeout)
+                    check_table_row_does_not_exist(id, columns, timeout, false)
+                else
+                    raise "Found row in table \"" + id + "\" that is not supposed to exist: " + columns.inspect
+                end
             end
         end
     end
@@ -183,8 +207,9 @@ class WorldExtensions
     # @param id      HTML id of the table
     # @param columns Hash fro one-based column index to expected column value
     # @param timeout Timeout in seconds (defaults to Capybara.default_wait_time)
+    # @param recurse Whether to recurse and check a second time if a failure occurs
     # @raise Exception if the expected row is not found
-    def click_table_row_checkbox(id, columns, timeout=nil)
+    def click_table_row_checkbox(id, columns, timeout=nil, recurse=true)
         page.all(:xpath, "//table[@id='" + id + "']/tbody/tr").each do |row|
             found = { }
             columns.keys.sort.each do |index|
@@ -211,7 +236,14 @@ class WorldExtensions
             end
         end
 
-        raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+        # I only want to sleep if the initial check doesn't work, because it slows down the tests
+        if (recurse)
+            timeout = normalize_timeout(timeout)
+            sleep(timeout)
+            click_table_row_checkbox(id, columns, timeout, false)
+        else
+            raise "Did not find expected row in table \"" + id + "\": " + columns.inspect
+        end
     end
 
     # Check that a button exists with a specific id.
