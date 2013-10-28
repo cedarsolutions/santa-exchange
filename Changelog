@@ -5,6 +5,7 @@ Version 0.9.34   unreleased
     * Enhance extensions.rb to allow local.properties to override build.properties and cuucmber.properties.
     * Rework Capybara configuration to allow configuring the AJAX wait timeout in properties.
     * Bump up to CedarBuild v0.8.8 to fix problems with JRuby and JVM 1.6.
+    * Make the table-related Cucumber tests more resiliant if there are delays in rendering data.
 
 Version 0.9.33   27 Oct 2013
 
