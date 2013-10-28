@@ -31,7 +31,18 @@ class WorldExtensions
     # Default constructor
     def initialize()
         @test_config = TestConfig.new
+        configure_capybara()
         configure_browser()
+    end
+
+    # Configure Capybara
+    def configure_capybara()
+        Capybara.run_server = false
+        Capybara.default_driver = :selenium
+        Capybara.default_selector = :css
+        Capybara.default_wait_time = Integer(test_config.defaultAjaxWaitTime)
+        Capybara.match = :prefer_exact
+        Capybara.ignore_hidden_elements = true
     end
 
     # Do any special browser-related configuration
@@ -626,12 +637,15 @@ class WorldExtensions
 
 end
 
-# Configuration accessible to all tests, taken from cucumber.properties.
+# Configuration accessible to all tests.
 # See: http://snippets.dzone.com/posts/show/1311 for the original properties parser.
 class TestConfig
 
     # Name of the project-wide build properties file on disk, relative to the acceptance directory
     BUILD_PROPERTIES = "../build.properties";
+
+    # Name of the project-wide local properties file on disk, relative to the acceptance directory
+    LOCAL_PROPERTIES = "../local.properties";
 
     # Name of the test properties file on disk, relative to the acceptance directory
     TEST_PROPERTIES = "cucumber.properties";
@@ -657,10 +671,13 @@ class TestConfig
     # Browser to use for tests
     attr_accessor :browser
 
+    # Amount of time Capybara should wait for AJAX requests to complete
+    attr_accessor :defaultAjaxWaitTime
+
     # Default constructor, which loads properties from disk.
     def initialize()
-        buildProperties = parse(BUILD_PROPERTIES);
-        testProperties = parse(TEST_PROPERTIES);
+        buildProperties = parse([BUILD_PROPERTIES, LOCAL_PROPERTIES]);
+        testProperties = parse([TEST_PROPERTIES, LOCAL_PROPERTIES]);
         @app_host = testProperties["config_appHost"]
         @module_html = buildProperties["config_appStartupUrl"]
         @base_url = self.app_host + "/" + self.module_html
@@ -668,25 +685,33 @@ class TestConfig
         @normal_user = testProperties["config_credentialsUser"]
         @locked_user = testProperties["config_credentialsLocked"]
         @browser = testProperties["config_capybaraSeleniumBrowser"]
+        @defaultAjaxWaitTime = testProperties["config_defaultAjaxWaitTime"]
     end
 
     # Parse a properties file from disk
     # @param Path to the file
     # @return Properties hash map parsed from the file
-    def parse(filename)
+    def parse(filenames)
         properties = {}
-        File.open(filename, "r") do |file|
+        filenames.each do |filename|
+            file = File.open(filename, "r")
             file.read.each_line do |line|
                 line.strip!
                 if (line[0] != ?# and line[0] != ?=)
                     i = line.index("=")
                     if (i)
-                        properties[line[0..i - 1].strip] = line[i + 1..-1].strip
+                        key = line[0..i - 1].strip
+                        value = line[i + 1..-1].strip
+                        properties[key] = value
                     else
-                        properties[line] = ""
+                        key = line
+                        value = ""
+                        properties[key] = value
                     end
                 end
             end
+            file.close
+            file = nil
         end
         properties
     end

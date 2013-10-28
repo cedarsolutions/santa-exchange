@@ -27,13 +27,6 @@ require 'capybara/dsl'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.run_server = false
-Capybara.default_driver = :selenium
-Capybara.default_selector = :css
-Capybara.default_wait_time = 3
-Capybara.match = :prefer_exact
-Capybara.ignore_hidden_elements = true
-
 World do
     extend RSpec::Matchers
     WorldExtensions.new
