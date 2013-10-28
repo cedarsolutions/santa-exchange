@@ -726,24 +726,26 @@ class TestConfig
     def parse(filenames)
         properties = {}
         filenames.each do |filename|
-            file = File.open(filename, "r")
-            file.read.each_line do |line|
-                line.strip!
-                if (line[0] != ?# and line[0] != ?=)
-                    i = line.index("=")
-                    if (i)
-                        key = line[0..i - 1].strip
-                        value = line[i + 1..-1].strip
-                        properties[key] = value
-                    else
-                        key = line
-                        value = ""
-                        properties[key] = value
+            if File.exists?(filename)
+                file = File.open(filename, "r")
+                file.read.each_line do |line|
+                    line.strip!
+                    if (line[0] != ?# and line[0] != ?=)
+                        i = line.index("=")
+                        if (i)
+                            key = line[0..i - 1].strip
+                            value = line[i + 1..-1].strip
+                            properties[key] = value
+                        else
+                            key = line
+                            value = ""
+                            properties[key] = value
+                        end
                     end
                 end
+                file.close
+                file = nil
             end
-            file.close
-            file = nil
         end
         properties
     end
