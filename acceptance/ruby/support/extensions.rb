@@ -720,9 +720,9 @@ class TestConfig
         @defaultAjaxWaitTime = testProperties["config_defaultAjaxWaitTime"]
     end
 
-    # Parse a properties file from disk
-    # @param Path to the file
-    # @return Properties hash map parsed from the file
+    # Parse properties files from disk.
+    # @param filename  Filenames of properties files to load, in order
+    # @return Properties hash map parsed from the files, with later definitions overriding earlier ones.
     def parse(filenames)
         properties = {}
         filenames.each do |filename|
