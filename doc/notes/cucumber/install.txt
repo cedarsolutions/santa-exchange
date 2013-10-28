@@ -1,3 +1,5 @@
+[These notes are superceded by documentation on the wiki.]
+
 The acceptance tests are written in Ruby using Cucumber
 and Capybara:
 
