@@ -94,7 +94,7 @@ public class ExchangeListTabView extends ModuleTabView implements IExchangeListT
     private ViewEventHandler criteriaResetEventHandler;
     private ViewEventHandler createHandler;
     private ViewEventHandler deleteHandler;
-    private ViewEventHandlerWithContext<Exchange> editExchangeHandler;
+    private ViewEventHandlerWithContext<Exchange> editSelectedRowHandler;
     private ExchangeCriteria criteria;
 
     /** Create the view. */
@@ -156,13 +156,13 @@ public class ExchangeListTabView extends ModuleTabView implements IExchangeListT
     /** Get the edit selected row handler. */
     @Override
     public ViewEventHandlerWithContext<Exchange> getEditSelectedRowHandler() {
-        return this.editExchangeHandler;
+        return this.editSelectedRowHandler;
     }
 
     /** Set the edit selected row handler. */
     @Override
-    public void setEditSelectedRowHandler(ViewEventHandlerWithContext<Exchange> editExchangeHandler) {
-        this.editExchangeHandler = editExchangeHandler;
+    public void setEditSelectedRowHandler(ViewEventHandlerWithContext<Exchange> editSelectedRowHandler) {
+        this.editSelectedRowHandler = editSelectedRowHandler;
     }
 
     /** Show a validation error related to search criteria. */
