@@ -28,6 +28,8 @@ package com.cedarsolutions.santa.shared.domain.audit;
  */
 public enum AuditEventType {
 
+    // NOTE: if you add items here, remember to add tooltips in AdminMessageConstants
+
     ADMIN_LOGIN,             // An admin user logged in to one of the authenticated modules
     USER_LOGIN,              // A user logged in to one of the authenticated modules
     REGISTER_USER,           // A user was registered due to their first login
