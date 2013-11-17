@@ -1,5 +1,6 @@
 Version 0.9.35   unreleased
 
+    * Upgrade to AppEngine 1.8.7, since we're starting to get behind.
     * Bump up to CedarCommon v3.0.0, which has interface changes but no functional changes.
 
 Version 0.9.34   28 Oct 2013
