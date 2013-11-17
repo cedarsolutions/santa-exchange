@@ -1,3 +1,7 @@
+Version 0.9.35   unreleased
+
+    * Bump up to CedarCommon v3.0.0, which has interface changes but no functional changes.
+
 Version 0.9.34   28 Oct 2013
 
     * Fix build.xml's run.all.tests tasks to actually run all tests, not just unit tests.

@@ -3,6 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:d="urn:import:com.cedarsolutions.client.gwt.custom.datepicker"
              xmlns:custom="urn:import:com.cedarsolutions.client.gwt.widget"
+             xmlns:table="urn:import:com.cedarsolutions.client.gwt.widget.table"
              xmlns:widget="urn:import:com.cedarsolutions.santa.client.common.widget">
 
     <ui:style>
@@ -57,8 +58,8 @@
                     </g:HTMLPanel>
                 </g:HTMLPanel>
             </g:DisclosurePanel>
-            <custom:DataTablePager ui:field="pager" />
-            <custom:DataTable ui:field="table" />
+            <table:DataTablePager ui:field="pager" />
+            <table:DataTable ui:field="table" />
         </g:HTMLPanel>
     </g:ScrollPanel>
 

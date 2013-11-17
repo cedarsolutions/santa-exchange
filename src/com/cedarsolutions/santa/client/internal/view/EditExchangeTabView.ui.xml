@@ -2,6 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:custom="urn:import:com.cedarsolutions.client.gwt.widget"
+             xmlns:table="urn:import:com.cedarsolutions.client.gwt.widget.table"
              xmlns:widget="urn:import:com.cedarsolutions.santa.client.common.widget">
 
     <ui:style>
@@ -94,8 +95,8 @@
                     <g:HTMLPanel>
                         <p><g:Button ui:field="addParticipantButton" /> <g:Button ui:field="deleteParticipantButton" /> <g:Button ui:field="previewButton" /> <g:Button ui:field="sendAllNotificationsButton" /> <g:Button ui:field="resendNotificationButton" /> </p>
                         <p><g:Label styleName="{style.instructions}" ui:field="instructionsLabel"></g:Label></p>
-                        <custom:DataTable ui:field="table" />
-                        <custom:DataTablePager ui:field="pager" />
+                        <table:DataTable ui:field="table" />
+                        <table:DataTablePager ui:field="pager" />
                     </g:HTMLPanel>
                 </g:VerticalPanel>
             </g:HorizontalPanel>

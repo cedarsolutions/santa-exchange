@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:table="urn:import:com.cedarsolutions.client.gwt.widget.table"
              xmlns:custom="urn:import:com.cedarsolutions.client.gwt.widget">
 
     <ui:style>
@@ -13,8 +14,8 @@
         <g:HTMLPanel>
             <p><g:Label styleName="{style.paragraph}" ui:field="paragraph1" /></p>
             <p><g:Button ui:field="createButton" /> <g:Button ui:field="deleteButton" /></p>
-            <custom:DataTable ui:field="table" />
-            <custom:DataTablePager ui:field="pager" />
+            <table:DataTable ui:field="table" />
+            <table:DataTablePager ui:field="pager" />
         </g:HTMLPanel>
     </g:ScrollPanel>
 
