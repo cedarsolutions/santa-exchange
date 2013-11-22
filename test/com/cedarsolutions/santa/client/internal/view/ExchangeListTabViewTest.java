@@ -227,7 +227,7 @@ public class ExchangeListTabViewTest extends StubbedClientTestCase {
         verifyNoMoreInteractions(view.getEditSelectedRowHandler());
 
         exchange.setId(null);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, exchange);
+        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, exchange);  // column 0 is the selection column, so we ignore it
         verifyNoMoreInteractions(view.getEditSelectedRowHandler());
 
         exchange.setId(null);
@@ -235,7 +235,7 @@ public class ExchangeListTabViewTest extends StubbedClientTestCase {
         order.verify(view.getEditSelectedRowHandler()).handleEvent(row);
 
         exchange.setId(12L);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, exchange);
+        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, exchange);  // column 0 is the selection column, so we ignore it;
         verifyNoMoreInteractions(view.getEditSelectedRowHandler());
 
         exchange.setId(12L);
