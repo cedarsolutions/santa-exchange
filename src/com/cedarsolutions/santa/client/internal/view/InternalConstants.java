@@ -350,13 +350,15 @@ public interface InternalConstants extends Constants {
     @DefaultStringValue("Add Conflict")
     String editParticipant_addConflictButton();
 
-    @DefaultStringValue("Add the participant from the drop-down as a conflict")
+    @DefaultStringValue("Add the participant from the drop-down as a conflict.\n" +
+                        "A conflict is someone that this participant is not allowed to give a gift to.")
     String editParticipant_addConflictTooltip();
 
     @DefaultStringValue("Remove Selected")
     String editParticipant_deleteConflictButton();
 
-    @DefaultStringValue("Remove the conflict(s) which are selected in the table")
+    @DefaultStringValue("Remove the conflict(s) which are selected in the table.\n" +
+                        "A conflict is someone that this participant is not allowed to give a gift to.")
     String editParticipant_deleteConflictTooltip();
 
     @DefaultStringValue("Name")

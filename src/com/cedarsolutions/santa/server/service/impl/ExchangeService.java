@@ -156,8 +156,24 @@ public class ExchangeService extends AbstractService implements IExchangeService
 
     /**
      * Generate assignments for the passed-in set of participants.
+     *
+     * <p>
+     * A giver can never give a gift to themselves.  If there are any
+     * conflicts configured, the giver cannot give a gift to any of those
+     * conflicts, either.  If autoConflictDetection is enabled, then two
+     * givers cannot give gifts to each other.
+     * </p>
+     *
+     * <p>
+     * Conflicts only work one way: if mom has a conflict for dad, mom
+     * cannot be assigned to give a gift to dad.  However, nothing prevents
+     * dad from being assigned to give a gift to mom (unless dad has his
+     * own conflict).
+     * </p>
+     *
      * @param participants           Set of participants to operate on
      * @param autoConflictDetection  Whether automatic conflict detection should be enabled
+     *
      * @return Randomly-generated set of assignment for this exchange.
      */
     private static AssignmentSet generateAssignments(ParticipantSet participants, boolean autoConflictDetection)  {
