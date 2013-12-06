@@ -146,9 +146,10 @@ class ProjectEclipsePlugin implements Plugin<Project> {
 
         // Copy the runtime libraries to war/WEB-INF/lib to make the Eclipse web application launcher happy
         project.task("copyRuntimeLibraries", dependsOn: project.tasks.cleanupRuntimeLibraries) << { 
+            def files = project.configurations.runtime.files - project.configurations.providedRuntime.files
             project.copy {
                 into "war/WEB-INF/lib"
-                from project.configurations.runtime.files
+                from files
             }
         }
 

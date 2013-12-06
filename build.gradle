@@ -33,7 +33,7 @@ buildscript {
     dependencies {
         classpath "com.googlecode.cedar-common:cedar-build:0.8.8"
     }
-} 
+}
 
 apply plugin: "cedarGwtOnGae"
 apply plugin: "cedarBuild"
@@ -47,8 +47,8 @@ def gwtConfig = file(config_mercurialLabelResources).canonicalPath
 cedarProperties.loadGwtProperties(gwtConfig, [ "system_applicationName", "system_versionNumber", "system_releaseDate", ])
 
 compileJava.options.fork(memoryMaximumSize: config_javaCompilerMemory)
-sourceCompatibility = JavaVersion.VERSION_1_6
-targetCompatibility = JavaVersion.VERSION_1_6
+sourceCompatibility = JavaVersion.VERSION_1_6  // because GWT 2.5.1 does not support Java 7
+targetCompatibility = JavaVersion.VERSION_1_7  // because AppEngine is now 1.7-only
 
 cedarLabel {
     enabled = config_mercurialLabelEnabled
@@ -77,7 +77,7 @@ projectEclipse {
     sourceFolders = [ "resources", "src", "test", "suites", ]  // in desired order
     suitesSourceDir = "gradle/src/suites"
     settingsSourceDir = "gradle/eclipse/settings"
-    externalToolBuildersSourceDir = "gradle/eclipse/externalToolBuilders"    
+    externalToolBuildersSourceDir = "gradle/eclipse/externalToolBuilders"
 }
 
 cedarGwtOnGae {
@@ -136,10 +136,11 @@ dependencies {
     compile "com.googlecode.cedar-common:cedar-common-util:${config_cedarCommonVersion}"
     compile "com.googlecode.cedar-common:cedar-common-gae:${config_cedarCommonVersion}"
     compile("com.googlecode.cedar-common:cedar-common-gwt:${config_cedarCommonVersion}") {
-        exclude module: "com.google.gwt" // proper version is provided runtime, below
+        exclude module: "com.google.gwt"       // proper version is providedRuntime, below
+        exclude module: "com.google.appengine" // proper version is providedRuntime, below
     }
 
-    testCompile "com.googlecode.cedar-common:cpsuite:1.2.6" 
+    testCompile "com.googlecode.cedar-common:cpsuite:1.2.6"
     testCompile "com.googlecode.cedar-common:cedar-common-testutil:${config_cedarCommonVersion}"
     testCompile "com.googlecode.cedar-common:cedar-common-gwttestutil:${config_cedarCommonVersion}"
     testCompile "com.googlecode.cedar-common:cedar-common-gaetestutil:${config_cedarCommonVersion}"
@@ -148,6 +149,8 @@ dependencies {
     runtime("org.apache.xerces:com.springsource.org.apache.xerces:2.9.1") { transitive = false }
     runtime "org.aspectj:aspectjrt:1.6.12"
 
+    providedRuntime "com.google.appengine:appengine-api-stubs:${config_appEngineVersion}"
+    providedRuntime "com.google.appengine:appengine-testing:${config_appEngineVersion}"
     providedRuntime "com.google.gwt:gwt-dev:${config_gwtVersion}"
     providedRuntime "com.google.gwt:gwt-user:${config_gwtVersion}"
 

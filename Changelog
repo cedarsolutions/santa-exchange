@@ -1,7 +1,7 @@
 Version 0.9.35   unreleased
 
-    * Upgrade to AppEngine 1.8.7, since we're starting to get behind.
-    * Bump up to CedarCommon v3.0.0, which has interface changes but no functional changes.
+    * Upgrade to AppEngine 1.8.8, which required a move to Java 7 and some gradle tweaks.
+    * Upgrade to CedarCommon v3.4.1, which has interface changes and functional improvements.
 
 Version 0.9.34   28 Oct 2013
 
@@ -17,7 +17,7 @@ Version 0.9.33   27 Oct 2013
 
     * Bump up to latest-and-greatest CedarCommon v2.4.2.
     * Refactor a lot of code in build.gradle out into CedarBuild and bump up to v0.8.7.
-    * Fall back the "please wait" change, which didn't make enough difference to worth it.
+    * Fall back the "please wait" change, which didn't make enough difference to be worth it.
     * Minor tweaks to make the build process work the same on Linux as Windows.
 
 Version 0.9.32   23 Oct 2013
