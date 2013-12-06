@@ -23,7 +23,7 @@
 package com.cedarsolutions.santa.client.external.view;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.module.view.ModulePageView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -79,7 +79,7 @@ public class AccountLockedPageView extends ModulePageView implements IAccountLoc
     }
 
     /** Continue click handler. */
-    protected static class ContinueClickHandler extends AbstractClickHandler<AccountLockedPageView> {
+    protected static class ContinueClickHandler extends AbstractViewEventClickHandler<AccountLockedPageView> {
         public ContinueClickHandler(AccountLockedPageView parent) {
             super(parent);
         }

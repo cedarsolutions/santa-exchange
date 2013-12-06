@@ -30,8 +30,8 @@ import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.event.ViewEventHandlerWithContext;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
 import com.cedarsolutions.client.gwt.widget.table.DataTable;
@@ -310,7 +310,7 @@ public class ExchangeListTabView extends ModuleTabView implements IExchangeListT
     }
 
     /** Create click handler. */
-    protected static class CreateClickHandler extends AbstractClickHandler<ExchangeListTabView> {
+    protected static class CreateClickHandler extends AbstractViewEventClickHandler<ExchangeListTabView> {
         public CreateClickHandler(ExchangeListTabView parent) {
             super(parent);
         }
