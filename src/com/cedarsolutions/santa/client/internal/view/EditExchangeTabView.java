@@ -33,8 +33,8 @@ import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.event.ViewEventHandlerWithContext;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
 import com.cedarsolutions.client.gwt.validation.IValidationErrorWidget;
@@ -525,7 +525,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** Save click handler. */
-    protected static class SaveClickHandler extends AbstractClickHandler<EditExchangeTabView> {
+    protected static class SaveClickHandler extends AbstractViewEventClickHandler<EditExchangeTabView> {
         public SaveClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
@@ -567,7 +567,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** ReturnToList click handler. */
-    protected static class ReturnToListClickHandler extends AbstractClickHandler<EditExchangeTabView> {
+    protected static class ReturnToListClickHandler extends AbstractViewEventClickHandler<EditExchangeTabView> {
         public ReturnToListClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
@@ -579,7 +579,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** AddParticipant click handler. */
-    protected static class AddParticipantClickHandler extends AbstractClickHandler<EditExchangeTabView> {
+    protected static class AddParticipantClickHandler extends AbstractViewEventClickHandler<EditExchangeTabView> {
         public AddParticipantClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
@@ -591,7 +591,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** DeleteParticipant click handler. */
-    protected static class DeleteParticipantClickHandler extends AbstractClickHandler<EditExchangeTabView> {
+    protected static class DeleteParticipantClickHandler extends AbstractViewEventClickHandler<EditExchangeTabView> {
         public DeleteParticipantClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
@@ -638,7 +638,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** ResendNotification click handler. */
-    protected static class ResendNotificationClickHandler extends AbstractClickHandler<EditExchangeTabView> {
+    protected static class ResendNotificationClickHandler extends AbstractViewEventClickHandler<EditExchangeTabView> {
         public ResendNotificationClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
@@ -650,7 +650,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** Preview click handler. */
-    protected static class PreviewClickHandler extends AbstractClickHandler<EditExchangeTabView> {
+    protected static class PreviewClickHandler extends AbstractViewEventClickHandler<EditExchangeTabView> {
         public PreviewClickHandler(EditExchangeTabView parent) {
             super(parent);
         }

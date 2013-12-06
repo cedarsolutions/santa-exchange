@@ -31,7 +31,7 @@ import com.cedarsolutions.client.gwt.event.UnifiedEventType;
 import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.event.ViewEventHandlerWithContext;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
 import com.cedarsolutions.client.gwt.validation.IValidationErrorWidget;
 import com.cedarsolutions.client.gwt.validation.ValidationUtils;
@@ -445,7 +445,7 @@ public class AuditTabView extends ModuleTabView implements IAuditTabView {
     }
 
     /** Refresh click handler. */
-    protected static class RefreshClickHandler extends AbstractClickHandler<AuditTabView> {
+    protected static class RefreshClickHandler extends AbstractViewEventClickHandler<AuditTabView> {
         public RefreshClickHandler(AuditTabView parent) {
             super(parent);
         }
@@ -457,7 +457,7 @@ public class AuditTabView extends ModuleTabView implements IAuditTabView {
     }
 
     /** Clear click handler. */
-    protected static class ClearClickHandler extends AbstractClickHandler<AuditTabView> {
+    protected static class ClearClickHandler extends AbstractViewEventClickHandler<AuditTabView> {
         public ClearClickHandler(AuditTabView parent) {
             super(parent);
         }

@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
 import com.cedarsolutions.client.gwt.validation.IValidationErrorWidget;
 import com.cedarsolutions.client.gwt.widget.table.DataTable;
@@ -318,7 +318,7 @@ public class EditParticipantTabView extends ModuleTabView implements IEditPartic
     }
 
     /** Save click handler. */
-    protected static class SaveClickHandler extends AbstractClickHandler<EditParticipantTabView> {
+    protected static class SaveClickHandler extends AbstractViewEventClickHandler<EditParticipantTabView> {
         public SaveClickHandler(EditParticipantTabView parent) {
             super(parent);
         }
@@ -330,7 +330,7 @@ public class EditParticipantTabView extends ModuleTabView implements IEditPartic
     }
 
     /** Cancel click handler. */
-    protected static class CancelClickHandler extends AbstractClickHandler<EditParticipantTabView> {
+    protected static class CancelClickHandler extends AbstractViewEventClickHandler<EditParticipantTabView> {
         public CancelClickHandler(EditParticipantTabView parent) {
             super(parent);
         }

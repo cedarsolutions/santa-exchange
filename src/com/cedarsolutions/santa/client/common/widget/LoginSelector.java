@@ -23,7 +23,7 @@
 package com.cedarsolutions.santa.client.common.widget;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -149,7 +149,7 @@ public class LoginSelector extends Composite {
     }
 
     /** Continue click handler. */
-    protected static class ContinueClickHandler extends AbstractClickHandler<LoginSelector> {
+    protected static class ContinueClickHandler extends AbstractViewEventClickHandler<LoginSelector> {
         public ContinueClickHandler(LoginSelector parent) {
             super(parent);
         }
@@ -161,7 +161,7 @@ public class LoginSelector extends Composite {
     }
 
     /** OpenId click handler. */
-    protected static class OpenIdClickHandler extends AbstractClickHandler<LoginSelector> {
+    protected static class OpenIdClickHandler extends AbstractViewEventClickHandler<LoginSelector> {
         public OpenIdClickHandler(LoginSelector parent) {
             super(parent);
         }

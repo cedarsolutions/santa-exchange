@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.module.view.ModulePageView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -260,7 +260,7 @@ public class RpcTestPageView extends ModulePageView implements IRpcTestPageView 
     }
 
     /** Unprotected RPC click handler. */
-    protected static class UnprotectedRpcClickHandler extends AbstractClickHandler<RpcTestPageView> {
+    protected static class UnprotectedRpcClickHandler extends AbstractViewEventClickHandler<RpcTestPageView> {
         public UnprotectedRpcClickHandler(RpcTestPageView parent) {
             super(parent);
         }
@@ -272,7 +272,7 @@ public class RpcTestPageView extends ModulePageView implements IRpcTestPageView 
     }
 
     /** User RPC click handler. */
-    protected static class UserRpcClickHandler extends AbstractClickHandler<RpcTestPageView> {
+    protected static class UserRpcClickHandler extends AbstractViewEventClickHandler<RpcTestPageView> {
         public UserRpcClickHandler(RpcTestPageView parent) {
             super(parent);
         }
@@ -284,7 +284,7 @@ public class RpcTestPageView extends ModulePageView implements IRpcTestPageView 
     }
 
     /** Admin RPC click handler. */
-    protected static class AdminRpcClickHandler extends AbstractClickHandler<RpcTestPageView> {
+    protected static class AdminRpcClickHandler extends AbstractViewEventClickHandler<RpcTestPageView> {
         public AdminRpcClickHandler(RpcTestPageView parent) {
             super(parent);
         }
@@ -296,7 +296,7 @@ public class RpcTestPageView extends ModulePageView implements IRpcTestPageView 
     }
 
     /** Enabled user RPC click handler. */
-    protected static class EnabledUserRpcClickHandler extends AbstractClickHandler<RpcTestPageView> {
+    protected static class EnabledUserRpcClickHandler extends AbstractViewEventClickHandler<RpcTestPageView> {
         public EnabledUserRpcClickHandler(RpcTestPageView parent) {
             super(parent);
         }
@@ -308,7 +308,7 @@ public class RpcTestPageView extends ModulePageView implements IRpcTestPageView 
     }
 
     /** Enabled admin RPC click handler. */
-    protected static class EnabledAdminRpcClickHandler extends AbstractClickHandler<RpcTestPageView> {
+    protected static class EnabledAdminRpcClickHandler extends AbstractViewEventClickHandler<RpcTestPageView> {
         public EnabledAdminRpcClickHandler(RpcTestPageView parent) {
             super(parent);
         }

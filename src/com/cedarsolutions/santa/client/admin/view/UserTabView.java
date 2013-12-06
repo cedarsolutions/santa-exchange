@@ -38,9 +38,9 @@ import java.util.Map;
 import com.cedarsolutions.client.gwt.custom.datepicker.DateBox;
 import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
-import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractColumnSortEventHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
 import com.cedarsolutions.client.gwt.validation.IValidationErrorWidget;
@@ -584,7 +584,7 @@ public class UserTabView extends ModuleTabView implements IUserTabView {
     }
 
     /** Lock click handler. */
-    protected static class LockClickHandler extends AbstractClickHandler<UserTabView> {
+    protected static class LockClickHandler extends AbstractViewEventClickHandler<UserTabView> {
         public LockClickHandler(UserTabView parent) {
             super(parent);
         }
@@ -596,7 +596,7 @@ public class UserTabView extends ModuleTabView implements IUserTabView {
     }
 
     /** Unlock click handler. */
-    protected static class UnlockClickHandler extends AbstractClickHandler<UserTabView> {
+    protected static class UnlockClickHandler extends AbstractViewEventClickHandler<UserTabView> {
         public UnlockClickHandler(UserTabView parent) {
             super(parent);
         }
@@ -608,7 +608,7 @@ public class UserTabView extends ModuleTabView implements IUserTabView {
     }
 
     /** Refresh click handler. */
-    protected static class RefreshClickHandler extends AbstractClickHandler<UserTabView> {
+    protected static class RefreshClickHandler extends AbstractViewEventClickHandler<UserTabView> {
         public RefreshClickHandler(UserTabView parent) {
             super(parent);
         }
@@ -620,7 +620,7 @@ public class UserTabView extends ModuleTabView implements IUserTabView {
     }
 
     /** Clear click handler. */
-    protected static class ClearClickHandler extends AbstractClickHandler<UserTabView> {
+    protected static class ClearClickHandler extends AbstractViewEventClickHandler<UserTabView> {
         public ClearClickHandler(UserTabView parent) {
             super(parent);
         }
