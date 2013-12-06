@@ -56,7 +56,10 @@ public class Participant extends TranslatableDomainObject {
     /** Template overrides to use, if any. */
     private TemplateConfig templateOverrides;
 
-    /** Set of conflicts for this participant. */
+    /**
+     * Set of conflicts for this participant.
+     * A conflict is someone that this participant is not allowed to give a gift to.
+     */
     private ParticipantSet conflicts;
 
     /** Default constructor. */
