@@ -31,14 +31,16 @@
     <property file="app.properties" />
 
     <!-- This assumes Gradle is properly set up on your system path. -->
-    <condition property="gradle" value="gradle.bat"><os family="windows" /></condition>
-    <property name="gradle" value="gradle" />
+    <condition property="executable" value="cmd"><os family="windows" /></condition>
+    <condition property="script" value="/c gradle.bat"><os family="windows" /></condition>
+    <property name="executable" value="gradle" />
+    <property name="script" value="" />
 
     <macrodef name="gradle">
         <attribute name="target"/>
         <sequential>
-            <exec executable="${gradle}" dir="${basedir}">
-                <arg line="@{target}" />
+            <exec executable="${executable}">
+                <arg line="${script} @{target}" />
             </exec>
         </sequential>
     </macrodef>
