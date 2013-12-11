@@ -31,7 +31,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.googlecode.cedar-common:cedar-build:0.8.8"
+        classpath "com.googlecode.cedar-common:cedar-build:0.8.9"
     }
 }
 
@@ -86,6 +86,8 @@ cedarGwtOnGae {
     appStartupUrl = config_appStartupUrl
 
     gwtCompilerMemory = config_gwtCompilerMemory
+    unittestMemory = config_unittestMemory
+    clienttestMemory = config_clienttestMemory
 
     devmodeServerMemory = config_devmodeServerMemory
     devmodeCodeserverPort = config_devmodeCodeserverPort
