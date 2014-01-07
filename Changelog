@@ -1,4 +1,4 @@
-Version 0.9.35   unreleased
+Version 0.9.35   06 Jan 2014
 
     * Take the plunge and upgrade to GWT v2.6.0 RC3.
     * Upgrade to CedarBuild v0.8.9, to allow configuring memory for tests.
