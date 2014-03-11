@@ -6,7 +6,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * Copyright (c) 2013 Kenneth J. Pronovici.
+ * Copyright (c) 2013-2014 Kenneth J. Pronovici.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -35,15 +35,15 @@ public interface SantaExchangeConfig extends ConstantsWithLookup {
     String system_applicationName();
 
     /** Application version number. */
-    @DefaultStringValue("0.9.34")
+    @DefaultStringValue("0.9.35")
     String system_versionNumber();
 
     /** Application release date. */
-    @DefaultStringValue("28 Oct 2013")
+    @DefaultStringValue("06 Jan 2014")
     String system_releaseDate();
 
     /** Copyright statement for the application. */
-    @DefaultStringValue("Copyright (c) 2013 Kenneth J. Pronovici.  All rights reserved.")
+    @DefaultStringValue("Copyright (c) 2013-2014 Kenneth J. Pronovici.  All rights reserved.")
     String system_copyrightStatement();
 
     /** Public application URL. */
