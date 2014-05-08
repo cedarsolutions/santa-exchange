@@ -24,6 +24,7 @@ package com.cedarsolutions.santa.client.rpc.util;
 
 import com.cedarsolutions.client.gwt.datasource.BackendDataSource;
 import com.cedarsolutions.dao.domain.PaginatedResults;
+import com.cedarsolutions.exception.InvalidDataException;
 
 /**
  * Standard RPC caller for use with BackendDataSource.
@@ -58,14 +59,23 @@ public abstract class BackendDataRpcCaller<A, T, C> extends StandardRpcCaller<A,
     /** Invoked when an asynchronous call completes successfully. */
     @Override
     public void onSuccessResult(PaginatedResults<T> results) {
+        this.dataSource.markRetrieveComplete();  // VERY important to make sure this is called
         this.dataSource.applyResults(this.start, results);
     }
 
     /** Invoked when an asynchronous call results in an unhandled error. */
     @Override
     public void onUnhandledError(Throwable caught) {
-        this.dataSource.markRetrieveComplete();
+        this.dataSource.markRetrieveComplete();  // VERY important to make sure this is called
         super.onUnhandledError(caught);
+    }
+
+    /** Invoked when an asynchronous call results in a validation error. */
+    @Override
+    public boolean onValidationError(InvalidDataException caught) {
+        this.dataSource.markRetrieveComplete();  // VERY important to make sure this is called
+        this.getDataSource().getRenderer().showValidationError(caught);
+        return true;  // indicate that we've handled the validation error
     }
 
     /** Get the back-end data source. */

@@ -28,11 +28,16 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
 
 import com.cedarsolutions.client.gwt.datasource.BackendDataSource;
+import com.cedarsolutions.client.gwt.datasource.IBackendDataRenderer;
 import com.cedarsolutions.dao.domain.PaginatedResults;
+import com.cedarsolutions.exception.InvalidDataException;
 import com.cedarsolutions.santa.client.junit.StubbedClientTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -67,12 +72,26 @@ public class BackendDataRpcCallerTest extends StubbedClientTestCase {
 
     /** Test onUnhandledError(). */
     @SuppressWarnings("unchecked")
-    @Test public void testOnUnhandledError7() {
+    @Test public void testOnUnhandledError() {
         BackendDataSource<String, Integer> dataSource = (BackendDataSource<String, Integer>) mock(BackendDataSource.class);
         Throwable exception = new RuntimeException("Whatever");
         Caller caller = new Caller(dataSource, 5);
         caller.onUnhandledError(exception);
         verify(dataSource).markRetrieveComplete();
+    }
+
+    /** Test onValidationError(). */
+    @SuppressWarnings("unchecked")
+    @Test public void testOnValidationError() {
+        IBackendDataRenderer<String, Integer> renderer = mock(IBackendDataRenderer.class);
+        BackendDataSource<String, Integer> dataSource = (BackendDataSource<String, Integer>) mock(BackendDataSource.class);
+        when(dataSource.getRenderer()).thenReturn(renderer);
+        InvalidDataException error = new InvalidDataException("Hello");
+        Caller caller = new Caller(dataSource, 5);
+        caller.onValidationError(error);
+        InOrder order = Mockito.inOrder(renderer, dataSource);
+        order.verify(dataSource).markRetrieveComplete();
+        order.verify(renderer).showValidationError(error);
     }
 
     /** Dummy asynchronous RPC for testing. */
