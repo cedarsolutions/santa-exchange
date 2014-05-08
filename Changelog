@@ -2,6 +2,7 @@ Version 0.9.36   unreleased
 
     * Upgrade to official GWT v2.6.0 release.
     * Upgrade to CedarComon v4.3.2, which has functional improvements and a new mvp4g jar.
+    * Fix bug with the way validation errors are handled on some screens.
 
 Version 0.9.35   06 Jan 2014
 

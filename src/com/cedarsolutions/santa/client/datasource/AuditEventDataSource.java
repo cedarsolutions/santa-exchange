@@ -26,7 +26,6 @@ import com.cedarsolutions.client.gwt.datasource.BackendDataSource;
 import com.cedarsolutions.client.gwt.datasource.IBackendDataRenderer;
 import com.cedarsolutions.dao.domain.PaginatedResults;
 import com.cedarsolutions.dao.domain.Pagination;
-import com.cedarsolutions.exception.InvalidDataException;
 import com.cedarsolutions.santa.client.rpc.IAdminRpcAsync;
 import com.cedarsolutions.santa.client.rpc.util.BackendDataRpcCaller;
 import com.cedarsolutions.santa.shared.domain.audit.AuditEvent;
@@ -82,12 +81,6 @@ public class AuditEventDataSource extends BackendDataSource<AuditEvent, AuditEve
         @Override
         public void invokeRpcMethod(IAdminRpcAsync async, AsyncCallback<PaginatedResults<AuditEvent>> callback) {
             async.getAuditEvents(this.criteria, this.pagination, callback);
-        }
-
-        @Override
-        public boolean onValidationError(InvalidDataException caught) {
-            this.getDataSource().getRenderer().showValidationError(caught);
-            return true;  // indicate that we've handled the validation error
         }
     }
 
