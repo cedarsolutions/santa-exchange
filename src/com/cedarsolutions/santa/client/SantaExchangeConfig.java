@@ -35,11 +35,11 @@ public interface SantaExchangeConfig extends ConstantsWithLookup {
     String system_applicationName();
 
     /** Application version number. */
-    @DefaultStringValue("0.9.35")
+    @DefaultStringValue("0.9.36")
     String system_versionNumber();
 
     /** Application release date. */
-    @DefaultStringValue("06 Jan 2014")
+    @DefaultStringValue("08 May 2014")
     String system_releaseDate();
 
     /** Copyright statement for the application. */

@@ -1,4 +1,4 @@
-Version 0.9.36   unreleased
+Version 0.9.36   08 May 2014
 
     * Upgrade to GWT v2.6.1-rc2, which has some improvements over official v2.6.0.
     * Upgrade to CedarComon v4.3.2, which has functional improvements and a new mvp4g jar.
