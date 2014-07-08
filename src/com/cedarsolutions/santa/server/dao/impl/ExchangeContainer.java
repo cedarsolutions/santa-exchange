@@ -72,7 +72,11 @@ public class ExchangeContainer implements IContainer<Exchange> {
         if (this.getSerialized() == null) {
             return null;
         } else {
-            Exchange exchange = JaxbUtils.getInstance().unmarshalDocument(Exchange.class, this.serialized);
+            // There's a JAXB bug that gets confused by the Exchange object structure
+            // when using schema validation like implemented by unmarshalDocument().
+            // See the bottom of: http://stackoverflow.com/questions/3658378
+            // Because of this bug, we pass validate=false and don't validate the XML.
+            Exchange exchange = JaxbUtils.getInstance().unmarshalDocument(Exchange.class, this.serialized, false);
             exchange.setId(this.getId());
             return exchange;
         }
