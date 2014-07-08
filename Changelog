@@ -3,6 +3,7 @@ Version 0.9.37   unreleased
     * Upgrade to the official GWT v2.6.1 release.
     * Upgrade to the latest AppEngine v1.9.6 from June.
     * Upgrade to CedarCommon v4.5.0 to pull in a fix for the DataTablePager.
+    * Disable XML validation when retrieving an exchange from the database, to work around JAXB bugs.
 
 Version 0.9.36   08 May 2014
 
