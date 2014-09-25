@@ -2,6 +2,7 @@ Version 0.9.38   unreleased
 
     * Change standard log4j date format to include time zone.
     * Bump up to CedarCommon v4.8.0, to get updated date format in JavaLoggingFormatter.
+    * Fix build.gradle so AppEngine dependencies are properly divorced from versions in CedarCommon.
 
 Version 0.9.37   08 Jul 2014
 
