@@ -138,22 +138,22 @@ dependencies {
     compile "com.googlecode.cedar-common:cedar-common-util:${config_cedarCommonVersion}"
     compile "com.googlecode.cedar-common:cedar-common-gae:${config_cedarCommonVersion}"
     compile("com.googlecode.cedar-common:cedar-common-gwt:${config_cedarCommonVersion}") {
-        exclude module: "com.google.gwt"       // proper version is providedRuntime, below
+        exclude group: "com.google.gwt"       // proper version is providedRuntime, below
     }
 
     testCompile "com.googlecode.cedar-common:cpsuite:1.2.6"
     testCompile "com.googlecode.cedar-common:cedar-common-testutil:${config_cedarCommonVersion}"
     testCompile "com.googlecode.cedar-common:cedar-common-gwttestutil:${config_cedarCommonVersion}"
     testCompile("com.googlecode.cedar-common:cedar-common-gaetestutil:${config_cedarCommonVersion}") {
-        exclude module: "com.google.appengine" // proper version is providedRuntime, below
+        exclude group: "com.google.appengine" // proper version is testCompile, below
     }
+
+    testCompile "com.google.appengine:appengine-api-stubs:${config_appEngineVersion}"
+    testCompile "com.google.appengine:appengine-testing:${config_appEngineVersion}"
 
     runtime("org.apache.xalan:com.springsource.org.apache.xalan:2.7.1") { transitive = false }
     runtime("org.apache.xerces:com.springsource.org.apache.xerces:2.9.1") { transitive = false }
     runtime "org.aspectj:aspectjrt:1.6.12"
-
-    providedRuntime "com.google.appengine:appengine-api-stubs:${config_appEngineVersion}"
-    providedRuntime "com.google.appengine:appengine-testing:${config_appEngineVersion}"
 
     providedRuntime "com.google.gwt:gwt-dev:${config_gwtVersion}"
     providedRuntime "com.google.gwt:gwt-user:${config_gwtVersion}"
