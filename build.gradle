@@ -135,6 +135,7 @@ dependencies {
 
     compile "com.google.gwt:gwt-servlet:${config_gwtVersion}"
     compile fileTree(dir: project.convention.plugins.cedarGwtOnGae.getAppEngineSdkDir(), includes: [ "lib/user/**/*.jar", ])
+
     compile "com.googlecode.cedar-common:cedar-common-util:${config_cedarCommonVersion}"
     compile "com.googlecode.cedar-common:cedar-common-gae:${config_cedarCommonVersion}"
     compile("com.googlecode.cedar-common:cedar-common-gwt:${config_cedarCommonVersion}") {
