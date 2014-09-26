@@ -178,25 +178,42 @@
 
 .ss-MainMenuRegion .left {
     position: absolute;
+    top: 0;
     left: 0;
-    width: 50%;
+    width: 30%;
+    height: 32px;
+    padding-bottom: 1px;
+    background: #e5e5e5;
+    border-bottom: 1px solid #000000;
+}
+
+.ss-MainMenuRegion .center {
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 30%;
+    width: 40%;
+    height: 32px;
+    padding-bottom: 1px;
     background: #e5e5e5;
     border-bottom: 1px solid #000000;
 }
 
 .ss-MainMenuRegion .right {
     position: absolute;
+    top: 0;
     right: 0;
-    width: 50%;
+    width: 30%;
+    height: 32px;
+    padding-bottom: 1px;
     background: #e5e5e5;
     border-bottom: 1px solid #000000;
-    padding-bottom: 1px;  /* for some reason, this doesn't line up with the other side...? */
 }
 
 .ss-MainMenuBar {
     background: #e5e5e5;
     float: right;
-    width: 275px;
+    width: 200px;
 }
 
 .ss-MainMenuBar .gwt-MenuItem {
