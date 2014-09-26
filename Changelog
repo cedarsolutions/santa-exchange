@@ -1,15 +1,17 @@
 Version 0.9.38   unreleased
 
-    * Change standard log4j date format to include time zone.
+    * Bump up to CedarBuild v0.8.10, to get Cucumber-related improvements.
     * Bump up to CedarCommon v4.8.0, to get updated date format in JavaLoggingFormatter.
-    * Fix build.gradle so AppEngine dependencies are properly divorced from versions in CedarCommon.
     * Bump up to AppEngine v1.9.11, since v1.9.6 is getting kind of old.
+    * Change standard log4j date format to include time zone.
+    * Fix build.gradle so AppEngine dependencies are properly divorced from versions in CedarCommon.
     * Be more strict about using Mockito's isA() in unit tests rather than any().
     * Add a global uncaught exception handler to catch and display UI errors.
     * Fix the bottom border on top menu by using position:absolute instead of position:fixed.
     * Update RPCs to throw service exceptions using ServiceExceptionUtils.createServiceException().
     * Pull in improvements to Cucumber utility functions in extensions.rb.
     * Remove the locked.feature Cucucmber test suite, which could not be made to pass reliably.
+    * Implement a new Cucumber output formatter that's more succinct and easier to read.
 
 Version 0.9.37   08 Jul 2014
 
