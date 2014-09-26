@@ -14,6 +14,7 @@ Version 0.9.38   unreleased
     * Implement a new Cucumber output formatter that's more succinct and easier to read.
     * Add configuration for memory and permgen space.
     * Add Gradle support for Checkstyle, Jacoco coverage, and JavaNCSS metrics.
+    * Add Gradle support for headless Cucumber tests on Linux.
 
 Version 0.9.37   08 Jul 2014
 
