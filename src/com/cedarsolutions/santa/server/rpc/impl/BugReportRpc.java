@@ -22,6 +22,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.server.rpc.impl;
 
+import static com.cedarsolutions.util.ServiceExceptionUtils.createServiceException;
+
 import org.apache.log4j.Logger;
 
 import com.cedarsolutions.exception.InvalidDataException;
@@ -71,7 +73,7 @@ public class BugReportRpc extends AbstractService implements IBugReportRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error submitting bug report: " + e.getMessage(), e);
-            throw new ServiceException("Error submitting bug report: " + e.getMessage(), e);
+            throw createServiceException("Error submitting bug report: " + e.getMessage(), e);
         }
     }
 

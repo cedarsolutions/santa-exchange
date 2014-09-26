@@ -22,6 +22,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.server.rpc.impl;
 
+import static com.cedarsolutions.util.ServiceExceptionUtils.createServiceException;
+
 import org.apache.log4j.Logger;
 
 import com.cedarsolutions.exception.NotConfiguredException;
@@ -70,7 +72,7 @@ public class ClientSessionRpc extends AbstractService implements IClientSessionR
             return this.clientSessionService.establishClientSession(module, logoutDestinationUrl);
         } catch (Exception e) {
             LOGGER.error("Error establishing client session: " + e.getMessage(), e);
-            throw new ServiceException("Error establishing client session: " + e.getMessage(), e);
+            throw createServiceException("Error establishing client session: " + e.getMessage(), e);
         }
     }
 
@@ -85,7 +87,7 @@ public class ClientSessionRpc extends AbstractService implements IClientSessionR
             this.clientSessionService.invalidateClientSession(module);
         } catch (Exception e) {
             LOGGER.error("Error invalidating client session: " + e.getMessage(), e);
-            throw new ServiceException("Error invalidating client session: " + e.getMessage(), e);
+            throw createServiceException("Error invalidating client session: " + e.getMessage(), e);
         }
     }
 
