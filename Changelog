@@ -9,6 +9,7 @@ Version 0.9.38   unreleased
     * Fix the bottom border on top menu by using position:absolute instead of position:fixed.
     * Update RPCs to throw service exceptions using ServiceExceptionUtils.createServiceException().
     * Pull in improvements to Cucumber utility functions in extensions.rb.
+    * Remove the locked.feature Cucucmber test suite, which could not be made to pass reliably.
 
 Version 0.9.37   08 Jul 2014
 
