@@ -44,6 +44,7 @@ public class RootPresenter extends BasePresenter<IRootView, RootEventBus> {
 
     /** Handle the start event. */
     public void onStart() {
+        GWT.setUncaughtExceptionHandler(new GlobalUncaughtExceptionHandler());
     }
 
     /** Handle the init event. */
