@@ -103,6 +103,8 @@ cedarGwtOnGae {
     devmodeServerPort = config_devmodeServerPort
     serverWait = config_serverWait
 
+    xvfbRunPath = config_xvfbRunPath
+
     appEngineVersion = config_appEngineVersion
 }
 
