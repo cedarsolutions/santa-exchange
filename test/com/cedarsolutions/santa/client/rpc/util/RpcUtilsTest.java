@@ -24,7 +24,7 @@ package com.cedarsolutions.santa.client.rpc.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -66,7 +66,7 @@ public class RpcUtilsTest extends StubbedClientTestCase {
         ServiceDefTarget remoteInterface = mock(ServiceDefTarget.class);
         RpcUtils rpcUtils = new RpcUtils();
         rpcUtils.applySystemWidePolicies(remoteInterface);
-        verify(remoteInterface).setRpcRequestBuilder(any(PolicyRpcRequestBuilder.class));
+        verify(remoteInterface).setRpcRequestBuilder(isA(PolicyRpcRequestBuilder.class));
     }
 
     /** Test getNextCallerId(). */

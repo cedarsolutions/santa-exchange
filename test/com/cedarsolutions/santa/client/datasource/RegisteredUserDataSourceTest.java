@@ -25,7 +25,7 @@ package com.cedarsolutions.santa.client.datasource;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -73,7 +73,7 @@ public class RegisteredUserDataSourceTest extends StubbedClientTestCase {
         Pagination pagination = mock(Pagination.class);
         when(renderer.getSearchCriteria()).thenReturn(criteria);
         dataSource.retrieveFromBackEnd(23, pagination);
-        verify(adminRpc).getRegisteredUsers(criteriaCaptor.capture(), paginationCaptor.capture(), any(RpcCallback.class));
+        verify(adminRpc).getRegisteredUsers(criteriaCaptor.capture(), paginationCaptor.capture(), isA(RpcCallback.class));
         assertSame(criteria, criteriaCaptor.getValue());
         assertSame(pagination, paginationCaptor.getValue());
     }

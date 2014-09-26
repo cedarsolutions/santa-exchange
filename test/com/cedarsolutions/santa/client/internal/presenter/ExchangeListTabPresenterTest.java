@@ -27,7 +27,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -80,15 +80,18 @@ public class ExchangeListTabPresenterTest extends StubbedClientTestCase {
 
     /** Test bind(). */
     @Test public void testBind() {
+        ViewEventHandler refreshEventHandler = mock(ViewEventHandler.class);
         ExchangeListTabPresenter presenter = createPresenter();
+        when(presenter.getView().getRefreshEventHandler()).thenReturn(refreshEventHandler);
+
         presenter.bind();
-        verify(presenter.getView()).setInitializationEventHandler(any(BackendDataInitializeHandler.class));
-        verify(presenter.getView()).setRefreshEventHandler(any(BackendDataRefreshHandler.class));
-        verify(presenter.getView()).setCriteriaResetEventHandler(any(BackendDataCriteriaResetHandler.class));
-        verify(presenter.getView()).setSelectedEventHandler(any(BackendDataRefreshHandler.class));
-        verify(presenter.getView()).setDeleteHandler(any(DeleteHandler.class));
-        verify(presenter.getView()).setCreateHandler(any(CreateHandler.class));
-        verify(presenter.getView()).setEditSelectedRowHandler(any(EditSelectedRowHandler.class));
+        verify(presenter.getView()).setInitializationEventHandler(isA(BackendDataInitializeHandler.class));
+        verify(presenter.getView()).setRefreshEventHandler(isA(BackendDataRefreshHandler.class));
+        verify(presenter.getView()).setCriteriaResetEventHandler(isA(BackendDataCriteriaResetHandler.class));
+        verify(presenter.getView()).setSelectedEventHandler(refreshEventHandler);
+        verify(presenter.getView()).setDeleteHandler(isA(DeleteHandler.class));
+        verify(presenter.getView()).setCreateHandler(isA(CreateHandler.class));
+        verify(presenter.getView()).setEditSelectedRowHandler(isA(EditSelectedRowHandler.class));
     }
 
     /** Test onShowExchangeListPage(). */
@@ -141,7 +144,7 @@ public class ExchangeListTabPresenterTest extends StubbedClientTestCase {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         handler.handleEvent(null); // event does not matter
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(presenter.getExchangeRpc()).createExchange(captor.capture(), any(RpcCallback.class));
+        verify(presenter.getExchangeRpc()).createExchange(captor.capture(), isA(RpcCallback.class));
         assertEquals(constants.exchangeList_newExchangeName(), captor.getValue());
     }
 
@@ -165,7 +168,7 @@ public class ExchangeListTabPresenterTest extends StubbedClientTestCase {
 
         handler.handleEvent(null); // event does not matter
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(presenter.getExchangeRpc()).deleteExchanges(captor.capture(), any(RpcCallback.class));
+        verify(presenter.getExchangeRpc()).deleteExchanges(captor.capture(), isA(RpcCallback.class));
         assertSame(records, captor.getValue());
     }
 

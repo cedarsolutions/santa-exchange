@@ -23,7 +23,7 @@
 package com.cedarsolutions.santa.client.admin.presenter;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -61,12 +61,12 @@ public class AdminPresenterTest extends StubbedClientTestCase {
     @Test public void testBind() {
         AdminPresenter presenter = createPresenter();
         presenter.bind();
-        verify(presenter.getView()).setInternalLandingPageEventHandler(any(InternalLandingPageEventHandler.class));
-        verify(presenter.getView()).setDashboardEventHandler(any(DashboardEventHandler.class));
-        verify(presenter.getView()).setAboutEventHandler(any(AboutEventHandler.class));
-        verify(presenter.getView()).setBugReportEventHandler(any(BugReportEventHandler.class));
-        verify(presenter.getView()).setSourceCodeEventHandler(any(SourceCodeEventHandler.class));
-        verify(presenter.getView()).setLogoutEventHandler(any(LogoutEventHandler.class));
+        verify(presenter.getView()).setInternalLandingPageEventHandler(isA(InternalLandingPageEventHandler.class));
+        verify(presenter.getView()).setDashboardEventHandler(isA(DashboardEventHandler.class));
+        verify(presenter.getView()).setAboutEventHandler(isA(AboutEventHandler.class));
+        verify(presenter.getView()).setBugReportEventHandler(isA(BugReportEventHandler.class));
+        verify(presenter.getView()).setSourceCodeEventHandler(isA(SourceCodeEventHandler.class));
+        verify(presenter.getView()).setLogoutEventHandler(isA(LogoutEventHandler.class));
     }
 
     /** Test onReplaceModuleBody(). */

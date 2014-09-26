@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,6 +39,7 @@ import com.cedarsolutions.client.gwt.datasource.BackendDataInitializeHandler;
 import com.cedarsolutions.client.gwt.datasource.BackendDataRefreshHandler;
 import com.cedarsolutions.client.gwt.event.UnifiedEventType;
 import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
+import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.santa.client.admin.AdminEventBus;
 import com.cedarsolutions.santa.client.admin.presenter.AuditTabPresenter.UserIdSelectedHandler;
 import com.cedarsolutions.santa.client.admin.view.IAuditTabView;
@@ -63,14 +64,17 @@ public class AuditTabPresenterTest extends StubbedClientTestCase {
 
     /** Test bind(). */
     @Test public void testBind() {
+        ViewEventHandler refreshEventHandler = mock(ViewEventHandler.class);
         AuditTabPresenter presenter = createPresenter();
         when(presenter.getEventBus().selectAuditTab()).thenReturn("token");
+        when(presenter.getView().getRefreshEventHandler()).thenReturn(refreshEventHandler);
+
         presenter.bind();
-        verify(presenter.getView()).setInitializationEventHandler(any(BackendDataInitializeHandler.class));
-        verify(presenter.getView()).setRefreshEventHandler(any(BackendDataRefreshHandler.class));
-        verify(presenter.getView()).setCriteriaResetEventHandler(any(BackendDataCriteriaResetHandler.class));
-        verify(presenter.getView()).setSelectedEventHandler(any(BackendDataRefreshHandler.class));
-        verify(presenter.getView()).setUserIdSelectedHandler(any(UserIdSelectedHandler.class));
+        verify(presenter.getView()).setInitializationEventHandler(isA(BackendDataInitializeHandler.class));
+        verify(presenter.getView()).setRefreshEventHandler(isA(BackendDataRefreshHandler.class));
+        verify(presenter.getView()).setCriteriaResetEventHandler(isA(BackendDataCriteriaResetHandler.class));
+        verify(presenter.getView()).setSelectedEventHandler(refreshEventHandler);
+        verify(presenter.getView()).setUserIdSelectedHandler(isA(UserIdSelectedHandler.class));
         verify(presenter.getView()).setHistoryToken("token");
     }
 

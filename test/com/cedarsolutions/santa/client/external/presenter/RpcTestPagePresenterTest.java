@@ -25,8 +25,8 @@ package com.cedarsolutions.santa.client.external.presenter;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -65,7 +65,7 @@ public class RpcTestPagePresenterTest extends StubbedClientTestCase {
 
         RpcTestPagePresenter presenter = createPresenter();
         presenter.onShowRpcTestPage();
-        verify(presenter.getView()).setExpectedResults(any(Map.class));
+        verify(presenter.getView()).setExpectedResults(isA(Map.class));
         verify(presenter.getView()).setUnprotectedRpcHandler(unprotectedRpc.capture());
         verify(presenter.getView()).setUserRpcHandler(userRpc.capture());
         verify(presenter.getView()).setAdminRpcHandler(adminRpc.capture());
@@ -167,7 +167,7 @@ public class RpcTestPagePresenterTest extends StubbedClientTestCase {
         assertEquals("unprotectedRpc", handler.getMethod());
 
         handler.handleEvent(null); // event doesn't matter
-        verify(presenter.getTestRpc()).unprotectedRpc(eq("value"), any(RpcCallback.class)); // spot-check
+        verify(presenter.getTestRpc()).unprotectedRpc(eq("value"), isA(RpcCallback.class)); // spot-check
     }
 
     /** Test TestRpcCaller. */

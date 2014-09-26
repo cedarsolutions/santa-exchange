@@ -30,7 +30,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -69,8 +69,8 @@ public class EditParticipantTabPresenterTest extends StubbedClientTestCase {
     @Test public void testBind() {
         EditParticipantTabPresenter presenter = createPresenter();
         presenter.bind();
-        verify(presenter.getView()).setSaveHandler(any(SaveHandler.class));
-        verify(presenter.getView()).setCancelHandler(any(CancelHandler.class));
+        verify(presenter.getView()).setSaveHandler(isA(SaveHandler.class));
+        verify(presenter.getView()).setCancelHandler(isA(CancelHandler.class));
     }
 
     /** Test onShowEditParticipantPage(). */
@@ -186,25 +186,25 @@ public class EditParticipantTabPresenterTest extends StubbedClientTestCase {
 
         when(presenter.getView().getEditState()).thenReturn(participant2a);
         handler.handleEvent(null);  // actual event does not matter
-        order.verify(presenter.getEventBus()).showErrorPopup(any(ErrorDescription.class));
+        order.verify(presenter.getEventBus()).showErrorPopup(isA(ErrorDescription.class));
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
 
         when(presenter.getView().getEditState()).thenReturn(participantEmpty);
         handler.handleEvent(null);  // actual event does not matter
-        order.verify(presenter.getEventBus()).showErrorPopup(any(ErrorDescription.class));
+        order.verify(presenter.getEventBus()).showErrorPopup(isA(ErrorDescription.class));
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
 
         when(presenter.getView().getEditState()).thenReturn(participantNoId);
         handler.handleEvent(null);  // actual event does not matter
-        order.verify(presenter.getEventBus()).showErrorPopup(any(ErrorDescription.class));
+        order.verify(presenter.getEventBus()).showErrorPopup(isA(ErrorDescription.class));
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
 
         when(presenter.getView().getEditState()).thenReturn(null);
         handler.handleEvent(null);  // actual event does not matter
-        order.verify(presenter.getEventBus()).showErrorPopup(any(ErrorDescription.class));
+        order.verify(presenter.getEventBus()).showErrorPopup(isA(ErrorDescription.class));
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
     }
@@ -238,7 +238,7 @@ public class EditParticipantTabPresenterTest extends StubbedClientTestCase {
 
         when(presenter.getView().getEditState()).thenReturn(participant1b);
         handler.handleEvent(null);  // actual event does not matter
-        verify(presenter.getView()).showValidationError(any(InvalidDataException.class));
+        verify(presenter.getView()).showValidationError(isA(InvalidDataException.class));
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
     }

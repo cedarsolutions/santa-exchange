@@ -34,7 +34,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -306,7 +306,7 @@ public class ClientSessionServiceTest {
         assertSame(registeredUser2, session.getRegisteredUser());
 
         verify(service.getRegisteredUserDao()).retrieveRegisteredUser("user");
-        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser((RegisteredUser) any());
+        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser(isA(RegisteredUser.class));
         verifyZeroInteractions(service.getNotificationService());
 
         verify(service.getAuditEventDao(), times(1)).insertAuditEvent(auditEvent.capture());
@@ -399,7 +399,7 @@ public class ClientSessionServiceTest {
         assertSame(registeredUser2, session.getRegisteredUser());
 
         verify(service.getRegisteredUserDao()).retrieveRegisteredUser("user");
-        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser((RegisteredUser) any());
+        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser(isA(RegisteredUser.class));
         verifyZeroInteractions(service.getNotificationService());
 
         verify(service.getAuditEventDao(), times(1)).insertAuditEvent(auditEvent.capture());
@@ -492,7 +492,7 @@ public class ClientSessionServiceTest {
         assertSame(registeredUser2, session.getRegisteredUser());
 
         verify(service.getRegisteredUserDao()).retrieveRegisteredUser("user");
-        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser((RegisteredUser) any());
+        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser(isA(RegisteredUser.class));
         verifyZeroInteractions(service.getNotificationService());
 
         verify(service.getAuditEventDao(), times(1)).insertAuditEvent(auditEvent.capture());
@@ -585,7 +585,7 @@ public class ClientSessionServiceTest {
         assertSame(registeredUser2, session.getRegisteredUser());
 
         verify(service.getRegisteredUserDao()).retrieveRegisteredUser("user");
-        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser((RegisteredUser) any());
+        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser(isA(RegisteredUser.class));
         verifyZeroInteractions(service.getNotificationService());
 
         verify(service.getAuditEventDao(), times(1)).insertAuditEvent(auditEvent.capture());
@@ -678,7 +678,7 @@ public class ClientSessionServiceTest {
         assertSame(registeredUser2, session.getRegisteredUser());
 
         verify(service.getRegisteredUserDao()).retrieveRegisteredUser("user");
-        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser((RegisteredUser) any());
+        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser(isA(RegisteredUser.class));
         verifyZeroInteractions(service.getNotificationService());
 
         verify(service.getAuditEventDao(), times(1)).insertAuditEvent(auditEvent.capture());
@@ -771,7 +771,7 @@ public class ClientSessionServiceTest {
         assertSame(registeredUser2, session.getRegisteredUser());
 
         verify(service.getRegisteredUserDao()).retrieveRegisteredUser("user");
-        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser((RegisteredUser) any());
+        verify(service.getRegisteredUserDao(), never()).insertRegisteredUser(isA(RegisteredUser.class));
         verifyZeroInteractions(service.getNotificationService());
 
         verify(service.getAuditEventDao(), times(1)).insertAuditEvent(auditEvent.capture());
