@@ -28,6 +28,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -240,7 +241,7 @@ public class ExchangeRpcTest {
 
         ExchangeRpc rpc = createRpc();
         when(rpc.getClientSessionService().retrieveClientSession().getCurrentUser().getUserId()).thenReturn("me");
-        when(rpc.getExchangeDao().insertExchange(Mockito.any(Exchange.class))).thenReturn(42L);
+        when(rpc.getExchangeDao().insertExchange(isA(Exchange.class))).thenReturn(42L);
         when(rpc.getAuditEventService().buildCreateExchangeEvent(42L)).thenReturn(event);
 
         Exchange exchange = rpc.createExchange("name");

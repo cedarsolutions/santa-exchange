@@ -27,8 +27,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -152,29 +152,29 @@ public class ExchangeListTabViewTest extends StubbedClientTestCase {
 
         when(view.getDeleteHandler()).thenReturn(deleteEventHandler);
         handler.onClick(null);  // just make sure it doesn't blow up
-        order.verify(deleteEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(deleteEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         verify(view, times(0)).showDeletePopup(anyInt());
 
         when(view.getDeleteHandler()).thenReturn(null);
         handler.onClick(event);
-        order.verify(deleteEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(deleteEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         order.verify(view, times(0)).showDeletePopup(anyInt());
 
         when(view.getDeleteHandler()).thenReturn(deleteEventHandler);
         handler.onClick(event);
-        order.verify(deleteEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(deleteEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         verify(view, times(0)).showDeletePopup(anyInt());
 
         when(view.getDeleteHandler()).thenReturn(deleteEventHandler);
         selected.add(mock(Exchange.class));
         handler.onClick(event);
-        order.verify(deleteEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(deleteEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         verify(view, times(1)).showDeletePopup(1);
 
         when(view.getDeleteHandler()).thenReturn(deleteEventHandler);
         selected.add(mock(Exchange.class));
         handler.onClick(event);
-        order.verify(deleteEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(deleteEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         verify(view, times(1)).showDeletePopup(2);
     }
 

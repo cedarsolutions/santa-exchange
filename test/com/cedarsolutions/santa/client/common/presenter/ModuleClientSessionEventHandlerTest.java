@@ -29,6 +29,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -76,7 +77,7 @@ public class ModuleClientSessionEventHandlerTest extends StubbedClientTestCase {
         handler.onInitializeSession(eventType, params);
 
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(handler.getClientSessionRpc()).establishClientSession(module.capture(), logoutDestinationUrl.capture(), any(RpcCallback.class));
+        verify(handler.getClientSessionRpc()).establishClientSession(module.capture(), logoutDestinationUrl.capture(), isA(RpcCallback.class));
         assertEquals(Module.ROOT, module.getValue()); // defined in ConcreteModuleClientSessionEventHandler
     }
 
@@ -89,7 +90,7 @@ public class ModuleClientSessionEventHandlerTest extends StubbedClientTestCase {
         handler.onClearSession();
 
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(handler.getClientSessionRpc()).invalidateClientSession(module.capture(), any(RpcCallback.class));
+        verify(handler.getClientSessionRpc()).invalidateClientSession(module.capture(), isA(RpcCallback.class));
         assertSame(handler.getModule(), module.getValue());
     }
 
@@ -102,7 +103,7 @@ public class ModuleClientSessionEventHandlerTest extends StubbedClientTestCase {
         handler.onClearSession();
 
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(handler.getClientSessionRpc()).invalidateClientSession(module.capture(), any(RpcCallback.class));
+        verify(handler.getClientSessionRpc()).invalidateClientSession(module.capture(), isA(RpcCallback.class));
         assertSame(handler.getModule(), module.getValue());
     }
 
@@ -125,7 +126,7 @@ public class ModuleClientSessionEventHandlerTest extends StubbedClientTestCase {
         assertEquals(Module.ROOT, caller.module);
 
         caller.invoke();
-        verify(caller.getAsync()).establishClientSession(eq(Module.ROOT), eq("destinationUrl"), any(RpcCallback.class));
+        verify(caller.getAsync()).establishClientSession(eq(Module.ROOT), eq("destinationUrl"), isA(RpcCallback.class));
 
         assertTrue(caller.isExceptionRetryable(null)); // any exception yields true
 
@@ -195,7 +196,7 @@ public class ModuleClientSessionEventHandlerTest extends StubbedClientTestCase {
 
         caller.setMethodArguments(Module.ROOT);
         caller.invoke();
-        verify(clientSessionRpc).invalidateClientSession(eq(Module.ROOT), any(RpcCallback.class));
+        verify(clientSessionRpc).invalidateClientSession(eq(Module.ROOT), isA(RpcCallback.class));
 
         caller.onSuccessResult(null);
         verify(session).clear();

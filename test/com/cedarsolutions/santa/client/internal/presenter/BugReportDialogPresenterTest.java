@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -65,7 +65,7 @@ public class BugReportDialogPresenterTest extends StubbedClientTestCase {
     @Test public void testBind() {
         BugReportDialogPresenter presenter = createPresenter();
         presenter.bind();
-        verify(presenter.getView()).setSubmitEventHandler(any(SubmitEventHandler.class));
+        verify(presenter.getView()).setSubmitEventHandler(isA(SubmitEventHandler.class));
     }
 
     /** Test onShowBugReportDialog(). */

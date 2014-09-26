@@ -26,7 +26,7 @@ import static com.cedarsolutions.santa.client.SantaExchangeEventTypes.ACCOUNT_LO
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -65,7 +65,7 @@ public class LoginEventHandlerTest extends StubbedClientTestCase {
         handler.onShowLoginPageForToken(OpenIdProvider.GOOGLE, "whatever");
 
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(handler.getGaeUserRpc()).getLoginUrl(openIdProvider.capture(), destinationUrl.capture(), any(RpcCallback.class));
+        verify(handler.getGaeUserRpc()).getLoginUrl(openIdProvider.capture(), destinationUrl.capture(), isA(RpcCallback.class));
         assertEquals(OpenIdProvider.GOOGLE, openIdProvider.getValue());
         assertEquals("http://whatever", destinationUrl.getValue());
     }
@@ -79,7 +79,7 @@ public class LoginEventHandlerTest extends StubbedClientTestCase {
         handler.onShowLoginPageForUrl(OpenIdProvider.GOOGLE, "whatever");
 
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(handler.getGaeUserRpc()).getLoginUrl(openIdProvider.capture(), destinationUrl.capture(), any(RpcCallback.class));
+        verify(handler.getGaeUserRpc()).getLoginUrl(openIdProvider.capture(), destinationUrl.capture(), isA(RpcCallback.class));
         assertEquals(OpenIdProvider.GOOGLE, openIdProvider.getValue());
         assertEquals("whatever", destinationUrl.getValue());
     }
@@ -108,7 +108,7 @@ public class LoginEventHandlerTest extends StubbedClientTestCase {
         when(WidgetUtils.getInstance().getDestinationUrl(ACCOUNT_LOCKED_PAGE)).thenReturn("whatever");
         LoginEventHandler handler = createEventHandler();
         handler.onLockOutUser();
-        verify(handler.getGaeUserRpc()).getLogoutUrl(destination.capture(), any(RpcCallback.class));
+        verify(handler.getGaeUserRpc()).getLogoutUrl(destination.capture(), isA(RpcCallback.class));
         assertEquals("whatever", destination.getValue());
     }
 

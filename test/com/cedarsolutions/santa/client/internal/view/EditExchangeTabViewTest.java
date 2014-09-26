@@ -27,7 +27,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -137,12 +137,12 @@ public class EditExchangeTabViewTest extends StubbedClientTestCase {
 
         when(view.getResetHandler()).thenReturn(null);
         handler.onClick(event);  // just make sure it doesn't blow up
-        order.verify(resetEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(resetEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         order.verify(view, never()).showResetConfirmPopup();
 
         when(view.getResetHandler()).thenReturn(resetEventHandler);
         handler.onClick(event);
-        order.verify(resetEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(resetEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         order.verify(view).showResetConfirmPopup();
     }
 
@@ -244,28 +244,28 @@ public class EditExchangeTabViewTest extends StubbedClientTestCase {
         when(view.getEditState().getAssignments()).thenReturn(notempty);
         when(view.getSendAllNotificationsHandler()).thenReturn(null);
         handler.onClick(event);  // just make sure it doesn't blow up
-        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         order.verify(view, never()).showSendConfirmPopup();
         order.verify(view, never()).showResendConfirmPopup();
 
         when(view.getEditState().getAssignments()).thenReturn(null);
         when(view.getSendAllNotificationsHandler()).thenReturn(sendAllNotificationsEventHandler);
         handler.onClick(event);
-        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         order.verify(view).showSendConfirmPopup();
         order.verify(view, never()).showResendConfirmPopup();
 
         when(view.getEditState().getAssignments()).thenReturn(empty);
         when(view.getSendAllNotificationsHandler()).thenReturn(sendAllNotificationsEventHandler);
         handler.onClick(event);
-        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         order.verify(view).showSendConfirmPopup();
         order.verify(view, never()).showResendConfirmPopup();
 
         when(view.getEditState().getAssignments()).thenReturn(notempty);
         when(view.getSendAllNotificationsHandler()).thenReturn(sendAllNotificationsEventHandler);
         handler.onClick(event);
-        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(any(UnifiedEvent.class));
+        order.verify(sendAllNotificationsEventHandler, never()).handleEvent(isA(UnifiedEvent.class));
         order.verify(view, never()).showSendConfirmPopup();
         order.verify(view).showResendConfirmPopup();
     }

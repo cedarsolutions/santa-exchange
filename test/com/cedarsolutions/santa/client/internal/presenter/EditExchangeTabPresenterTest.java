@@ -27,7 +27,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -89,15 +89,15 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
     @Test public void testBind() {
         EditExchangeTabPresenter presenter = createPresenter();
         presenter.bind();
-        verify(presenter.getView()).setSaveHandler(any(SaveHandler.class));
-        verify(presenter.getView()).setResetHandler(any(ResetHandler.class));
-        verify(presenter.getView()).setReturnToListHandler(any(ReturnToListHandler.class));
-        verify(presenter.getView()).setAddParticipantHandler(any(AddParticipantHandler.class));
-        verify(presenter.getView()).setEditParticipantHandler(any(EditParticipantHandler.class));
-        verify(presenter.getView()).setDeleteParticipantHandler(any(DeleteParticipantHandler.class));
-        verify(presenter.getView()).setSendAllNotificationsHandler(any(SendAllNotificationsHandler.class));
-        verify(presenter.getView()).setResendNotificationHandler(any(ResendNotificationHandler.class));
-        verify(presenter.getView()).setPreviewHandler(any(PreviewHandler.class));
+        verify(presenter.getView()).setSaveHandler(isA(SaveHandler.class));
+        verify(presenter.getView()).setResetHandler(isA(ResetHandler.class));
+        verify(presenter.getView()).setReturnToListHandler(isA(ReturnToListHandler.class));
+        verify(presenter.getView()).setAddParticipantHandler(isA(AddParticipantHandler.class));
+        verify(presenter.getView()).setEditParticipantHandler(isA(EditParticipantHandler.class));
+        verify(presenter.getView()).setDeleteParticipantHandler(isA(DeleteParticipantHandler.class));
+        verify(presenter.getView()).setSendAllNotificationsHandler(isA(SendAllNotificationsHandler.class));
+        verify(presenter.getView()).setResendNotificationHandler(isA(ResendNotificationHandler.class));
+        verify(presenter.getView()).setPreviewHandler(isA(PreviewHandler.class));
     }
 
     /** Test onShowEditExchangePage(). */
@@ -108,7 +108,7 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
         presenter.onShowEditExchangePage(12L);
         InOrder order = Mockito.inOrder(WidgetUtils.getInstance(), presenter.getExchangeRpc());
         order.verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        order.verify(presenter.getExchangeRpc()).retrieveExchange(exchangeId.capture(), any(RpcCallback.class));
+        order.verify(presenter.getExchangeRpc()).retrieveExchange(exchangeId.capture(), isA(RpcCallback.class));
         assertEquals(new Long(12), exchangeId.getValue());
     }
 
@@ -151,7 +151,7 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
         handler.handleEvent(null); // actual event doesn't matter
         InOrder order = Mockito.inOrder(WidgetUtils.getInstance(), presenter.getExchangeRpc());
         order.verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        order.verify(presenter.getExchangeRpc()).saveExchange(exchangeCaptor.capture(), any(RpcCallback.class));
+        order.verify(presenter.getExchangeRpc()).saveExchange(exchangeCaptor.capture(), isA(RpcCallback.class));
         assertEquals(exchangeAtEnd, exchangeCaptor.getValue());
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
@@ -207,7 +207,7 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
         handler.handleEvent(null); // actual event doesn't matter
         InOrder order = Mockito.inOrder(WidgetUtils.getInstance(), presenter.getExchangeRpc());
         order.verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        order.verify(presenter.getExchangeRpc()).saveExchange(exchangeCaptor.capture(), any(RpcCallback.class));
+        order.verify(presenter.getExchangeRpc()).saveExchange(exchangeCaptor.capture(), isA(RpcCallback.class));
         assertEquals(exchangeAtEnd, exchangeCaptor.getValue());
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
@@ -349,7 +349,7 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
         handler.handleEvent(event);
         InOrder order = Mockito.inOrder(WidgetUtils.getInstance(), presenter.getExchangeRpc());
         order.verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        order.verify(presenter.getExchangeRpc()).sendNotifications(exchangeCaptor.capture(), any(RpcCallback.class));
+        order.verify(presenter.getExchangeRpc()).sendNotifications(exchangeCaptor.capture(), isA(RpcCallback.class));
         assertEquals(exchangeAtEnd, exchangeCaptor.getValue());
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
@@ -392,7 +392,7 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
         handler.handleEvent(event);
         InOrder order = Mockito.inOrder(WidgetUtils.getInstance(), presenter.getExchangeRpc());
         order.verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        order.verify(presenter.getExchangeRpc()).resendNotification(exchangeCaptor.capture(), participantsCaptor.capture(), any(RpcCallback.class));
+        order.verify(presenter.getExchangeRpc()).resendNotification(exchangeCaptor.capture(), participantsCaptor.capture(), isA(RpcCallback.class));
         assertEquals(exchangeAtEnd, exchangeCaptor.getValue());
         assertEquals(selected, participantsCaptor.getValue());
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
@@ -424,7 +424,7 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
         handler.handleEvent(null); // actual event doesn't matter
         InOrder order = Mockito.inOrder(WidgetUtils.getInstance(), presenter.getExchangeRpc());
         order.verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        order.verify(presenter.getExchangeRpc()).generatePreview(exchangeCaptor.capture(), any(RpcCallback.class));
+        order.verify(presenter.getExchangeRpc()).generatePreview(exchangeCaptor.capture(), isA(RpcCallback.class));
         assertEquals(exchangeAtEnd, exchangeCaptor.getValue());
         assertEquals(exchangeAtStart, presenter.getManager().getUndoState());
         assertEquals(exchangeAtEnd, presenter.getManager().getEditState());
@@ -470,7 +470,7 @@ public class EditExchangeTabPresenterTest extends StubbedClientTestCase {
         assertEquals(constants.editExchange_chooseAnotherExchange(), error.getValue().getSupportingTextItems().get(0));
 
         caller.onUnhandledError(new Exception());
-        order.verify(WidgetUtils.getInstance()).showErrorPopup(any(ErrorDescription.class));
+        order.verify(WidgetUtils.getInstance()).showErrorPopup(isA(ErrorDescription.class));
         order.verify(presenter.getEventBus()).showExchangeListPage();
     }
 

@@ -27,7 +27,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -45,6 +45,7 @@ import org.mockito.Mockito;
 import com.cedarsolutions.client.gwt.datasource.BackendDataCriteriaResetHandler;
 import com.cedarsolutions.client.gwt.datasource.BackendDataInitializeHandler;
 import com.cedarsolutions.client.gwt.datasource.BackendDataRefreshHandler;
+import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.rpc.util.RpcCallback;
 import com.cedarsolutions.santa.client.admin.AdminEventBus;
 import com.cedarsolutions.santa.client.admin.presenter.UserTabPresenter.DeleteHandler;
@@ -76,16 +77,19 @@ public class UserTabPresenterTest extends StubbedClientTestCase {
 
     /** Test bind(). */
     @Test public void testBind() {
+        ViewEventHandler refreshEventHandler = mock(ViewEventHandler.class);
         UserTabPresenter presenter = createPresenter();
         when(presenter.getEventBus().selectUserTab()).thenReturn("token");
+        when(presenter.getView().getRefreshEventHandler()).thenReturn(refreshEventHandler);
+
         presenter.bind();
-        verify(presenter.getView()).setInitializationEventHandler(any(BackendDataInitializeHandler.class));
-        verify(presenter.getView()).setRefreshEventHandler(any(BackendDataRefreshHandler.class));
-        verify(presenter.getView()).setCriteriaResetEventHandler(any(BackendDataCriteriaResetHandler.class));
-        verify(presenter.getView()).setSelectedEventHandler(any(BackendDataRefreshHandler.class));
-        verify(presenter.getView()).setDeleteEventHandler(any(DeleteHandler.class));
-        verify(presenter.getView()).setLockEventHandler(any(LockHandler.class));
-        verify(presenter.getView()).setUnlockEventHandler(any(UnlockHandler.class));
+        verify(presenter.getView()).setInitializationEventHandler(isA(BackendDataInitializeHandler.class));
+        verify(presenter.getView()).setRefreshEventHandler(isA(BackendDataRefreshHandler.class));
+        verify(presenter.getView()).setCriteriaResetEventHandler(isA(BackendDataCriteriaResetHandler.class));
+        verify(presenter.getView()).setSelectedEventHandler(refreshEventHandler);
+        verify(presenter.getView()).setDeleteEventHandler(isA(DeleteHandler.class));
+        verify(presenter.getView()).setLockEventHandler(isA(LockHandler.class));
+        verify(presenter.getView()).setUnlockEventHandler(isA(UnlockHandler.class));
         verify(presenter.getView()).setHistoryToken("token");
     }
 
@@ -161,7 +165,7 @@ public class UserTabPresenterTest extends StubbedClientTestCase {
         ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
 
         handler.handleEvent(null); // event does not matter
-        verify(presenter.getAdminRpc()).deleteRegisteredUsers(captor.capture(), any(RpcCallback.class));
+        verify(presenter.getAdminRpc()).deleteRegisteredUsers(captor.capture(), isA(RpcCallback.class));
         assertSame(records, captor.getValue());
     }
 
@@ -184,7 +188,7 @@ public class UserTabPresenterTest extends StubbedClientTestCase {
         ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
 
         handler.handleEvent(null); // event does not matter
-        verify(presenter.getAdminRpc()).lockRegisteredUsers(captor.capture(), any(RpcCallback.class));
+        verify(presenter.getAdminRpc()).lockRegisteredUsers(captor.capture(), isA(RpcCallback.class));
         assertSame(records, captor.getValue());
     }
 
@@ -207,7 +211,7 @@ public class UserTabPresenterTest extends StubbedClientTestCase {
         ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
 
         handler.handleEvent(null); // event does not matter
-        verify(presenter.getAdminRpc()).unlockRegisteredUsers(captor.capture(), any(RpcCallback.class));
+        verify(presenter.getAdminRpc()).unlockRegisteredUsers(captor.capture(), isA(RpcCallback.class));
         assertSame(records, captor.getValue());
     }
 
