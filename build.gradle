@@ -31,7 +31,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.googlecode.cedar-common:cedar-build:0.8.9"
+        classpath "com.googlecode.cedar-common:cedar-build:0.8.10"
     }
 }
 
@@ -102,6 +102,7 @@ cedarCucumber {
     cucumberDir = "acceptance"
     featuresSubdir = "cucumber"
     rubySubdir = "ruby"
+    cucumberFormatter = "Formatter::Cedar"
 }
 
 repositories {
