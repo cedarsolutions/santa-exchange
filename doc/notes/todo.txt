@@ -1,19 +1,8 @@
 Things to do:
 
-- Incrementally implement Cucumber acceptance tests for most of the site
-- Pull up cucumber, GWT, and app engine stuff into a Gradle plugin
-- Come up with a better Gradle way to label code that doesn't require building the entire application
-  - This is probably a Groovy method that regex-parses a GWT constants file for String and Integer
+- cleanup tables similarly to what I did in other SE-based applications
+- refactoring with new simple action handlers, maybe
+- clean up unit tests for action handlers, tables, etc. so they're testing
+  only the implementation (not the underlying stuff done by the parent class)
+- incrementally implement Cucumber acceptance tests for more of the site
 
-
-build script refactoring:
-
-  cucumber stuff (with acceptance test)
-
-GWT devmode stuff (coupleed with appengine) -- single cedarGwtAppEngine plugin ?
-   - also includes the standard gae plugin
-   - includes getAppEngineSdkDir()
-   - not sure how I handle the devmode runtime dependency -- manually?
-
-If I do these, most remaining ugliness is in the eclipse stuff
-I can look at what to factor out there, too.
