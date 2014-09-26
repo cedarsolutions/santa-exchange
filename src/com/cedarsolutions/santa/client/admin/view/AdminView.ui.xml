@@ -25,6 +25,8 @@
                 <g:HTMLPanel styleName="left">
                     <h1><g:Label ui:field="title" /></h1>
                 </g:HTMLPanel>
+                <g:HTMLPanel styleName="center">
+                </g:HTMLPanel>
                 <g:HTMLPanel styleName="right">
                     <g:MenuBar stylePrimaryName="ss-MainMenuBar" ui:field="menuBar" animationEnabled="false" autoOpen="true">
                         <g:MenuItem ui:field="mainMenu">

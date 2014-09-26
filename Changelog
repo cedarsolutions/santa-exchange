@@ -6,6 +6,7 @@ Version 0.9.38   unreleased
     * Bump up to AppEngine v1.9.11, since v1.9.6 is getting kind of old.
     * Be more strict about using Mockito's isA() in unit tests rather than any().
     * Add a global uncaught exception handler to catch and display UI errors.
+    * Fix the bottom border on top menu by using position:absolute instead of position:fixed.
 
 Version 0.9.37   08 Jul 2014
 
