@@ -87,9 +87,12 @@ cedarGwtOnGae {
 
     gwtCompilerMemory = config_gwtCompilerMemory
     unittestMemory = config_unittestMemory
+    unittestPermgen = config_unittestPermgen
     clienttestMemory = config_clienttestMemory
+    clienttestPermgen = config_clienttestPermgen
 
     devmodeServerMemory = config_devmodeServerMemory
+    devmodeServerPermgen = config_devmodeServerPermgen
     devmodeCodeserverPort = config_devmodeCodeserverPort
     devmodeServerPort = config_devmodeServerPort
     serverWait = config_serverWait
@@ -102,6 +105,7 @@ cedarCucumber {
     cucumberDir = "acceptance"
     featuresSubdir = "cucumber"
     rubySubdir = "ruby"
+    jrubyCucumberMemory = config_jrubyCucumberMemory
     cucumberFormatter = "Formatter::Cedar"
 }
 

@@ -12,6 +12,7 @@ Version 0.9.38   unreleased
     * Pull in improvements to Cucumber utility functions in extensions.rb.
     * Remove the locked.feature Cucucmber test suite, which could not be made to pass reliably.
     * Implement a new Cucumber output formatter that's more succinct and easier to read.
+    * Add configuration for memory and permgen space.
 
 Version 0.9.37   08 Jul 2014
 
