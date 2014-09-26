@@ -22,6 +22,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.server.rpc.impl;
 
+import static com.cedarsolutions.util.ServiceExceptionUtils.createServiceException;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -105,7 +107,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error retrieving exchange: " + e.getMessage(), e);
-            throw new ServiceException("Error retrieving exchange: " + e.getMessage(), e);
+            throw createServiceException("Error retrieving exchange: " + e.getMessage(), e);
         }
     }
 
@@ -128,7 +130,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error getting exchanges: " + e.getMessage(), e);
-            throw new ServiceException("Error getting exchanges: " + e.getMessage(), e);
+            throw createServiceException("Error getting exchanges: " + e.getMessage(), e);
         }
     }
 
@@ -160,7 +162,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error creating exchange: " + e.getMessage(), e);
-            throw new ServiceException("Error creating exchange: " + e.getMessage(), e);
+            throw createServiceException("Error creating exchange: " + e.getMessage(), e);
         }
     }
 
@@ -183,7 +185,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error deleting exchanges: " + e.getMessage(), e);
-            throw new ServiceException("Error deleting exchanges: " + e.getMessage(), e);
+            throw createServiceException("Error deleting exchanges: " + e.getMessage(), e);
         }
     }
 
@@ -209,7 +211,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error saving exchange: " + e.getMessage(), e);
-            throw new ServiceException("Error saving exchange: " + e.getMessage(), e);
+            throw createServiceException("Error saving exchange: " + e.getMessage(), e);
         }
     }
 
@@ -251,7 +253,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error sending notifications: " + e.getMessage(), e);
-            throw new ServiceException("Error sending notifications: " + e.getMessage(), e);
+            throw createServiceException("Error sending notifications: " + e.getMessage(), e);
         }
     }
 
@@ -292,7 +294,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error resending notification: " + e.getMessage(), e);
-            throw new ServiceException("Error resending notification: " + e.getMessage(), e);
+            throw createServiceException("Error resending notification: " + e.getMessage(), e);
         }
     }
 
@@ -314,7 +316,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error generating preview: " + e.getMessage(), e);
-            throw new ServiceException("Error generating preview: " + e.getMessage(), e);
+            throw createServiceException("Error generating preview: " + e.getMessage(), e);
         }
     }
 

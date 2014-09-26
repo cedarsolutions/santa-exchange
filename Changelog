@@ -7,6 +7,7 @@ Version 0.9.38   unreleased
     * Be more strict about using Mockito's isA() in unit tests rather than any().
     * Add a global uncaught exception handler to catch and display UI errors.
     * Fix the bottom border on top menu by using position:absolute instead of position:fixed.
+    * Update RPCs to throw service exceptions using ServiceExceptionUtils.createServiceException().
 
 Version 0.9.37   08 Jul 2014
 

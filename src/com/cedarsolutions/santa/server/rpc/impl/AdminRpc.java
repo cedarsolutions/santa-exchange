@@ -25,6 +25,7 @@ package com.cedarsolutions.santa.server.rpc.impl;
 import static com.cedarsolutions.santa.shared.domain.MessageKeys.INVALID;
 import static com.cedarsolutions.santa.shared.domain.MessageKeys.NULL;
 import static com.cedarsolutions.santa.shared.domain.MessageKeys.REQUIRED;
+import static com.cedarsolutions.util.ServiceExceptionUtils.createServiceException;
 
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class AdminRpc extends AbstractService implements IAdminRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error retrieving audit events: " + e.getMessage(), e);
-            throw new ServiceException("Error retrieving audit events: " + e.getMessage(), e);
+            throw createServiceException("Error retrieving audit events: " + e.getMessage(), e);
         }
     }
 
@@ -118,7 +119,7 @@ public class AdminRpc extends AbstractService implements IAdminRpc {
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error retrieving registered users: " + e.getMessage(), e);
-            throw new ServiceException("Error retrieving registered users: " + e.getMessage(), e);
+            throw createServiceException("Error retrieving registered users: " + e.getMessage(), e);
         }
     }
 
@@ -137,7 +138,7 @@ public class AdminRpc extends AbstractService implements IAdminRpc {
             }
         } catch (Exception e) {
             LOGGER.error("Error deleting registered users: " + e.getMessage(), e);
-            throw new ServiceException("Error deleting registered users: " + e.getMessage(), e);
+            throw createServiceException("Error deleting registered users: " + e.getMessage(), e);
         }
     }
 
@@ -156,7 +157,7 @@ public class AdminRpc extends AbstractService implements IAdminRpc {
             }
         } catch (Exception e) {
             LOGGER.error("Error locking registered users: " + e.getMessage(), e);
-            throw new ServiceException("Error locking registered users: " + e.getMessage(), e);
+            throw createServiceException("Error locking registered users: " + e.getMessage(), e);
         }
     }
 
@@ -175,7 +176,7 @@ public class AdminRpc extends AbstractService implements IAdminRpc {
             }
         } catch (Exception e) {
             LOGGER.error("Error unlocking registered users: " + e.getMessage(), e);
-            throw new ServiceException("Error unlocking registered users: " + e.getMessage(), e);
+            throw createServiceException("Error unlocking registered users: " + e.getMessage(), e);
         }
     }
 
