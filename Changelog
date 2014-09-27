@@ -1,4 +1,4 @@
-Version 0.9.38   unreleased
+Version 0.9.38   26 Sep 2014
 
     * Bump up to CedarBuild v0.8.10, to get Cucumber-related improvements.
     * Bump up to CedarCommon v4.8.0, to get updated date format in JavaLoggingFormatter.
