@@ -117,7 +117,7 @@ public class InternalHistoryConverter implements HistoryConverter<InternalEventB
     /** Dispatch history tokens for INTERNAL_EDIT_EXCHANGE. */
     private boolean dispatchInternalEditExchange(String eventType, String param, InternalEventBus eventBus) {
         if (!GwtStringUtils.isEmpty(param) && param.matches("^[0-9]+$")) {
-            long exchangeId = Integer.valueOf(param);
+            long exchangeId = Long.valueOf(param);
             if (this.getManager().isActive()) {
                 if (this.getManager().getEditState().getId().equals(exchangeId)) {
                     eventBus.editCurrentExchange();
@@ -141,8 +141,8 @@ public class InternalHistoryConverter implements HistoryConverter<InternalEventB
     private boolean dispatchInternalEditParticipant(String eventType, String param, InternalEventBus eventBus) {
         if (!GwtStringUtils.isEmpty(param) && param.matches("^[0-9]+[-][0-9]+$")) {
             String[] values = param.split("-");
-            long exchangeId = Integer.valueOf(values[0]);
-            long participantId = Integer.valueOf(values[1]);
+            long exchangeId = Long.valueOf(values[0]);
+            long participantId = Long.valueOf(values[1]);
             if (this.getManager().isActive()) {
                 if (this.getManager().getEditState().getId().equals(exchangeId)) {
                     Participant participant = this.getManager().getEditState().getParticipantById(participantId);
