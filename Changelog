@@ -1,4 +1,4 @@
-Version 0.9.39   unreleased
+Version 0.9.39   09 Oct 2014
 
     * Use Long.valueOf() and not Integer.valueOf() when assigning to a long, duh.
 
@@ -14,7 +14,7 @@ Version 0.9.38   26 Sep 2014
     * Fix the bottom border on top menu by using position:absolute instead of position:fixed.
     * Update RPCs to throw service exceptions using ServiceExceptionUtils.createServiceException().
     * Pull in improvements to Cucumber utility functions in extensions.rb.
-    * Remove the locked.feature Cucucmber test suite, which could not be made to pass reliably.
+    * Remove the locked.feature Cucumber test suite, which could not be made to pass reliably.
     * Implement a new Cucumber output formatter that's more succinct and easier to read.
     * Add configuration for memory and permgen space.
     * Add Gradle support for Checkstyle, Jacoco coverage, and JavaNCSS metrics.
