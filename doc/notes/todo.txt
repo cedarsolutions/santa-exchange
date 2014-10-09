@@ -5,4 +5,5 @@ Things to do:
 - clean up unit tests for action handlers, tables, etc. so they're testing
   only the implementation (not the underlying stuff done by the parent class)
 - incrementally implement Cucumber acceptance tests for more of the site
+- Checkstyle should ignore gradle suites, otherwise we get warnings about bad packages
 
