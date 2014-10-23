@@ -1,3 +1,8 @@
+Version 0.9.40   unreleased
+
+    * Bump up to CedarCommon v4.9.0, to get new GwtCacheControlFilter class.
+    * Try to improve deploy behavior with better cache configuration for GWT files.
+
 Version 0.9.39   09 Oct 2014
 
     * Use Long.valueOf() and not Integer.valueOf() when assigning to a long, duh.
