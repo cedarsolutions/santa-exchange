@@ -1,4 +1,4 @@
-Version 0.9.40   unreleased
+Version 0.9.40   23 Oct 2014
 
     * Bump up to CedarCommon v4.9.0, to get new GwtCacheControlFilter class.
     * Try to improve deploy behavior with better cache configuration for GWT files.
