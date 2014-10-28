@@ -1,3 +1,7 @@
+Version 0.9.41   unreleased
+
+    * Bump up to CedarCommon v4.9.1 to get improvements for multi-tabbed views.
+
 Version 0.9.40   23 Oct 2014
 
     * Bump up to CedarCommon v4.9.0, to get new GwtCacheControlFilter class.
