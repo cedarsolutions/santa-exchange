@@ -61,13 +61,13 @@ public class ParticipantListClientTest extends ClientTestCase {
 
         assertEquals(1, list.getVisibleItemCount());
         assertEquals(2, list.getItemCount());
-        assertEquals(participant1, list.getSelectedValue());
+        assertEquals(participant1, list.getSelectedObjectValue());
         assertEquals("name1 (email1)", list.getItemText(0));
         assertEquals("name2 (email2)", list.getItemText(1));
     }
 
     /** Check that every value can be selected. */
-    public void testSetSelectedValue() {
+    public void testsetSelectedObjectValue() {
         Participant participant1 = new Participant();
         participant1.setId(1L);
         participant1.setName("name1");
@@ -85,14 +85,14 @@ public class ParticipantListClientTest extends ClientTestCase {
         ParticipantList list = new ParticipantList();
         list.setParticipants(participants);
 
-        list.setSelectedValue(null);
-        assertEquals(participant1, list.getSelectedValue());
+        list.setSelectedObjectValue(null);
+        assertEquals(participant1, list.getSelectedObjectValue());
 
-        list.setSelectedValue(participant2);
-        assertEquals(participant2, list.getSelectedValue());
+        list.setSelectedObjectValue(participant2);
+        assertEquals(participant2, list.getSelectedObjectValue());
 
-        list.setSelectedValue(participant1);
-        assertEquals(participant1, list.getSelectedValue());
+        list.setSelectedObjectValue(participant1);
+        assertEquals(participant1, list.getSelectedObjectValue());
     }
 
 }

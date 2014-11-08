@@ -37,40 +37,40 @@ public class OpenIdProviderListClientTest extends ClientTestCase {
         OpenIdProviderList list = new OpenIdProviderList();
         assertNotNull(list);
         assertEquals(1, list.getVisibleItemCount());
-        assertEquals(OpenIdProviderList.DEFAULT_SELECTION, list.getSelectedValue());
+        assertEquals(OpenIdProviderList.DEFAULT_SELECTION, list.getSelectedObjectValue());
         assertEquals(5, list.getItemCount());
 
         list = new OpenIdProviderList(true);
         assertNotNull(list);
         assertEquals(1, list.getVisibleItemCount());
-        assertEquals(null, list.getSelectedValue());
+        assertEquals(null, list.getSelectedObjectValue());
         assertEquals(6, list.getItemCount());
     }
 
     /** Check that every value can be selected. */
-    public void testSetSelectedValue() {
+    public void testsetSelectedObjectValue() {
         OpenIdProviderList list = new OpenIdProviderList(true);
 
-        list.setSelectedValue(null);
-        assertEquals(null, list.getSelectedValue());
+        list.setSelectedObjectValue(null);
+        assertEquals(null, list.getSelectedObjectValue());
 
-        list.setSelectedValue(OpenIdProvider.UNKNOWN);
-        assertEquals(null, list.getSelectedValue());
+        list.setSelectedObjectValue(OpenIdProvider.UNKNOWN);
+        assertEquals(null, list.getSelectedObjectValue());
 
-        list.setSelectedValue(OpenIdProvider.GOOGLE);
-        assertEquals(OpenIdProvider.GOOGLE, list.getSelectedValue());
+        list.setSelectedObjectValue(OpenIdProvider.GOOGLE);
+        assertEquals(OpenIdProvider.GOOGLE, list.getSelectedObjectValue());
 
-        list.setSelectedValue(OpenIdProvider.YAHOO);
-        assertEquals(OpenIdProvider.YAHOO, list.getSelectedValue());
+        list.setSelectedObjectValue(OpenIdProvider.YAHOO);
+        assertEquals(OpenIdProvider.YAHOO, list.getSelectedObjectValue());
 
-        list.setSelectedValue(OpenIdProvider.MYSPACE);
-        assertEquals(OpenIdProvider.MYSPACE, list.getSelectedValue());
+        list.setSelectedObjectValue(OpenIdProvider.MYSPACE);
+        assertEquals(OpenIdProvider.MYSPACE, list.getSelectedObjectValue());
 
-        list.setSelectedValue(OpenIdProvider.AOL);
-        assertEquals(OpenIdProvider.AOL, list.getSelectedValue());
+        list.setSelectedObjectValue(OpenIdProvider.AOL);
+        assertEquals(OpenIdProvider.AOL, list.getSelectedObjectValue());
 
-        list.setSelectedValue(OpenIdProvider.MYOPENID);
-        assertEquals(OpenIdProvider.MYOPENID, list.getSelectedValue());
+        list.setSelectedObjectValue(OpenIdProvider.MYOPENID);
+        assertEquals(OpenIdProvider.MYOPENID, list.getSelectedObjectValue());
     }
 
     /** Check that every provider name is localized properly. */

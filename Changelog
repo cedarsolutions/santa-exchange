@@ -1,3 +1,9 @@
+Version 0.9.42   unreleased
+
+    * Bump up to CedarCommon v5.0.0 and CedarBuild v0.8.11 to get support for GWT 2.7.x.
+    * Bump up to AppEngine v1.9.15 and upgrade a variety of other dependencies to latest version.
+    * Update client code that uses AbstractDropdownList to handle change in interface.
+
 Version 0.9.41   28 Oct 2014
 
     * Bump up to CedarCommon v4.9.1 to get improvements for multi-tabbed views.

@@ -44,7 +44,7 @@ public class ParticipantList extends DropdownList<Participant> {
                 this.addDropdownItem(participant);
             }
 
-            this.setSelectedValue(participants.get(0));
+            this.setSelectedObjectValue(participants.get(0));
         }
 
         this.setVisibleItemCount(1);

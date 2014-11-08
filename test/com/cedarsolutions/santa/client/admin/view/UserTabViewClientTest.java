@@ -216,19 +216,19 @@ public class UserTabViewClientTest extends ClientTestCase {
         assertEquals(constants.userTab_openIdProviderCriteria(), view.providerLabel.getText());
 
         assertNotNull(view.providerInput);
-        assertEquals(null, view.providerInput.getSelectedValue());  // null == any
+        assertEquals(null, view.providerInput.getSelectedObjectValue());  // null == any
 
         assertNotNull(view.adminLabel);
         assertEquals(constants.userTab_adminCriteria(), view.adminLabel.getText());
 
         assertNotNull(view.adminInput);
-        assertEquals(null, view.adminInput.getSelectedValue());  // null == any
+        assertEquals(null, view.adminInput.getSelectedObjectValue());  // null == any
 
         assertNotNull(view.lockedLabel);
         assertEquals(constants.userTab_lockedCriteria(), view.lockedLabel.getText());
 
         assertNotNull(view.lockedInput);
-        assertEquals(null, view.lockedInput.getSelectedValue());  // null == any
+        assertEquals(null, view.lockedInput.getSelectedObjectValue());  // null == any
 
         assertNotNull(view.registrationDateLabel);
         assertEquals(constants.userTab_registrationDateCriteria(), view.registrationDateLabel.getText());

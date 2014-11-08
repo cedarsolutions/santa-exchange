@@ -170,13 +170,13 @@ public class EditParticipantTabViewClientTest extends ClientTestCase {
         assertContainsItems(view.conflictInput, "201", "202");
         assertTrue(view.addConflictButton.isEnabled());
 
-        view.conflictInput.setSelectedValue(other2);
+        view.conflictInput.setSelectedObjectValue(other2);
         clickButton(view.addConflictButton);
         assertContainsItems(view.getEditState().getConflicts(), 101L, 202L);
         assertContainsItems(view.conflictInput, "201");
         assertTrue(view.addConflictButton.isEnabled());
 
-        view.conflictInput.setSelectedValue(other1);
+        view.conflictInput.setSelectedObjectValue(other1);
         clickButton(view.addConflictButton);
         assertContainsItems(view.getEditState().getConflicts(), 101L, 202L, 201L);
         assertEquals(0, view.conflictInput.getItemCount());
