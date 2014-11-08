@@ -54,9 +54,9 @@ public class OpenIdProviderList extends DropdownList<OpenIdProvider> {
         this.setVisibleItemCount(1);
 
         if (addAny) {
-            this.setSelectedValue(null);
+            this.setSelectedObjectValue(null);
         } else {
-            this.setSelectedValue(DEFAULT_SELECTION);
+            this.setSelectedObjectValue(DEFAULT_SELECTION);
         }
     }
 

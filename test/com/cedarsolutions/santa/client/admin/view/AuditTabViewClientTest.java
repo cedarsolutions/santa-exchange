@@ -151,7 +151,7 @@ public class AuditTabViewClientTest extends ClientTestCase {
         assertEquals(constants.auditTab_eventTypeCriteria(), view.eventTypeLabel.getText());
 
         assertNotNull(view.eventTypeInput);
-        assertEquals(null, view.eventTypeInput.getSelectedValue());  // null == any
+        assertEquals(null, view.eventTypeInput.getSelectedObjectValue());  // null == any
 
         assertNotNull(view.userIdLabel);
         assertEquals(constants.auditTab_userIdCriteria(), view.userIdLabel.getText());

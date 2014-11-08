@@ -45,15 +45,15 @@ public class AuditEventTypeListClientTest extends ClientTestCase {
     }
 
     /** Check that every value can be selected. */
-    public void testSetSelectedValue() {
+    public void testsetSelectedObjectValue() {
         AuditEventTypeList list = new AuditEventTypeList(true);
 
-        list.setSelectedValue(null);
-        assertEquals(null, list.getSelectedValue());
+        list.setSelectedObjectValue(null);
+        assertEquals(null, list.getSelectedObjectValue());
 
         for (AuditEventType eventType : AuditEventType.values()) {
-            list.setSelectedValue(eventType);
-            assertEquals(eventType, list.getSelectedValue());
+            list.setSelectedObjectValue(eventType);
+            assertEquals(eventType, list.getSelectedObjectValue());
         }
     }
 

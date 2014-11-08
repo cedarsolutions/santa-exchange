@@ -145,7 +145,7 @@ public class LoginSelector extends Composite {
 
     /** Get the selected OpenId provider key. */
     public OpenIdProvider getSelectedProvider() {
-        return this.openIdList.getSelectedValue();
+        return this.openIdList.getSelectedObjectValue();
     }
 
     /** Continue click handler. */

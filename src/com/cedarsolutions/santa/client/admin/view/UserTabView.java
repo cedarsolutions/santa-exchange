@@ -308,13 +308,13 @@ public class UserTabView extends ModuleTabView implements IUserTabView {
         }
 
         if (criteria.getOpenIdProviders() == null || criteria.getOpenIdProviders().isEmpty()) {
-            this.providerInput.setSelectedValue(null);
+            this.providerInput.setSelectedObjectValue(null);
         } else {
-            this.providerInput.setSelectedValue(criteria.getOpenIdProviders().get(0));
+            this.providerInput.setSelectedObjectValue(criteria.getOpenIdProviders().get(0));
         }
 
-        this.adminInput.setSelectedValue(criteria.getAdmin());
-        this.lockedInput.setSelectedValue(criteria.getLocked());
+        this.adminInput.setSelectedObjectValue(criteria.getAdmin());
+        this.lockedInput.setSelectedObjectValue(criteria.getLocked());
 
         this.startDateInput.setValue(criteria.getStartDate());
         this.endDateInput.setValue(criteria.getEndDate());
@@ -337,12 +337,12 @@ public class UserTabView extends ModuleTabView implements IUserTabView {
             criteria.setUserIds(this.userIdInput.getText());
         }
 
-        if (this.providerInput.getSelectedValue() != null) {
-            criteria.setOpenIdProviders(this.providerInput.getSelectedValue());
+        if (this.providerInput.getSelectedObjectValue() != null) {
+            criteria.setOpenIdProviders(this.providerInput.getSelectedObjectValue());
         }
 
-        criteria.setAdmin(this.adminInput.getSelectedValue());
-        criteria.setLocked(this.lockedInput.getSelectedValue());
+        criteria.setAdmin(this.adminInput.getSelectedObjectValue());
+        criteria.setLocked(this.lockedInput.getSelectedObjectValue());
 
         // Dates are supposed to be inclusive, so go from start at 00:00 to end at 23:59
         Date startDate = GwtDateUtils.resetTime(this.startDateInput.getDatePicker().getValue(), "00:00");

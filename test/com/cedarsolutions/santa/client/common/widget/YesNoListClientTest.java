@@ -44,17 +44,17 @@ public class YesNoListClientTest extends ClientTestCase {
     }
 
     /** Check that every value can be selected. */
-    public void testSetSelectedValue() {
+    public void testsetSelectedObjectValue() {
         YesNoList list = new YesNoList(true);
 
-        list.setSelectedValue(null);
-        assertEquals(null, list.getSelectedValue());
+        list.setSelectedObjectValue(null);
+        assertEquals(null, list.getSelectedObjectValue());
 
-        list.setSelectedValue(Boolean.TRUE);
-        assertEquals(Boolean.TRUE, list.getSelectedValue());
+        list.setSelectedObjectValue(Boolean.TRUE);
+        assertEquals(Boolean.TRUE, list.getSelectedObjectValue());
 
-        list.setSelectedValue(Boolean.FALSE);
-        assertEquals(Boolean.FALSE, list.getSelectedValue());
+        list.setSelectedObjectValue(Boolean.FALSE);
+        assertEquals(Boolean.FALSE, list.getSelectedObjectValue());
     }
 
 }

@@ -181,7 +181,7 @@ public class EditParticipantTabView extends ModuleTabView implements IEditPartic
 
     /** Add the selected conflict to the current edit state, and refresh the display. */
     protected void addSelectedConflict() {
-        Participant conflict = this.conflictInput.getSelectedValue();
+        Participant conflict = this.conflictInput.getSelectedObjectValue();
         if (conflict != null) {
             this.editState.addConflict(conflict);
             this.conflictInput.removeDropdownItem(conflict);

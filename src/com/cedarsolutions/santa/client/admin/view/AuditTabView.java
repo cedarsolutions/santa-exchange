@@ -228,9 +228,9 @@ public class AuditTabView extends ModuleTabView implements IAuditTabView {
         this.hasSearchCriteria = true;
 
         if (criteria.getEventTypes() == null || criteria.getEventTypes().isEmpty()) {
-            this.eventTypeInput.setSelectedValue(null);
+            this.eventTypeInput.setSelectedObjectValue(null);
         } else {
-            this.eventTypeInput.setSelectedValue(criteria.getEventTypes().get(0));
+            this.eventTypeInput.setSelectedObjectValue(criteria.getEventTypes().get(0));
         }
 
         if (criteria.getUserIds() == null || criteria.getUserIds().isEmpty()) {
@@ -250,8 +250,8 @@ public class AuditTabView extends ModuleTabView implements IAuditTabView {
 
         AuditEventCriteria criteria = new AuditEventCriteria();
 
-        if (this.eventTypeInput.getSelectedValue() != null) {
-            criteria.setEventTypes(this.eventTypeInput.getSelectedValue());
+        if (this.eventTypeInput.getSelectedObjectValue() != null) {
+            criteria.setEventTypes(this.eventTypeInput.getSelectedObjectValue());
         }
 
         if (!GwtStringUtils.isEmpty(this.userIdInput.getText())) {
