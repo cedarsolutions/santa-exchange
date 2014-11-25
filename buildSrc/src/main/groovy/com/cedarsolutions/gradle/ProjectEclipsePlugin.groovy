@@ -82,7 +82,7 @@ class ProjectEclipsePlugin implements Plugin<Project> {
 
         // Hide the various derived directories from Eclipse
         project.eclipse.project.file.withXml { provider ->
-            project.convention.plugins.cedarBuild.ignoreResourcesFromDirectories(provider, 
+            project.convention.plugins.cedarBuild.ignoreResourcesFromDirectories(provider,
                 [ ".gradle",
                   "build",
                   "tools",
@@ -90,7 +90,7 @@ class ProjectEclipsePlugin implements Plugin<Project> {
                   "gwt-unitCache",
                   "www-test",
                   "war/" + project.cedarGwtOnGae.getAppEntryPoint() + ".JUnit",
-                  "war/" + project.cedarGwtOnGae.getAppModuleName(), 
+                  "war/" + project.cedarGwtOnGae.getAppModuleName(),
                   "war/WEB-INF/deploy",
                   "war/WEB-INF/lib",
                   "war/WEB-INF/appengine-generated",
@@ -138,14 +138,14 @@ class ProjectEclipsePlugin implements Plugin<Project> {
         }
 
         // Cleanup the runtime libraries
-        project.task("cleanupRuntimeLibraries") << { 
+        project.task("cleanupRuntimeLibraries") << {
             project.ant.delete(includeemptydirs: "true", quiet: "true") {
                 fileset(dir: "war/WEB-INF/lib", includes: "**/*")
             }
         }
 
         // Copy the runtime libraries to war/WEB-INF/lib to make the Eclipse web application launcher happy
-        project.task("copyRuntimeLibraries", dependsOn: project.tasks.cleanupRuntimeLibraries) << { 
+        project.task("copyRuntimeLibraries", dependsOn: project.tasks.cleanupRuntimeLibraries) << {
             def files = project.configurations.runtime.files - project.configurations.providedRuntime.files
             project.copy {
                 into "war/WEB-INF/lib"
@@ -157,8 +157,51 @@ class ProjectEclipsePlugin implements Plugin<Project> {
         project.task("refreshLibraries", dependsOn: project.tasks.copyRuntimeLibraries) << {
         }
 
+        // Generate launch configuration for the application within Eclipse
+        project.task("generateLaunchConfig") << {
+
+            // Set up a bunch of variables
+            def warDir = project.file(project.projectDir.canonicalPath + "/war").canonicalPath
+            def appStartupUrl = project.cedarGwtOnGae.getAppStartupUrl()
+            def appEntryPoint = project.cedarGwtOnGae.getAppEntryPoint()
+            def serverPort = project.cedarGwtOnGae.getDevmodeServerPort()
+            def codeserverPort = project.cedarGwtOnGae.getDevmodeCodeserverPort()
+            def memory = project.cedarGwtOnGae.getDevmodeServerMemory()
+            def permgen = project.cedarGwtOnGae.getDevmodeServerPermgen()
+            def agentJar = project.convention.plugins.cedarGwtOnGae.getAppEngineAgentJar()
+            def launcher = "com.google.appengine.tools.development.gwt.AppEngineLauncher"
+            def launchDir = project.file(project.projectDir.canonicalPath + "/../.metadata/.plugins/org.eclipse.debug.core/.launches").canonicalPath
+            def launchFile = project.file(launchDir + "/" + appStartupUrl.replaceFirst("\\.html", ".html.launch")).canonicalPath
+
+            // Create the launch directory and remove any existing launch file
+            project.mkdir launchDir
+            project.file(launchFile).delete()
+
+            // Write a new launch file with the correct parameters
+            project.file(launchFile).withWriter { out ->
+                out.writeLine('<?xml version="1.0" encoding="UTF-8" standalone="no"?>')
+                out.writeLine('<launchConfiguration type="com.google.gdt.eclipse.suite.webapp">')
+                out.writeLine('<stringAttribute key="com.google.gdt.eclipse.suiteMainTypeProcessor.PREVIOUSLY_SET_MAIN_TYPE_NAME" value="com.google.gwt.dev.DevMode"/>')
+                out.writeLine('<booleanAttribute key="com.google.gdt.eclipse.suiteWarArgumentProcessor.IS_WAR_FROM_PROJECT_PROPERTIES" value="true"/>')
+                out.writeLine('<stringAttribute key="com.google.gwt.eclipse.core.URL" value="' + appStartupUrl + '"/>')
+                out.writeLine('<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">')
+                out.writeLine('<listEntry value="/' + project.name + '"/>')
+                out.writeLine('</listAttribute>')
+                out.writeLine('<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">')
+                out.writeLine('<listEntry value="4"/>')
+                out.writeLine('</listAttribute>')
+                out.writeLine('<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.suite.appengineClasspathProvider"/>')
+                out.writeLine('<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>')
+                out.writeLine('<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -startupUrl ' + appStartupUrl + ' -logLevel INFO -nosuperDevMode -codeServerPort ' + codeserverPort + ' -port ' + serverPort + ' -server ' + launcher + ' -war ' + warDir + ' ' + appEntryPoint + '"/>')
+                out.writeLine('<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="' + project.name + '"/>')
+                out.writeLine('<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx' + memory + ' -XX:MaxPermSize=' + permgen + ' -javaagent:' + agentJar + '"/>')
+                out.writeLine('</launchConfiguration>')
+            }
+
+        }
+
         // Always re-generate everything, otherwise we get duplicate sections in files
-        project.tasks.eclipse.dependsOn(project.tasks.cleanEclipse)
+        project.tasks.eclipse.dependsOn(project.tasks.cleanEclipse, project.tasks.generateLaunchConfig)
 
         // Clean up runtime libraries whenever the rest of Eclipse gets cleaned up
         project.tasks.cleanEclipse.dependsOn(project.tasks.cleanupRuntimeLibraries)
