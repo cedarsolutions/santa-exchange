@@ -1,6 +1,7 @@
 Version 0.9.43   unreleased
 
    * Bump up to GWT 2.7.0 now that it's been officially released.
+   * Change gradle build process to generate a working Eclipse launch config with -nosuperDevMode.
 
 Version 0.9.42   09 Nov 2014
 
