@@ -1,4 +1,4 @@
-Version 0.9.43   unreleased
+Version 0.9.43   01 Dec 2014
 
     * Upgrade from GWT 2.7.0-RC1 to the official GWT 2.7.0 release.
     * Bump up to CedarCommon v5.0.2 to take advantage of Assertions.assertListEquals().
