@@ -1,5 +1,6 @@
 Version 0.9.43   unreleased
 
+    * Upgrade from GWT 2.7.0-RC1 to the official GWT 2.7.0 release.
     * Bump up to CedarCommon v5.0.2 to take advantage of Assertions.assertListEquals().
     * Change gradle build process to generate a working Eclipse launch config with -nosuperDevMode.
     * Bump up to CedarBuild v0.8.12 to account for changes in GWT 2.7.0 relative to RC1.
