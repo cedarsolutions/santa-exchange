@@ -1,6 +1,7 @@
 Version 0.9.43   unreleased
 
     * Change gradle build process to generate a working Eclipse launch config with -nosuperDevMode.
+    * Bump up to CedarBuild v0.8.12 to account for changes in GWT 2.7.0 relative to RC1.
 
 Version 0.9.42   09 Nov 2014
 

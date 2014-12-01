@@ -31,7 +31,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.googlecode.cedar-common:cedar-build:0.8.11"
+        classpath "com.googlecode.cedar-common:cedar-build:0.8.12"
     }
 }
 
@@ -102,6 +102,7 @@ cedarGwtOnGae {
     devmodeCodeserverPort = config_devmodeCodeserverPort
     devmodeServerPort = config_devmodeServerPort
     serverWait = config_serverWait
+    stopWait = config_stopWait
 
     xvfbRunPath = config_xvfbRunPath
 
