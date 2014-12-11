@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
-import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
 import com.cedarsolutions.client.gwt.validation.IValidationErrorWidget;
@@ -46,7 +46,6 @@ import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -365,7 +364,7 @@ public class EditParticipantTabView extends ModuleTabView implements IEditPartic
     }
 
     /** Add conflict click handler. */
-    protected static class AddConflictClickHandler extends AbstractEventHandler<EditParticipantTabView> implements ClickHandler {
+    protected static class AddConflictClickHandler extends AbstractClickHandler<EditParticipantTabView> {
         public AddConflictClickHandler(EditParticipantTabView parent) {
             super(parent);
         }
@@ -378,7 +377,7 @@ public class EditParticipantTabView extends ModuleTabView implements IEditPartic
     }
 
     /** Delete conflict click handler. */
-    protected static class DeleteConflictClickHandler extends AbstractEventHandler<EditParticipantTabView> implements ClickHandler {
+    protected static class DeleteConflictClickHandler extends AbstractClickHandler<EditParticipantTabView> {
         public DeleteConflictClickHandler(EditParticipantTabView parent) {
             super(parent);
         }

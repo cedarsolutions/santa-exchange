@@ -22,7 +22,6 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.client.internal.view;
 
-import static com.cedarsolutions.client.gwt.event.UnifiedEventType.CLICK_EVENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
@@ -33,7 +32,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -46,8 +44,8 @@ import org.mockito.Mockito;
 
 import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.event.UnifiedEventType;
-import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
+import com.cedarsolutions.client.gwt.event.ViewEventHandlerWithContext;
 import com.cedarsolutions.santa.client.common.widget.ConfirmationPopup;
 import com.cedarsolutions.santa.client.internal.view.ExchangeListTabView.CreateClickHandler;
 import com.cedarsolutions.santa.client.internal.view.ExchangeListTabView.DeleteClickHandler;
@@ -58,7 +56,6 @@ import com.cedarsolutions.santa.client.internal.view.ExchangeListTabView.StateCo
 import com.cedarsolutions.santa.client.junit.StubbedClientTestCase;
 import com.cedarsolutions.santa.shared.domain.exchange.Exchange;
 import com.cedarsolutions.santa.shared.domain.exchange.ExchangeState;
-import com.cedarsolutions.web.metadata.NativeEventType;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -196,51 +193,13 @@ public class ExchangeListTabViewTest extends StubbedClientTestCase {
     }
 
     /** Test RowClickHandler. */
+    @SuppressWarnings("unchecked")
     @Test public void testRowClickHandler() {
-        // Unfortunately, it's not possible to mock NativeEvent, so
-        // we just test the handleSelectedRow() method instead of the
-        // onCellPreview() method.  Better than nothing.
-
-        ExchangeListTabView view = mock(ExchangeListTabView.class, Mockito.RETURNS_DEEP_STUBS);
+        ViewEventHandlerWithContext<Exchange> editSelectedRowHandler = mock(ViewEventHandlerWithContext.class);
+        ExchangeListTabView view = mock(ExchangeListTabView.class);
+        when(view.getEditSelectedRowHandler()).thenReturn(editSelectedRowHandler);
         RowClickHandler handler = new RowClickHandler(view);
-        assertSame(view, handler.getParent());
-
-        InOrder order = Mockito.inOrder(view.getEditSelectedRowHandler());
-        Exchange exchange = new Exchange();
-        UnifiedEventWithContext<Exchange> row = new UnifiedEventWithContext<Exchange>(CLICK_EVENT, exchange);
-
-        handler.handleSelectedRow(null, 0, null);
-        verifyNoMoreInteractions(view.getEditSelectedRowHandler());
-
-        handler.handleSelectedRow("blech", 0, null);
-        verifyNoMoreInteractions(view.getEditSelectedRowHandler());
-
-        handler.handleSelectedRow("blech", 5, null);
-        verifyNoMoreInteractions(view.getEditSelectedRowHandler());
-
-        exchange.setId(null);
-        handler.handleSelectedRow("blech", 5, exchange);
-        verifyNoMoreInteractions(view.getEditSelectedRowHandler());
-
-        exchange.setId(12L);
-        handler.handleSelectedRow("blech", 5, exchange);
-        verifyNoMoreInteractions(view.getEditSelectedRowHandler());
-
-        exchange.setId(null);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, exchange);  // column 0 is the selection column, so we ignore it
-        verifyNoMoreInteractions(view.getEditSelectedRowHandler());
-
-        exchange.setId(null);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 5, exchange);
-        order.verify(view.getEditSelectedRowHandler()).handleEvent(row);
-
-        exchange.setId(12L);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, exchange);  // column 0 is the selection column, so we ignore it;
-        verifyNoMoreInteractions(view.getEditSelectedRowHandler());
-
-        exchange.setId(12L);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 5, exchange);
-        order.verify(view.getEditSelectedRowHandler()).handleEvent(row);
+        assertSame(editSelectedRowHandler, handler.getViewEventHandler());
     }
 
 }

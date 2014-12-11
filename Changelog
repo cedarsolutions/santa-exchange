@@ -1,3 +1,7 @@
+Version 0.9.44   unreleased
+
+    * Use common event handler classes from CedarCommon in a few places.
+
 Version 0.9.43   01 Dec 2014
 
     * Upgrade from GWT 2.7.0-RC1 to the official GWT 2.7.0 release.

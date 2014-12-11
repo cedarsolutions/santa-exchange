@@ -38,8 +38,8 @@ import java.util.Map;
 import com.cedarsolutions.client.gwt.custom.datepicker.DateBox;
 import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractColumnSortEventHandler;
-import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
@@ -66,7 +66,6 @@ import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -554,7 +553,7 @@ public class UserTabView extends ModuleTabView implements IUserTabView {
     }
 
     /** Delete click handler. */
-    protected static class DeleteClickHandler extends AbstractEventHandler<UserTabView> implements ClickHandler {
+    protected static class DeleteClickHandler extends AbstractClickHandler<UserTabView> {
         public DeleteClickHandler(UserTabView parent) {
             super(parent);
         }

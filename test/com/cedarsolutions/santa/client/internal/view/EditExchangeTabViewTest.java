@@ -22,7 +22,6 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.client.internal.view;
 
-import static com.cedarsolutions.client.gwt.event.UnifiedEventType.CLICK_EVENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
@@ -31,7 +30,6 @@ import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
@@ -41,8 +39,8 @@ import org.mockito.Mockito;
 
 import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.event.UnifiedEventType;
-import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
+import com.cedarsolutions.client.gwt.event.ViewEventHandlerWithContext;
 import com.cedarsolutions.santa.client.internal.view.EditExchangeTabView.AddParticipantClickHandler;
 import com.cedarsolutions.santa.client.internal.view.EditExchangeTabView.DeleteParticipantClickHandler;
 import com.cedarsolutions.santa.client.internal.view.EditExchangeTabView.EmailColumn;
@@ -60,7 +58,6 @@ import com.cedarsolutions.santa.client.junit.StubbedClientTestCase;
 import com.cedarsolutions.santa.shared.domain.exchange.Assignment;
 import com.cedarsolutions.santa.shared.domain.exchange.AssignmentSet;
 import com.cedarsolutions.santa.shared.domain.exchange.Participant;
-import com.cedarsolutions.web.metadata.NativeEventType;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.event.dom.client.ClickEvent;
 
@@ -330,51 +327,13 @@ public class EditExchangeTabViewTest extends StubbedClientTestCase {
     }
 
     /** Test RowClickHandler. */
+    @SuppressWarnings("unchecked")
     @Test public void testRowClickHandler() {
-        // Unfortunately, it's not possible to mock NativeEvent, so
-        // we just test the handleSelectedRow() method instead of the
-        // onCellPreview() method.  Better than nothing.
-
-        EditExchangeTabView view = mock(EditExchangeTabView.class, Mockito.RETURNS_DEEP_STUBS);
+        ViewEventHandlerWithContext<Participant> editParticipantHandler = mock(ViewEventHandlerWithContext.class);
+        EditExchangeTabView view = mock(EditExchangeTabView.class);
+        when(view.getEditParticipantHandler()).thenReturn(editParticipantHandler);
         RowClickHandler handler = new RowClickHandler(view);
-        assertSame(view, handler.getParent());
-
-        InOrder order = Mockito.inOrder(view.getEditParticipantHandler());
-        Participant participant = new Participant();
-        UnifiedEventWithContext<Participant> row = new UnifiedEventWithContext<Participant>(CLICK_EVENT, participant);
-
-        handler.handleSelectedRow(null, 0, null);
-        verifyNoMoreInteractions(view.getEditParticipantHandler());
-
-        handler.handleSelectedRow("blech", 0, null);
-        verifyNoMoreInteractions(view.getEditParticipantHandler());
-
-        handler.handleSelectedRow("blech", 5, null);
-        verifyNoMoreInteractions(view.getEditParticipantHandler());
-
-        participant.setId(null);
-        handler.handleSelectedRow("blech", 5, participant);
-        verifyNoMoreInteractions(view.getEditParticipantHandler());
-
-        participant.setId(12L);
-        handler.handleSelectedRow("blech", 5, participant);
-        verifyNoMoreInteractions(view.getEditParticipantHandler());
-
-        participant.setId(null);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, participant);
-        verifyNoMoreInteractions(view.getEditParticipantHandler());
-
-        participant.setId(null);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 5, participant);
-        order.verify(view.getEditParticipantHandler()).handleEvent(row);
-
-        participant.setId(12L);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 0, participant);
-        verifyNoMoreInteractions(view.getEditParticipantHandler());
-
-        participant.setId(12L);
-        handler.handleSelectedRow(NativeEventType.CLICK.getValue(), 5, participant);
-        order.verify(view.getEditParticipantHandler()).handleEvent(row);
+        assertSame(editParticipantHandler, handler.getViewEventHandler());
     }
 
 }
