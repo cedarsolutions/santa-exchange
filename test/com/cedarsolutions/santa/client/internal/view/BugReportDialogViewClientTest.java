@@ -25,9 +25,7 @@ package com.cedarsolutions.santa.client.internal.view;
 import static com.cedarsolutions.santa.shared.domain.MessageKeys.INVALID;
 import static com.cedarsolutions.santa.shared.domain.MessageKeys.REQUIRED;
 
-import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.event.UnifiedEventType;
-import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.exception.InvalidDataException;
 import com.cedarsolutions.santa.client.junit.ClientTestCase;
 import com.cedarsolutions.santa.shared.domain.BugReport;
@@ -176,24 +174,15 @@ public class BugReportDialogViewClientTest extends ClientTestCase {
 
     /** Test onSubmitClicked() and the event handler getters/setters. */
     public void testOnSubmitClicked() {
-        StubbedEventHandler eventHandler = new StubbedEventHandler();
+        StubbedViewEventHandler eventHandler = new StubbedViewEventHandler();
 
         BugReportDialogView view = new BugReportDialogView();
         view.setSubmitEventHandler(eventHandler);
         assertSame(eventHandler, view.getSubmitEventHandler());
 
         view.onSubmitClicked(null); // event is not used
-        assertNotNull(eventHandler.event);
-        assertEquals(UnifiedEventType.BUTTON_EVENT, eventHandler.event.getEventType());
+        assertEquals(1, eventHandler.getEvents().size());
+        assertEquals(UnifiedEventType.BUTTON_EVENT, eventHandler.getEvents().get(0).getEventType());
     }
 
-    /** Stubbed event handler for testing onSubmitClicked(). */
-    private static class StubbedEventHandler implements ViewEventHandler {
-        protected UnifiedEvent event;
-
-        @Override
-        public void handleEvent(UnifiedEvent event) {
-            this.event = event;
-        }
-    }
 }

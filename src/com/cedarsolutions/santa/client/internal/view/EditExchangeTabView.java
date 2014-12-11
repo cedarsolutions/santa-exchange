@@ -24,16 +24,14 @@ package com.cedarsolutions.santa.client.internal.view;
 
 
 
-import static com.cedarsolutions.client.gwt.event.UnifiedEventType.CLICK_EVENT;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import com.cedarsolutions.client.gwt.event.UnifiedEvent;
-import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.event.ViewEventHandlerWithContext;
-import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractRowClickViewEventHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
@@ -53,12 +51,10 @@ import com.cedarsolutions.santa.shared.domain.exchange.ParticipantSet;
 import com.cedarsolutions.shared.domain.LocalizableMessage;
 import com.cedarsolutions.shared.domain.email.EmailMessage;
 import com.cedarsolutions.util.gwt.GwtLocalizationUtils;
-import com.cedarsolutions.web.metadata.NativeEventType;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -68,7 +64,6 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.Range;
 import com.google.inject.Singleton;
@@ -537,7 +532,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** Reset click handler. */
-    protected static class ResetClickHandler extends AbstractEventHandler<EditExchangeTabView> implements ClickHandler {
+    protected static class ResetClickHandler extends AbstractClickHandler<EditExchangeTabView> {
         public ResetClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
@@ -603,7 +598,7 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** SendAllNotifications click handler. */
-    protected static class SendAllNotificationsClickHandler extends AbstractEventHandler<EditExchangeTabView> implements ClickHandler {
+    protected static class SendAllNotificationsClickHandler extends AbstractClickHandler<EditExchangeTabView> {
         public SendAllNotificationsClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
@@ -662,25 +657,14 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
     }
 
     /** Row click handler. */
-    protected static class RowClickHandler extends AbstractEventHandler<EditExchangeTabView> implements CellPreviewEvent.Handler<Participant> {
+    protected static class RowClickHandler extends AbstractRowClickViewEventHandler<EditExchangeTabView, Participant> {
         public RowClickHandler(EditExchangeTabView parent) {
             super(parent);
         }
 
         @Override
-        public void onCellPreview(CellPreviewEvent<Participant> event) {
-            this.handleSelectedRow(event.getNativeEvent().getType(), event.getColumn(), event.getValue());
-        }
-
-        protected void handleSelectedRow(String event, int column, Participant row) {
-            if (this.getParent().getEditParticipantHandler() != null) {
-                if (NativeEventType.CLICK.equals(NativeEventType.convert(event))) {
-                    if (column > 0 && row != null) {  // Column zero is the selection column
-                        UnifiedEventWithContext<Participant> context = new UnifiedEventWithContext<Participant>(CLICK_EVENT, row);
-                        this.getParent().getEditParticipantHandler().handleEvent(context);
-                    }
-                }
-            }
+        protected ViewEventHandlerWithContext<Participant> getViewEventHandler() {
+            return this.getParent().getEditParticipantHandler();
         }
     }
 }

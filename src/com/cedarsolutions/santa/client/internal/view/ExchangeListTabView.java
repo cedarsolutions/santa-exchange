@@ -22,15 +22,13 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.client.internal.view;
 
-import static com.cedarsolutions.client.gwt.event.UnifiedEventType.CLICK_EVENT;
-
 import java.util.List;
 
 import com.cedarsolutions.client.gwt.event.UnifiedEvent;
-import com.cedarsolutions.client.gwt.event.UnifiedEventWithContext;
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.event.ViewEventHandlerWithContext;
-import com.cedarsolutions.client.gwt.handler.AbstractEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractClickHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractRowClickViewEventHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.ModuleTabView;
@@ -42,19 +40,16 @@ import com.cedarsolutions.santa.client.common.widget.ConfirmationPopup;
 import com.cedarsolutions.santa.shared.domain.exchange.Exchange;
 import com.cedarsolutions.santa.shared.domain.exchange.ExchangeCriteria;
 import com.cedarsolutions.santa.shared.domain.exchange.ExchangeKeyProvider;
-import com.cedarsolutions.web.metadata.NativeEventType;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.HasData;
 import com.google.inject.Singleton;
 import com.gwtplatform.idhandler.client.ElementIdHandler;
@@ -322,7 +317,7 @@ public class ExchangeListTabView extends ModuleTabView implements IExchangeListT
     }
 
     /** Delete click handler. */
-    protected static class DeleteClickHandler extends AbstractEventHandler<ExchangeListTabView> implements ClickHandler {
+    protected static class DeleteClickHandler extends AbstractClickHandler<ExchangeListTabView> {
         public DeleteClickHandler(ExchangeListTabView parent) {
             super(parent);
         }
@@ -355,25 +350,14 @@ public class ExchangeListTabView extends ModuleTabView implements IExchangeListT
     }
 
     /** Row click handler. */
-    protected static class RowClickHandler extends AbstractEventHandler<ExchangeListTabView> implements CellPreviewEvent.Handler<Exchange> {
+    protected static class RowClickHandler extends AbstractRowClickViewEventHandler<ExchangeListTabView, Exchange> {
         public RowClickHandler(ExchangeListTabView parent) {
             super(parent);
         }
 
         @Override
-        public void onCellPreview(CellPreviewEvent<Exchange> event) {
-            this.handleSelectedRow(event.getNativeEvent().getType(), event.getColumn(), event.getValue());
-        }
-
-        protected void handleSelectedRow(String event, int column, Exchange row) {
-            if (this.getParent().getEditSelectedRowHandler() != null) {
-                if (NativeEventType.CLICK.equals(NativeEventType.convert(event))) {
-                    if (column > 0 && row != null) {  // Column zero is the selection column
-                        UnifiedEventWithContext<Exchange> context = new UnifiedEventWithContext<Exchange>(CLICK_EVENT, row);
-                        this.getParent().getEditSelectedRowHandler().handleEvent(context);
-                    }
-                }
-            }
+        protected ViewEventHandlerWithContext<Exchange> getViewEventHandler() {
+            return this.getParent().getEditSelectedRowHandler();
         }
     }
 }
