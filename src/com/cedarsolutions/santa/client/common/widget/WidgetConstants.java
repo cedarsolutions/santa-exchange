@@ -89,15 +89,6 @@ public interface WidgetConstants extends Constants {
     @DefaultStringValue("Yahoo")
     String openId_Yahoo();
 
-    @DefaultStringValue("MySpace")
-    String openId_MySpace();
-
-    @DefaultStringValue("AOL")
-    String openId_AOL();
-
-    @DefaultStringValue("myOpenId")
-    String openId_myOpenId();
-
 
     /* **************************
      *  Login-related constants
@@ -106,20 +97,19 @@ public interface WidgetConstants extends Constants {
     @DefaultStringValue("What is OpenId?")
     String login_openIdDisclosureText();
 
-    @DefaultStringValue("You can sign in to this application using any of the OpenId providers shown in " +
-                        "the list.")
+    @DefaultStringValue("You can sign in to this application with a Yahoo or Google email address.")
     String login_openIdExplanation1Text();
 
-    @DefaultStringValue("When you choose to sign in using an OpenId provider, you will be " +
-                        "redirected to that provider's web site.  The provider will tell this " +
-                        "application who you are and that you have signed in correctly.  Your " +
-                        "password is never shared with this application.")
+    @DefaultStringValue("When you choose to sign in, you will be redirected to the web site " +
+                        "for either Yahoo or Google.  Yahoo or Google will tell Santa Exchange " +
+                        "who you are and that you have signed in correctly.  Your password is " +
+                        "never shared with Santa Exchange.")
     String login_openIdExplanation2Text();
 
-    @DefaultStringValue("If you have more than one OpenId username, you should make sure to use the same " +
-                        "one every time you sign in here.  If you do not have an OpenId username already, " +
-                        "the easiest way to get one is to sign up for a gmail account.  Then, sign in here " +
-                        "using the Google OpenId provider.")
+    @DefaultStringValue("Google has plans to phase out this login mechanism soon.  Starting Febrary " +
+                        "1, 2015, Santa Exchange will stop accepting logins from Yahoo users.  Existing " +
+                        "Yahoo users will be removed from Santa Exchange soon after.  So, it's best if " +
+                        "you use a Google account rather than a Yahoo account.")
     String login_openIdExplanation3Text();
 
     @DefaultStringValue("Sign in using OpenId:")
