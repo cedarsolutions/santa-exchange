@@ -47,6 +47,7 @@ public class LoginSelectorClientTest extends ClientTestCase {
         assertEquals(OpenIdProviderList.DEFAULT_SELECTION, selector.getSelectedProvider());
 
         assertTrue(selector.openIdSection.isVisible());
+        assertFalse(selector.openIdDisclosure.isOpen());
         assertFalse(selector.continueSection.isVisible());
         assertFalse(selector.continueDisclosure.isOpen());
 
