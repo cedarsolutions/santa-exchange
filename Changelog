@@ -1,4 +1,4 @@
-Version 0.9.44   unreleased
+Version 0.9.44   10 Jan 2015
 
     * Use common event handler classes from CedarCommon in a few places.
     * Start phasing out OpenId logins, since Google will be removing the federated login mechanism.
