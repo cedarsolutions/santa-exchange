@@ -1,3 +1,9 @@
+Version 0.9.44   unreleased
+
+    * Start phasing out OpenId logins, since Google will be removing the federated login mechanism.
+    * Remove OpenId login option for AOL, MySpace, and myOpenId, since there are no existing users.
+    * Change the login selector to remind Yahoo users that their access will be removed February 1.
+
 Version 0.9.43   01 Dec 2014
 
     * Upgrade from GWT 2.7.0-RC1 to the official GWT 2.7.0 release.
