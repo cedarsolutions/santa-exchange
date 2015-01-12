@@ -24,7 +24,6 @@ package com.cedarsolutions.santa.client.external.view;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.IModulePageView;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
 
 /**
  * Page to display when the user must log in.
@@ -32,13 +31,10 @@ import com.cedarsolutions.shared.domain.OpenIdProvider;
  */
 public interface ILoginRequiredPageView extends IModulePageView {
 
-    /** Set the event handler for the login selector. */
-    void setLoginSelectorEventHandler(ViewEventHandler loginSelectorEventHandler);
+    /** Set the login event handler. */
+    void setLoginEventHandler(ViewEventHandler loginEventHandler);
 
-    /** Get the login selector event handler. */
-    ViewEventHandler getLoginSelectorEventHandler();
-
-    /** Get the selected OpenId provider key. */
-    OpenIdProvider getSelectedProvider();
+    /** Get the login event handler. */
+    ViewEventHandler getLoginEventHandler();
 
 }

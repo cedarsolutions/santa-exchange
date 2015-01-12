@@ -31,7 +31,6 @@ import com.cedarsolutions.santa.client.external.ExternalEventBus;
 import com.cedarsolutions.santa.client.external.view.ExternalLandingPageView;
 import com.cedarsolutions.santa.client.external.view.IExternalLandingPageView;
 import com.cedarsolutions.santa.shared.domain.ClientSession;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.inject.Inject;
 import com.mvp4g.client.annotation.Presenter;
 
@@ -47,9 +46,7 @@ public class ExternalLandingPagePresenter extends ModulePagePresenter<IExternalL
 
     /** Show the external landing page. */
     public void onShowExternalLandingPage() {
-        this.view.setIsLoggedIn(this.getSession().isLoggedIn());
-        this.view.setContinueEventHandler(new ContinueEventHandler(this));
-        this.view.setLoginSelectorEventHandler(new LoginSelectorEventHandler(this));
+        this.view.setLoginEventHandler(new LoginEventHandler(this));
         this.replaceModuleBody();
     }
 
@@ -67,29 +64,20 @@ public class ExternalLandingPagePresenter extends ModulePagePresenter<IExternalL
         this.systemStateInjector = systemStateInjector;
     }
 
-    /** Event handler for the continue action. */
-    protected static class ContinueEventHandler extends AbstractViewEventHandler<ExternalLandingPagePresenter> {
-        public ContinueEventHandler(ExternalLandingPagePresenter parent) {
+    /** Handler for the login event. */
+    protected static class LoginEventHandler extends AbstractViewEventHandler<ExternalLandingPagePresenter> {
+        public LoginEventHandler(ExternalLandingPagePresenter parent) {
             super(parent);
         }
 
         @Override
         public void handleEvent(UnifiedEvent event) {
-            this.getParent().getEventBus().showLandingPage();
-        }
-    }
-
-    /** Event handler for login selector. */
-    protected static class LoginSelectorEventHandler extends AbstractViewEventHandler<ExternalLandingPagePresenter> {
-        public LoginSelectorEventHandler(ExternalLandingPagePresenter parent) {
-            super(parent);
-        }
-
-        @Override
-        public void handleEvent(UnifiedEvent event) {
-            OpenIdProvider openIdProvider = this.getParent().getView().getSelectedProvider();
-            String destinationToken = SantaExchangeEventTypes.LANDING_PAGE;
-            this.getParent().getEventBus().showLoginPageForToken(openIdProvider, destinationToken);
+            if (this.getParent().getSystemStateInjector().getSession().isLoggedIn()) {
+                this.getParent().getEventBus().showLandingPage();
+            } else {
+                String destinationToken = SantaExchangeEventTypes.LANDING_PAGE;
+                this.getParent().getEventBus().showGoogleAccountsLoginPageForToken(destinationToken);
+            }
         }
     }
 }

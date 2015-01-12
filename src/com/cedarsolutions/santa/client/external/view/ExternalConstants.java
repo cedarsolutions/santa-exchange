@@ -56,10 +56,17 @@ public interface ExternalConstants extends Constants {
     @DefaultStringValue("Login Required")
     String loginRequired_headerText();
 
-    @DefaultStringValue("The page you requested requires you to be logged in. " +
-                        "To continue, please choose an OpenId provider and then " +
-                        "click the Sign In button.")
-    String loginRequired_loginRequiredText();
+    @DefaultStringValue("The page you requested requires you to be logged in.")
+    String loginRequired_paragraph1Text();
+
+    @DefaultStringValue("Anyone with a Google email address can sign in and use Santa Exchange.")
+    String loginRequired_paragraph2Text();
+
+    @DefaultStringValue("Sign in with your Google email address")
+    String loginRequired_loginButtonTooltip();
+
+    @DefaultStringValue("Sign In With Google")
+    String loginRequired_loginButtonText();
 
 
     /* ************************
@@ -93,6 +100,15 @@ public interface ExternalConstants extends Constants {
                         "Source code and documentation can be found " +
                         "at <a href=\"%s\">Google Code</a>.")
     String landingPage_paragraph4TextFormat();
+
+    @DefaultStringValue("Anyone with a Google email address can sign in and use Santa Exchange.")
+    String landingPage_paragraph5Text();
+
+    @DefaultStringValue("Sign in with your Google email address")
+    String landingPage_loginButtonTooltip();
+
+    @DefaultStringValue("Sign In With Google")
+    String landingPage_loginButtonText();
 
 
     /* ********************

@@ -22,14 +22,14 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 When /^the user logs in with admin credentials$/ do
-    click_button("LoginSelector_openIdButton")
+    click_button("Sign In With Google")
     fill_in("email", {:with => test_config.admin_user})
     check("isAdmin")
     click_button("Log In")
 end
 
 When /^the user logs in with locked credentials$/ do
-    click_button("LoginSelector_openIdButton")
+    click_button("Sign In With Google")
     fill_in("email", {:with => test_config.locked_user})
     click_button("Log In")
 end

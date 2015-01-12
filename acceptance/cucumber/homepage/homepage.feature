@@ -5,9 +5,8 @@ Scenario: View the homepage
     Then the user should be taken to the external landing page
      And the page should have a link "Apache v2.0"
      And the page should have a link "Google Code"
-     And the page should have a button "Sign In"
+     And the page should have a button "Sign In With Google"
      And the page should have content "exchange is a party where people get together"
-     And the Login Selector disclosure panel should be closed
 
 Scenario: Go to the base landing page bookmark when not logged in
     When the user views an "Base Landing Page" bookmark
@@ -47,11 +46,3 @@ Scenario: Click the "Google Code" link
     Then the user should be taken to the external landing page
     When the user clicks the "Google Code" link
     Then the user should be taken to the external Google Code site for Santa Exchange
-
-Scenario: Open and close the Login Selector disclosure panel
-    When the user views the canonical site url
-    Then the user should be taken to the external landing page
-    When the user clicks the Login Selector disclosure panel
-    Then the Login Selector disclosure panel should be open
-    When the user clicks the Login Selector disclosure panel
-    Then the Login Selector disclosure panel should be closed

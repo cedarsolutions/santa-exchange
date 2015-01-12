@@ -25,10 +25,12 @@ package com.cedarsolutions.santa.client.external.presenter;
 import com.cedarsolutions.client.gwt.event.UnifiedEvent;
 import com.cedarsolutions.client.gwt.handler.AbstractViewEventHandler;
 import com.cedarsolutions.client.gwt.module.presenter.ModulePagePresenter;
+import com.cedarsolutions.santa.client.common.presenter.SystemStateInjector;
 import com.cedarsolutions.santa.client.external.ExternalEventBus;
 import com.cedarsolutions.santa.client.external.view.ILoginRequiredPageView;
 import com.cedarsolutions.santa.client.external.view.LoginRequiredPageView;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
+import com.cedarsolutions.santa.shared.domain.ClientSession;
+import com.google.inject.Inject;
 import com.mvp4g.client.annotation.Presenter;
 
 /**
@@ -38,28 +40,44 @@ import com.mvp4g.client.annotation.Presenter;
 @Presenter(view = LoginRequiredPageView.class)
 public class LoginRequiredPagePresenter extends ModulePagePresenter<ILoginRequiredPageView, ExternalEventBus> {
 
+    /** Injector for the shared client session singleton. */
+    private SystemStateInjector systemStateInjector;
+
     /**
      * Show the "login required" page.
      * @param destinationUrl  Destination URL to redirect to after login
      */
     public void onShowLoginRequiredPage(String destinationUrl) {
-        this.getView().setLoginSelectorEventHandler(new LoginSelectorEventHandler(this, destinationUrl));
+        this.getView().setLoginEventHandler(new LoginEventHandler(this, destinationUrl));
         this.replaceModuleBody();
     }
 
-    /** Handle the action that selects a login provider. */
-    protected static class LoginSelectorEventHandler extends AbstractViewEventHandler<LoginRequiredPagePresenter> {
+    /** Get the session from the injector. */
+    public ClientSession getSession() {
+        return this.systemStateInjector.getSession();
+    }
+
+    public SystemStateInjector getSystemStateInjector() {
+        return this.systemStateInjector;
+    }
+
+    @Inject
+    public void setSystemStateInjector(SystemStateInjector systemStateInjector) {
+        this.systemStateInjector = systemStateInjector;
+    }
+
+    /** Handler for the login event. */
+    protected static class LoginEventHandler extends AbstractViewEventHandler<LoginRequiredPagePresenter> {
         protected String destinationUrl;
 
-        public LoginSelectorEventHandler(LoginRequiredPagePresenter parent, String destinationUrl) {
+        public LoginEventHandler(LoginRequiredPagePresenter parent, String destinationUrl) {
             super(parent);
             this.destinationUrl = destinationUrl;
         }
 
         @Override
         public void handleEvent(UnifiedEvent event) {
-            OpenIdProvider openIdProvider = this.getParent().getView().getSelectedProvider();
-            this.getParent().getEventBus().showLoginPageForUrl(openIdProvider, destinationUrl);
+            this.getParent().getEventBus().showGoogleAccountsLoginPageForUrl(this.destinationUrl);
         }
     }
 }

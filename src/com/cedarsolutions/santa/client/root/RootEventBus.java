@@ -35,7 +35,6 @@ import com.cedarsolutions.santa.client.root.presenter.RedirectEventHandler;
 import com.cedarsolutions.santa.client.root.presenter.RootClientSessionEventHandler;
 import com.cedarsolutions.santa.client.root.presenter.RootPresenter;
 import com.cedarsolutions.shared.domain.ErrorDescription;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.mvp4g.client.annotation.Debug;
 import com.mvp4g.client.annotation.Debug.LogLevel;
@@ -99,20 +98,18 @@ public interface RootEventBus extends SessionAwareEventBus {
     void clearSession();
 
     /**
-     * Show the login page for a particular destination token.
-     * @param openIdProvider   Open ID provider that will be used
+     * Show the Google Accounts login page for a particular destination token.
      * @param destinationToken Destination token (page) to redirect to after login
      */
     @Event(handlers = LoginEventHandler.class)
-    void showLoginPageForToken(OpenIdProvider openIdProvider, String destinationToken);
+    void showGoogleAccountsLoginPageForToken(String destinationToken);
 
     /**
-     * Show the login page for a particular destination URL.
-     * @param openIdProvider   Open ID provider that will be used
+     * Show the Google Accounts login page for a particular destination URL.
      * @param destinationUrl   Destination URL to redirect to after login
      */
     @Event(handlers = LoginEventHandler.class)
-    void showLoginPageForUrl(OpenIdProvider openIdProvider, String destinationUrl);
+    void showGoogleAccountsLoginPageForUrl(String destinationUrl);
 
     /** Log out the current user. */
     @Event(handlers = LoginEventHandler.class)

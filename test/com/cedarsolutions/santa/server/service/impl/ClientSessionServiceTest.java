@@ -236,7 +236,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(null);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
         ArgumentCaptor<RegisteredUser> registeredUserInserted = ArgumentCaptor.forClass(RegisteredUser.class);
@@ -292,7 +292,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(registeredUser1);
         when(service.getRegisteredUserDao().recordNewLogin(registeredUser1)).thenReturn(registeredUser2);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
@@ -329,7 +329,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(null);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
         ArgumentCaptor<RegisteredUser> registeredUserInserted = ArgumentCaptor.forClass(RegisteredUser.class);
@@ -385,7 +385,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(registeredUser1);
         when(service.getRegisteredUserDao().recordNewLogin(registeredUser1)).thenReturn(registeredUser2);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
@@ -422,7 +422,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(null);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
         ArgumentCaptor<RegisteredUser> registeredUserInserted = ArgumentCaptor.forClass(RegisteredUser.class);
@@ -478,7 +478,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(registeredUser1);
         when(service.getRegisteredUserDao().recordNewLogin(registeredUser1)).thenReturn(registeredUser2);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
@@ -515,7 +515,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(null);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
         ArgumentCaptor<RegisteredUser> registeredUserInserted = ArgumentCaptor.forClass(RegisteredUser.class);
@@ -571,7 +571,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(registeredUser1);
         when(service.getRegisteredUserDao().recordNewLogin(registeredUser1)).thenReturn(registeredUser2);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
@@ -608,7 +608,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(null);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
         ArgumentCaptor<RegisteredUser> registeredUserInserted = ArgumentCaptor.forClass(RegisteredUser.class);
@@ -664,7 +664,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(registeredUser1);
         when(service.getRegisteredUserDao().recordNewLogin(registeredUser1)).thenReturn(registeredUser2);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
@@ -701,7 +701,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(null);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
         ArgumentCaptor<RegisteredUser> registeredUserInserted = ArgumentCaptor.forClass(RegisteredUser.class);
@@ -757,7 +757,7 @@ public class ClientSessionServiceTest {
         Date now = DateUtils.getCurrentDate();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
         when(service.getRegisteredUserDao().retrieveRegisteredUser("user")).thenReturn(registeredUser1);
         when(service.getRegisteredUserDao().recordNewLogin(registeredUser1)).thenReturn(registeredUser2);
         ArgumentCaptor<AuditEvent> auditEvent = ArgumentCaptor.forClass(AuditEvent.class);
@@ -846,7 +846,7 @@ public class ClientSessionServiceTest {
         FederatedUser currentUser = new FederatedUser();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
 
         ClientSession session = service.retrieveClientSession();
         assertNotNull(session);
@@ -908,7 +908,7 @@ public class ClientSessionServiceTest {
         FederatedUser currentUser = new FederatedUser();
         when(service.getGaeUserService().getCurrentUser()).thenReturn(currentUser);
         when(service.getSpringContextService().getCurrentSessionId()).thenReturn("1234");
-        when(service.getGaeUserService().getLogoutUrl("destination")).thenReturn("http://destination");
+        when(service.getGaeUserService().getGoogleAccountsLogoutUrl("destination")).thenReturn("http://destination");
 
         ClientSession session = service.retrieveClientSession("destination");
         assertNotNull(session);

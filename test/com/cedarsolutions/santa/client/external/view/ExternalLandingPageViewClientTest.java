@@ -41,14 +41,12 @@ public class ExternalLandingPageViewClientTest extends ClientTestCase {
 
         ExternalLandingPageView view = new ExternalLandingPageView();
         assertNotNull(view);
-        assertEquals(constants.landingPage_headerText(), view.header.getText());
+        assertNull(view.getLoginEventHandler());
         assertEquals(constants.landingPage_paragraph1Text(), view.paragraph1.getText());
         assertEquals(constants.landingPage_paragraph2Text(), view.paragraph2.getText());
         assertEquals(constants.landingPage_paragraph3Text(), view.paragraph3.getText());
         assertNotNull(view.paragraph4);
-        assertFalse(view.getIsLoggedIn());
-        assertNull(view.loginSelector.getContinueEventHandler());
-        assertNull(view.loginSelector.getLoginSelectorEventHandler());
+        assertEquals(constants.landingPage_paragraph5Text(), view.paragraph5.getText());
 
         HTML html = (HTML) view.paragraph4.getWidget(0);
         String format = constants.landingPage_paragraph4TextFormat();
@@ -56,43 +54,14 @@ public class ExternalLandingPageViewClientTest extends ClientTestCase {
         assertEquals(result, html.getHTML());
     }
 
-    /** Test setIsLoggedIn(). */
-    public void testIsLoggedIn() {
-        ExternalLandingPageView view = new ExternalLandingPageView();
-
-        view.setIsLoggedIn(false);
-        assertFalse(view.getIsLoggedIn());
-
-        view.setIsLoggedIn(true);
-        assertTrue(view.getIsLoggedIn());
-    }
-
-    /** Test setContinueEventHandler(). */
-    public void testSetContinueEventHandler() {
+    /** Test setLoginEventHandler(). */
+    public void testSetLoginEventHandler() {
         StubbedViewEventHandler eventHandler = new StubbedViewEventHandler();
         ExternalLandingPageView view = new ExternalLandingPageView();
-        view.setContinueEventHandler(eventHandler);
-        assertSame(eventHandler, view.getContinueEventHandler());
-        assertSame(eventHandler, view.loginSelector.getContinueEventHandler());
-        clickButton(view.loginSelector.getContinueButton());
-        assertFalse(eventHandler.getEvents().isEmpty());
-    }
-
-    /** Test setLoginSelectorEventHandler(). */
-    public void testSetLoginSelectorEventHandler() {
-        StubbedViewEventHandler eventHandler = new StubbedViewEventHandler();
-        ExternalLandingPageView view = new ExternalLandingPageView();
-        view.setLoginSelectorEventHandler(eventHandler);
-        assertSame(eventHandler, view.getLoginSelectorEventHandler());
-        assertSame(eventHandler, view.loginSelector.getLoginSelectorEventHandler());
-        clickButton(view.loginSelector.getOpenIdButton());
-        assertFalse(eventHandler.getEvents().isEmpty());
-    }
-
-    /** Test getSelectedProvider(). */
-    public void testGetSelectedProvider() {
-        ExternalLandingPageView view = new ExternalLandingPageView();
-        assertEquals(view.loginSelector.getSelectedProvider(), view.getSelectedProvider());
+        view.setLoginEventHandler(eventHandler);
+        assertSame(eventHandler, view.getLoginEventHandler());
+        clickButton(view.loginButton);
+        assertTrue(eventHandler.handledEvent());
     }
 
 }

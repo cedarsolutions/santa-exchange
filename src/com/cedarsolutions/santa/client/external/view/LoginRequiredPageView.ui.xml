@@ -20,7 +20,7 @@
     }
 
     .verbiage {
-        margin-top: 3em;
+        margin-top: 1em;
         margin-left: 1em;
         margin-right: 2em;
     }
@@ -29,38 +29,23 @@
         text-align: justify;
     }
 
-    .loginSelector {
-        margin-top: 3em;
-        margin-left: 1em;
-        margin-right: 2em;
-    }
-
     .content {
-        width: 450px;
-        float: left;
-    }
-
-    .login {
-        width: 190px;
-        float: left;
+        width: 650px;
     }
     </ui:style>
 
-    <g:FlowPanel>
-        <g:FlowPanel styleName="{style.content}">
-            <g:HTMLPanel styleName="{style.header}">
+    <g:VerticalPanel styleName="{style.content}">
+        <g:HTMLPanel styleName="{style.header}">
+            <g:HTMLPanel>
                 <img src="images/gift-75x75.png"/>
                 <h1><g:Label ui:field="header"/></h1>
             </g:HTMLPanel>
-            <g:HTMLPanel styleName="{style.verbiage}">
-                <p><g:Label ui:field="paragraph"/></p>
-            </g:HTMLPanel>
-        </g:FlowPanel>
-        <g:FlowPanel styleName="{style.login}">
-            <g:HTMLPanel styleName="{style.loginSelector}">
-                <widget:LoginSelector ui:field="loginSelector" />
-            </g:HTMLPanel>
-        </g:FlowPanel>
-    </g:FlowPanel>
+        </g:HTMLPanel>
+        <g:HTMLPanel styleName="{style.verbiage}">
+            <p><g:Label ui:field="paragraph1"/></p>
+            <p><g:Label ui:field="paragraph2"/></p>
+            <p><g:Button ui:field="loginButton"/></p>
+        </g:HTMLPanel>
+    </g:VerticalPanel>
 
 </ui:UiBinder>

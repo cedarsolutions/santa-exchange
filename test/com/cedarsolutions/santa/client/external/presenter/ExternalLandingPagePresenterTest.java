@@ -33,12 +33,10 @@ import org.mockito.ArgumentCaptor;
 import com.cedarsolutions.santa.client.SantaExchangeEventTypes;
 import com.cedarsolutions.santa.client.common.presenter.SystemStateInjector;
 import com.cedarsolutions.santa.client.external.ExternalEventBus;
-import com.cedarsolutions.santa.client.external.presenter.ExternalLandingPagePresenter.ContinueEventHandler;
-import com.cedarsolutions.santa.client.external.presenter.ExternalLandingPagePresenter.LoginSelectorEventHandler;
+import com.cedarsolutions.santa.client.external.presenter.ExternalLandingPagePresenter.LoginEventHandler;
 import com.cedarsolutions.santa.client.external.view.IExternalLandingPageView;
 import com.cedarsolutions.santa.client.junit.StubbedClientTestCase;
 import com.cedarsolutions.santa.shared.domain.ClientSession;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.gwt.user.client.ui.IsWidget;
 
 /**
@@ -49,8 +47,7 @@ public class ExternalLandingPagePresenterTest extends StubbedClientTestCase {
 
     /** Test onShowExternalLandingPage() when the user is not logged in. */
     @Test public void testOnShowExternalLandingPageNotLoggedIn() {
-        ArgumentCaptor<ContinueEventHandler> continueEventHandler = ArgumentCaptor.forClass(ContinueEventHandler.class);
-        ArgumentCaptor<LoginSelectorEventHandler> loginSelectorEventHandler = ArgumentCaptor.forClass(LoginSelectorEventHandler.class);
+        ArgumentCaptor<LoginEventHandler> loginEventHandler = ArgumentCaptor.forClass(LoginEventHandler.class);
         IsWidget viewWidget = mock(IsWidget.class);
 
         ExternalLandingPagePresenter presenter = createPresenter();
@@ -58,18 +55,14 @@ public class ExternalLandingPagePresenterTest extends StubbedClientTestCase {
         when(presenter.getView().getViewWidget()).thenReturn(viewWidget);
 
         presenter.onShowExternalLandingPage();
-        verify(presenter.getView()).setIsLoggedIn(false);
-        verify(presenter.getView()).setContinueEventHandler(continueEventHandler.capture());
-        verify(presenter.getView()).setLoginSelectorEventHandler(loginSelectorEventHandler.capture());
+        verify(presenter.getView()).setLoginEventHandler(loginEventHandler.capture());
         verify(presenter.getEventBus()).replaceModuleBody(viewWidget);
-        assertSame(presenter, continueEventHandler.getValue().getParent());
-        assertSame(presenter, loginSelectorEventHandler.getValue().getParent());
+        assertSame(presenter, loginEventHandler.getValue().getParent());
     }
 
     /** Test onShowExternalLandingPage() when the user is currently logged in. */
     @Test public void testOnShowExternalLandingPageLoggedIn() {
-        ArgumentCaptor<ContinueEventHandler> continueEventHandler = ArgumentCaptor.forClass(ContinueEventHandler.class);
-        ArgumentCaptor<LoginSelectorEventHandler> loginSelectorEventHandler = ArgumentCaptor.forClass(LoginSelectorEventHandler.class);
+        ArgumentCaptor<LoginEventHandler> loginEventHandler = ArgumentCaptor.forClass(LoginEventHandler.class);
         IsWidget viewWidget = mock(IsWidget.class);
 
         ExternalLandingPagePresenter presenter = createPresenter();
@@ -77,31 +70,33 @@ public class ExternalLandingPagePresenterTest extends StubbedClientTestCase {
         when(presenter.getView().getViewWidget()).thenReturn(viewWidget);
 
         presenter.onShowExternalLandingPage();
-        verify(presenter.getView()).setIsLoggedIn(true);
-        verify(presenter.getView()).setContinueEventHandler(continueEventHandler.capture());
-        verify(presenter.getView()).setLoginSelectorEventHandler(loginSelectorEventHandler.capture());
+        verify(presenter.getView()).setLoginEventHandler(loginEventHandler.capture());
         verify(presenter.getEventBus()).replaceModuleBody(viewWidget);
-        assertSame(presenter, continueEventHandler.getValue().getParent());
-        assertSame(presenter, loginSelectorEventHandler.getValue().getParent());
+        assertSame(presenter, loginEventHandler.getValue().getParent());
     }
 
-    /** Test ContinueEventHandler. */
-    @Test public void testContinueEventHandler() {
+    /** Test LoginEventHandler when the user is logged in. */
+    @Test public void testLoginEventHandlerLoggedIn() {
         ExternalLandingPagePresenter presenter = createPresenter();
-        ContinueEventHandler handler = new ContinueEventHandler(presenter);
+        when(presenter.getSystemStateInjector().getSession().isLoggedIn()).thenReturn(true);
+
+        LoginEventHandler handler = new LoginEventHandler(presenter);
         assertSame(presenter, handler.getParent());
+
         handler.handleEvent(null); // event is ignored
         verify(presenter.getEventBus()).showLandingPage();
     }
 
-    /** Test LoginSelectorEventHandler. */
-    @Test public void testLoginSelectorEventHandler() {
+    /** Test LoginEventHandler when the user is not logged in. */
+    @Test public void testLoginEventHandlerNotLoggedIn() {
         ExternalLandingPagePresenter presenter = createPresenter();
-        LoginSelectorEventHandler handler = new LoginSelectorEventHandler(presenter);
+        when(presenter.getSystemStateInjector().getSession().isLoggedIn()).thenReturn(false);
+
+        LoginEventHandler handler = new LoginEventHandler(presenter);
         assertSame(presenter, handler.getParent());
-        when(presenter.getView().getSelectedProvider()).thenReturn(OpenIdProvider.MYOPENID);
+
         handler.handleEvent(null); // event is ignored
-        verify(presenter.getEventBus()).showLoginPageForToken(OpenIdProvider.MYOPENID, SantaExchangeEventTypes.LANDING_PAGE);
+        verify(presenter.getEventBus()).showGoogleAccountsLoginPageForToken(SantaExchangeEventTypes.LANDING_PAGE);
     }
 
     /** Create a properly-mocked presenter, including everything that needs to be injected. */

@@ -45,7 +45,6 @@ import com.cedarsolutions.santa.client.root.RootEventBus;
 import com.cedarsolutions.santa.client.root.presenter.LoginEventHandler.GetLoginUrlCaller;
 import com.cedarsolutions.santa.client.root.presenter.LoginEventHandler.GetLogoutUrlCaller;
 import com.cedarsolutions.santa.shared.domain.ClientSession;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -55,32 +54,28 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 @SuppressWarnings("unchecked")
 public class LoginEventHandlerTest extends StubbedClientTestCase {
 
-    /** Test onShowLoginPageForToken(). */
-    @Test public void testOnShowLoginPageForToken() {
-        ArgumentCaptor<OpenIdProvider> openIdProvider = ArgumentCaptor.forClass(OpenIdProvider.class);
+    /** Test onShowGoogleAccountsLoginPageForToken(). */
+    @Test public void testOnShowGoogleAccountsLoginPageForToken() {
         ArgumentCaptor<String> destinationUrl = ArgumentCaptor.forClass(String.class);
         when(WidgetUtils.getInstance().getDestinationUrl("whatever")).thenReturn("http://whatever");
 
         LoginEventHandler handler = createEventHandler();
-        handler.onShowLoginPageForToken(OpenIdProvider.GOOGLE, "whatever");
+        handler.onShowGoogleAccountsLoginPageForToken("whatever");
 
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(handler.getGaeUserRpc()).getLoginUrl(openIdProvider.capture(), destinationUrl.capture(), isA(RpcCallback.class));
-        assertEquals(OpenIdProvider.GOOGLE, openIdProvider.getValue());
+        verify(handler.getGaeUserRpc()).getGoogleAccountsLoginUrl(destinationUrl.capture(), isA(RpcCallback.class));
         assertEquals("http://whatever", destinationUrl.getValue());
     }
 
-    /** Test onShowLoginPageForUrl(). */
-    @Test public void testOnShowLoginPageForUrl() {
-        ArgumentCaptor<OpenIdProvider> openIdProvider = ArgumentCaptor.forClass(OpenIdProvider.class);
+    /** Test onShowGoogleAccountsLoginPageForUrl(). */
+    @Test public void testOnShowGoogleAccountsLoginPageForUrl() {
         ArgumentCaptor<String> destinationUrl = ArgumentCaptor.forClass(String.class);
 
         LoginEventHandler handler = createEventHandler();
-        handler.onShowLoginPageForUrl(OpenIdProvider.GOOGLE, "whatever");
+        handler.onShowGoogleAccountsLoginPageForUrl("whatever");
 
         verify(WidgetUtils.getInstance()).showPleaseWaitProgressIndicator();
-        verify(handler.getGaeUserRpc()).getLoginUrl(openIdProvider.capture(), destinationUrl.capture(), isA(RpcCallback.class));
-        assertEquals(OpenIdProvider.GOOGLE, openIdProvider.getValue());
+        verify(handler.getGaeUserRpc()).getGoogleAccountsLoginUrl(destinationUrl.capture(), isA(RpcCallback.class));
         assertEquals("whatever", destinationUrl.getValue());
     }
 
@@ -108,7 +103,7 @@ public class LoginEventHandlerTest extends StubbedClientTestCase {
         when(WidgetUtils.getInstance().getDestinationUrl(ACCOUNT_LOCKED_PAGE)).thenReturn("whatever");
         LoginEventHandler handler = createEventHandler();
         handler.onLockOutUser();
-        verify(handler.getGaeUserRpc()).getLogoutUrl(destination.capture(), isA(RpcCallback.class));
+        verify(handler.getGaeUserRpc()).getGoogleAccountsLogoutUrl(destination.capture(), isA(RpcCallback.class));
         assertEquals("whatever", destination.getValue());
     }
 
@@ -120,13 +115,12 @@ public class LoginEventHandlerTest extends StubbedClientTestCase {
         assertSame(eventBus, caller.eventBus);
         assertTrue(caller.isMarkedRetryable());
 
-        caller.setMethodArguments(OpenIdProvider.GOOGLE, "destinationUrl");
-        assertEquals(OpenIdProvider.GOOGLE, caller.openIdProvider);
+        caller.setMethodArguments("destinationUrl");
         assertEquals("destinationUrl", caller.destinationUrl);
 
         AsyncCallback<String> callback = mock(AsyncCallback.class);
         caller.invoke(callback);
-        verify(gaeUserRpcAsync).getLoginUrl(OpenIdProvider.GOOGLE, "destinationUrl", callback);
+        verify(gaeUserRpcAsync).getGoogleAccountsLoginUrl("destinationUrl", callback);
 
         caller.onSuccessResult("whatever");
         InOrder inOrder = inOrder(eventBus, WidgetUtils.getInstance());
@@ -147,7 +141,7 @@ public class LoginEventHandlerTest extends StubbedClientTestCase {
 
         AsyncCallback<String> callback = mock(AsyncCallback.class);
         caller.invoke(callback);
-        verify(gaeUserRpcAsync).getLogoutUrl("destinationUrl", callback);
+        verify(gaeUserRpcAsync).getGoogleAccountsLogoutUrl("destinationUrl", callback);
 
         caller.onSuccessResult("whatever");
         InOrder inOrder = inOrder(eventBus, WidgetUtils.getInstance());

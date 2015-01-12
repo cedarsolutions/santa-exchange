@@ -89,45 +89,14 @@ public interface WidgetConstants extends Constants {
     @DefaultStringValue("Yahoo")
     String openId_Yahoo();
 
+    @DefaultStringValue("MySpace")
+    String openId_MySpace();
 
-    /* **************************
-     *  Login-related constants
-     * **************************/
+    @DefaultStringValue("AOL")
+    String openId_AOL();
 
-    @DefaultStringValue("What is OpenId?")
-    String login_openIdDisclosureText();
-
-    @DefaultStringValue("You can sign in to this application with a Yahoo or Google email address.")
-    String login_openIdExplanation1Text();
-
-    @DefaultStringValue("When you choose to sign in, you will be redirected to the web site " +
-                        "for either Yahoo or Google.  Yahoo or Google will tell Santa Exchange " +
-                        "who you are and that you have signed in correctly.  Your password is " +
-                        "never shared with Santa Exchange.")
-    String login_openIdExplanation2Text();
-
-    @DefaultStringValue("Google has plans to phase out this login mechanism soon.  Starting Febrary " +
-                        "1, 2015, Santa Exchange will stop accepting logins from Yahoo users.  Existing " +
-                        "Yahoo users will be removed from Santa Exchange soon after.  So, it's best if " +
-                        "you use a Google account rather than a Yahoo account.")
-    String login_openIdExplanation3Text();
-
-    @DefaultStringValue("Sign in using OpenId:")
-    String login_openIdInstructions();
-
-    @DefaultStringValue("Sign In")
-    String login_openIdButtonText();
-
-    @DefaultStringValue("You're already logged in")
-    String login_continueDisclosureText();
-
-    @DefaultStringValue("You have already logged in.  Click the button " +
-                        "above to enter the web site and start working " +
-                        "on your Secret Santa exchange.")
-    String login_continueExplanationText();
-
-    @DefaultStringValue("Enter Site")
-    String login_continueButtonText();
+    @DefaultStringValue("myOpenId")
+    String openId_myOpenId();
 
 
     /* *************************

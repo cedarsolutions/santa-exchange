@@ -22,7 +22,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 When /^the user logs in with normal user credentials$/ do
-    click_button("LoginSelector_openIdButton")
+    click_button("Sign In With Google")
     fill_in("email", {:with => test_config.normal_user})
     click_button("Log In")
 end
