@@ -1,4 +1,4 @@
-Version 0.9.45   unreleased
+Version 0.9.45   01 Feb 2015
 
     * Convert from AppEngine's federated login mechanism to the Google Account login mechanism.
     * Bump up to CedarCommon v5.1.0 to get support for Google Accounts authentication.
