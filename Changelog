@@ -1,3 +1,8 @@
+Version 0.9.45   unreleased
+
+    * Bump up to CedarCommon v5.1.0 to get support for Google Accounts authentication.
+    * Bump up to AppEngine v1.9.17 just to stay up-to-date.
+
 Version 0.9.44   10 Jan 2015
 
     * Use common event handler classes from CedarCommon in a few places.
