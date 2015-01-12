@@ -23,14 +23,15 @@
 package com.cedarsolutions.santa.client.external.view;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.module.view.ModulePageView;
 import com.cedarsolutions.santa.client.SantaExchangeConfig;
-import com.cedarsolutions.santa.client.common.widget.LoginSelector;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
+import com.cedarsolutions.santa.client.common.widget.WidgetUtils;
 import com.cedarsolutions.util.gwt.GwtStringUtils;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -64,7 +65,11 @@ public class ExternalLandingPageView extends ModulePageView implements IExternal
     @UiField @WithElementId protected Label paragraph2;
     @UiField @WithElementId protected Label paragraph3;
     @UiField @WithElementId protected HTMLPanel paragraph4;
-    @UiField protected LoginSelector loginSelector;
+    @UiField @WithElementId protected Label paragraph5;
+    @UiField @WithElementId protected Button loginButton;
+
+    // Other instance variables
+    private ViewEventHandler loginEventHandler;
 
     /** Create the view. */
     public ExternalLandingPageView() {
@@ -72,60 +77,48 @@ public class ExternalLandingPageView extends ModulePageView implements IExternal
         ID_HANDLER.generateAndSetIds(this);
 
         ExternalConstants constants = GWT.create(ExternalConstants.class);
+        SantaExchangeConfig config = GWT.create(SantaExchangeConfig.class);
+        String paragraph4Html = GwtStringUtils.format(constants.landingPage_paragraph4TextFormat(),
+                                                      config.system_apacheLicenseUrl(),
+                                                      config.system_sourceCodeUrl());
+
         this.header.setText(constants.landingPage_headerText());
         this.paragraph1.setText(constants.landingPage_paragraph1Text());
         this.paragraph2.setText(constants.landingPage_paragraph2Text());
         this.paragraph3.setText(constants.landingPage_paragraph3Text());
+        this.paragraph4.add(new HTML(paragraph4Html));  // safe even though it's not escaped
+        this.paragraph5.setText(constants.landingPage_paragraph5Text());
 
-        SantaExchangeConfig config = GWT.create(SantaExchangeConfig.class);
-        String result = GwtStringUtils.format(constants.landingPage_paragraph4TextFormat(),
-                                              config.system_apacheLicenseUrl(),
-                                              config.system_sourceCodeUrl());
-        this.paragraph4.add(new HTML(result));  // safe even though it's not escaped
+        this.loginButton.setText(constants.landingPage_loginButtonText());
+        this.loginButton.setTitle(constants.landingPage_loginButtonTooltip());
+        this.loginButton.addClickHandler(new LoginClickHandler(this));
 
-        this.loginSelector.setIsLoggedIn(false);
+        WidgetUtils.getInstance().clickOnEnter(this.loginButton);
     }
 
-    /** Tell the view whether a user is currently logged in. */
+    /** Set the login event handler. */
     @Override
-    public void setIsLoggedIn(boolean isLoggedIn) {
-        this.loginSelector.setIsLoggedIn(isLoggedIn);
+    public void setLoginEventHandler(ViewEventHandler loginEventHandler) {
+        this.loginEventHandler = loginEventHandler;
+
     }
 
-    /** Find out whether the view thinks anyone is logged in. */
+    /** Get the login event handler. */
     @Override
-    public boolean getIsLoggedIn() {
-        return this.loginSelector.getIsLoggedIn();
+    public ViewEventHandler getLoginEventHandler() {
+        return this.loginEventHandler;
     }
 
-    /** Set the event handler for the continue action. */
-    @Override
-    public void setContinueEventHandler(ViewEventHandler continueEventHandler) {
-        this.loginSelector.setContinueEventHandler(continueEventHandler);
-    }
+    /** Login click handler. */
+    protected static class LoginClickHandler extends AbstractViewEventClickHandler<ExternalLandingPageView> {
+        public LoginClickHandler(ExternalLandingPageView parent) {
+            super(parent);
+        }
 
-    /** Get the continue event handler. */
-    @Override
-    public ViewEventHandler getContinueEventHandler() {
-        return this.loginSelector.getContinueEventHandler();
-    }
-
-    /** Set the event handler for the login selector. */
-    @Override
-    public void setLoginSelectorEventHandler(ViewEventHandler loginSelectorEventHandler) {
-        this.loginSelector.setLoginSelectorEventHandler(loginSelectorEventHandler);
-    }
-
-    /** Get the login selector event handler. */
-    @Override
-    public ViewEventHandler getLoginSelectorEventHandler() {
-        return this.loginSelector.getLoginSelectorEventHandler();
-    }
-
-    /** Get the selected OpenId provider key. */
-    @Override
-    public OpenIdProvider getSelectedProvider() {
-        return this.loginSelector.getSelectedProvider();
+        @Override
+        public ViewEventHandler getViewEventHandler() {
+            return this.getParent().getLoginEventHandler();
+        }
     }
 
 }

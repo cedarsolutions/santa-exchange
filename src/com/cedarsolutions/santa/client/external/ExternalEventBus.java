@@ -32,7 +32,6 @@ import com.cedarsolutions.santa.client.external.presenter.ExternalLandingPagePre
 import com.cedarsolutions.santa.client.external.presenter.ExternalPresenter;
 import com.cedarsolutions.santa.client.external.presenter.LoginRequiredPagePresenter;
 import com.cedarsolutions.santa.client.external.presenter.RpcTestPagePresenter;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.mvp4g.client.annotation.Debug;
 import com.mvp4g.client.annotation.Debug.LogLevel;
@@ -103,20 +102,18 @@ public interface ExternalEventBus extends ModuleEventBus {
     void showAccountLockedPage();
 
     /**
-     * Show the login page for a particular destination token.
-     * @param openIdProvider   Open ID provider that will be used
+     * Show the Google Accounts login page for a particular destination token.
      * @param destinationToken Destination token (page) to redirect to after login
      */
     @Event(forwardToParent = true)
-    void showLoginPageForToken(OpenIdProvider openIdProvider, String destinationToken);
+    void showGoogleAccountsLoginPageForToken(String destinationToken);
 
     /**
-     * Show the login page for a particular destination URL.
-     * @param openIdProvider   Open ID provider that will be used
+     * Show the Google Accounts login page for a particular destination URL.
      * @param destinationUrl   Destination URL to redirect to after login
      */
     @Event(forwardToParent = true)
-    void showLoginPageForUrl(OpenIdProvider openIdProvider, String destinationUrl);
+    void showGoogleAccountsLoginPageForUrl(String destinationUrl);
 
     /** Log out the current user. */
     @Event(forwardToParent = true)

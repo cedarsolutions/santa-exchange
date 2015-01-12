@@ -143,7 +143,7 @@ public class ClientSessionService extends AbstractService implements IClientSess
 
         String logoutUrl = null;
         if (currentUser != null && logoutDestinationUrl != null) {
-            logoutUrl = this.gaeUserService.getLogoutUrl(logoutDestinationUrl);
+            logoutUrl = this.gaeUserService.getGoogleAccountsLogoutUrl(logoutDestinationUrl);
         }
 
         ClientSession clientSession = new ClientSession();

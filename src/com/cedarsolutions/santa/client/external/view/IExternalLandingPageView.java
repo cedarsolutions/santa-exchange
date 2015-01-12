@@ -24,9 +24,6 @@ package com.cedarsolutions.santa.client.external.view;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.client.gwt.module.view.IModulePageView;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
-
-
 
 /**
  * View for the external (public-facing) landing page.
@@ -34,25 +31,10 @@ import com.cedarsolutions.shared.domain.OpenIdProvider;
  */
 public interface IExternalLandingPageView extends IModulePageView {
 
-    /** Tell the view whether a user is currently logged in. */
-    void setIsLoggedIn(boolean isLoggedIn);
+    /** Set login event handler. */
+    void setLoginEventHandler(ViewEventHandler loginEventHandler);
 
-    /** Find out whether the view thinks anyone is logged in. */
-    boolean getIsLoggedIn();
-
-    /** Set the event handler for the continue action. */
-    void setContinueEventHandler(ViewEventHandler continueEventHandler);
-
-    /** Get the continue event handler. */
-    ViewEventHandler getContinueEventHandler();
-
-    /** Set the event handler for the login selector. */
-    void setLoginSelectorEventHandler(ViewEventHandler loginSelectorEventHandler);
-
-    /** Get the login selector event handler. */
-    ViewEventHandler getLoginSelectorEventHandler();
-
-    /** Get the selected OpenId provider key. */
-    OpenIdProvider getSelectedProvider();
+    /** Get the login event handler. */
+    ViewEventHandler getLoginEventHandler();
 
 }

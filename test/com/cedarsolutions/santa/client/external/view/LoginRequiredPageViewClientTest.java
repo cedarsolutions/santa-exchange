@@ -22,7 +22,6 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.cedarsolutions.santa.client.external.view;
 
-import com.cedarsolutions.client.gwt.event.ViewEventHandler;
 import com.cedarsolutions.santa.client.junit.ClientTestCase;
 import com.google.gwt.core.client.GWT;
 
@@ -38,23 +37,21 @@ public class LoginRequiredPageViewClientTest extends ClientTestCase {
         LoginRequiredPageView view = new LoginRequiredPageView();
         assertNotNull(view);
         assertEquals(constants.loginRequired_headerText(), view.header.getText());
-        assertEquals(constants.loginRequired_loginRequiredText(), view.paragraph.getText());
-        assertFalse(view.loginSelector.getIsLoggedIn());
-        assertNull(view.loginSelector.getLoginSelectorEventHandler());
+        assertEquals(constants.loginRequired_paragraph1Text(), view.paragraph1.getText());
+        assertEquals(constants.loginRequired_paragraph2Text(), view.paragraph2.getText());
+        assertEquals(constants.loginRequired_loginButtonText(), view.loginButton.getText());
+        assertEquals(constants.loginRequired_loginButtonTooltip(), view.loginButton.getTitle());
+        assertNull(view.getLoginEventHandler());
     }
 
-    /** Test setLoginSelectorEvenHandler(). */
-    public void testSetLoginSelectorEventHandler() {
-        ViewEventHandler eventHandler = new StubbedViewEventHandler();
+    /** Test setLoginEvenHandler(). */
+    public void testSetLoginEventHandler() {
+        StubbedViewEventHandler eventHandler = new StubbedViewEventHandler();
         LoginRequiredPageView view = new LoginRequiredPageView();
-        view.setLoginSelectorEventHandler(eventHandler);
-        assertSame(eventHandler, view.getLoginSelectorEventHandler());
-        assertSame(eventHandler, view.loginSelector.getLoginSelectorEventHandler());
+        view.setLoginEventHandler(eventHandler);
+        assertSame(eventHandler, view.getLoginEventHandler());
+        clickButton(view.loginButton);
+        assertTrue(eventHandler.handledEvent());
     }
 
-    /** Test getSelectedProvider(). */
-    public void testGetSelectedProvider() {
-        LoginRequiredPageView view = new LoginRequiredPageView();
-        assertEquals(view.loginSelector.getSelectedProvider(), view.getSelectedProvider());
-    }
 }

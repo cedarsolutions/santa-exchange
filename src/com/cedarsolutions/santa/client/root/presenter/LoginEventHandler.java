@@ -28,9 +28,9 @@ import com.cedarsolutions.client.gwt.rpc.IGaeUserRpcAsync;
 import com.cedarsolutions.santa.client.common.presenter.SystemStateInjector;
 import com.cedarsolutions.santa.client.common.widget.WidgetUtils;
 import com.cedarsolutions.santa.client.root.RootEventBus;
+import com.cedarsolutions.santa.client.rpc.util.RpcUtils;
 import com.cedarsolutions.santa.client.rpc.util.StandardRpcCaller;
 import com.cedarsolutions.santa.shared.domain.ClientSession;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.mvp4g.client.annotation.EventHandler;
@@ -50,23 +50,21 @@ public class LoginEventHandler extends BaseEventHandler<RootEventBus> {
     private IGaeUserRpcAsync gaeUserRpc;
 
     /**
-     * Show the login page for a particular destination token.
-     * @param openIdProvider   Open ID provider that will be used
+     * Show the Google Accounts login page for a particular destination token.
      * @param destinationToken Destination token (page) to redirect to after login
      */
-    public void onShowLoginPageForToken(OpenIdProvider openIdProvider, String destinationToken) {
+    public void onShowGoogleAccountsLoginPageForToken(String destinationToken) {
         String destinationUrl = WidgetUtils.getInstance().getDestinationUrl(destinationToken);
-        this.onShowLoginPageForUrl(openIdProvider, destinationUrl);
+        this.onShowGoogleAccountsLoginPageForUrl(destinationUrl);
     }
 
     /**
-     * Show the login page for a particular destination URL.
-     * @param openIdProvider   Open ID provider that will be used
+     * Show the Google Accounts login page for a particular destination URL.
      * @param destinationUrl   Destination URL to redirect to after login
      */
-    public void onShowLoginPageForUrl(OpenIdProvider openIdProvider, String destinationUrl) {
+    public void onShowGoogleAccountsLoginPageForUrl(String destinationUrl) {
         GetLoginUrlCaller caller = new GetLoginUrlCaller(this.gaeUserRpc, this.eventBus);
-        caller.setMethodArguments(openIdProvider, destinationUrl);
+        caller.setMethodArguments(destinationUrl);
         caller.invoke();
     }
 
@@ -113,44 +111,16 @@ public class LoginEventHandler extends BaseEventHandler<RootEventBus> {
     @Inject
     public void setGaeUserRpc(IGaeUserRpcAsync gaeUserRpc) {
         this.gaeUserRpc = gaeUserRpc;
+        RpcUtils.getInstance().applySystemWidePolicies(this.gaeUserRpc);
     }
 
-    /** Caller for IGaeUserRpcAsync.getLoginUrl(). */
+    /** Caller for IGaeUserRpcAsync.getGoogleAccountsLoginUrl(). */
     protected static class GetLoginUrlCaller extends StandardRpcCaller<IGaeUserRpcAsync, String> {
         protected RootEventBus eventBus;
-        protected OpenIdProvider openIdProvider;
         protected String destinationUrl;
 
         public GetLoginUrlCaller(IGaeUserRpcAsync async, RootEventBus eventBus) {
-            super(async, "IGaeUserRpc", "getLoginUrl");
-            this.eventBus = eventBus;
-            this.markRetryable();  // it's safe to retry this RPC call
-        }
-
-        public void setMethodArguments(OpenIdProvider openIdProvider, String destinationUrl) {
-            this.openIdProvider = openIdProvider;
-            this.destinationUrl = destinationUrl;
-        }
-
-        @Override
-        public void invokeRpcMethod(IGaeUserRpcAsync async, AsyncCallback<String> callback) {
-            async.getLoginUrl(this.openIdProvider, this.destinationUrl, callback);
-        }
-
-        @Override
-        public void onSuccessResult(String result) {
-            this.eventBus.clearSession();  // clear it so it gets reloaded later
-            WidgetUtils.getInstance().redirect(result);
-        }
-    }
-
-    /** Caller for IGaeUserRpcAsync.getLogoutUrl(). */
-    protected static class GetLogoutUrlCaller extends StandardRpcCaller<IGaeUserRpcAsync, String> {
-        protected RootEventBus eventBus;
-        protected String destinationUrl;
-
-        public GetLogoutUrlCaller(IGaeUserRpcAsync async, RootEventBus eventBus) {
-            super(async, "IGaeUserRpc", "getLogoutUrl");
+            super(async, "IGaeUserRpc", "getGoogleAccountsLoginUrl");
             this.eventBus = eventBus;
             this.markRetryable();  // it's safe to retry this RPC call
         }
@@ -161,7 +131,34 @@ public class LoginEventHandler extends BaseEventHandler<RootEventBus> {
 
         @Override
         public void invokeRpcMethod(IGaeUserRpcAsync async, AsyncCallback<String> callback) {
-            async.getLogoutUrl(this.destinationUrl, callback);
+            async.getGoogleAccountsLoginUrl(this.destinationUrl, callback);
+        }
+
+        @Override
+        public void onSuccessResult(String result) {
+            this.eventBus.clearSession();  // clear it so it gets reloaded later
+            WidgetUtils.getInstance().redirect(result);
+        }
+    }
+
+    /** Caller for IGaeUserRpcAsync.getGoogleAccountsLogoutUrl(). */
+    protected static class GetLogoutUrlCaller extends StandardRpcCaller<IGaeUserRpcAsync, String> {
+        protected RootEventBus eventBus;
+        protected String destinationUrl;
+
+        public GetLogoutUrlCaller(IGaeUserRpcAsync async, RootEventBus eventBus) {
+            super(async, "IGaeUserRpc", "getGoogleAccountsLogoutUrl");
+            this.eventBus = eventBus;
+            this.markRetryable();  // it's safe to retry this RPC call
+        }
+
+        public void setMethodArguments(String destinationUrl) {
+            this.destinationUrl = destinationUrl;
+        }
+
+        @Override
+        public void invokeRpcMethod(IGaeUserRpcAsync async, AsyncCallback<String> callback) {
+            async.getGoogleAccountsLogoutUrl(this.destinationUrl, callback);
         }
 
         @Override

@@ -23,14 +23,16 @@
 package com.cedarsolutions.santa.client.external.view;
 
 import com.cedarsolutions.client.gwt.event.ViewEventHandler;
+import com.cedarsolutions.client.gwt.handler.AbstractViewEventClickHandler;
 import com.cedarsolutions.client.gwt.module.view.ModulePageView;
-import com.cedarsolutions.santa.client.common.widget.LoginSelector;
-import com.cedarsolutions.shared.domain.OpenIdProvider;
+import com.cedarsolutions.santa.client.common.widget.WidgetUtils;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.idhandler.client.WithElementId;
 
 /**
  * Page to display when the user must log in.
@@ -46,35 +48,54 @@ public class LoginRequiredPageView extends ModulePageView implements ILoginRequi
     }
 
     // User interface fields fron the UI binder
-    @UiField protected Label header;
-    @UiField protected Label paragraph;
-    @UiField protected LoginSelector loginSelector;
+    @UiField @WithElementId protected Label header;
+    @UiField @WithElementId protected Label paragraph1;
+    @UiField @WithElementId protected Label paragraph2;
+    @UiField @WithElementId protected Button loginButton;
+
+    // Other instance variables
+    private ViewEventHandler loginEventHandler;
 
     /** Create the view. */
     public LoginRequiredPageView() {
         this.initWidget(BINDER.createAndBindUi(this));
         ExternalConstants constants = GWT.create(ExternalConstants.class);
+
         this.header.setText(constants.loginRequired_headerText());
-        this.paragraph.setText(constants.loginRequired_loginRequiredText());
-        this.loginSelector.setIsLoggedIn(false);  // we never use this option on this page
+
+        this.paragraph1.setText(constants.loginRequired_paragraph1Text());
+        this.paragraph2.setText(constants.loginRequired_paragraph2Text());
+
+        this.loginButton.setText(constants.loginRequired_loginButtonText());
+        this.loginButton.setTitle(constants.loginRequired_loginButtonTooltip());
+        this.loginButton.addClickHandler(new LoginClickHandler(this));
+
+        WidgetUtils.getInstance().clickOnEnter(this.loginButton);
     }
 
-    /** Set the event handler for the login selector. */
+    /** Set the login event handler. */
     @Override
-    public void setLoginSelectorEventHandler(ViewEventHandler loginSelectorEventHandler) {
-        this.loginSelector.setLoginSelectorEventHandler(loginSelectorEventHandler);
+    public void setLoginEventHandler(ViewEventHandler loginEventHandler) {
+        this.loginEventHandler = loginEventHandler;
+
     }
 
-    /** Get the login selector event handler. */
+    /** Get the login event handler. */
     @Override
-    public ViewEventHandler getLoginSelectorEventHandler() {
-        return this.loginSelector.getLoginSelectorEventHandler();
+    public ViewEventHandler getLoginEventHandler() {
+        return this.loginEventHandler;
     }
 
-    /** Get the selected OpenId provider key. */
-    @Override
-    public OpenIdProvider getSelectedProvider() {
-        return this.loginSelector.getSelectedProvider();
+    /** Login click handler. */
+    protected static class LoginClickHandler extends AbstractViewEventClickHandler<LoginRequiredPageView> {
+        public LoginClickHandler(LoginRequiredPageView parent) {
+            super(parent);
+        }
+
+        @Override
+        public ViewEventHandler getViewEventHandler() {
+            return this.getParent().getLoginEventHandler();
+        }
     }
 
 }

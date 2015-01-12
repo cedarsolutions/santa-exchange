@@ -6,7 +6,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * Copyright (c) 2013-2015 Kenneth J. Pronovici.
+ * Copyright (c) 2013-2014 Kenneth J. Pronovici.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -45,7 +45,10 @@ public class OpenIdProviderList extends DropdownList<OpenIdProvider> {
             this.addDropdownItemAny();
         }
 
+        this.addDropdownItem(OpenIdProvider.AOL);
         this.addDropdownItem(OpenIdProvider.GOOGLE);
+        this.addDropdownItem(OpenIdProvider.MYOPENID);
+        this.addDropdownItem(OpenIdProvider.MYSPACE);
         this.addDropdownItem(OpenIdProvider.YAHOO);
 
         this.setVisibleItemCount(1);
@@ -71,8 +74,14 @@ public class OpenIdProviderList extends DropdownList<OpenIdProvider> {
         } else {
             WidgetConstants constants = GWT.create(WidgetConstants.class);
             switch(provider) {
+            case AOL:
+                return constants.openId_AOL();
             case GOOGLE:
                 return constants.openId_Google();
+            case MYOPENID:
+                return constants.openId_myOpenId();
+            case MYSPACE:
+                return constants.openId_MySpace();
             case YAHOO:
                 return constants.openId_Yahoo();
             default:

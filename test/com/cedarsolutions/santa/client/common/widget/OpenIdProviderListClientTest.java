@@ -6,7 +6,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * Copyright (c) 2013-2015 Kenneth J. Pronovici.
+ * Copyright (c) 2013-2014 Kenneth J. Pronovici.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -38,17 +38,17 @@ public class OpenIdProviderListClientTest extends ClientTestCase {
         assertNotNull(list);
         assertEquals(1, list.getVisibleItemCount());
         assertEquals(OpenIdProviderList.DEFAULT_SELECTION, list.getSelectedObjectValue());
-        assertEquals(2, list.getItemCount());
+        assertEquals(5, list.getItemCount());
 
         list = new OpenIdProviderList(true);
         assertNotNull(list);
         assertEquals(1, list.getVisibleItemCount());
         assertEquals(null, list.getSelectedObjectValue());
-        assertEquals(3, list.getItemCount());
+        assertEquals(6, list.getItemCount());
     }
 
     /** Check that every value can be selected. */
-    public void testsetSelectedObjectValue() {
+    public void testSetSelectedValue() {
         OpenIdProviderList list = new OpenIdProviderList(true);
 
         list.setSelectedObjectValue(null);
@@ -64,13 +64,13 @@ public class OpenIdProviderListClientTest extends ClientTestCase {
         assertEquals(OpenIdProvider.YAHOO, list.getSelectedObjectValue());
 
         list.setSelectedObjectValue(OpenIdProvider.MYSPACE);
-        assertEquals(null, list.getSelectedObjectValue());
+        assertEquals(OpenIdProvider.MYSPACE, list.getSelectedObjectValue());
 
         list.setSelectedObjectValue(OpenIdProvider.AOL);
-        assertEquals(null, list.getSelectedObjectValue());
+        assertEquals(OpenIdProvider.AOL, list.getSelectedObjectValue());
 
         list.setSelectedObjectValue(OpenIdProvider.MYOPENID);
-        assertEquals(null, list.getSelectedObjectValue());
+        assertEquals(OpenIdProvider.MYOPENID, list.getSelectedObjectValue());
     }
 
     /** Check that every provider name is localized properly. */
@@ -80,6 +80,8 @@ public class OpenIdProviderListClientTest extends ClientTestCase {
         assertEquals(OpenIdProvider.UNKNOWN.toString(), OpenIdProviderList.getProviderName(OpenIdProvider.UNKNOWN));
         assertEquals(constants.openId_Google(), OpenIdProviderList.getProviderName(OpenIdProvider.GOOGLE));
         assertEquals(constants.openId_Yahoo(), OpenIdProviderList.getProviderName(OpenIdProvider.YAHOO));
+        assertEquals(constants.openId_MySpace(), OpenIdProviderList.getProviderName(OpenIdProvider.MYSPACE));
+        assertEquals(constants.openId_AOL(), OpenIdProviderList.getProviderName(OpenIdProvider.AOL));
+        assertEquals(constants.openId_myOpenId(), OpenIdProviderList.getProviderName(OpenIdProvider.MYOPENID));
     }
-
 }

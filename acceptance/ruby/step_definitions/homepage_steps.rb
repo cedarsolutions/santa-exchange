@@ -21,18 +21,3 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-When /^the user clicks the Login Selector disclosure panel$/ do
-    click_disclosure_panel("LoginSelector_openIdDisclosure")
-end
-
-When /^the user clicks the Already Logged In disclosure panel$/ do
-    click_disclosure_panel("LoginSelector_continueDisclosure")
-end
-
-Then /^the Login Selector disclosure panel should be ([^"]*)$/ do |state|
-    check_disclosure_panel_state("LoginSelector_openIdDisclosure", state)
-end
-
-Then /^the Already Logged In disclosure panel should be ([^"]*)$/ do |state|
-    check_disclosure_panel_state("LoginSelector_continueDisclosure", state)
-end

@@ -81,12 +81,7 @@ Scenario: Go to the external landing page bookmark when logged in
     Then the user should be taken to the internal landing page
     When the user views an "External Landing Page" bookmark
     Then the user should be taken to the external landing page
-     And the Already Logged In disclosure panel should be closed
-    When the user clicks the Already Logged In disclosure panel
-    Then the Already Logged In disclosure panel should be open
-    When the user clicks the Already Logged In disclosure panel
-    Then the Already Logged In disclosure panel should be closed
-    When the user clicks the "Enter Site" button
+    When the user clicks the "Sign In With Google" button
     Then the user should be taken to the internal landing page
     When the user chooses the "Sign Out" internal menu option
     Then the user should be taken to the external landing page
