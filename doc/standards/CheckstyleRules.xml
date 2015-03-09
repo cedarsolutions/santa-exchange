@@ -148,7 +148,6 @@
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="InterfaceIsType"/>
-        <module name="JUnitTestCase"/>
         <module name="MissingDeprecated"/>
         <module name="ModifiedControlVariable"/>
         <module name="ModifierOrder"/>
