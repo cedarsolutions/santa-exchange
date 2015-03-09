@@ -3,6 +3,10 @@
 
 <suppressions>
 
+    <!-- NOTE: Changes to this file sometimes don't take effect immediately.  You may need
+               to restart Eclipse, refresh the project, and then execute Project > Clean
+               before Checkstyle warnings are actually suppressed in the Problems view. -->
+
     <!-- We don't follow the normal conventions for GWT constants. -->
     <suppress checks="MethodName" files="SantaExchangeConfig.java"/>
     <suppress checks="MethodName" files="SantaExchangeConstants.java"/>
