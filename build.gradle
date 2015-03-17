@@ -27,11 +27,10 @@ buildscript {
     repositories {
         mavenLocal()   // Local Maven repository
         mavenCentral() // Maven Central repository
-        maven { url "http://maven.cedar-common.googlecode.com/hg/maven/" }   // Cedar Common code
     }
 
     dependencies {
-        classpath "com.googlecode.cedar-common:cedar-build:0.8.12"
+        classpath "com.googlecode.cedar-common:cedar-build:0.8.14"
     }
 }
 
@@ -122,9 +121,7 @@ cedarCucumber {
 repositories {
     mavenLocal()   // Local Maven repository
     mavenCentral() // Maven Central repository
-    maven { url "http://maven.objectify-appengine.googlecode.com/git/" }      // Objectify 3.x
     maven { url "http://repository.springsource.com/maven/bundles/external" } // Spring Source bundles
-    maven { url "http://maven.cedar-common.googlecode.com/hg/maven/" }        // Cedar Common code
 }
 
 sourceSets {

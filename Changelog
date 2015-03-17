@@ -1,6 +1,8 @@
 Version 0.9.46   unreleased
 
     * Bump up to AppEngine v1.9.18 just to stay up-to-date.
+    * Bump up to CedarBuild v0.8.14 and CedarCommon v5.2.0.
+    * Adjust build.gradle now that CedarCommon is distributed at Maven Central.
 
 Version 0.9.45   01 Feb 2015
 
