@@ -1,4 +1,4 @@
-Version 0.9.46   unreleased
+Version 0.9.46   17 Mar 2015
 
     * Bump up to AppEngine v1.9.18 just to stay up-to-date.
     * Bump up to CedarBuild v0.8.14 and CedarCommon v5.2.1.
