@@ -1,7 +1,7 @@
 This is the SantaExchange demonstration project.  It is a GWT web site written
 to be deployed on Google App Engine (GAE).  The home page for this project is:
 
-    http://code.google.com/p/santa-exchange/
+    https://bitbucket.org/cedarsolutions/santa-exchange
 
 A "Secret Santa" exchange is a party where people get together to exchange
 surprise gifts.  The gift assignments are secret, and the gifts are usually

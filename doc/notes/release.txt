@@ -1,5 +1,6 @@
 Here's the release process.
 
+0. Be sure to pull the SantaExchange and BitBucketSite projects
 1. Run all of the tests, using the run.all.tests Ant task
 2. Update the Changelog file with the release date
 3. Update the SantaExchangeConfig class with the release date and version
@@ -7,5 +8,5 @@ Here's the release process.
 5. Run the update.copyright.statements Ant task and check in changes
 6. Run the generate.javadoc Ant task and check in changes
 7. Run the label.current.release Ant task
-8. Push each of the projects to Google Code
+8. Push each of the projects to BitBucket
 9. Deploy to App Engine

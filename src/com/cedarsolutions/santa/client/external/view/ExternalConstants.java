@@ -98,7 +98,7 @@ public interface ExternalConstants extends Constants {
     @DefaultStringValue("This is open source software, released under the " +
                         "<a href=\"%s\">Apache v2.0</a> license. " +
                         "Source code and documentation can be found " +
-                        "at <a href=\"%s\">Google Code</a>.")
+                        "at <a href=\"%s\">BitBucket</a>.")
     String landingPage_paragraph4TextFormat();
 
     @DefaultStringValue("Anyone with a Google email address can sign in and use Santa Exchange.")

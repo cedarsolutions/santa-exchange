@@ -60,7 +60,7 @@ Scenario: Choose the "Source Code" internal menu option
      And the user logs in with normal user credentials
     Then the user should be taken to the internal landing page
     When the user chooses the "Source Code" internal menu option
-    Then the user should be taken to the external Google Code page
+    Then the user should be taken to the external BitBucket page
     When the user views an "Internal Landing Page" bookmark
     Then the user should be taken to the internal landing page
     When the user chooses the "Sign Out" internal menu option

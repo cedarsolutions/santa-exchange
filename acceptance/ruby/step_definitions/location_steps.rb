@@ -80,16 +80,16 @@ Then /^the user should be taken to the login required page$/ do
     page.should have_content("The page you requested requires you to be logged in.")
 end
 
-Then /^the user should be taken to the external Google Code page$/ do
-    current_url_equals("http://code.google.com/p/santa-exchange/")
+Then /^the user should be taken to the external BitBucket page$/ do
+    current_url_equals("https://bitbucket.org/cedarsolutions/santa-exchange")
 end
 
 Then /^the user should be taken to the external Apache license page$/ do
     current_url_equals("http://www.apache.org/licenses/LICENSE-2.0")
 end
 
-Then /^the user should be taken to the external Google Code site for Santa Exchange$/ do
-    current_url_equals("http://code.google.com/p/santa-exchange/")
+Then /^the user should be taken to the external BitBucket site for Santa Exchange$/ do
+    current_url_equals("https://bitbucket.org/cedarsolutions/santa-exchange")
 end
 
 Then /^the user should be taken to the external application dashboard page$/ do

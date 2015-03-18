@@ -5,7 +5,7 @@ Take the following steps before opening Eclipse:
 
 - Determine the name of your new project (i.e. BonsaiTreeWiki)
 - Determine the base package (i.e. com.cedarsolutions.bonsai)
-- Create the project repository on Google Code (or wherever), including for Javadoc
+- Create the project repository on BitBucket (or wherever), including for Javadoc
 - Clone the project into a local folder on your machine (same name as your new project)
 - Copy the contents of SantaExchange (excluding the .hg directory) to the cloned folder
 - Delete the following directories:
@@ -75,7 +75,7 @@ At this point, you can open the project in Eclipse.
   Since the SantaExchange tests are already pretty limited, and focus on the common
   functionality that will be shared, this is straightforward:
    - Change "Santa Exchange" to "Bonsai Tree"
-   - Change Google Code URL
+   - Change BitBucket URL
    - Change App Engine admin console URL
 - Search for "santa" (case-insensitive) and see what else uses it
 - Run the unit tests and see if anything fails
@@ -94,5 +94,5 @@ Create a copy of the Javadoc project following similar steps.  Copy everything e
 the .hg directory and look through the few files to make the required changes (not that
 much has to change).
 
-Finally, release the code to Google Code and App Engine for the
+Finally, release the code to BitBucket and App Engine for the
 first time, following the standard release procedure.

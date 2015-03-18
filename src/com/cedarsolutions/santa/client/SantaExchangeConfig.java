@@ -51,7 +51,7 @@ public interface SantaExchangeConfig extends ConstantsWithLookup {
     String system_applicationUrl();
 
     /** Public source code URL. */
-    @DefaultStringValue("http://code.google.com/p/santa-exchange/")
+    @DefaultStringValue("https://bitbucket.org/cedarsolutions/santa-exchange")
     String system_sourceCodeUrl();
 
     /** URL for the Apache v2.0 license. */

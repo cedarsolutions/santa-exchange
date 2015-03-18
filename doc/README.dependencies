@@ -16,6 +16,6 @@ In a few cases, jar files that were not available in Maven were uploaded to
 the CedarCommon Maven repository.  For information about those dependencies,
 see the CedarCommon Dependencies project:
 
-    https://code.google.com/p/cedar-common/source/browse/?repo=dependencies
+    https://bitbucket.org/cedarsolutions/cedar-dependencies
 
 See README.license for a discussion of license compatibility.
