@@ -81,7 +81,7 @@ Then /^the user should be taken to the login required page$/ do
 end
 
 Then /^the user should be taken to the external BitBucket page$/ do
-    current_url_equals("https://bitbucket.org/cedarsolutions/santa-exchange")
+    current_url_equals("https://bitbucket.org/cedarsolutions/santa-exchange/wiki/Home")
 end
 
 Then /^the user should be taken to the external Apache license page$/ do
@@ -89,7 +89,7 @@ Then /^the user should be taken to the external Apache license page$/ do
 end
 
 Then /^the user should be taken to the external BitBucket site for Santa Exchange$/ do
-    current_url_equals("https://bitbucket.org/cedarsolutions/santa-exchange")
+    current_url_equals("https://bitbucket.org/cedarsolutions/santa-exchange/wiki/Home")
 end
 
 Then /^the user should be taken to the external application dashboard page$/ do

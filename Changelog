@@ -1,3 +1,7 @@
+Version 0.9.47   unreleased
+
+    * Fix tests that broke when I made the BitBucket homepage point at the wiki.
+
 Version 0.9.46   17 Mar 2015
 
     * Bump up to AppEngine v1.9.18 just to stay up-to-date.
