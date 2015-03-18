@@ -4,7 +4,7 @@ Scenario: View the homepage
     When the user views the canonical site url
     Then the user should be taken to the external landing page
      And the page should have a link "Apache v2.0"
-     And the page should have a link "Google Code"
+     And the page should have a link "BitBucket"
      And the page should have a button "Sign In With Google"
      And the page should have content "exchange is a party where people get together"
 
@@ -40,9 +40,9 @@ Scenario: Click the "Apache v2.0" link
     When the user clicks the "Apache v2.0" link
     Then the user should be taken to the external Apache license page
 
-Scenario: Click the "Google Code" link
+Scenario: Click the "BitBucket" link
     Given that external link checking is enabled
     When the user views the canonical site url
     Then the user should be taken to the external landing page
-    When the user clicks the "Google Code" link
-    Then the user should be taken to the external Google Code site for Santa Exchange
+    When the user clicks the "BitBucket" link
+    Then the user should be taken to the external BitBucket site for Santa Exchange

@@ -132,7 +132,7 @@ public interface WidgetConstants extends Constants {
     @DefaultStringValue("This is open source software, released under the " +
                         "<a href=\"%s\">Apache v2.0</a> license. " +
                         "Source code and documentation can be found " +
-                        "at <a href=\"%s\">Google Code</a>.")
+                        "at <a href=\"%s\">BitBucket</a>.")
     String about_paragraph5TextFormat();
 
 

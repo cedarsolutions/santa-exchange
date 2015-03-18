@@ -92,7 +92,7 @@ Scenario: Choose the "Source Code" admin menu option
      And the user logs in with admin credentials
     Then the user should be taken to the "Admin Home" admin tab
     When the user chooses the "Source Code" admin menu option
-    Then the user should be taken to the external Google Code page
+    Then the user should be taken to the external BitBucket page
     When the user views an "Admin Landing Page" bookmark
     Then the user should be taken to the "Admin Home" admin tab
     When the user chooses the "Sign Out" admin menu option
