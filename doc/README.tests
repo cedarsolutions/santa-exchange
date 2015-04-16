@@ -49,14 +49,20 @@ Eclipse plugin to measure code coverage:
 
    http://www.eclemma.org/
 
-Any version of EclEmma will work for the unit tests.  However, you'll need a
-specially patched version of the plugin to get coverage for GWT client-side
-tests.  You can download a patched version of EclEmma here:
+Prior to 2015, I used a specially-patched version of EclEmma that generated
+coverage information for both true unit tests and GWT client tests.  That
+plugin can still be found here:
 
-   https://bitbucket.org/cedarsolutions/santa-exchange/downloads/eclemma-1.3.2-gwt.zip
+   https://bitbucket.org/cedarsolutions/cedar-common/downloads/eclemma-1.3.2-gwt.zip
 
-To get coverage for the unit tests, right-click on UnitTestSuite and choose
-Coverage As > JUnit Test.  Let the test suite run.  It will probably
+Unfortunately, although the plugin can be installed, it no longer succeeds
+in executing GWT client tests when using Java 1.7 and GWT 2.7.0+.  Although
+I set a code compatibility level of 1.6, I need to use a Java 1.7 JDK for
+development, because that's what the AppEngine jars require.  So, there's
+no good way to get code coverage for my GWT client code.
+
+To get coverage for the true unit tests, right-click on UnitTestSuite and
+choose Coverage As > JUnit Test.  Let the test suite run.  It will probably
 double-count tests, but you can ignore that for the time being.
 
 Once the suite has finished running, right-click on UnitTestSuite again and
@@ -66,32 +72,3 @@ except src and resources.
 Now that things are configured properly, click Apply, then click Coverage.
 This time, when the suite runs, you should get the correct number of tests and
 the coverage analyis should show only the source tree.
-
-To get coverage for the GWT client-side test cases, right-click on
-ClientTestSuite and choose Coverage As > JUnit Test.  The first time the suite
-runs, all of the tests will fail.  This is expected.
-
-Once the suite has finished running, right-click on ClientTestSuite again and
-choose Coverage Configurations.  In the Arguments tab, place the following in
-the VM Arguments box:
-
-    -Dgwt.args="-out www-test"
-
-This option tells GWT to generate a www-test folder for the compiled code,
-rather than trying to re-use the existing war directory.  The standard Google
-test runner does this automatically, but we have to be explicit about it here.
-If you forget this, the Spring context will be loaded, and the unit tests won't
-work properly.
-
-Next, in the Coverage tab, uncheck all folders except src and resources.  Then,
-in the Classpath tab, click on User Entries, then click Advanced.  Select the
-Add Folders radio button and click OK.  Then, add the src and test folders to
-the classpath.
-
-Now that things are configured properly, click Apply, then click Coverage.
-This time, when the suite runs, all of the tests should pass.
-
-At this point, you'll have two separate coverage reports shown in the Coverage
-view, one for each suite.  Click the Merge Sessions icon in the Coverage View,
-and EclEmma will merge the two coverage reports into a single report.  This
-will tell you about the overall coverage for both kinds of tests.
