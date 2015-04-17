@@ -23,6 +23,13 @@
     cursor: hand;
 }
 
+/** See: http://stackoverflow.com/questions/10355221/gwt-column-turn-off-word-wrap */
+.ss-NoWrap {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 
 /**********************/
 /* Styles for DialogBox */
