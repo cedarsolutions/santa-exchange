@@ -1,3 +1,7 @@
+Version 0.9.48   unreleased
+
+    * Add new unit test class RpcInterfaceTest to check that RPCs implement the proper interface.
+
 Version 0.9.47   18 Mar 2015
 
     * Fix tests that broke when I made the BitBucket homepage point at the wiki.
