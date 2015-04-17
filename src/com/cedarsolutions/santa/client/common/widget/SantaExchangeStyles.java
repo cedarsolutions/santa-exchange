@@ -31,6 +31,9 @@ public class SantaExchangeStyles {
     /** Style that makes text look like a link. */
     public static final String TEXT_AS_LINK_STYLE = "ss-TextAsLink";
 
+    /** Style that disables line wrapping, as in a table cell. */
+    public static final String NO_WRAP_STYLE = "ss-NoWrap";
+
     /** Style set to indicate validation error on input fields. */
     public static final String VALIDATION_ERROR_STYLE = "ss-ErrorField";
 
