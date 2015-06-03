@@ -47,7 +47,12 @@ end
 # Tear down the headless test runner, if necessary
 def teardown_headless(headless)
    if headless
-      headless.destroy()
+      begin
+         headless.destroy()
+      rescue Exception => e
+         puts "Error destroying headless test runner; just ignoring it and moving on."
+         puts e.message, e.backtrace
+      end
    end
 end
 
