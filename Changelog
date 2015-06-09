@@ -2,7 +2,7 @@ Version 0.9.48   unreleased
 
     * Add SantaExchangeStyles.NO_WRAP_STYLE and associated CSS in SantaExchange.css.
     * Add new unit test class RpcInterfaceTest to check that RPCs implement the proper interface.
-    * Bump up to CedarBuild v0.8.15 to get Cucumber-related improvements.
+    * Bump up to CedarBuild v0.8.16 to get Cucumber-related improvements.
     * Make the Cucumber headless test runner shutdown process more robust.
     * Pull out Ruby gem versions into cucumber.properties, to make Jenkins builds easier.
 
