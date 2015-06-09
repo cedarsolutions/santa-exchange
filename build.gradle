@@ -41,7 +41,7 @@ apply plugin: "cedarJavadoc"
 apply plugin: "cedarAnalysis"
 apply plugin: "projectEclipse"
 
-cedarProperties.loadStandardProperties()
+cedarProperties.loadProperties([ "build.properties", "acceptance/cucumber.properties", "local.properties", ])
 
 def gwtConfig = file(config_mercurialLabelResources).canonicalPath
 cedarProperties.loadGwtProperties(gwtConfig, [ "system_applicationName", "system_versionNumber", "system_releaseDate", ])
@@ -116,6 +116,12 @@ cedarCucumber {
     rubySubdir = "ruby"
     jrubyCucumberMemory = config_jrubyCucumberMemory
     cucumberFormatter = "Formatter::Cedar"
+
+    seleniumVersion = config_seleniumVersion
+    rspecVersion = config_rspecVersion
+    capybaraVersion = config_capybaraVersion
+    cucumberVersion = config_cucumberVersion
+    headlessVersion = config_headlessVersion
 }
 
 repositories {
