@@ -1,6 +1,7 @@
 Version 0.9.49   unreleased
 
     * Bump up to CedarBuild v0.8.17 to get Cucumber-related bug fix.
+    * Make it possible to configure the specific path to Firefox for use by Selenium.
 
 Version 0.9.48   09 Jun 2015
 
