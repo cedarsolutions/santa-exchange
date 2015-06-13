@@ -1,3 +1,7 @@
+Version 0.9.49   unreleased
+
+    * Bump up to CedarBuild v0.8.17 to get Cucumber-related bug fix.
+
 Version 0.9.48   09 Jun 2015
 
     * Add SantaExchangeStyles.NO_WRAP_STYLE and associated CSS in SantaExchange.css.
