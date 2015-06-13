@@ -129,6 +129,14 @@ class WorldExtensions
       Capybara.register_driver :selenium do |app|
         Capybara::Selenium::Driver.new(app, :browser=>:internet_explorer)
       end
+    else
+        Capybara.register_driver :selenium do |app|
+            if !(test_config.browserPath.nil? || test_config.browserPath.empty?)
+                require 'selenium/webdriver'
+                Selenium::WebDriver::Firefox::Binary.path = test_config.browserPath
+            end
+            Capybara::Selenium::Driver.new(app, :browser => :firefox)
+        end
     end
   end
 
@@ -1295,6 +1303,9 @@ class TestConfig
   # Browser to use for tests
   attr_accessor :browser
 
+  # Path to the configured browser, or unset to use default
+  attr_accessor :browserPath
+
   # Amount of time Capybara should wait for AJAX requests to complete
   attr_accessor :defaultAjaxWaitTime
 
@@ -1308,6 +1319,7 @@ class TestConfig
     @admin_user = testProperties["config_credentialsAdmin"]
     @normal_user = testProperties["config_credentialsUser"]
     @browser = testProperties["config_capybaraSeleniumBrowser"]
+    @browserPath = testProperties["config_capybaraSeleniumBrowserPath"]
     @defaultAjaxWaitTime = testProperties["config_defaultAjaxWaitTime"]
   end
 
