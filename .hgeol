@@ -6,6 +6,7 @@ only-consistent = False
 fix-trailing-newline = True
 
 [patterns]
+**.vm = BIN
 **.input = BIN
 **.actual = BIN
 **.result = BIN
