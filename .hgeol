@@ -6,10 +6,10 @@ only-consistent = False
 fix-trailing-newline = True
 
 [patterns]
-**.vm = BIN
-**.input = BIN
-**.actual = BIN
-**.result = BIN
+**.vm = CRLF
+**.input = CRLF
+**.actual = CRLF
+**.result = CRLF
 **.doc = BIN
 **.docx = BIN
 **.xls = BIN
