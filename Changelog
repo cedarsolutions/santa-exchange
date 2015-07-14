@@ -1,4 +1,4 @@
-Version 0.9.50   unreleased
+Version 0.9.50   13 Jul 2015
 
     * Bump up to CedarCommon v5.2.5 and AppEngine v1.9.23 just to stay up-to-date.
     * Convert to Gradle 2 by upgrading to CedarBuild v0.9.1 (tested with Gradle v2.5).
