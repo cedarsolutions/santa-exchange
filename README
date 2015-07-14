@@ -25,13 +25,12 @@ execute:
 This will create all of the files, and then you'll be able to import the
 project into Eclipse.
 
-The build scripts are written for Gradle 1.x, and will not work with Gradle
-2.x.  Long-term, I want to convert to Gradle 2.x, but it's a major effort
-because the interface changed.
-
-I recommend that you install Gradle v1.12, the final release in the 1.x line:
+The build scripts are written for Gradle 2, and will not work with Gradle 1
+due to an interface change.  The initial conversion from Gradle 1 to Gradle 2
+was done in July 2015 using Gradle 2.5.  I think any version after 2.5 should
+also work:
 
     Project homepage: http://www.gradle.org/
-    Download: https://services.gradle.org/distributions/gradle-1.12-all.zip
+    Download: https://gradle.org/gradle-download/
 
 Look in the doc directory for additional documentation, including credits, etc.
