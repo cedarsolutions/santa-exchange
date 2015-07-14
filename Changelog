@@ -1,4 +1,4 @@
-Version 0.9.51   unreleased
+Version 0.9.51   14 Jul 2015
 
     * Bump up to CedarBuild v0.9.2 to get improvements to Cucumber test runner.
 
