@@ -17,7 +17,7 @@
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 // *
 // * Author   : Kenneth J. Pronovici <pronovic@ieee.org>
-// * Language : Gradle (>= 1.7)
+// * Language : Gradle (>= 2.5)
 // * Project  : Secret Santa Exchange
 // *
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -214,7 +214,7 @@ class ProjectEclipsePlugin implements Plugin<Project> {
 
         // We need to download the SDK before the classpath can be generated properly.
         // We also want to copy the jars into the WEB-INF/lib directory at the same time.
-        project.tasks.eclipseClasspath.dependsOn(project.tasks.gaeDownloadSdk, project.tasks.copyRuntimeLibraries)
+        project.tasks.eclipseClasspath.dependsOn(project.tasks.appengineDownloadSdk, project.tasks.copyRuntimeLibraries)
 
         // Customize the Eclipse .classpath file
         project.eclipse.classpath.file {
