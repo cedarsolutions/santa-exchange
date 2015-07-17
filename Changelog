@@ -1,3 +1,8 @@
+Version 0.9.52   unreleased
+
+    * Bump up to CedarCommon v5.2.6 to get minor resource-leak bug fixes.
+    * Bump up to CedarBuild v0.9.2 to get bug fixes for Cucucmber test runner.
+
 Version 0.9.51   14 Jul 2015
 
     * Bump up to CedarBuild v0.9.2 to get improvements to Cucumber test runner.
