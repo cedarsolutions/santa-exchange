@@ -663,6 +663,11 @@ public class EditExchangeTabView extends ModuleTabView implements IEditExchangeT
         }
 
         @Override
+        protected Integer getSelectionColumn() {
+            return 0;
+        }
+
+        @Override
         protected ViewEventHandlerWithContext<Participant> getViewEventHandler() {
             return this.getParent().getEditParticipantHandler();
         }
