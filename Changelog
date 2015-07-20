@@ -1,3 +1,7 @@
+Version 0.9.53   unreleased
+
+    * Fix target URL for external application dashboard, so acceptance tests pass.
+
 Version 0.9.52   17 Jul 2015
 
     * Bump up to CedarCommon v5.2.6 to get minor resource-leak bug fixes.
