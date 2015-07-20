@@ -1,5 +1,6 @@
 Version 0.9.53   unreleased
 
+    * Fix EditExchangeTabView and ExchangeListTabView so selection column works properly.
     * Fix target URL for external application dashboard, so acceptance tests pass.
 
 Version 0.9.52   17 Jul 2015

@@ -356,6 +356,11 @@ public class ExchangeListTabView extends ModuleTabView implements IExchangeListT
         }
 
         @Override
+        protected Integer getSelectionColumn() {
+            return 0;
+        }
+
+        @Override
         protected ViewEventHandlerWithContext<Exchange> getViewEventHandler() {
             return this.getParent().getEditSelectedRowHandler();
         }
