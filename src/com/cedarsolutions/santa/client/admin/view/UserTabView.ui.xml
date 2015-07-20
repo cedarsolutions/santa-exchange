@@ -9,7 +9,7 @@
     <ui:style>
     .panel {
         padding-top: 10px;
-        width: 40em;
+        width: 45em;
         border: 2px solid;
         background: #e5e5e5;
         font-family: sans-serif;

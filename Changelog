@@ -1,7 +1,8 @@
 Version 0.9.53   unreleased
 
-    * Fix EditExchangeTabView and ExchangeListTabView so selection column works properly.
+    * Increase width of filter area on UserTabView so it renders better in Chrome.
     * Fix target URL for external application dashboard, so acceptance tests pass.
+    * Fix EditExchangeTabView and ExchangeListTabView so selection column works properly.
 
 Version 0.9.52   17 Jul 2015
 
