@@ -1,4 +1,4 @@
-Version 0.9.53   unreleased
+Version 0.9.53   20 Jul 2015
 
     * Increase width of filter area on UserTabView so it renders better in Chrome.
     * Fix target URL for external application dashboard, so acceptance tests pass.
