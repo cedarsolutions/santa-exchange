@@ -81,6 +81,8 @@ cedarAnalysis {
     testFolders = [ "test", ]
 }
 
+checkstyleTest.exclude "*TestSuite*"  // don't want to report on the Gradle suites, which fail some checks
+
 projectEclipse {
     sourceFolders = [ "resources", "src", "test", "suites", ]  // in desired order
     suitesSourceDir = "gradle/src/suites"
