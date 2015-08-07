@@ -1,6 +1,7 @@
 Version 0.9.54   unreleased
 
     * Bump up to CedarBuild v0.9.4 to get a bug fix for the JavaNCSS metrics.
+    * Add a Checkstyle exclusion for the Gradle suites, which don't pass some checks.
 
 Version 0.9.53   20 Jul 2015
 
