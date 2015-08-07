@@ -23,6 +23,9 @@
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // See: http://stackoverflow.com/questions/1163173/why-use-gradle-instead-of-ant-or-maven
 
+// Dump the Gradle home directory, which is useful during Jenkins builds
+logger.lifecycle("Gradle home directory: $gradle.startParameter.gradleUserHomeDir")
+
 buildscript {
     repositories {
         mavenLocal()   // Local Maven repository
