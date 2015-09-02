@@ -1,5 +1,6 @@
 Version 0.9.54   unreleased
 
+    * Bump up to AppEngine v1.9.25 and CedarCommon v5.2.7, to stay up-to-date.
     * Bump up to CedarBuild v0.9.5, to get fixes for Javadoc and JavaNCSS metrics.
     * Add a Checkstyle exclusion for the Gradle suites, which don't pass some checks.
 
