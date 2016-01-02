@@ -1,4 +1,4 @@
-Version 0.9.56   unreleased
+Version 0.9.56   02 Jan 2016
 
     * Bump up to AppEngine v1.9.30, to stay up-to-date.
     * Bump up to CedarCommon v5.8.0, to get minor fixes and enhancements.
