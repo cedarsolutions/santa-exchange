@@ -1,6 +1,9 @@
 Version 0.9.56   unreleased
 
     * Bump up to CedarCommon v5.8.0, to get minor fixes and enhancements.
+    * Fix JRuby environment used for Cucumber acceptance tests.
+      - Upgrade to CedarBuild v0.9.6
+      - Add JRuby gem dependency on mime-types v2.6.2
 
 Version 0.9.55   30 Oct 2015
 
