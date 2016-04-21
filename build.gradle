@@ -37,6 +37,13 @@ buildscript {
     }
 }
 
+// See: http://stackoverflow.com/questions/21028438
+allprojects {
+    apply plugin: 'java'
+    sourceCompatibility = JavaVersion.VERSION_1_6  // because GWT 2.7.x does not support Java 7
+    targetCompatibility = JavaVersion.VERSION_1_7  // because AppEngine is now 1.7-only
+}
+
 apply plugin: "cedarGwtOnGae"
 apply plugin: "cedarBuild"
 apply plugin: "cedarCopyright"
@@ -50,8 +57,6 @@ def gwtConfig = file(config_mercurialLabelResources).canonicalPath
 cedarProperties.loadGwtProperties(gwtConfig, [ "system_applicationName", "system_versionNumber", "system_releaseDate", ])
 
 compileJava.options.fork(memoryMaximumSize: config_javaCompilerMemory)
-sourceCompatibility = JavaVersion.VERSION_1_6  // because GWT 2.7.x does not support Java 7
-targetCompatibility = JavaVersion.VERSION_1_7  // because AppEngine is now 1.7-only
 
 cedarLabel {
     enabled = config_mercurialLabelEnabled
