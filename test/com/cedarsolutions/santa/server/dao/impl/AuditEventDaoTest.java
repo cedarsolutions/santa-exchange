@@ -829,7 +829,7 @@ public class AuditEventDaoTest extends DaoTestCase {
     }
 
     /** Build event type criteria for testing. */
-    private static AuditEventCriteria buildCriteria(AuditEventType ... eventTypes) {
+    private static AuditEventCriteria buildCriteria(AuditEventType... eventTypes) {
         AuditEventCriteria criteria = new AuditEventCriteria();
 
         // Have to set some date, so hardcode the range we know we're creating
@@ -842,7 +842,7 @@ public class AuditEventDaoTest extends DaoTestCase {
     }
 
     /** Build user id criteria for testing. */
-    private static AuditEventCriteria buildCriteria(String ... userIds) {
+    private static AuditEventCriteria buildCriteria(String... userIds) {
         AuditEventCriteria criteria = new AuditEventCriteria();
 
         // Have to set some date, so hardcode the range we know we're creating

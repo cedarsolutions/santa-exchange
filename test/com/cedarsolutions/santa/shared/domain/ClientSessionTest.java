@@ -42,6 +42,7 @@ import com.cedarsolutions.shared.domain.FederatedUser;
  * Unit tests for ClientSession.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class ClientSessionTest {
 
     /** Test the constructor, getters, and setters. */

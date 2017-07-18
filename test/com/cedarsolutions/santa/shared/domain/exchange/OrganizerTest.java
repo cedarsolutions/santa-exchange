@@ -38,6 +38,7 @@ import org.junit.Test;
  * Unit tests for Organizer.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class OrganizerTest {
 
     /** Test the constructors. */

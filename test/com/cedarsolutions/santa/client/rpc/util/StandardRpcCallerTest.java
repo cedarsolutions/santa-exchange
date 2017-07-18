@@ -273,7 +273,7 @@ public class StandardRpcCallerTest extends StubbedClientTestCase {
 
     /** Stubbed caller for testing. */
     private static class Caller extends StandardRpcCaller<IDummyAsync, Object> {
-        public Caller() {
+        Caller() {
             super(mock(IDummyAsync.class), "rpc", "method");
         }
 

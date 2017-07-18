@@ -78,7 +78,7 @@ public class AuditEventService extends AbstractService implements IAuditEventSer
      * @return Newly-created audit event.
      */
     @Override
-    public AuditEvent buildAuditEvent(AuditEventType eventType, ExtraData ... extraData) {
+    public AuditEvent buildAuditEvent(AuditEventType eventType, ExtraData... extraData) {
         AuditEvent auditEvent = new AuditEvent();
 
         auditEvent.setEventType(eventType);

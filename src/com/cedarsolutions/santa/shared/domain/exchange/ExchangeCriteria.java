@@ -84,7 +84,7 @@ public class ExchangeCriteria extends TranslatableDomainObject {
         return this.exchangeIds;
     }
 
-    public void setExchangeIds(Long ... exchangeIds) {
+    public void setExchangeIds(Long... exchangeIds) {
         if (exchangeIds == null) {
             this.exchangeIds = null;
         } else {

@@ -42,6 +42,7 @@ import org.junit.Test;
  * Unit tests for ExchangeCriteria.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class ExchangeCriteriaTest {
 
     /** Test the constructor. */

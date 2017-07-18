@@ -38,6 +38,7 @@ import org.junit.Test;
  * Unit tests for ExtraData.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class ExtraDataTest {
 
     /** Test the constructors. */

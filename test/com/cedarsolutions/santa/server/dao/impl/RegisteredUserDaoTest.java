@@ -1258,21 +1258,21 @@ public class RegisteredUserDaoTest extends DaoTestCase {
     }
 
     /** Build criteria for testing. */
-    private static RegisteredUserCriteria buildCriteriaWithUserNames(String ... userNames) {
+    private static RegisteredUserCriteria buildCriteriaWithUserNames(String... userNames) {
         RegisteredUserCriteria criteria = new RegisteredUserCriteria();
         criteria.setUserNames(userNames);
         return criteria;
     }
 
     /** Build criteria for testing. */
-    private static RegisteredUserCriteria buildCriteriaWithUserIds(String ... userIds) {
+    private static RegisteredUserCriteria buildCriteriaWithUserIds(String... userIds) {
         RegisteredUserCriteria criteria = new RegisteredUserCriteria();
         criteria.setUserIds(userIds);
         return criteria;
     }
 
     /** Build criteria for testing. */
-    private static RegisteredUserCriteria buildCriteriaWithOpenId(OpenIdProvider ... openIdProviders) {
+    private static RegisteredUserCriteria buildCriteriaWithOpenId(OpenIdProvider... openIdProviders) {
         RegisteredUserCriteria criteria = new RegisteredUserCriteria();
         criteria.setOpenIdProviders(openIdProviders);
         return criteria;

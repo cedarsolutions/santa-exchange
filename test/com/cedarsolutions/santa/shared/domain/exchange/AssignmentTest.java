@@ -40,6 +40,7 @@ import org.junit.Test;
  * Unit tests for Assignment.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class AssignmentTest {
 
     /** Test the constructors. */

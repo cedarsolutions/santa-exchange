@@ -85,7 +85,7 @@ public class AuditEventCriteria extends AbstractSearchCriteria<AuditEvent> {
         return this.eventTypes;
     }
 
-    public void setEventTypes(AuditEventType ... eventTypes) {
+    public void setEventTypes(AuditEventType... eventTypes) {
         if (eventTypes == null) {
             this.eventTypes = null;
         } else {
@@ -104,7 +104,7 @@ public class AuditEventCriteria extends AbstractSearchCriteria<AuditEvent> {
         return this.userIds;
     }
 
-    public void setUserIds(String ... userIds) {
+    public void setUserIds(String... userIds) {
         if (userIds == null) {
             this.userIds = null;
         } else {

@@ -114,7 +114,7 @@ public class RegisteredUserCriteria extends AbstractSearchCriteriaWithSort<Regis
         return this.userIds;
     }
 
-    public void setUserIds(String ... userIds) {
+    public void setUserIds(String... userIds) {
         if (userIds == null) {
             this.userIds = null;
         } else {
@@ -133,7 +133,7 @@ public class RegisteredUserCriteria extends AbstractSearchCriteriaWithSort<Regis
         return this.userNames;
     }
 
-    public void setUserNames(String ... userNames) {
+    public void setUserNames(String... userNames) {
         if (userNames == null) {
             this.userNames = null;
         } else {
@@ -152,7 +152,7 @@ public class RegisteredUserCriteria extends AbstractSearchCriteriaWithSort<Regis
         return this.openIdProviders;
     }
 
-    public void setOpenIdProviders(OpenIdProvider ... openIdProviders) {
+    public void setOpenIdProviders(OpenIdProvider... openIdProviders) {
         if (openIdProviders == null) {
             this.openIdProviders = null;
         } else {

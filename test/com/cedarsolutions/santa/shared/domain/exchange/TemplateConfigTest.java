@@ -40,6 +40,7 @@ import com.cedarsolutions.shared.domain.email.EmailFormat;
  * Unit tests for TemplateConfig.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class TemplateConfigTest {
 
     /** Test the constructors. */

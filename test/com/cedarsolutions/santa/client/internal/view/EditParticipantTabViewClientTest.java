@@ -221,7 +221,7 @@ public class EditParticipantTabViewClientTest extends ClientTestCase {
     }
 
     /** Assert that a participant list contains specific items (in order). */
-    private static void assertContainsItems(ParticipantList list, String ... items) {
+    private static void assertContainsItems(ParticipantList list, String... items) {
         assertEquals(items.length, list.getItemCount());
         for (int i = 0; i < items.length; i++) {
             assertEquals(items[i], list.getValue(i));
@@ -229,7 +229,7 @@ public class EditParticipantTabViewClientTest extends ClientTestCase {
     }
 
     /** Assert that a participant list contains specific items (in order). */
-    private static void assertContainsItems(ParticipantSet list, Long ... items) {
+    private static void assertContainsItems(ParticipantSet list, Long... items) {
         assertEquals(items.length, list.size());
         for (int i = 0; i < items.length; i++) {
             assertEquals(items[i], list.get(i).getId());

@@ -42,6 +42,7 @@ import com.cedarsolutions.shared.domain.email.EmailFormat;
  * Unit tests for Participant.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class ParticipantTest {
 
     /** Test the constructors. */
