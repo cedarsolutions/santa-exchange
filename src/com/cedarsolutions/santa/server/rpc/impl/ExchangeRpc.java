@@ -324,7 +324,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
      * Validate the user id on search criteria.
      * @throws RpcSecurityException If there current user does not own one of the passed-in records.
      */
-    private void validateUserId(ExchangeCriteria ... records) throws ServiceException {
+    private void validateUserId(ExchangeCriteria... records) throws ServiceException {
         String userId = this.getUserId();
         for (ExchangeCriteria record : records) {
             if (!userId.equals(record.getUserId())) {
@@ -337,7 +337,7 @@ public class ExchangeRpc extends AbstractService implements IExchangeRpc {
      * Validate the user id on a list of records.
      * @throws RpcSecurityException If there current user does not own one of the passed-in records.
      */
-    private void validateUserId(Exchange ... records) {
+    private void validateUserId(Exchange... records) {
         String userId = this.getUserId();
         if (records != null) {
             for (Exchange record : records) {

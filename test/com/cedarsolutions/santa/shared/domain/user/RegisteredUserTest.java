@@ -41,6 +41,7 @@ import com.cedarsolutions.util.DateUtils;
  * Unit tests for RegisteredUser.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class RegisteredUserTest {
 
     /** Test the default constructor. */

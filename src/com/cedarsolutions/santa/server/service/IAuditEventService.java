@@ -46,7 +46,7 @@ public interface IAuditEventService {
      * @param extraData   Extra event data
      * @return Newly-created audit event.
      */
-    AuditEvent buildAuditEvent(AuditEventType eventType, ExtraData ... extraData);
+    AuditEvent buildAuditEvent(AuditEventType eventType, ExtraData... extraData);
 
     /**
      * Build an audit event, including context information.

@@ -100,7 +100,7 @@ public class BackendDataRpcCallerTest extends StubbedClientTestCase {
 
     /** Callback for testing. */
     private static class Caller extends BackendDataRpcCaller<IDummyAsync, String, Integer> {
-        public Caller(BackendDataSource<String, Integer> dataSource, int start) {
+        Caller(BackendDataSource<String, Integer> dataSource, int start) {
             super(mock(IDummyAsync.class), "rpc", "method", dataSource, start);
         }
 

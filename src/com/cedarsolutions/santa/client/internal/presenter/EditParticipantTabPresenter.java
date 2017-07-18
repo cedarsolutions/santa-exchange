@@ -159,7 +159,7 @@ public class EditParticipantTabPresenter extends ModulePagePresenter<IEditPartic
          * better to give specific warnings as soon as possible.
          * </p>
          *
-         * @param particpant  Particpant to validate
+         * @param participant  Particpant to validate
          *
          * @throws InvalidDataException If the data does not pass validation
          * @throws CedarRuntimeException If the participant is null or somehow bogus

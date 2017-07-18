@@ -46,6 +46,7 @@ import com.cedarsolutions.util.DateUtils;
  * Unit tests for AuditEventCriteria.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class AuditEventCriteriaTest {
 
     /** Test the constructor. */

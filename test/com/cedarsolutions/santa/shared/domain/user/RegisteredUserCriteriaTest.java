@@ -46,6 +46,7 @@ import com.cedarsolutions.util.DateUtils;
  * Unit tests for RegisteredUserCriteria.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class RegisteredUserCriteriaTest {
 
     /** Test the constructor. */

@@ -258,7 +258,7 @@ public class ExchangeDaoTest extends DaoTestCase {
     }
 
     /** Build user criteria for testing. */
-    private static ExchangeCriteria buildCriteria(String userId, Long ... exchangeIds) {
+    private static ExchangeCriteria buildCriteria(String userId, Long... exchangeIds) {
         ExchangeCriteria criteria = new ExchangeCriteria();
 
         criteria.setUserId(userId);

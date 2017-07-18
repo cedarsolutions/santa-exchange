@@ -254,10 +254,7 @@ public class ExchangeListTabView extends ModuleTabView implements IExchangeListT
         this.table.setColumnWidth(column, width, Unit.PCT);
     }
 
-    /**
-     * Create a delete confirmation popup.
-     * @param items Number of items being deleted
-     */
+    /** Create a delete confirmation popup. */
     protected ConfirmationPopup createDeletePopup() {
         InternalConstants constants = GWT.create(InternalConstants.class);
         String title = constants.exchangeList_confirmDeleteTitle();

@@ -42,6 +42,7 @@ import com.cedarsolutions.shared.domain.email.EmailFormat;
  * Unit tests for Exchange.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class ExchangeTest {
 
     /** Test the constructors. */

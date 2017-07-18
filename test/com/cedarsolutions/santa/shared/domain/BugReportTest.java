@@ -42,6 +42,7 @@ import com.cedarsolutions.util.DateUtils;
  * Unit tests for BugReport.
  * @author Kenneth J. Pronovici <pronovic@ieee.org>
  */
+@SuppressWarnings("unlikely-arg-type")
 public class BugReportTest {
 
     /** Test the constructor. */

@@ -38,7 +38,7 @@ public class StandardDialogClientTest extends ClientTestCase {
 
     /** Concrete dialog to test with. */
     private static class ConcreteDialog extends StandardDialog {
-        public ConcreteDialog() {
+        ConcreteDialog() {
             super();
         }
     }
