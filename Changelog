@@ -2,6 +2,7 @@ Version 0.9.57   unreleased
 
     * Bump up to CedarCommon v5.8.3 for minor changes.
     * Bump up to CedarBuild v0.9.8 to get fixes for Cucumber functionality.
+    * Bump up to AppEngine v1.9.59 and convert to the Java 8 runtime.
     * Adjust build.gradle so the Java source/target compatibility actually works.
     * Fix new warnings exposed by moving to Eclipse 4.7 (Oyxgen) and Checkstyle 8.
 
