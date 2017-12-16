@@ -1,4 +1,4 @@
-Version 0.9.57   unreleased
+Version 0.9.57   16 Dec 2017
 
     * Bump up to CedarCommon v5.8.3 for minor changes.
     * Bump up to CedarBuild v0.9.8 to get fixes for Cucumber functionality.
