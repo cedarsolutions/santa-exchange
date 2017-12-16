@@ -28,8 +28,5 @@
     <inbound-services>
         <service>mail</service>
     </inbound-services>
-    
-    <!-- Use the Java 8 runtime -->
-    <runtime>java8</runtime>
 
 </appengine-web-app>

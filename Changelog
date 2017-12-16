@@ -1,3 +1,7 @@
+Version 0.9.58   unreleased
+
+    * Fall back Java 8 conversion, which broke when deployed to AppEngine.
+
 Version 0.9.57   16 Dec 2017
 
     * Bump up to CedarCommon v5.8.3 for minor changes.
