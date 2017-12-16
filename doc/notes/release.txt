@@ -7,6 +7,7 @@ Here's the release process.
 4. Check in Changelog and SantaExchangeConfig, so copyright update will apply to them.
 5. Run the update.copyright.statements Ant task and check in changes
 6. Run the generate.javadoc Ant task and check in changes
+    Note: this no longer works properly with Java 8 and I haven't had time to debug it
 7. Run the label.current.release Ant task
 8. Push each of the projects to BitBucket
 9. Deploy to App Engine
