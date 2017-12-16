@@ -1,4 +1,4 @@
-Version 0.9.58   unreleased
+Version 0.9.58   16 Dec 2017
 
     * Fall back Java 8 conversion, which broke when deployed to AppEngine.
 
