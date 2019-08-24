@@ -1,15 +1,22 @@
+_Note: As of June 2018, this code is unmaintained.  It was originally written
+starting in 2011, which is an eternity ago in user-interface terms.  Today, GWT
+is basically dead as a user interface development framework, making this code
+mostly irrelevant.  Besides that, the Santa Exchange backend no longer works
+with the most recent Java 8 API for Google AppEngine, so as of January 2019,
+there won't even be any infrastructure on which it will run.  I don't have the
+time or the motivation to fix it, so it remains here as a historical example._
+
+---
+
 This is the SantaExchange demonstration project.  It is a GWT web site written
 to be deployed on Google App Engine (GAE).  The home page for this project is:
 
-    https://bitbucket.org/cedarsolutions/santa-exchange
+    https://github.com/cedarsolutions/santa-exchange
 
 A "Secret Santa" exchange is a party where people get together to exchange
 surprise gifts.  The gift assignments are secret, and the gifts are usually
 fairly small.  This application helps you organize a Secret Santa exchange and
 sends out email invitations to participants.
-
-Check out the doc directory for additional documentation, including credits,
-dependencies, etc.
 
 This project is managed by Gradle, and gets most of its dependencies from
 Maven.  You do not need the Google Plugin for Eclipse (GPE) installed to work
@@ -33,4 +40,5 @@ also work:
     Project homepage: http://www.gradle.org/
     Download: https://gradle.org/gradle-download/
 
-Look in the doc directory for additional documentation, including credits, etc.
+Look in the doc directory or the GitHub wiki for additional documentation,
+including credits, etc.
